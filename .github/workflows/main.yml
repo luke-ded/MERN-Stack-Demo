@@ -38,4 +38,4 @@
               npm install
               npm run build
               systemctl restart nginx
-              EOE
+              EOF
