@@ -8,7 +8,7 @@ function Login(){
       <span id="inner-title">PLEASE LOG IN</span><br />
       <input type="text" id="loginName" placeholder="Email" /><br />
       <input type="password" id="loginPassword" placeholder="Password" /><br />
-      <input type="submit" id="loginButton" className="buttons" value ="Do It" onClick={doLogin} />
+      <input type="submit" id="loginButton" className="buttons" value ="Login" onClick={doLogin} />
       <span id="loginResult"></span>
     </div>
   );
