@@ -6,8 +6,8 @@ import app from './App.module.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <div className={app.LDiv}>
+    <body>
       <App />
-    </div>
+    </body>
   </StrictMode>,
 )
