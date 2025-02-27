@@ -6,7 +6,7 @@ import app from './App.module.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <body>
+    <body className = {app.body}>
       <App />
     </body>
   </StrictMode>,
