@@ -3,7 +3,7 @@ import Login from '../components/Login.tsx';
 
 const LoginPage = () => {
   return (
-    <div>
+    <div id = "LPage">
       <PageTitle />
       <Login />
     </div>
