@@ -5,7 +5,7 @@ import app from './App.module.css';
 function  App(){
   return(
   <div className={app.LDiv}>
-    <LoginPage />);
+    <LoginPage />
   </div>
   )
 }
