@@ -53,6 +53,7 @@ li a:hover {
 
 .loginlabel
 {   
+    display:inline;
     margin-top:4%;
     margin-bottom:0;
     margin-left: 10%;
@@ -102,6 +103,24 @@ li a:hover {
 #dologinbutton
 {
     margin-top:10%;
+}
+
+#forgotpasswordbutton
+{
+    float:right;
+    display:inline;
+    margin-top:6%;
+    margin-right:10%;
+    padding:0;
+    background-color: transparent;
+    border:none;
+    color: #6d91e8;
+    font-size: 1.5vh;
+}
+
+#forgotpasswordbutton:hover
+{
+    color:#bdc8e2;
 }
 
 #NavBar
