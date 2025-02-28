@@ -45,3 +45,63 @@ li a:hover {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+.loginbuttons
+{
+    position:absolute;
+    width:fit-content;
+    padding:10px;
+    /* background-color: rgba(109, 145, 232, .3); */
+    background-color: transparent;
+    border: 1px solid #6d91e8;
+    text-align: center;
+}
+
+.loginbuttons:hover
+{
+    background-color: rgba(109, 145, 232, .1);
+    border-color: rgb(63, 85, 137)
+}
+
+#loginbutton
+{
+    right:9%;
+}
+
+#signupbutton
+{
+    right:1%;
+}
+
+#NavBar
+{
+  display: flex;
+  align-items: center; 
+  height: 12vh; 
+  width: 100vw;
+  position:absolute;
+  top:0;
+  left:0;
+
+  border-bottom: 1px solid #6d91e8;
+  background-color: rgba(17,18,23, .6);
+}
+
+#logoimg
+{
+  width:4.5%;
+  height:auto;
+}
+
+.tagline
+{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    animation: fadeIn 5.5s;
+    color:white;
+}
+
+@keyframes fadeIn
+{
+    0% {opacity: 0;}
+    100% { opactiy: 1;}
+}
