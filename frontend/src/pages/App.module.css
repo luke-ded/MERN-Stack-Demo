@@ -11,18 +11,21 @@ ul {
     margin: 0%;
     padding: 0%;
     background-color: rgb(177, 84, 22);
+    width: 10%;
 }
 
 li{
     display: block;
     text-decoration: none;
     color: rgb(0,0,0);
+    padding: 5%;
 }
 
 a{
     display: block;
     text-decoration: none;
     color: rgb(0,0,0);
+    padding: 2.5%;
 }
 
 li a:hover {
