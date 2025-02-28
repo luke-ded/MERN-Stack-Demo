@@ -3,6 +3,7 @@ body {
 }
 
 .LDiv {
+    display: inline;
     background-color: rgb(140,96,87);
     position: absolute;
     top: 50%;
