@@ -17,8 +17,8 @@ const NavBar = () => {
 
   function navSignup()
   {
-    if(location.pathname != '/login') // Change this to signup once set up
-      navigate('/login'); // Change this to signup once set up
+    if(location.pathname != '/signup') // Change this to signup once set up
+      navigate('/signup'); // Change this to signup once set up
     else
       navigate('/')
   }
