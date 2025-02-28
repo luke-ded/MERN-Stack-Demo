@@ -9,8 +9,16 @@ ul {
     padding: 0%;
 }
 
-li a {
+li{
+    display: block;
+    text-decoration: none;
+    color: rgb(0,0,0);
+}
 
+a{
+    display: block;
+    text-decoration: none;
+    color: rgb(0,0,0);
 }
 
 
