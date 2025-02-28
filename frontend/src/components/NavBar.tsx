@@ -1,7 +1,7 @@
 import PageTitle from '../components/PageTitle.tsx';
 import logo from '../assets/testlogo.png'
 import app from '../pages/App.module.css'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const NavBar = () => {
