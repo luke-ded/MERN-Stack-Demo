@@ -3,6 +3,5 @@ body {
 }
 
 .LDiv {
-    display: flex;
-    align-items: center;
+    place-items: center;
 }
