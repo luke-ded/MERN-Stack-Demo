@@ -5,7 +5,7 @@ import app from './App.module.css';
 const LoginPage = () => {
   return (
     <body className={app.body}>
-      <div>
+      <div className= {app.LDiv}>
         <PageTitle />
         <Login />
       </div>
