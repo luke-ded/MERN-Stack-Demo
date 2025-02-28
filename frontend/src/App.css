@@ -17,6 +17,14 @@
 {
   margin:1%;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1.8em;
+  font-size: 4.8vh;
+  color:#6d91e8;
+}
+
+#inner-title
+{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: 3vh;
   color:#6d91e8;
 }

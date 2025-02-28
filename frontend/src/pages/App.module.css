@@ -1,7 +1,7 @@
 body {
     background: linear-gradient(to top, transparent, 70%, rgb(0, 0, 0)), url("../assets/testimage.jpg");
     background-position: center;
-    background-size: 115%;
+    background-size: 220vh;
 }
 
 
@@ -38,17 +38,37 @@ li a:hover {
 
 .LDiv {
     display: inline;
-    background-color: rgb(140,96,87);
+    background-color: rgba(17,18,23, .9);
     position: absolute;
+    width:20%;
+    min-height: fit-content;
+    height:50%;
     top: 50%;
     left: 50%;
+    border: 1.5px solid #6d91e8;
+    border-radius: 4%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
 
+.loginlabel
+{   
+    margin-top:4%;
+    margin-bottom:0;
+    margin-left: 10%;
+    float:left;
+    font-size: 2.3vh;
+}
+
+.logininputs
+{
+    width:80%;
+}
+
 .loginbuttons
 {
-    position:absolute;
+    display:inline-block;
+    
     height:fit-content;
     width:fit-content;
     padding:10px;
@@ -58,6 +78,7 @@ li a:hover {
     background-color: transparent;
     border: 1px solid #6d91e8;
     text-align: center;
+    font-size: 2.8vh;
 }
 
 .loginbuttons:hover
@@ -68,12 +89,19 @@ li a:hover {
 
 #loginbutton
 {
-    right:9%;
+    position:absolute;
+    right:9vw;
 }
 
 #signupbutton
 {
-    right:1%;
+    position:absolute;
+    right: 1vw;
+}
+
+#dologinbutton
+{
+    margin-top:10%;
 }
 
 #NavBar
@@ -95,6 +123,14 @@ li a:hover {
   width:4.5%;
   height:auto;
 }
+
+#loginlogoimg
+{
+  width:30%;
+  height:auto;
+  margin-top:5%;
+}
+
 
 .tagline
 {
