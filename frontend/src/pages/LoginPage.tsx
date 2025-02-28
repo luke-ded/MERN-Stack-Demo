@@ -6,9 +6,9 @@ const LoginPage = () => {
   return (
     <body className={app.body}>
      <ul className = {app.ul}>
-        <li><a href = "#Login">Login</a></li>
-        <li><a href = "#Signup">Signup</a></li>
-        <li><a href = "https://github.com/Lobbbey/ProjectSalvage">GitHub</a></li>
+        <li className = {app.li}><a className = {app.a} href = "#Login">Login</a></li>
+        <li className = {app.li}><a className = {app.a}href = "#Signup">Signup</a></li>
+        <li className = {app.li}><a className = {app.a}href = "https://github.com/Lobbbey/ProjectSalvage">GitHub</a></li>
      </ul>
       <div className= {app.LDiv}>
         <PageTitle />
