@@ -8,7 +8,6 @@ const LoginPage = () => {
      <ul className = {app.ul}>
         <li className = {app.li}><a className = {app.a} href = "#Login">Login</a></li>
         <li className = {app.li}><a className = {app.a}href = "#Signup">Signup</a></li>
-        <li className = {app.li}><a className = {app.a}href = "https://github.com/Lobbbey/ProjectSalvage">GitHub</a></li>
      </ul>
       <div className= {app.LDiv}>
         <PageTitle />
