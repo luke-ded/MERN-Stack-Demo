@@ -10,7 +10,7 @@ function Login(){
     const loginVal = (document.getElementById("loginName") as HTMLInputElement).value;
     const passVal = (document.getElementById("loginPassword") as HTMLInputElement).value;
 
-    if (loginVal.length == 0 && passVal.length == 0){
+    if (loginVal.length == 0 && passVal.length == 0){ 
       event.preventDefault();
       alert('Both username and password is empty');
     } else if (loginVal.length != 0 && passVal.length == 0){
