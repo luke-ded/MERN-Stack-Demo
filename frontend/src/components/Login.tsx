@@ -11,19 +11,28 @@ function Login(){
     const passVal = (document.getElementById("loginPassword") as HTMLInputElement).value;
     const alertMessage = document.getElementById("alertmessage");
 
-    if (alertMessage){
+    if (alertMessage){ 
+
       if (loginVal.length == 0 && passVal.length == 0){ 
+
         alertMessage.innerText = "Username and Password are both empty";
         alertMessage.style.visibility = "visible";
+
       } else if (loginVal.length != 0 && passVal.length == 0){
+
         alertMessage.innerText = "Password is empty";
         alertMessage.style.visibility = "visible";
+
       } else if (loginVal.length == 0 && passVal.length != 0){
+
         alertMessage.innerText = "Username is empty";
         alertMessage.style.visibility = "visible";
+        
       } else {
+
         alertMessage.style.visibility = "hidden";
       }
+
     }
     event.preventDefault();
 
