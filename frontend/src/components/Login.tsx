@@ -40,7 +40,10 @@ function Login(){
 
   function navForgotPassword()
   {
-    navigate('/ForgotPass'); // Change to forgot password page once set up
+    if(location.pathname != '/ForgotPass')
+      navigate('/ForgotPass'); 
+    else
+      navigate('/') // Change to forgot password page once set up
   }
 
   return(
