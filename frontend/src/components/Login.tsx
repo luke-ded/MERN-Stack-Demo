@@ -22,6 +22,7 @@ function Login(){
     } else {
       document.getElementById("alertMessage").style.visibility = "hidden";
     }
+    event.preventDefault();
 
   }
 
