@@ -13,7 +13,7 @@ function Login(){
 
     if (alertMessage){
       if (loginVal.length == 0 && passVal.length == 0){ 
-        alertMessage.innerText = "Username and Password are both empty";
+        alertMessage.value = "Username and Password are both empty";
         alertMessage.style.visibility = "none";
       } else if (loginVal.length != 0 && passVal.length == 0){
         alertMessage.innerText = "Password is empty";
