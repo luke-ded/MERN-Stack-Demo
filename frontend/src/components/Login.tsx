@@ -5,8 +5,25 @@ function Login(){
   const navigate = useNavigate();
 
   function doLogin(event:any) : void {
-    event.preventDefault();
-    alert('doIt()');
+
+
+    const loginVal = (document.getElementById("loginName") as HTMLInputElement).value;
+    const passVal = (document.getElementById("loginPassword") as HTMLInputElement).value;
+
+    if (loginVal.length == 0 && passVal.length == 0){
+      event.preventDefault();
+      alert('Both username and password is empty');
+    } else if (loginVal.length != 0 && passVal.length == 0){
+      event.preventDefault();
+      alert('Password is empty');
+    } else if (loginVal.length == 0 && passVal.length != 0){
+      event.preventDefault();
+      alert('Username is emmpty');
+    } else {
+      event.preventDefault();
+      alert('doIt()');
+    }
+
   }
 
   function navForgotPassword()
