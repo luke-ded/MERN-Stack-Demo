@@ -14,15 +14,15 @@ function Login(){
     if (alertMessage){
       if (loginVal.length == 0 && passVal.length == 0){ 
         alertMessage.innerText = "Username and Password are both empty";
-        alertMessage.style.visibility = none;
+        alertMessage.style.visibility = "none";
       } else if (loginVal.length != 0 && passVal.length == 0){
         alertMessage.innerText = "Password is empty";
-        alertMessage.style.visibility = none;
+        alertMessage.style.visibility = "none";
       } else if (loginVal.length == 0 && passVal.length != 0){
         alertMessage.innerText = "Username is empty";
-        alertMessage.style.visibility = none;
+        alertMessage.style.visibility = "none";
       } else {
-        alertMessage.style.visibility = hidden;
+        alertMessage.style.visibility = "hidden";
       }
     }
     event.preventDefault();
