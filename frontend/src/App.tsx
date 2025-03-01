@@ -3,6 +3,7 @@ import './App.css';
 import HomePage from './pages/HomePage.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import SignupPage from './pages/SignupPage.tsx';
+import ForgotPage from './pages/ForgotPage.tsx';
 
 
 function  App(){
@@ -12,6 +13,7 @@ function  App(){
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/forgot" element = {<ForgotPage />} />
         <Route path="*" element={<HomePage />} /> {/* default */}
       </Routes>
   </Router>
