@@ -42,7 +42,7 @@ function Login(){
       <h5 className={app.loginlabel}>Password</h5>
       <button id={app.forgotpasswordbutton} onClick={navForgotPassword}>Forgot Password?</button>
       <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" /><br />
-      <h5 id = "alertMessage" className = {app.hide}></h5>
+      <h5 id = "alertmessage"></h5>
       <button className={app.loginbuttons} id={app.dologinbutton} onClick={doLogin}>Login</button>
       <span id="loginResult"></span>
     </div>
