@@ -40,7 +40,7 @@ function Login(){
 
   function navForgotPassword()
   {
-     // Change to forgot password page once set up
+     navigate('/');// Change to forgot password page once set up
   }
 
   return(
