@@ -1,11 +1,11 @@
 import app from "../pages/App.module.css";
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 
 
 function ForgotPass(){
 
-    function reclaimPass(){
-
+    function reclaimPass(event:any) : void{
+        event.preventDefault();
     }
 
     return(
