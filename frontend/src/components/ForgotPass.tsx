@@ -17,3 +17,5 @@ function ForgotPass(){
         </div>
     );
 }
+
+export default ForgotPass;
