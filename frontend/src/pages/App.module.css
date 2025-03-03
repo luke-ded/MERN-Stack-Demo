@@ -67,6 +67,8 @@ li a:hover {
 
 .logininputs
 {
+    display:inline-block;
+    margin-left:.1%;
     width:80%;
 }
 
