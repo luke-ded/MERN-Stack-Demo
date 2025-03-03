@@ -37,6 +37,7 @@ li a:hover {
 
 .alertmessage {
     visibility: hidden;
+    margin:0;
     color: white;
 }
 
@@ -47,7 +48,7 @@ li a:hover {
     position: absolute;
     width:30%;
     min-height: fit-content;
-    height:50%;
+    height:40%;
     top: 55%;
     left: 50%;
     border: 1.5px solid #6d91e8;
@@ -108,8 +109,8 @@ li a:hover {
 
 #dologinbutton
 {
-    margin-top:10%;
-    margin-bottom:10%;
+    margin-top:5%;
+    margin-bottom:5%;
 }
 
 #forgotpasswordbutton
@@ -133,18 +134,24 @@ li a:hover {
 #signinredirect
 {
     display:flex;
-    justify-content: space-between;
-    width:110%;
-    height:7vh;
-    margin-top:75vh;
+    width:105%;
+    height:3vh;
+    margin-top:70vh;
+    background-color: rgba(71, 70, 70, 0.675);
     text-align: center;
     font-size: 2vh;
+}
+
+#signinredirectmsg
+{
+    margin:0;
+    margin-left:.7%;
 }
 
 #signinredirectbutton
 {
     padding:0;
-    margin-left:0px;
+    margin-left:4%;
     background-color: transparent;
     border:none;
     color: #6d91e8;

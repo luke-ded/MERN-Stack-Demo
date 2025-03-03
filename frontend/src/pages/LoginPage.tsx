@@ -20,7 +20,7 @@ const LoginPage = () => {
           <Login />
         </div>
         <div id={app.signinredirect}>
-          <p>Don't have an account?</p>
+          <p id={app.signinredirectmsg}>Don't have an account?</p>
           <button id={app.signinredirectbutton} onClick={navSignup}> Sign up.</button>
         </div>
     </div>
