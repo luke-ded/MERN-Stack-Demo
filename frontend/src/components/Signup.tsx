@@ -109,7 +109,7 @@ function Signup(){
       <input type="text" id="lastName" className = {app.logininputs} placeholder="Last Name" /><br />
       <h5 className={app.loginlabel}>Email</h5>
       <input type="text" id="Email" className = {app.logininputs} placeholder="Email" onKeyUp={validateEmail}/><br />
-      <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isValidEmail ? '#58e96c' :'rgb(235, 83, 83)'}}>{isValidEmail ? '' : 'Invalid email.' }</h6><h6 style = {{fontSize: 9}}></h6>
+      <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isValidEmail ? '#58e96c' :'rgb(235, 83, 83)'}}>{isValidEmail ? '' : 'Invalid email.' }</h6><br />
       <h5 className={app.loginlabel}>Password</h5>
       <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={validatePassword}/><br />
       <h6 className={app.passwordinstructions} id={app.firstinstruction}>Must contain at least&nbsp;</h6>
@@ -118,7 +118,7 @@ function Signup(){
       <h6 className={app.passwordinstructions} id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>1 symbol</h6>
       <h6 className={app.passwordinstructions}>,&nbsp;</h6>
       <h6 className={app.passwordinstructions} id={app.passlength} style = {{color: isPasswordLengthValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>length of 8+</h6>
-      <h6 className={app.passwordinstructions}>.</h6>
+      <h6 className={app.passwordinstructions}>.</h6><br />
       
       <h5 className={app.loginlabel}>Confirm Password</h5>
       <input type="password" id="ConfPassword" className = {app.logininputs} placeholder="Confirm Password" onKeyUp={validatePasswordSame}/><br />
