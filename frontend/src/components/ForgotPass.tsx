@@ -34,7 +34,7 @@ function ForgotPass(){
         <div id = "loginDiv">
             <span id="inner-title">Forgot Password</span><br />
             <h5 className={app.loginlabel}>Enter your Email</h5>
-            <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp = {(e) => {if (e.key === 'Enter'){ForgotPass()}}} /><br/>
+            <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp = {(e) => {if (e.key == 'Enter')ForgotPass()}} /><br/>
             <h5 id = "alertmessage"></h5>
             <button className={app.loginbuttons} id={app.dologinbutton} onClick={reclaimPass}>Reset Password</button>
         </div>
