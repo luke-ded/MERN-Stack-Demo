@@ -49,7 +49,7 @@ li a:hover {
     width:30%;
     min-height: fit-content;
     height:40%;
-    top: 55%;
+    top: 50%;
     left: 50%;
     border: 1.5px solid #6d91e8;
     border-radius: 4%;
@@ -136,7 +136,18 @@ li a:hover {
     display:flex;
     width:105%;
     height:3vh;
-    margin-top:70vh;
+    margin-top:60vh;
+    background-color: rgba(71, 70, 70, 0.675);
+    text-align: center;
+    font-size: 2vh;
+}
+
+#signupredirect
+{
+    display:flex;
+    width:105%;
+    height:3vh;
+    margin-top:88vh;
     background-color: rgba(71, 70, 70, 0.675);
     text-align: center;
     font-size: 2vh;
