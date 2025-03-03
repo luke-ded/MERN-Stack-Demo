@@ -8,6 +8,7 @@ function Signup(){
   const [isPasswordSymbolValid, setIsPasswordSymbolValid] = useState(false);
   const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(false);
   const [isPasswordSame, setIsPasswordSame] = useState(true);
+  const [isValidEmail, setIsValidEmail] = useState(false);
 
   function doSignUp(event:any) : void {
 
@@ -87,6 +88,18 @@ function Signup(){
       setIsPasswordSame(false);
   }
 
+
+  function validateEmail()
+  {
+    const ret = String((document.getElementById("Email") as HTMLInputElement).value)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+
+    setIsValidEmail(Boolean(ret));
+  }
+
   return(
     <div id="loginDiv">
       <span id="inner-title">SIGN UP</span><br />
@@ -95,7 +108,8 @@ function Signup(){
       <h5 className={app.loginlabel}>Last Name</h5>
       <input type="text" id="lastName" className = {app.logininputs} placeholder="Last Name" /><br />
       <h5 className={app.loginlabel}>Email</h5>
-      <input type="text" id="Email" className = {app.logininputs} placeholder="Email" /><br />
+      <input type="text" id="Email" className = {app.logininputs} placeholder="Email" onKeyUp={validateEmail}/><br />
+      <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isValidEmail ? '#58e96c' :'rgb(235, 83, 83)'}}>{isValidEmail ? '' : 'Invalid email.' }</h6><h6 style = {{fontSize: 9}}></h6>
       <h5 className={app.loginlabel}>Password</h5>
       <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={validatePassword}/><br />
       <h6 className={app.passwordinstructions} id={app.firstinstruction}>Must contain at least&nbsp;</h6>
@@ -108,7 +122,7 @@ function Signup(){
       
       <h5 className={app.loginlabel}>Confirm Password</h5>
       <input type="password" id="ConfPassword" className = {app.logininputs} placeholder="Confirm Password" onKeyUp={validatePasswordSame}/><br />
-      <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isPasswordSame ? '#58e96c' :'rgb(235, 83, 83)'}}> Passwords are {isPasswordSame ? '' : 'not' } the same.</h6>
+      <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isPasswordSame ? '#58e96c' :'rgb(235, 83, 83)'}}> {isPasswordSame ? '' : 'Passwords are not the same.'} </h6>
       <h5 id = "alertmessage"></h5>
       <button className={app.loginbuttons} id={app.dologinbutton} onClick={doSignUp}>Sign Up</button>
       <span id="loginResult"></span>
