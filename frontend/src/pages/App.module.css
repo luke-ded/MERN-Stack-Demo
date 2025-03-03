@@ -52,7 +52,7 @@ li a:hover {
     top: 50%;
     left: 50%;
     border: 1.5px solid #6d91e8;
-    border-radius: 4%;
+    border-radius: 2%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
