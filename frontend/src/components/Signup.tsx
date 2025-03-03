@@ -1,8 +1,12 @@
 import app from "../pages/App.module.css";
 //import { useNavigate } from 'react-router-dom';
+import {useState} from 'react'
 
 function Signup(){
   //const navigate = useNavigate();
+  const [isPasswordNumberValid, setIsPasswordNumberValid] = useState(false);
+  const [isPasswordSymbolValid, setIsPasswordSymbolValid] = useState(false);
+  const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(false);
 
   function doSignUp(event:any) : void {
 
@@ -32,6 +36,34 @@ function Signup(){
   }
 
 
+  let symbols = new Set(['!', '@', '#', '$', '%', '^', '&', '*']);
+  let numbers = new Set(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
+
+  function validatePassword()
+  {
+    console.log("validating");
+      var password = (document.getElementById("loginPassword") as HTMLInputElement).value;
+      var symbol = false;
+      var number = false;
+
+      for(let i = 0; i < password.length; i++)
+      {
+          if(symbols.has(password[i]))
+              symbol = true;
+          else if(numbers.has(password[i]))
+              number = true;
+
+          if(symbol && number) break;
+      }
+
+
+      setIsPasswordNumberValid(number);
+      setIsPasswordSymbolValid(symbol);
+      setIsPasswordLengthValid(password.length > 7);
+
+      return symbol && number && password.length > 7;
+  }
+
   return(
     <div id="loginDiv">
       <span id="inner-title">SIGN UP</span><br />
@@ -42,13 +74,13 @@ function Signup(){
       <h5 className={app.loginlabel}>Email</h5>
       <input type="text" id="Email" className = {app.logininputs} placeholder="Email" /><br />
       <h5 className={app.loginlabel}>Password</h5>
-      <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" /><br />
+      <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={validatePassword}/><br />
       <h6 className={app.passwordinstructions} id={app.firstinstruction}>Must contain at least&nbsp;</h6>
-      <h6 className={app.passwordinstructions} id={app.passnumber}>1 number</h6>
+      <h6 className={app.passwordinstructions} id={app.passnumber} style = {{color: isPasswordNumberValid ? '#58e96c' : 'red'}}>1 number</h6>
       <h6 className={app.passwordinstructions}>,&nbsp;</h6>
-      <h6 className={app.passwordinstructions} id={app.passsymbol}>1 symbol</h6>
+      <h6 className={app.passwordinstructions} id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#58e96c' : 'red'}}>1 symbol</h6>
       <h6 className={app.passwordinstructions}>,&nbsp;</h6>
-      <h6 className={app.passwordinstructions} id={app.passlength}>length of 8+</h6>
+      <h6 className={app.passwordinstructions} id={app.passlength} style = {{color: isPasswordLengthValid ? '#58e96c' : 'red'}}>length of 8+</h6>
       <h6 className={app.passwordinstructions}>.</h6>
       
       <h5 className={app.loginlabel}>Confirm Password</h5>
