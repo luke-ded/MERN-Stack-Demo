@@ -97,7 +97,7 @@ function Signup(){
       
       <h5 className={app.loginlabel}>Confirm Password</h5>
       <input type="password" id="ConfPassword" className = {app.logininputs} placeholder="Confirm Password" onKeyUp={validatePasswordSame}/><br />
-      <h6 className={app.passwordinstructions} id={app.firstinstruction}> Passwords are {isPasswordSame ? '' : 'not' } the same.</h6>
+      <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isPasswordSame ? '#58e96c' :'rgb(235, 83, 83)'}}> Passwords are {isPasswordSame ? '' : 'not' } the same.</h6>
       <h5 id = "alertmessage"></h5>
       <button className={app.loginbuttons} id={app.dologinbutton} onClick={doSignUp}>Sign Up</button>
       <span id="loginResult"></span>
