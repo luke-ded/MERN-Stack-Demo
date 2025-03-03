@@ -23,9 +23,14 @@ const NavBar = () => {
       navigate('/')
   }
 
+  function navHome()
+  {
+    navigate('/')
+  }
+
   return (
     <div id = {app.NavBar}>
-        <img src = {logo} id = {app.logoimg}></img>
+        <img src = {logo} id = {app.logoimg} onClick={navHome}></img>
         <PageTitle />
         <button className = {app.loginbuttons} id = {app.loginbutton} 
         onClick={navLogin}>Login</button>
