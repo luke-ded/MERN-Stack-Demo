@@ -76,11 +76,11 @@ function Signup(){
       <h5 className={app.loginlabel}>Password</h5>
       <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={validatePassword}/><br />
       <h6 className={app.passwordinstructions} id={app.firstinstruction}>Must contain at least&nbsp;</h6>
-      <h6 className={app.passwordinstructions} id={app.passnumber} style = {{color: isPasswordNumberValid ? '#58e96c' : 'red'}}>1 number</h6>
+      <h6 className={app.passwordinstructions} id={app.passnumber} style = {{color: isPasswordNumberValid ? '#58e96c' :'rgb(235, 83, 83)'}}>1 number</h6>
       <h6 className={app.passwordinstructions}>,&nbsp;</h6>
-      <h6 className={app.passwordinstructions} id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#58e96c' : 'red'}}>1 symbol</h6>
+      <h6 className={app.passwordinstructions} id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>1 symbol</h6>
       <h6 className={app.passwordinstructions}>,&nbsp;</h6>
-      <h6 className={app.passwordinstructions} id={app.passlength} style = {{color: isPasswordLengthValid ? '#58e96c' : 'red'}}>length of 8+</h6>
+      <h6 className={app.passwordinstructions} id={app.passlength} style = {{color: isPasswordLengthValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>length of 8+</h6>
       <h6 className={app.passwordinstructions}>.</h6>
       
       <h5 className={app.loginlabel}>Confirm Password</h5>
