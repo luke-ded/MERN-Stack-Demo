@@ -7,6 +7,7 @@ function Signup(){
   const [isPasswordNumberValid, setIsPasswordNumberValid] = useState(false);
   const [isPasswordSymbolValid, setIsPasswordSymbolValid] = useState(false);
   const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(false);
+  const [isPasswordSame, setIsPasswordSame] = useState(true);
 
   function doSignUp(event:any) : void {
 
@@ -41,6 +42,8 @@ function Signup(){
 
   function validatePassword()
   {
+    validatePasswordSame();
+    
     console.log("validating");
       var password = (document.getElementById("loginPassword") as HTMLInputElement).value;
       var symbol = false;
@@ -64,6 +67,15 @@ function Signup(){
       return symbol && number && password.length > 7;
   }
 
+  function validatePasswordSame()
+  {
+    if((document.getElementById("loginPassword") as HTMLInputElement).value
+    === (document.getElementById("ConfPassword") as HTMLInputElement).value)
+      setIsPasswordSame(true);
+    else
+      setIsPasswordSame(false);
+  }
+
   return(
     <div id="loginDiv">
       <span id="inner-title">SIGN UP</span><br />
@@ -84,7 +96,8 @@ function Signup(){
       <h6 className={app.passwordinstructions}>.</h6>
       
       <h5 className={app.loginlabel}>Confirm Password</h5>
-      <input type="password" id="ConfPassword" className = {app.logininputs} placeholder="Confirm Password" /><br />
+      <input type="password" id="ConfPassword" className = {app.logininputs} placeholder="Confirm Password" onKeyUp={validatePasswordSame}/><br />
+      <h6 className={app.passwordinstructions} id={app.firstinstruction}> Passwords are {isPasswordSame ? '' : 'not' } the same.</h6>
       <h5 id = "alertmessage"></h5>
       <button className={app.loginbuttons} id={app.dologinbutton} onClick={doSignUp}>Sign Up</button>
       <span id="loginResult"></span>
