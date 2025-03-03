@@ -131,8 +131,28 @@ li a:hover {
 
 #signinredirect
 {
-    display:block;
-    margin-top:10%;
+    display:flex;
+    justify-content: space-between;
+    width:110%;
+    height:7vh;
+    margin-top:75vh;
+    text-align: center;
+    font-size: 2vh;
+}
+
+#signinredirectbutton
+{
+    padding:0;
+    margin-left:0px;
+    background-color: transparent;
+    border:none;
+    color: #6d91e8;
+    font-size: 2vh;
+}
+
+#signinredirectbutton:hover
+{
+    color:#bdc8e2;
 }
 
 #NavBar
