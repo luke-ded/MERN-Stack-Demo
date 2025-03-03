@@ -26,7 +26,18 @@ function Signup(){
         alertMessage.innerText = "One or more fields are missing!";
         alertMessage.style.visibility = "visible";
 
-      } else {
+      } 
+      else if (!validatePassword())
+      {
+        alertMessage.innerText = "Password must meet the requirements.";
+        alertMessage.style.visibility = "visible";
+      }
+      else if (!isPasswordSame)
+      {
+        alertMessage.innerText = "Passwords must be the same.";
+        alertMessage.style.visibility = "visible";
+      }
+      else {
 
         alertMessage.style.visibility = "hidden";
 
