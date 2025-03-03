@@ -102,7 +102,7 @@ function Signup(){
 
   return(
     <div id="loginDiv">
-      <span id="inner-title">SIGN UP2</span><br />
+      <span id="inner-title">SIGN UP</span><br />
       <h5 className={app.loginlabel}>First Name</h5>
       <input type="text" id="FirstName" className = {app.logininputs} placeholder="First Name" /><br />
       <h5 className={app.loginlabel}>Last Name</h5>
