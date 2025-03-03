@@ -85,7 +85,7 @@ li a:hover {
     background-color: transparent;
     border: 1px solid #6d91e8;
     text-align: center;
-    font-size: 2.8vh;
+    font-size: 1.8vh;
 }
 
 .loginbuttons:hover
@@ -97,7 +97,7 @@ li a:hover {
 #loginbutton
 {
     position:absolute;
-    right:9vw;
+    right:7vw;
 }
 
 #signupbutton
@@ -173,7 +173,7 @@ li a:hover {
 {
   display: flex;
   align-items: center; 
-  height: 10vh; 
+  height: 6vh; 
   width: 100vw;
   position:absolute;
   top:0;
@@ -185,7 +185,7 @@ li a:hover {
 
 #logoimg
 {
-  width:4.5%;
+  width:2.5%;
   height:auto;
 }
 
