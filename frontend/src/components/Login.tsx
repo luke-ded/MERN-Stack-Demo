@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function Login(){
   const navigate = useNavigate();
 
-  function doLogin(event:any) : void {
+  function doLogin(){
 
 
     const loginVal = (document.getElementById("loginName") as HTMLInputElement).value;
@@ -34,8 +34,7 @@ function Login(){
       }
 
     }
-    event.preventDefault();
-
+    
   }
 
   function navForgotPassword()
@@ -53,10 +52,10 @@ function Login(){
     <div id="loginDiv">
       <span id="inner-title">LOG IN</span><br />
       <h5 className={app.loginlabel}>Email</h5>
-      <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" /><br />
+      <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp={(e) => e.key === "Enter" && doLogin()}/><br />
       <h5 className={app.loginlabel}>Password</h5>
       <button id={app.forgotpasswordbutton} onClick={navForgotPassword}>Forgot Password?</button>
-      <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" /><br />
+      <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={(e) => e.key === "Enter" && doLogin()}/><br />
       <h5 id = "alertmessage"></h5>
       <button className={app.loginbuttons} id={app.dologinbutton} onClick={doLogin}>Login</button>
       <span id="loginResult"></span>
