@@ -4,48 +4,43 @@ import { useNavigate } from 'react-router-dom';
 function Login(){
   const navigate = useNavigate();
 
-  function doLogin(){
-
-
+  function doLogin()
+  {
     const loginVal = (document.getElementById("loginName") as HTMLInputElement).value;
     const passVal = (document.getElementById("loginPassword") as HTMLInputElement).value;
     const alertMessage = document.getElementById("alertmessage");
 
     if (alertMessage){ 
 
-      if (loginVal.length == 0 && passVal.length == 0){ 
-
+      if (loginVal.length == 0 && passVal.length == 0)
+      { 
         alertMessage.innerText = "Username and Password are both empty!";
         alertMessage.style.visibility = "visible";
-
-      } else if (loginVal.length != 0 && passVal.length == 0){
-
+        return;
+      } 
+      else if (loginVal.length != 0 && passVal.length == 0)
+      {
         alertMessage.innerText = "Password is empty!";
         alertMessage.style.visibility = "visible";
-
-      } else if (loginVal.length == 0 && passVal.length != 0){
-
+        return;
+      } 
+      else if (loginVal.length == 0 && passVal.length != 0)
+      {
         alertMessage.innerText = "Username is empty!";
-        alertMessage.style.visibility = "visible";
-        
-      } else {
+        alertMessage.style.visibility = "visible"; 
+        return;    
+      } 
 
-        alertMessage.style.visibility = "hidden";
-      }
+      alertMessage.style.visibility = "hidden";
 
+      // Add api call here
     }
     
   }
 
   function navForgotPassword()
   {
-
-     if (location.pathname != '/forgot')
-      navigate('/forgot');// Change to forgot password page once set up
-     else 
-      navigate('/');
-     
-     
+    navigate('/forgot');
   }
 
   return(
