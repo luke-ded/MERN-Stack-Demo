@@ -8,7 +8,7 @@ function PageTitle(){
     navigate('/')
   }
 
-  return(<h1 id="title" onClick={navHome}>Salvage Financial2</h1>);
+  return(<h1 id="title" onClick={navHome}>Salvage Financial</h1>);
 };
 
 export default PageTitle;
