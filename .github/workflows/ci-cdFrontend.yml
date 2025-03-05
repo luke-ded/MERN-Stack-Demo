@@ -34,8 +34,11 @@ jobs:
         run: |
           sshpass -p "${SSH_KEY}" ssh -o StrictHostKeyChecking=no ${SSH_USERNAME}@${SSH_HOST} << 'EOF'
           cd /var/www/html
-          git pull origin master
+          git pull
+          cd /var/www/html/frontend
           npm install
           npm run build
+          cp -r /var/www/html/frontend/dist/* /var/www/html
+          cd /var/www/html
           systemctl restart nginx
           EOF

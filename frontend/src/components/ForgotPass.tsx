@@ -1,11 +1,13 @@
 import app from "../pages/App.module.css";
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function ForgotPass(){
 
+    const navigate = useNavigate();
 
-    function reclaimPass(event:any) : void{
+    function reclaimPass(){
 
         const Email = (document.getElementById("loginName") as HTMLInputElement).value;
         const alertMessage = document.getElementById("alertmessage");
@@ -21,12 +23,37 @@ function ForgotPass(){
             } else {
     
                 alertMessage.style.visibility = "hidden";
+        
+                if (validateEmail()){
+
+                    alertMessage.innerText = "Sent to " + Email;
+                    alertMessage.style.visibility = "visible";
+                } else {
+
+                    alertMessage.innerText = "Invalid Email";
+                    alertMessage.style.visibility = "visible";
+                }
             }
 
         }
 
-        event.preventDefault();
+        
     }
+
+    function navLogin(){
+
+        navigate('/login');
+    }
+   
+   function validateEmail(){
+        return String((document.getElementById("loginName") as HTMLInputElement).value)
+        .toLowerCase()
+        .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+   }
+
+
 
    
 
@@ -34,9 +61,10 @@ function ForgotPass(){
         <div id = "loginDiv">
             <span id="inner-title">Forgot Password</span><br />
             <h5 className={app.loginlabel}>Enter your Email</h5>
-            <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp = {(e) => {if (e.key == 'Enter')ForgotPass()}} /><br/>
+            <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
             <h5 id = "alertmessage"></h5>
-            <button className={app.loginbuttons} id={app.dologinbutton} onClick={reclaimPass}>Reset Password</button>
+            <button className={app.loginbuttons} id={app.doEmail} onClick={reclaimPass}>Confirm</button>
+            <button className={app.loginbuttons} id = {app.backToLogin} onClick = {navLogin}>Back To Login</button>
         </div>
     );
 }

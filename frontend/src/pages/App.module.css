@@ -131,6 +131,20 @@ li a:hover {
     color:#bdc8e2;
 }
 
+#doEmail
+{
+    position: absolute;
+    left: 28%;
+    bottom: 15%;
+}
+
+#backToLogin
+{
+    position: absolute;
+    right: 25%;
+    bottom: 15%;
+}
+
 #signinredirect
 {
     display:flex;

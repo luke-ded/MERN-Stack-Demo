@@ -1,9 +1,10 @@
-require('dotenv').config()
-const url = process.env.MONODB_URI;
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config()
+const url = process.env.MONODB_URI;
+var api = require('./api.js');
+api.setApp(app, client);
 
 const app = express();
 app.use(cors());
