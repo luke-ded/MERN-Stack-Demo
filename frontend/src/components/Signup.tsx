@@ -26,17 +26,25 @@ function Signup(){
 
         alertMessage.innerText = "One or more fields are missing!";
         alertMessage.style.visibility = "visible";
-
+        return;
       } 
+      else if(!validateEmail())
+      {
+        alertMessage.innerText = "Email must be valid.";
+        alertMessage.style.visibility = "visible";
+        return;
+      }
       else if (!validatePassword())
       {
         alertMessage.innerText = "Password must meet the requirements.";
         alertMessage.style.visibility = "visible";
+        return;
       }
       else if (!isPasswordSame)
       {
         alertMessage.innerText = "Passwords must be the same.";
         alertMessage.style.visibility = "visible";
+        return;
       }
       else {
 
@@ -98,6 +106,8 @@ function Signup(){
     );
 
     setIsValidEmail(Boolean(ret));
+
+    return Boolean(ret);
   }
 
   return(
