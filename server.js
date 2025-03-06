@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-//require('dotenv').config()
+require('dotenv').config()
 //const url = process.env.MONODB_URI;
 const MongoClient = require('mongodb').MongoClient; 
 const url = 'mongodb+srv://kentaf1202:Lihys2G76A1hS6Ld@salvagefinancialdb.pvcx6.mongodb.net/SalvageFinancialDB?retryWrites=true&w=majority';
