@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 const MongoClient = require('mongodb').MongoClient; 
 const url = 'mongodb+srv://kentaf1202:Lihys2G76A1hS6Ld@salvagefinancialdb.pvcx6.mongodb.net/SalvageFinancialDB?retryWrites=true&w=majority';
 const client = new MongoClient(url);
-client.connect();
+await client.connect();
 
 var api = require('./api.js');
 api.setApp(app, client);
@@ -22,6 +22,10 @@ app.use((req, res, next) => {
 		'Access-Control-Allow-Methods',
 		'GET, POST, PATCH, DELETE, OPTIONS');
 	next();
+});
+
+app.get('/test', (req, res) => {
+    res.send("✅ API is working!");
 });
 
 app.listen(5000);
