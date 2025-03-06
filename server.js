@@ -11,8 +11,8 @@ const url = 'mongodb+srv://kentaf1202:Lihys2G76A1hS6Ld@salvagefinancialdb.pvcx6.
 const client = new MongoClient(url);
 await client.connect();
 
-var api = require('./api.js');
-api.setApp(app, client);
+//var api = require('./api.js');
+//api.setApp(app, client);
 
 app.use((req, res, next) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,6 +22,42 @@ app.use((req, res, next) => {
 		'Access-Control-Allow-Methods',
 		'GET, POST, PATCH, DELETE, OPTIONS');
 	next();
+});
+
+app.post('/api/login', async (req, res) => {
+	try {
+		const {email, password } = req.body;
+
+		const db = client.db('SalvageFinancialDB');
+		const usersCollection = db.collection('Users');
+		
+		const users = await usersCollection.findOne(
+			{ email: email, password: password }, // Search criteria
+			{ projection: { _id: 1 } } // Return only the _id field
+		);
+		const error = "Could not find user";
+		res.status(200).json(users || {error: error});
+	} catch (error) {
+		console.error("❌ Fetch Error:", error);
+		res.status(500).json({ error: "Could not sign in" });
+	}
+});
+
+app.post('/api/signup', async (req, res) => {
+	try {
+		const { fname, lname, email, password } = req.body;
+		const newUser = {fname: fname, lname: lname, email: email, password: password};
+		var error = 'Finished succesfully';
+
+		const db = client.db('SalvageFinancialDB');
+		const usersCollection = db.collection('Users');
+		
+		const users = await usersCollection.insertOne(newUser);
+		res.status(200).json({error: error});
+	} catch (error) {
+		console.error("❌ Fetch Error:", error);
+		res.status(500).json({ error: "Could not sign up" });
+	}
 });
 
 app.get('/test', (req, res) => {
