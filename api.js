@@ -17,7 +17,7 @@ client.connect();*/
 
 exports.setApp = function ( app, client )
 {
-    app.get('/api/login', async (req, res) => {
+    app.post('/api/login', async (req, res) => {
         try {
             const {email, password } = req.body;
 
@@ -35,7 +35,7 @@ exports.setApp = function ( app, client )
         }
     });
 
-    app.get('/api/signup', async (req, res) => {
+    app.post('/api/signup', async (req, res) => {
         try {
             const { fname, lname, email, password } = req.body;
             const newUser = {fname: fname, lname: lname, email: email, password: password};
