@@ -10,8 +10,8 @@ function Signup(){
   const [isPasswordSame, setIsPasswordSame] = useState(true);
   const [isValidEmail, setIsValidEmail] = useState(false);
 
-  function doSignUp(event:any) : void {
-
+  function doSignUp(event:any) : void 
+  {
     const FirstName = (document.getElementById("FirstName") as HTMLInputElement).value;
     const lastName = (document.getElementById("lastName") as HTMLInputElement).value;
     const Email = (document.getElementById("Email") as HTMLInputElement).value;
@@ -22,27 +22,34 @@ function Signup(){
 
     if (alertMessage) {
       
-      if (FirstName.length == 0 || lastName.length == 0 || Email.length == 0 || Password.length == 0 || ConfirmPass.length == 0){
-
+      if (FirstName.length == 0 || lastName.length == 0 || Email.length == 0 || Password.length == 0 || ConfirmPass.length == 0)
+      {
         alertMessage.innerText = "One or more fields are missing!";
         alertMessage.style.visibility = "visible";
-
+        return;
       } 
+      else if(!validateEmail())
+      {
+        alertMessage.innerText = "Email must be valid.";
+        alertMessage.style.visibility = "visible";
+        return;
+      }
       else if (!validatePassword())
       {
         alertMessage.innerText = "Password must meet the requirements.";
         alertMessage.style.visibility = "visible";
+        return;
       }
       else if (!isPasswordSame)
       {
         alertMessage.innerText = "Passwords must be the same.";
         alertMessage.style.visibility = "visible";
+        return;
       }
-      else {
 
-        alertMessage.style.visibility = "hidden";
+      alertMessage.style.visibility = "hidden";
 
-      }
+      // Add api call here
     }
 
     event.preventDefault();
@@ -98,6 +105,8 @@ function Signup(){
     );
 
     setIsValidEmail(Boolean(ret));
+
+    return Boolean(ret);
   }
 
   return(
