@@ -1,15 +1,15 @@
+//Imports
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config()
-
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+//Setting Up Database
 const MongoClient = require('mongodb').MongoClient; 
 const url = process.env.MONGODB_URI;
-
 if (!url) {
     console.error("❌ MongoDB URI is missing. Set it in the .env file.");
     process.exit(1); // Exit if the DB URL is not found
@@ -22,6 +22,7 @@ client.connect()
         process.exit(1); // Exit if the connection fails
     });
 
+//Access Control Headers
 app.use((req, res, next) =>
 {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -36,9 +37,9 @@ app.use((req, res, next) =>
     next();
 });
 
+//API calls
 var api = require('./api.js');
 api.setApp(app, client);
 
-app.listen(5000, () => {
-    console.log(`🚀 Server running on http://localhost:5000`);
-});
+//Listening on port 5000
+app.listen(5000);
