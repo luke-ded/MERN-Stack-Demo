@@ -20,11 +20,11 @@ exports.setApp = function ( app, client )
 
             //If user is not null, send JSON response
             if (!user){
-                Result = "Found user";
-                res.status(200).json({Result: Result, _id: user._id});
+                res.status(200).json({Result: Result, _id: -1})
             }
             else{
-                res.status(200).json({Result: Result, _id: -1})
+                Result = "Found user";
+                res.status(200).json({Result: Result, _id: user._id});
             }       
         } catch (error) {
             console.error("❌ Fetch Error:", error);
@@ -43,10 +43,18 @@ exports.setApp = function ( app, client )
             const newUser = {FName: FName, LName: LName, Email: Email, Password: Password}; //Making New User Object
             
             //DB Statement
-            const users = await usersCollection.insertOne(newUser);
+            const user = await usersCollection.findOne(
+                { Email: Email, Password: Password }, // Search criteria
+            );
+            if (!user){     //If user does not already exist
+                await usersCollection.insertOne(newUser);
+                Result = "Added user";
+            }
+            else{
+                Result = "User Already Exists";
+            }
             
             //Send JSON response
-            Result = "Added user";
             res.status(200).json({Result: Result});
         } catch (error) {
             res.status(500).json({Result: Result});
