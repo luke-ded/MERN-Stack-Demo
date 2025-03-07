@@ -7,7 +7,7 @@ exports.setApp = function ( app, client )
     //In: Email, Password
     //Out: Result, _id
     app.post('/api/login', async (req, res) =>{
-        const Result = "Could not find user";
+        let Result = "Could not find user";
         try {
             //Input
             const {Email, Password} = req.body;
@@ -36,7 +36,7 @@ exports.setApp = function ( app, client )
     //In: FName, LName, Email, Password
     //Out: Result
     app.post('/api/signup', async (req, res) =>{
-        const Result = "Could not add user";
+        let Result = "Could not add user";
         try {
             //Input
             const {FName, LName, Email, Password} = req.body;
@@ -53,7 +53,7 @@ exports.setApp = function ( app, client )
             else{
                 Result = "User Already Exists";
             }
-            
+
             //Send JSON response
             res.status(200).json({Result: Result});
         } catch (error) {
