@@ -12,7 +12,6 @@ const url = 'mongodb+srv://kentaf1202:Lihys2G76A1hS6Ld@salvagefinancialdb.pvcx6.
 const client = new MongoClient(url);
 client.connect()
 
-
 app.use((req, res, next) =>
 {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,28 +24,6 @@ app.use((req, res, next) =>
 	'GET, POST, PATCH, DELETE, OPTIONS'
     );
     next();
-});
-
-
-app.post('/api/addcard', async (req, res, next) =>
-{
-// incoming: userId, color
-// outgoing: error
-const { userId, card } = req.body;
-const newCard = {Card:card,UserId:userId};
-var error = '';
-try
-{
-const db = client.db();
-const result = db.collection('Cards').insertOne(newCard);
-}
-catch(e)
-{
-error = e.toString();
-}
-cardList.push( card );
-var ret = { error: error };
-res.status(200).json(ret);
 });
 
 app.post('/api/login', async (req, res) =>{
@@ -68,6 +45,20 @@ app.post('/api/login', async (req, res) =>{
 	}
 });
 
+app.post('/api/signup', async (req, res) =>{
+	try {
+		const {FName, LName, Email, Password} = req.body;
+		const newUser = {FName: FName, LName: LName, Email: Email, Password: Password};
+
+		const db = client.db('SalvageFinancialDB');
+		const usersCollection = db.collection('Users');
+		
+		const users = await usersCollection.insertOne(newUser);
+		res.status(200).json({result: "Added User"});
+	} catch (error) {
+		res.status(500).json({result: "Could not add user" });
+	}
+});
 
 app.post('/api/dbtest', async (req, res) => {
     try {
