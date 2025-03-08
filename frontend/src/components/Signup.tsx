@@ -106,7 +106,7 @@ function Signup(){
 
     setIsValidEmail(Boolean(ret));
 
-    return Boolean(ret);
+    return isValidEmail;
   }
 
   return(
