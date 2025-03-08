@@ -27,7 +27,7 @@ exports.setApp = function ( app, client )
                 res.status(200).json({Result: Result, _id: user._id});
             }       
         } catch (error) {
-            console.error("❌ Fetch Error:", error);
+            console.error("❌ Error:", error);
             res.status(500).json({Result: Result});
         }
     });
@@ -46,17 +46,50 @@ exports.setApp = function ( app, client )
             const user = await usersCollection.findOne(
                 { Email: Email, Password: Password }, // Search criteria
             );
-            if (!user){     //If user does not already exist
+
+            //Configure response
+            if (!user){         //If user doesnt already exist
                 await usersCollection.insertOne(newUser);
                 Result = "Added user";
             }
-            else{
+            else{           //If user already exists
                 Result = "User Already Exists";
             }
 
             //Send JSON response
             res.status(200).json({Result: Result});
         } catch (error) {
+            console.error("❌ Error:", error);
+            res.status(500).json({Result: Result});
+        }
+    });
+
+    //AddInitial API
+    //In: _id, InitialDebt, InitialAmount
+    //Out: Result
+    app.post('/api/AddInitial', async (req,res) => {
+        let Result = "Could not add amount";
+        try{
+            //Input
+            const {_id, InitialDebt, InitialAmount} = req.body();
+
+            //DB 
+            const user = await usersCollection.updateOne(
+                { _id: _id}, {InitialDebt: InitialDebt, InitialAmount: InitialAmount} // Search criteria
+            );
+
+            //Configure response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to add initial debt and amount to";
+            }
+            else{          //If user was updated 
+                Result = "Added amounts to user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error);
             res.status(500).json({Result: Result});
         }
     });
