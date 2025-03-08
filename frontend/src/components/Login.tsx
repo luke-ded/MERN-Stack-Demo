@@ -34,6 +34,7 @@ function Login(){
       alertMessage.style.visibility = "hidden";
 
       // Add api call here
+      navFincancialsPage();
     }
     
   }
@@ -41,6 +42,11 @@ function Login(){
   function navForgotPassword()
   {
     navigate('/forgot');
+  }
+
+  function navFincancialsPage()
+  {
+    navigate('/financials');
   }
 
   return(
