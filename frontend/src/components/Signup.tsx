@@ -1,14 +1,20 @@
 import app from "../pages/App.module.css";
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
 
 function Signup(){
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
+  
   const [isPasswordNumberValid, setIsPasswordNumberValid] = useState(false);
   const [isPasswordSymbolValid, setIsPasswordSymbolValid] = useState(false);
   const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(false);
   const [isPasswordSame, setIsPasswordSame] = useState(true);
   const [isValidEmail, setIsValidEmail] = useState(false);
+
+  function navFincancialsPage()
+  {
+    navigate('/financials');
+  }
 
   function doSignUp(event:any) : void 
   {
@@ -50,6 +56,7 @@ function Signup(){
       alertMessage.style.visibility = "hidden";
 
       // Add api call here
+      navFincancialsPage();
     }
 
     event.preventDefault();
@@ -106,7 +113,7 @@ function Signup(){
 
     setIsValidEmail(Boolean(ret));
 
-    return Boolean(ret);
+    return isValidEmail;
   }
 
   return(

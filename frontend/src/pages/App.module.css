@@ -68,6 +68,8 @@ li a:hover {
 
 .logininputs
 {
+    position:relative;
+    z-index: 2;
     display:inline-block;
     margin-left:.1%;
     width:80%;
@@ -131,6 +133,23 @@ li a:hover {
     color:#bdc8e2;
 }
 
+.showpassworddiv
+{
+    position:relative;
+}
+
+#showpasswordbutton
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 11%;
+    margin-right:10%;
+    z-index: 2;
+    width:3.5%;
+    height:auto;
+    color:white;
+}
 #doEmail
 {
     position: absolute;
@@ -241,3 +260,4 @@ li a:hover {
     0% {opacity: 0;}
     100% { opacity: 1;}
 }
+
