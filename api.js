@@ -7,7 +7,7 @@ exports.setApp = function ( app, client )
     //In: Email, Password
     //Out: Result, _id
     app.post('/api/login', async (req, res) =>{
-        let Result = "Could not find user";
+        let Result = "Could not find login";
         try {
             //Input
             const {Email, Password} = req.body;
@@ -18,11 +18,12 @@ exports.setApp = function ( app, client )
                 { projection: { _id: 1 } }      //Returns only _id
             );
 
-            //If user is not null, send JSON response
-            if (!user){
-                res.status(200).json({Result: Result, _id: -1})
+            //Configure response and send JSON response
+            if (!user){     //If user does not match
+                Result = "Could not match user";
+                res.status(200).json({Result: Result, _id: -1});
             }
-            else{
+            else{   //If user does match
                 Result = "Found user";
                 res.status(200).json({Result: Result, _id: user._id});
             }       
@@ -111,7 +112,7 @@ exports.setApp = function ( app, client )
                 {$push : {Income: newIncome}}   //Pushing onto Income Array new Income
             );
 
-            //Configure response
+            //Configure response and send JSON response
             if (user.matchedCount === 0) {          //If no user was updated
                 Result = "Could not find user to add income";
             }
@@ -159,6 +160,34 @@ exports.setApp = function ( app, client )
         }
     });
     
+    //ShowAllInfo API
+    //In: _id
+    //Out: Result, FName, LName, Email, Password, InitialAmount, InitialDebt, Income[], Expenses
+    app.post('/api/ShowAllInfo', async (req,res) => {
+        let Result = "Could not show all information";
+        try{
+            //Input
+            const {_id} = req.body();
+
+            //DB 
+            const user = await usersCollection.findOne(
+                { _id: _id}   //Search criteria
+            );
+
+            //Configure response and send JSON response
+            if (user.matchedCount === 0) {          //If no user was found
+                Result = "Could not find user to show";
+            }
+            else{          //If user was found
+                Result = "Found user";
+                res.status(200).json({Result: Result, User: user});
+            }
+        } catch (error) {
+            console.error("❌ Error:", error);
+            res.status(500).json({Result: Result});
+        }
+    });
+
     //DB Test API
     //Out: Whether DB connection was successful
     app.post('/api/dbtest', async (req, res) => {
