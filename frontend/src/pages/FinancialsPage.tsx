@@ -3,7 +3,7 @@ import app from './App.module.css';
 
 const FinancialsPage = () => {
   return (
-    <div>
+    <div id = {app.finance}>
         <NavBar />
         <div id = {app.main}>
 
