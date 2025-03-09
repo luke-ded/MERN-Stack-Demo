@@ -113,6 +113,7 @@ li a:hover {
     display:inline-block;
     margin-left:.1%;
     width:80%;
+    font-size: 2vh;
 }
 
 .loginbuttons
@@ -180,14 +181,14 @@ li a:hover {
 
 #showpasswordbutton
 {
+    float:bottom;
     position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 11%;
+    right:0;
+    top:70%;
     margin-right:10%;
     z-index: 2;
-    width:3.5%;
-    height:auto;
+    width:auto;
+    height:2vh;
     color:white;
 }
 #doEmail
