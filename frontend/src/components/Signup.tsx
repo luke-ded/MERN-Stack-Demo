@@ -1,4 +1,6 @@
 import app from "../pages/App.module.css";
+import show from '../assets/eye-password-show.png'
+import dontshow from '../assets/eye-password-hide.png'
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
 
@@ -10,6 +12,18 @@ function Signup(){
   const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(false);
   const [isPasswordSame, setIsPasswordSame] = useState(true);
   const [isValidEmail, setIsValidEmail] = useState(false);
+  const [showPasssword, setShowPassword] = useState(false);
+  const [showConfirmPasssword, setShowConfirmPassword] = useState(false);
+
+  function showPasswordHandler()
+  {
+    setShowPassword(!showPasssword);
+  }
+
+  function showConfirmPasswordHandler()
+  {
+    setShowConfirmPassword(!showConfirmPasssword);
+  }
 
   function navFincancialsPage()
   {
@@ -127,7 +141,12 @@ function Signup(){
       <input type="text" id="Email" className = {app.logininputs} placeholder="Email" onKeyUp={validateEmail}/><br />
       <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isValidEmail ? '#58e96c' :'rgb(235, 83, 83)'}}>{isValidEmail ? '' : 'Invalid email.' }</h6><br />
       <h5 className={app.loginlabel}>Password</h5>
-      <input type="password" id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={validatePassword}/><br />
+      
+      <div className={app.showpassworddiv}>
+        <input type= { showPasssword ? "text" :"password"} id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={validatePassword}/><br />
+        <img id={app.showpasswordbutton} onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
+      </div>
+
       <h6 className={app.passwordinstructions} id={app.firstinstruction}>Must contain at least&nbsp;</h6>
       <h6 className={app.passwordinstructions} id={app.passnumber} style = {{color: isPasswordNumberValid ? '#58e96c' :'rgb(235, 83, 83)'}}>1 number</h6>
       <h6 className={app.passwordinstructions}>,&nbsp;</h6>
@@ -137,7 +156,10 @@ function Signup(){
       <h6 className={app.passwordinstructions}>.</h6><br />
       
       <h5 className={app.loginlabel}>Confirm Password</h5>
-      <input type="password" id="ConfPassword" className = {app.logininputs} placeholder="Confirm Password" onKeyUp={validatePasswordSame}/><br />
+      <div className={app.showpassworddiv}>
+      <input type= { showConfirmPasssword ? "text" :"password"} id="ConfPassword" className = {app.logininputs} placeholder="Confirm Password" onKeyUp={validatePasswordSame}/><br />
+        <img id={app.showpasswordbutton} onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
+      </div>
       <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isPasswordSame ? '#58e96c' :'rgb(235, 83, 83)'}}> {isPasswordSame ? '' : 'Passwords are not the same.'} </h6>
       <h5 id = "alertmessage"></h5>
       <button className={app.loginbuttons} id={app.dologinbutton} onClick={doSignUp}>Sign Up</button>
