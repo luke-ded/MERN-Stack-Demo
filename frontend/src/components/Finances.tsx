@@ -1,6 +1,6 @@
-import app from "../pages/App.module.css";
-import { useNavigate } from 'react-router-dom';
-import {useState} from 'react'
+//import app from "../pages/App.module.css";
+//import { useNavigate } from 'react-router-dom';
+//import {useState} from 'react'
 
 
 function Finances(){
