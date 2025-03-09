@@ -77,12 +77,12 @@ const FinancialsPage = () => {
     <div id = {app.finance}>
          <NavBar />
 
-        <div className = {app.FinanceDiv}>
+        <div className = {app.FinanceDiv} id ="FinanceBar">
           <Finances />
           <button id = {app.exitBtn} onClick={() => {if(isFinanceBarClosed == false) {closeFinanceBar();} else {openFianceBar();}}}>&#10060;</button><br />
         </div>
 
-        <div className = {app.visualDiv}>
+        <div className = {app.visualDiv} id = "VisualBar">
           <VisualFinances />
           <button id = {app.exitBtnV} onClick = {() => {if(isVisualBarClosed == false) {closeVisualBar();} else {openVisualBar();}}}>&#10060;</button><br />
         </div>
