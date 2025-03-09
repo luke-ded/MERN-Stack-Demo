@@ -66,6 +66,37 @@ li a:hover {
     text-align: center;
 }
 
+.FinanceDiv{
+    display: block;
+    background-color: rgba(17,18,23, .9);
+    position: absolute;
+    width:30%;
+    min-height: fit-content;
+    height:40%;
+    top: 50%;
+    left: 30%;
+    border: 1.5px solid #6d91e8;
+    border-radius: 2%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    visibility: visible;
+}
+
+.visualDiv{
+    display: block;
+    background-color: rgba(17,18,23, .9);
+    position: absolute;
+    width:30%;
+    min-height: fit-content;
+    height:40%;
+    top: 50%;
+    left: 70%;
+    border: 1.5px solid #6d91e8;
+    border-radius: 2%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
 .loginlabel
 {   
     margin-top:4%;
@@ -215,6 +246,23 @@ li a:hover {
 {
     color:#bdc8e2;
 }
+
+#exitBtn
+{
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    border: none;
+    padding:0;
+    background-color: rgba(17,18,23, .9);
+}
+
+#exitBtn:hover
+{
+    border-radius: 50%;
+    background-color: gray;
+}
+
 
 .passwordinstructions
 {
