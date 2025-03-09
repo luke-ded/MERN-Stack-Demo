@@ -69,7 +69,7 @@ function Login(){
       <button id={app.forgotpasswordbutton} onClick={navForgotPassword}>Forgot Password?</button>
 
       <div className={app.showpassworddiv}>
-        <input type= { showPasssword ? "text" :"password"} id={app.loginPassword} className = {app.logininputs} placeholder="Password" onKeyUp={(e) => e.key === "Enter" && doLogin()}/><br />
+        <input type= { showPasssword ? "text" :"password"} id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={(e) => e.key === "Enter" && doLogin()}/><br />
         <img id={app.showpasswordbutton} onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
       </div>
 
