@@ -167,6 +167,10 @@ li a:hover {
     border:none;
     color: #6d91e8;
     font-size: 1.5vh;
+    z-index: 2;
+    position: absolute;
+    top: 54.5%;
+    right: 0%;
 }
 
 #forgotpasswordbutton:hover
@@ -190,6 +194,7 @@ li a:hover {
     width:auto;
     height:2vh;
     color:white;
+    padding: 0%;
 }
 #doEmail
 {
