@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 exports.setApp = function ( app, client )
 {
     const db = client.db('SalvageFinancialDB');
@@ -11,6 +13,11 @@ exports.setApp = function ( app, client )
         try {
             //Input
             const {Email, Password} = req.body;
+
+            //If all input fields are not given
+            if (!Email || !Password){
+                throw new error("Invalid Input");
+            }
 
             //DB Statement
             const user = await usersCollection.findOne(
@@ -41,8 +48,13 @@ exports.setApp = function ( app, client )
         try {
             //Input
             const {FName, LName, Email, Password} = req.body;
-            const newUser = {FName: FName, LName: LName, Email: Email, Password: Password}; //Making New User Object
-            
+            const newUser = {FName: FName, LName: LName, Email: Email, Password: Password};     //Making New User Object
+
+            //If all input fields are not given
+            if (!FName || !LName || !Email || !Password){
+                throw new error("Invalid Input");
+            }
+              
             //DB Statement
             const user = await usersCollection.findOne(
                 { Email: Email, Password: Password },   //Search criteria
@@ -69,15 +81,21 @@ exports.setApp = function ( app, client )
     //In: _id, InitialDebt, InitialAmount
     //Out: Result
     app.post('/api/AddInitial', async (req,res) => {
-        let Result = "Could not add amount";
+        let Result = "Could not add amount and debt";
         try{
             //Input
-            const {_id, InitialDebt, InitialAmount} = req.body();
+            const {_id, InitialDebt, InitialAmount} = req.body;
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+
+            //If all input fields are not given
+            if (!_id || !InitialDebt || !InitialAmount){
+                throw new error("Invalid Input");
+            }
 
             //DB 
             const user = await usersCollection.updateOne(
-                { _id: _id},    //Search criteria
-                {InitialDebt: InitialDebt, InitialAmount: InitialAmount}   //Updated info
+                { _id: objectId},    //Search criteria
+                {$set: {InitialDebt: InitialDebt, InitialAmount: InitialAmount}}   //Updated info
             );
 
             //Configure response
@@ -103,12 +121,18 @@ exports.setApp = function ( app, client )
         let Result = "Could not add income";
         try{
             //Input
-            const {_id, Name, Amount, IfReccuring, InitialTime, TimeFrame} = req.body();
+            const {_id, Name, Amount, IfReccuring, InitialTime, TimeFrame} = req.body;
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
             const newIncome = {Name, Amount, IfReccuring, InitialTime, TimeFrame};
+
+            //If all input fields are not given
+            if (!_id || !Name || !Amount || !IfReccuring){
+                throw new error("Invalid Input");
+            }
 
             //DB 
             const user = await usersCollection.updateOne(
-                { _id: _id},    //Search criteria
+                { _id: objectId},    //Search criteria
                 {$push : {Income: newIncome}}   //Pushing onto Income Array new Income
             );
 
@@ -135,12 +159,18 @@ exports.setApp = function ( app, client )
         let Result = "Could not add expense";
         try{
             //Input
-            const {_id, Name, Amount, Category, IfReccuring, InitialTime, TimeFrame} = req.body();
+            const {_id, Name, Amount, Category, IfReccuring, InitialTime, TimeFrame} = req.body;
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
             const newExpense = {Name, Amount, Category, IfReccuring, InitialTime, TimeFrame};
+
+            //If all input fields are not given
+            if (!_id || !Name || !Amount || !Category || !IfReccuring){
+                throw new error("Invalid Input");
+            }
 
             //DB 
             const user = await usersCollection.updateOne(
-                { _id: _id},    //Search criteria
+                { _id: objectId},    //Search criteria
                 {$push : {Expenses: newExpense}}   //Pushing onto Expenses Array new Expense
             );
 
@@ -162,16 +192,22 @@ exports.setApp = function ( app, client )
     
     //ShowAllInfo API
     //In: _id
-    //Out: Result, FName, LName, Email, Password, InitialAmount, InitialDebt, Income[], Expenses
+    //Out: Result, User{FName, LName, Email, Password, InitialAmount, InitialDebt, Income[], Expenses}
     app.post('/api/ShowAllInfo', async (req,res) => {
         let Result = "Could not show all information";
         try{
             //Input
-            const {_id} = req.body();
+            const {_id} = req.body;
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+
+            //If all input fields are not given
+            if (!_id){
+                throw new error("Invalid Input");
+            }
 
             //DB 
             const user = await usersCollection.findOne(
-                { _id: _id}   //Search criteria
+                { _id: objectId}   //Search criteria
             );
 
             //Configure response and send JSON response
@@ -194,10 +230,11 @@ exports.setApp = function ( app, client )
         try {
             //DB Statement
             const collections = await db.listCollections().toArray();
+
             //Send JSON response
-            res.status(200).json({ message: "✅ Connected to MongoDB!", collections: collections.map(c => c.name) });
+            res.status(200).json({Result: "✅ Connected to MongoDB!", Collections: collections.map(c => c.name) });
         } catch (error) {
-            res.status(500).json({ error: "❌ Database connection failed", details: error.message });
+            res.status(500).json({Result: "❌ Database connection failed", Error: error.message });
         }
     });
 

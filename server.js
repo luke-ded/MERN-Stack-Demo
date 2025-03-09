@@ -10,11 +10,14 @@ app.use(bodyParser.json());
 //Setting Up Database
 const MongoClient = require('mongodb').MongoClient; 
 const url = process.env.MONGODB_URI;
+
 if (!url) {
     console.error("❌ MongoDB URI is missing. Set it in the .env file.");
     process.exit(1); // Exit if the DB URL is not found
 }
+
 const client = new MongoClient(url);
+
 client.connect()
     .then(() => console.log("✅ Connected to MongoDB"))
     .catch(err => {
