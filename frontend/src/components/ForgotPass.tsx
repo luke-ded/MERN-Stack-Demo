@@ -39,7 +39,17 @@ function ForgotPass(){
                         OneTimePass: oneTimePassword
                     };
 
-                    emailjs.send(serviceID, templateID, templateParams, publicKey);
+                    emailjs.send(serviceID, templateID, templateParams, publicKey)
+                    .then(response => {
+                        alertMessage.innerText = "Sent to " + Email;
+                        alertMessage.style.visibility = "visible";
+                        
+                    })
+                    .catch(error => {
+                        alertMessage.innerText = "Failed to send email";
+                        alertMessage.style.visibility = "visible";
+                        
+                    });
                     return;
                 } else {
 
