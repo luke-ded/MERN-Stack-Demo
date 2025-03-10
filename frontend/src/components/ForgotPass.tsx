@@ -17,6 +17,7 @@ function ForgotPass(){
         //Website: emailjs.com
         //Email: salvagefinancial416@gmail.com
         //Password: COP4331$
+        //works for gmail emails only for now, will add more later
 
         if (alertMessage) {
 
