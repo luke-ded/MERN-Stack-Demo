@@ -8,6 +8,7 @@ import dashapp from '../components/dashboardcomponents/dashboard.module.css'
 // Luke is working on this page, please don't edit!!
 const DashboardPage = () => {
     const percentage = 60;
+    const rewardName = "rewardName";
   return (
     <div>
         <NavBar />
@@ -24,11 +25,11 @@ const DashboardPage = () => {
 
         {/* This is super rough */}
         <div className={dashapp.dashboardDiv} id={dashapp.goal}>
-            <h3 id={dashapp.chartlabel}>Goal</h3>
+            <h3 id={dashapp.chartlabel}>Reward</h3>
             <div id={app.goalmessagewrapper}>
                 <GoalProgress />
                 <h5 id={dashapp.goalmessage} style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 
-                    You are {percentage}% of the way to your goal!</h5>
+                    You are {percentage}% of the way to your reward, {rewardName}!</h5>
             </div>
         </div>
 
