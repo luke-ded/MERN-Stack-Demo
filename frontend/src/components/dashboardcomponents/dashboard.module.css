@@ -80,3 +80,11 @@
     margin-right:10%;
     font-size: 2vh;
 }
+
+#depthmeter
+{
+    top:53%;
+    left:90%;
+    width:10%;
+    height:85%;
+}

@@ -34,6 +34,10 @@ const DashboardPage = () => {
             </div>
         </div>
 
+        <div className={dashapp.dashboardDiv} id={dashapp.depthmeter}>
+            <h3 id={dashapp.chartlabel}>Depth</h3>
+        </div>
+        
     </div>
     );
     };
