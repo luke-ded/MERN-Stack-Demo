@@ -5,11 +5,12 @@ import app from './App.module.css';
 import dashapp from '../components/dashboardcomponents/dashboard.module.css'
 
 
-// Luke is working on this page, please don't edit!!
+// Luke is working on this page, please DO NOT edit!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const DashboardPage = () => {
     const percentage = 60;
     const rewardName = "rewardName";
-  return (
+    
+    return (
     <div>
         <NavBar />
 
@@ -34,7 +35,7 @@ const DashboardPage = () => {
         </div>
 
     </div>
-  );
-};
+    );
+    };
 
 export default DashboardPage;
