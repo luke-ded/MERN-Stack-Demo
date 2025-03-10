@@ -63,8 +63,10 @@ const NavBar = () => {
       <div id = {app.NavBar}>
           <img src = {logo} id = {app.logoimg} onClick={navHome}></img>
           <PageTitle />
-          <button className={app.navbarbutton} onClick={navDashboardPage}>Dashboard</button>
-          <button className={app.navbarbutton} onClick={navFinancialsPage}>Financials</button>
+          <button className={app.navbarbutton} onClick={navDashboardPage} 
+          style={{backgroundColor: location.pathname == '/dashboard' ? "rgba(255, 255, 255, 0.15)":"transparent"}}>Dashboard</button>
+          <button className={app.navbarbutton} onClick={navFinancialsPage}
+          style={{backgroundColor: location.pathname == '/financials' ? "rgba(255, 255, 255, 0.15)":"transparent"}}>Financials</button>
           <button className = {app.loginbuttons} id = {app.signupbutton} 
           onClick={doLogout}>Log out</button>
           
