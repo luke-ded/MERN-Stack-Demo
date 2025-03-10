@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage.tsx';
 import SignupPage from './pages/SignupPage.tsx';
 import ForgotPage from './pages/ForgotPage.tsx';
 import FinancialsPage from './pages/FinancialsPage.tsx';
+import DashboardPage from './pages/DashboardPage.tsx';
 
 
 function  App(){
@@ -16,6 +17,7 @@ function  App(){
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/forgot" element = {<ForgotPage />} />
         <Route path="/financials" element = {<FinancialsPage />} />
+        <Route path="/dashboard" element = {<DashboardPage />} />
         <Route path="*" element={<HomePage />} /> {/* default */}
       </Routes>
   </Router>
