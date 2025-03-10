@@ -51,6 +51,8 @@ const NavBar = () => {
       <div id = {app.NavBar}>
           <img src = {logo} id = {app.logoimg} onClick={navHome}></img>
           <PageTitle />
+          <button className={app.navbarbutton}>Dashboard</button>
+          <button className={app.navbarbutton}>Financials</button>
           <button className = {app.loginbuttons} id = {app.signupbutton} 
           onClick={doLogout}>Log out</button>
           

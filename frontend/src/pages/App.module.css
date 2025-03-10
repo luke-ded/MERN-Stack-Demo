@@ -134,8 +134,7 @@ li a:hover {
 
 .loginbuttons:hover
 {
-    background-color: rgba(109, 145, 232, .1);
-    border-color: rgb(63, 85, 137)
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 #loginbutton
@@ -311,6 +310,22 @@ li a:hover {
 
   border-bottom: 1px solid #6d91e8;
   background-color: rgba(17,18,23, .6);
+}
+
+.navbarbutton
+{
+    margin-left:2%;
+    background-color: transparent;
+    border-radius: 0%;
+    border-left: 1px solid #6d91e8;
+    border-right: 1px solid #6d91e8;
+}
+
+.navbarbutton:hover
+{
+    background-color: rgba(255, 255, 255, 0.2);
+    border-top: none;
+    border-bottom: none;
 }
 
 #logoimg
