@@ -28,6 +28,18 @@ const NavBar = () => {
     navigate('/')
   }
 
+  function navDashboardPage()
+  {
+    if(location.pathname != '/dashboard')
+      navigate('/dashboard');
+  }
+
+  function navFinancialsPage()
+  {
+    if(location.pathname != '/financials')
+      navigate('/financials');
+  }
+
   function doLogout()
   {
     // Add more here to actually log user out
@@ -51,8 +63,8 @@ const NavBar = () => {
       <div id = {app.NavBar}>
           <img src = {logo} id = {app.logoimg} onClick={navHome}></img>
           <PageTitle />
-          <button className={app.navbarbutton}>Dashboard</button>
-          <button className={app.navbarbutton}>Financials</button>
+          <button className={app.navbarbutton} onClick={navDashboardPage}>Dashboard</button>
+          <button className={app.navbarbutton} onClick={navFinancialsPage}>Financials</button>
           <button className = {app.loginbuttons} id = {app.signupbutton} 
           onClick={doLogout}>Log out</button>
           
