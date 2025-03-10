@@ -9,7 +9,7 @@ import dashapp from '../components/dashboardcomponents/dashboard.module.css'
 const DashboardPage = () => {
     const percentage = 60;
     const rewardName = "rewardName";
-    
+
     return (
     <div>
         <NavBar />
