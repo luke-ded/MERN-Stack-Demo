@@ -16,7 +16,7 @@ exports.setApp = function ( app, client )
 
             //If all input fields are not given
             if (!Email || !Password){
-                throw new error("Invalid Input");
+                throw new Error("Invalid Input");
             }
 
             //DB Statement
@@ -52,7 +52,7 @@ exports.setApp = function ( app, client )
 
             //If all input fields are not given
             if (!FName || !LName || !Email || !Password){
-                throw new error("Invalid Input");
+                throw new Error("Invalid Input");
             }
               
             //DB Statement
@@ -89,7 +89,7 @@ exports.setApp = function ( app, client )
 
             //If all input fields are not given
             if (!_id || !InitialDebt || !InitialAmount){
-                throw new error("Invalid Input");
+                throw new Error("Invalid Input");
             }
 
             //DB 
@@ -127,7 +127,7 @@ exports.setApp = function ( app, client )
 
             //If all input fields are not given
             if (!_id || !Name || !Amount || !IfReccuring){
-                throw new error("Invalid Input");
+                throw new Error("Invalid Input");
             }
 
             //DB 
@@ -165,7 +165,7 @@ exports.setApp = function ( app, client )
 
             //If all input fields are not given
             if (!_id || !Name || !Amount || !Category || !IfReccuring){
-                throw new error("Invalid Input");
+                throw new Error("Invalid Input");
             }
 
             //DB 
@@ -202,7 +202,7 @@ exports.setApp = function ( app, client )
 
             //If all input fields are not given
             if (!_id){
-                throw new error("Invalid Input");
+                throw new Error("Invalid Input");
             }
 
             //DB 
