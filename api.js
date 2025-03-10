@@ -22,7 +22,7 @@ exports.setApp = function ( app, client )
             //DB Statement
             const user = await usersCollection.findOne(
                 { Email: Email, Password: Password },   //Search criteria
-                { projection: { _id: 1 } }      //Returns only _id
+                { projection: { _id: 1} }      //Returns only _id
             );
 
             //Configure response and send JSON response
@@ -180,6 +180,80 @@ exports.setApp = function ( app, client )
             }
             else{          //If user was updated 
                 Result = "Added expense to user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error);
+            res.status(500).json({Result: Result});
+        }
+    });
+
+    //DeleteIncome API
+    //In: _id, Name
+    //Out: Result
+    app.post('/api/DeleteIncome', async (req,res) => {
+        let Result = "Could not delete income";
+        try{
+            //Input
+            const {_id, Name} = req.body;
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+
+            //If all input fields are not given
+            if (!_id || !Name){
+                throw new Error("Invalid Input");
+            }
+
+            //DB 
+            const user = await usersCollection.updateOne(
+                { _id: objectId},    //Search criteria
+                {$pull : {Income: {Name: Name}}}   //Income to delete by name
+            );
+
+            //Configure response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to delete income";
+            }
+            else{          //If user was updated 
+                Result = "Deleted income from user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error);
+            res.status(500).json({Result: Result});
+        }
+    });
+
+    //DeleteExpenses API
+    //In: _id, Name
+    //Out: Result
+    app.post('/api/DeleteExpenses', async (req,res) => {
+        let Result = "Could not delete expense";
+        try{
+            //Input
+            const {_id, Name} = req.body;
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+
+            //If all input fields are not given
+            if (!_id || !Name){
+                throw new Error("Invalid Input");
+            }
+
+            //DB 
+            const user = await usersCollection.updateOne(
+                { _id: objectId},    //Search criteria
+                {$pull : {Expenses: {Name: Name}}}   //Expense to delete by name
+            );
+
+            //Configure response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to delete expense";
+            }
+            else{          //If user was updated 
+                Result = "Deleted expense from user";
             }
 
             //Send JSON response
