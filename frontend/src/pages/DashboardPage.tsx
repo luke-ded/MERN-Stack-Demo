@@ -11,7 +11,7 @@ const DashboardPage = () => {
     const rewardName = "rewardName";
 
     return (
-    <div>
+    <div id = {app.dashboard}>
         <NavBar />
 
         <div className={dashapp.dashboardDiv} id={dashapp.expensesdoughnut}>
