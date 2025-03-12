@@ -49,7 +49,7 @@ function Login() {
       var js = JSON.stringify(obj);
       try
       {
-        const response = await fetch('http://salvagefinancial.xyz:5000/api/login',
+        const response = await fetch('/api/login',
         {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
         var res = JSON.parse(await response.text());
         if( res._id <= 0 )
