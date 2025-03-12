@@ -30,7 +30,7 @@ function Signup(){
     navigate('/financials');
   }
 
-  function doSignUp(event:any) : void 
+  async function doSignUp(event:any) : Promise<void> 
   {
     const FirstName = (document.getElementById("FirstName") as HTMLInputElement).value;
     const lastName = (document.getElementById("lastName") as HTMLInputElement).value;
@@ -70,7 +70,31 @@ function Signup(){
       alertMessage.style.visibility = "hidden";
 
       // Add api call here
-      navFincancialsPage();
+
+      event.preventDefault();
+      var obj = {FName:FirstName,LName:lastName, Email:Email, Password:Password};
+      var js = JSON.stringify(obj);
+      try
+      {
+        const response = await fetch('http://salvagefinancial.xyz:5000/api/signup',
+        {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
+        var res = JSON.parse(await response.text());
+        if( res._id <= 0 )
+        {
+          alertMessage.innerText = 'User/Password combination incorrect';
+          alertMessage.style.visibility = "visible"; 
+        }
+        else
+        {
+          // Add error handling here
+          navFincancialsPage();
+        }
+      }
+      catch(error:any)
+      {
+          alert(error.toString());
+          return;
+      }
     }
 
     event.preventDefault();
