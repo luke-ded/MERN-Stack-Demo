@@ -79,14 +79,15 @@ function Signup(){
         const response = await fetch('http://salvagefinancial.xyz:5000/api/signup',
         {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
         var res = JSON.parse(await response.text());
-        if( res._id <= 0 )
+        if( res.Result == "User Already Exists" )
         {
-          alertMessage.innerText = 'User/Password combination incorrect';
+          alertMessage.innerText = 'User already exists.';
           alertMessage.style.visibility = "visible"; 
         }
         else
         {
           // Add error handling here
+          alertMessage.style.visibility = "hidden"; 
           navFincancialsPage();
         }
       }
