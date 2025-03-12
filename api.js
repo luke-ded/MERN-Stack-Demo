@@ -57,7 +57,7 @@ exports.setApp = function ( app, client )
               
             //DB Statement
             const user = await usersCollection.findOne(
-                { Email: Email, Password: Password },   //Search criteria
+                { Email: Email },   //Search criteria
             );
 
             //Configure response
