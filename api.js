@@ -190,6 +190,84 @@ exports.setApp = function ( app, client )
         }
     });
 
+    /*
+    //EditIncome API
+    //In: _id, Name, Amount, IfReccuring, InitialTime, TimeFrame
+    //Out: Result
+    app.post('/api/AddIncome', async (req,res) => {
+        let Result = "Could not add income";
+        try{
+            //Input
+            const {_id, Name, Amount, IfReccuring, InitialTime, TimeFrame} = req.body;
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            const newIncome = {Name, Amount, IfReccuring, InitialTime, TimeFrame};
+
+            //If all input fields are not given
+            if (!_id || !Name || !Amount || !IfReccuring){
+                throw new Error("Invalid Input");
+            }
+
+            //DB
+            const user = await usersCollection.updateOne(
+                { _id: objectId},    //Search criteria
+                {$push : {Income: newIncome}}   //Pushing onto Income Array new Income
+            );
+
+            //Configure response and send JSON response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to add income";
+            }
+            else{          //If user was updated 
+                Result = "Added income to user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error);
+            res.status(500).json({Result: Result});
+        }
+    });
+
+    //EditExpenses API
+    //In: _id, Name, Category, Amount, IfReccuring, InitialTime, TimeFrame
+    //Out: Result
+    app.post('/api/AddExpenses', async (req,res) => {
+        let Result = "Could not add expense";
+        try{
+            //Input
+            const {_id, Name, Amount, Category, IfReccuring, InitialTime, TimeFrame} = req.body;
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            const newExpense = {Name, Amount, Category, IfReccuring, InitialTime, TimeFrame};
+
+            //If all input fields are not given
+            if (!_id || !Name || !Amount || !Category || !IfReccuring){
+                throw new Error("Invalid Input");
+            }
+
+            //DB 
+            const user = await usersCollection.updateOne(
+                { _id: objectId},    //Search criteria
+                {$push : {Expenses: newExpense}}   //Pushing onto Expenses Array new Expense
+            );
+
+            //Configure response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to add expense";
+            }
+            else{          //If user was updated 
+                Result = "Added expense to user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error);
+            res.status(500).json({Result: Result});
+        }
+    }); 
+    */
+
     //DeleteIncome API
     //In: _id, Name
     //Out: Result
