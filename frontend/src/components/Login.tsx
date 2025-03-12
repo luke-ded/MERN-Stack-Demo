@@ -4,7 +4,7 @@ import dontshow from '../assets/eye-password-hide.png'
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
 
-function Login(){
+function Login() {
   const navigate = useNavigate();
 
   const [showPasssword, setShowPassword] = useState(false);
@@ -45,23 +45,22 @@ function Login(){
       loginName = loginVal;
       loginPassword = passVal;
       event.preventDefault();
-      var obj = {login:loginName,password:loginPassword};
+      var obj = {Email:loginName,Password:loginPassword};
       var js = JSON.stringify(obj);
       try
       {
         const response = await fetch('http://salvagefinancial.xyz/api/login',
         {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
         var res = JSON.parse(await response.text());
-        if( res.id <= 0 )
+        if( res._id <= 0 )
         {
           alertMessage.innerText = 'User/Password combination incorrect';
           alertMessage.style.visibility = "visible"; 
         }
         else
         {
-          alert("hello");
           var user =
-          {firstName:res.firstName,lastName:res.lastName,id:res.id}
+          {firstName:res.firstName,lastName:res.lastName,id:res._id}
           localStorage.setItem('user_data', JSON.stringify(user));
           alertMessage.style.visibility = "hidden";
           navDashboard();
