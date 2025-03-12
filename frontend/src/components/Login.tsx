@@ -4,12 +4,12 @@ import dontshow from '../assets/eye-password-hide.png'
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
 
-function Login(){
+function Login() {
   const navigate = useNavigate();
 
   const [showPasssword, setShowPassword] = useState(false);
 
-  function doLogin()
+  async function doLogin(event:any) : Promise<void>
   {
     const loginVal = (document.getElementById("loginName") as HTMLInputElement).value;
     const passVal = (document.getElementById("loginPassword") as HTMLInputElement).value;
@@ -39,7 +39,38 @@ function Login(){
       alertMessage.style.visibility = "hidden";
 
       // Add api call here
-      navDashboard();
+      var loginName = "";
+      var loginPassword = ""
+      
+      loginName = loginVal;
+      loginPassword = passVal;
+      event.preventDefault();
+      var obj = {Email:loginName,Password:loginPassword};
+      var js = JSON.stringify(obj);
+      try
+      {
+        const response = await fetch('http://salvagefinancial.xyz:5000/api/login',
+        {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
+        var res = JSON.parse(await response.text());
+        if( res._id <= 0 )
+        {
+          alertMessage.innerText = 'User/Password combination incorrect';
+          alertMessage.style.visibility = "visible"; 
+        }
+        else
+        {
+          var user =
+          {firstName:res.firstName,lastName:res.lastName,id:res._id}
+          localStorage.setItem('user_data', JSON.stringify(user));
+          alertMessage.style.visibility = "hidden";
+          navDashboard();
+        }
+      }
+      catch(error:any)
+      {
+          alert(error.toString());
+          return;
+      }
     }
     
   }
@@ -63,13 +94,13 @@ function Login(){
     <div id="loginDiv">
       <span id="inner-title">LOG IN</span><br />
       <h5 className={app.loginlabel}>Email</h5>
-      <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp={(e) => e.key === "Enter" && doLogin()}/><br />
+      <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp={(e) => e.key === "Enter" && doLogin}/><br />
 
       <h5 className={app.loginlabel}>Password</h5>
       <button id={app.forgotpasswordbutton} onClick={navForgotPassword}>Forgot Password?</button>
 
       <div className={app.showpassworddiv}>
-        <input type= { showPasssword ? "text" :"password"} id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={(e) => e.key === "Enter" && doLogin()}/><br />
+        <input type= { showPasssword ? "text" :"password"} id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={(e) => e.key === "Enter" && doLogin}/><br />
         <img id={app.showpasswordbutton} onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
       </div>
 

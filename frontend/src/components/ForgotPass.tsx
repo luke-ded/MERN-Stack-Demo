@@ -1,6 +1,6 @@
 import app from "../pages/App.module.css";
 import { useNavigate } from 'react-router-dom';
-
+import emailjs from 'emailjs-com';
 
 
 function ForgotPass(){
@@ -11,7 +11,13 @@ function ForgotPass(){
 
         const Email = (document.getElementById("loginName") as HTMLInputElement).value;
         const alertMessage = document.getElementById("alertmessage");
-
+        const serviceID = "service_joh3vl9"; // EmailJS Service ID
+        const templateID = "template_0wir29e"; // EmailJS Template ID
+        const publicKey = "SjEKgAnbxGXtlizVm"; // EmailJS Public Key
+        //Website: emailjs.com
+        //Email: salvagefinancial416@gmail.com
+        //Password: COP4331$
+        //works for gmail emails only for now, will add more later
 
         if (alertMessage) {
 
@@ -19,6 +25,7 @@ function ForgotPass(){
                 
                 alertMessage.innerText = "No Email is entered";
                 alertMessage.style.visibility = "visible";
+                return;
 
             } else {
     
@@ -26,12 +33,22 @@ function ForgotPass(){
         
                 if (validateEmail()){
 
+                    const oneTimePassword = Math.round((Math.random() * 100000)).toString();
+
+                    const templateParams = { //parameters for email builder
+                        toEmail: Email,
+                        OneTimePass: oneTimePassword
+                    };
+
+                    emailjs.send(serviceID, templateID, templateParams, publicKey)
                     alertMessage.innerText = "Sent to " + Email;
                     alertMessage.style.visibility = "visible";
+                    return;
                 } else {
 
                     alertMessage.innerText = "Invalid Email";
                     alertMessage.style.visibility = "visible";
+                    return;
                 }
             }
 
