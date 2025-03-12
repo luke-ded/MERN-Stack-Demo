@@ -69,7 +69,7 @@ function Signup(){
 
       alertMessage.style.visibility = "hidden";
 
-      // Add api call here
+      // Add email validation here
 
       event.preventDefault();
       var obj = {FName:FirstName,LName:lastName, Email:Email, Password:Password};
