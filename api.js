@@ -167,10 +167,10 @@ exports.setApp = function ( app, client )
             }
             else{
                 if (!InitialTime || !TimeFrame){
-                    newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+                    newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring};
                 }
                 else{
-                    newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring};
+                    newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
                 }
             }
 
@@ -213,10 +213,10 @@ exports.setApp = function ( app, client )
             }
             else{
                 if (!InitialTime || !TimeFrame){
-                    newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+                    newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring};
                 }
                 else{
-                    newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring};
+                    newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
                 }
             }
 
