@@ -59,6 +59,10 @@ const NavBar = () => {
     );
   // Logged in
   else
+  {
+    const data = localStorage.getItem('user_data');
+    const parsedData = data ? JSON.parse(data) : null;
+
     return (
       <div id = {app.NavBar}>
         <img src = {logo} id = {app.logoimg} onClick={navHome}></img>
@@ -68,11 +72,12 @@ const NavBar = () => {
         <button className={app.navbarbutton} onClick={navFinancialsPage}
         style={{backgroundColor: location.pathname == '/financials' ? "rgba(255, 255, 255, 0.15)":"transparent"}}>Financials</button>
         
-        <h2 id={app.username}> Firstname Lastname</h2>
+        <h2 id={app.username}> {parsedData.User.FName} {parsedData.User.LName}</h2>
         <button className = {app.loginbuttons} id = {app.signupbutton} onClick={doLogout}>Log out</button>
           
-      </div>
-    );
+      </div>);
+  }
+    
 };
 
 export default NavBar;
