@@ -59,10 +59,11 @@ function Login() {
         }
         else
         {
-          var user =
-          {firstName:res.firstName,lastName:res.lastName,id:res._id}
-          localStorage.setItem('user_data', JSON.stringify(user));
+          
+          localStorage.setItem('user_data', JSON.stringify(res));
           alertMessage.style.visibility = "hidden";
+
+          await setInfo();
           navDashboard();
         }
       }
@@ -73,6 +74,34 @@ function Login() {
       }
     }
     
+  }
+
+  async function setInfo() : Promise<void>
+  {
+    const data = localStorage.getItem('user_data');
+    const parsedData = data ? JSON.parse(data) : null;
+    var obj = {_id:parsedData._id};
+    var js = JSON.stringify(obj);
+    try
+    {
+      const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
+      {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
+      var res = JSON.parse(await response.text());
+      if( res._id <= 0 )
+      {
+        console.log("FAILED IN SETINFO FUNCTION");
+      }
+      else
+      {
+        //console.log(JSON.stringify(res));
+        localStorage.setItem('user_data', JSON.stringify(res));
+      }
+    }
+    catch(error:any)
+    {
+        alert(error.toString());
+        return;
+    }
   }
 
   function navForgotPassword()
