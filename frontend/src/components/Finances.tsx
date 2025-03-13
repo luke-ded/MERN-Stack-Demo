@@ -5,13 +5,13 @@ import app from "../pages/App.module.css";
 
 function Finances(){
 
-    function showIncome(){
+    /*function showIncome(){
         return;
     }
 
     function addIncome(){
         return;
-    }
+    }*/
 
 
     return(
