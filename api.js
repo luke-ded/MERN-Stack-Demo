@@ -8,7 +8,7 @@ exports.setApp = function ( app, client )
     //Login API
     //In: Email, Password
     //Out: Result, _id
-    app.post('/api/login', async (req, res) =>{
+    app.post('/api/Login', async (req, res) =>{
         let Result = "Could not find login";
         try {
             //Input
@@ -43,7 +43,7 @@ exports.setApp = function ( app, client )
     //Signup API
     //In: FName, LName, Email, Password
     //Out: Result
-    app.post('/api/signup', async (req, res) =>{
+    app.post('/api/Signup', async (req, res) =>{
         let Result = "Could not add user";
         try {
             //Input
@@ -159,11 +159,19 @@ exports.setApp = function ( app, client )
             //Input
             const {_id, Name, Amount, IfReccuring, InitialTime, TimeFrame} = req.body;
             const objectId = new ObjectId(_id); // Convert string to ObjectId
-            const newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+            let newIncome = {};
 
             //If all input fields are not given
             if (!_id || !Name || !Amount || !IfReccuring){
                 throw new Error("Invalid Input");
+            }
+            else{
+                if (!InitialTime || !TimeFrame){
+                    newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+                }
+                else{
+                    newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring};
+                }
             }
 
             //DB 
@@ -197,11 +205,19 @@ exports.setApp = function ( app, client )
             //Input
             const {_id, Name, Amount, Category, IfReccuring, InitialTime, TimeFrame} = req.body;
             const objectId = new ObjectId(_id); // Convert string to ObjectId
-            const newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+            let newExpense = {};
 
             //If all input fields are not given
             if (!_id || !Name || !Amount || !Category || !IfReccuring){
                 throw new Error("Invalid Input");
+            }
+            else{
+                if (!InitialTime || !TimeFrame){
+                    newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+                }
+                else{
+                    newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring};
+                }
             }
 
             //DB 
@@ -419,7 +435,7 @@ exports.setApp = function ( app, client )
 
     //DB Test API
     //Out: Whether DB connection was successful
-    app.post('/api/dbtest', async (req, res) => {
+    app.post('/api/DBTest', async (req, res) => {
         try {
             //DB Statement
             const collections = await db.listCollections().toArray();
@@ -432,7 +448,7 @@ exports.setApp = function ( app, client )
     });
 
     //Test API
-    app.post('/api/test', (req, res) => {
+    app.post('/api/Test', (req, res) => {
         res.send("✅ API is working!");
     });
 }
