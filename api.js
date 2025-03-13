@@ -4,7 +4,6 @@ exports.setApp = function ( app, client )
 {
     const db = client.db('SalvageFinancialDB');
     const usersCollection = db.collection('Users');
-
     //Login API
     //In: Email, Password
     //Out: Result, _id
