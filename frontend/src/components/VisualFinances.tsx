@@ -6,11 +6,11 @@ import app from "../pages/App.module.css";
 function VisualFinances(){
 
     function showExpenses(){
-
+        return;
     }
 
     function addExpense(){
-        
+        return;
     }
 
     return(
