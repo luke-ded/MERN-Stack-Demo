@@ -196,10 +196,10 @@ exports.setApp = function ( app, client )
         }
     });
 
-    //AddExpenses API
+    //AddExpense API
     //In: _id, Name, Category, Amount, IfReccuring, InitialTime, TimeFrame
     //Out: Result
-    app.post('/api/AddExpenses', async (req,res) => {
+    app.post('/api/AddExpense', async (req,res) => {
         let Result = "Could not add expense";
         try{
             //Input
@@ -284,11 +284,11 @@ exports.setApp = function ( app, client )
         }
     });
 
-    //EditExpenses API
+    //EditExpense API
     //In: _id, index, NewName, NewAmount, NewCategory, NewIfReccuring, NewInitialTime, NewTimeFrame
     //Out: Result
-    app.post('/api/EditExpenses', async (req,res) => {
-        let Result = "Could not edit income";
+    app.post('/api/EditExpense', async (req,res) => {
+        let Result = "Could not edit expense";
         try{
             //Input
             const {_id, index, NewName, NewAmount, NewCategory, NewIfReccuring, NewInitialTime, NewTimeFrame} = req.body;
@@ -362,10 +362,10 @@ exports.setApp = function ( app, client )
         }
     });
 
-    //DeleteExpenses API
+    //DeleteExpense API
     //In: _id, index
     //Out: Result
-    app.post('/api/DeleteExpenses', async (req,res) => {
+    app.post('/api/DeleteExpense', async (req,res) => {
         let Result = "Could not delete expense";
         try{
             //Input
