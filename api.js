@@ -265,7 +265,7 @@ exports.setApp = function ( app, client )
             //DB
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
-                {$set : {indexSearch: newIncome}}   //Pushing onto Income Array new Income
+                {$set : {[indexSearch]: newIncome}}   //Pushing onto Income Array new Income
             );
 
             //Configure response and send JSON response
