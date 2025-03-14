@@ -35,5 +35,6 @@ jobs:
           sshpass -p "${SSH_KEY}" ssh -o StrictHostKeyChecking=no ${SSH_USERNAME}@${SSH_HOST} << 'EOF'
           cd /var/ProjectSalvage
           git pull
-          npm install pm2 restart server
+          npm install 
+          pm2 restart express-server
           EOF
