@@ -46,7 +46,7 @@ const NavBar = () => {
     navHome();
   }
   // Not logged in
-  if(location.pathname == '/' || location.pathname == '/signup' || location.pathname == '/login' || location.pathname == '/forgot')
+  if(location.pathname == '/' || location.pathname == '/signup' || location.pathname == '/login' || location.pathname == '/forgot' || location.pathname == '/reset')
     return (
       <div id = {app.NavBar}>
           <img src = {logo} id = {app.logoimg} onClick={navHome}></img>
