@@ -14,7 +14,7 @@ function ResetPass(){
             var email = userEmail;
             var newPass = newPassword;
             event.preventDefault();
-            var obj = {Email:userEmail,Password:newPass};
+            var obj = {Email:email,Password:newPass};
             var js = JSON.stringify(obj);
 
             try
