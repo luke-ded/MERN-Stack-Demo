@@ -4,7 +4,7 @@ exports.setApp = function ( app, client )
 {
     const db = client.db('SalvageFinancialDB');
     const usersCollection = db.collection('Users');
-    
+
     //Login API
     //In: Email, Password
     //Out: Result, _id
@@ -254,7 +254,7 @@ exports.setApp = function ( app, client )
             const objectId = new ObjectId(_id); // Convert string to ObjectId
             const newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
 
-            let indexSearch = 'Income.${index}';
+            let indexSearch = `Income.${index}`;
             console.log(indexSearch);
 
             //If all input fields are not given
