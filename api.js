@@ -158,23 +158,23 @@ exports.setApp = function ( app, client )
         try{
             //Input
             const {_id, Name, Amount, IfReccuring, InitialTime, TimeFrame} = req.body;
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
-            let newIncome = {};
-
+            
             //If all input fields are not given
-            if (!_id || !Name || !Amount || !IfReccuring){
+            if (!_id || !Name || !Amount || IfReccuring == undefined){
                 throw new Error("Invalid Input");
             }
+
+            //Create Objects for DB statement
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            let newIncome = {};
+            if (!InitialTime || !TimeFrame){
+                newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring};
+            }
             else{
-                if (!InitialTime || !TimeFrame){
-                    newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring};
-                }
-                else{
-                    newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
-                }
+                newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
             }
 
-            //DB 
+            //DB Statement
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
                 {$push : {Income: newIncome}}   //Pushing onto Income Array new Income
@@ -204,29 +204,29 @@ exports.setApp = function ( app, client )
         try{
             //Input
             const {_id, Name, Amount, Category, IfReccuring, InitialTime, TimeFrame} = req.body;
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
-            let newExpense = {};
-
+            
             //If all input fields are not given
-            if (!_id || !Name || !Amount || !Category || !IfReccuring){
+            if (!_id || !Name || !Amount || !Category || IfReccuring == undefined){
                 throw new Error("Invalid Input");
             }
+
+            //Create Objects for DB statement
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            let newExpense = {};
+            if (!InitialTime || !TimeFrame){
+                newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring};
+            }
             else{
-                if (!InitialTime || !TimeFrame){
-                    newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring};
-                }
-                else{
-                    newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
-                }
+                newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
             }
 
-            //DB 
+            //DB Statement
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
                 {$push : {Expenses: newExpense}}   //Pushing onto Expenses Array new Expense
             );
 
-            //Configure response
+            //Configure response and send JSON response
             if (user.matchedCount === 0) {          //If no user was updated
                 Result = "Could not find user to add expense";
             }
@@ -252,14 +252,21 @@ exports.setApp = function ( app, client )
             //Input
             const {_id, index, NewName, NewAmount, NewIfReccuring, NewInitialTime, NewTimeFrame} = req.body;
             const objectId = new ObjectId(_id); // Convert string to ObjectId
-            const newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
+            let newIncome = {};
 
             let indexSearch = `Income.${index}`;
-            console.log(indexSearch);
 
             //If all input fields are not given
             if (!_id || !index || !NewName || !NewAmount || !NewIfReccuring){
                 throw new Error("Invalid Input");
+            }
+            else{
+                if (!NewInitialTime || !NewTimeFrame){
+                    newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring};
+                }
+                else{
+                    newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
+                }
             }
 
             //DB
