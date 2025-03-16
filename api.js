@@ -347,17 +347,24 @@ exports.setApp = function ( app, client )
         try{
             //Input
             const {_id, index} = req.body;
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //If all input fields are not given
             if (!_id || !index){
                 throw new Error("Invalid Input");
             }
 
+            //Create objects for DB statement
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            const indexSearch = `Income.${index}`;
+
             //DB 
-            const user = await usersCollection.updateOne(
-                { _id: objectId},    //Search criteria
-                {$spliceArray : {Income: [index, 1]}}   //Income to delete by name
+            let user = await usersCollection.updateOne(
+                { _id: objectId },  //Search Criteria
+                { $unset: { [indexSearch]: 1 } } // Unset the field at the index
+            );
+            user = await usersCollection.updateOne(
+                { _id: objectId },  //Search Criteria
+                { $pull: { Income: null } } // Remove null values after unset
             );
 
             //Configure response
@@ -384,18 +391,26 @@ exports.setApp = function ( app, client )
         try{
             //Input
             const {_id, index} = req.body;
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //If all input fields are not given
             if (!_id || !index){
                 throw new Error("Invalid Input");
             }
 
+            //Create objects for DB statement
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            const indexSearch = `Expenses.${index}`;
+
             //DB 
-            const user = await usersCollection.updateOne(
-                { _id: objectId},    //Search criteria
-                {$spliceArray : {Expenses: [index, 1]}}   //Income to delete by name
+            let user = await usersCollection.updateOne(
+                { _id: objectId },  //Search Criteria
+                { $unset: { [indexSearch]: 1 } } // Unset the field at the index
             );
+            user = await usersCollection.updateOne(
+                { _id: objectId },  //Search Criteria
+                { $pull: { Expenses: null } } // Remove null values after unset
+            );
+
 
             //Configure response
             if (user.matchedCount === 0) {          //If no user was updated
@@ -434,7 +449,7 @@ exports.setApp = function ( app, client )
             );
 
             //Configure response and send JSON response
-            if (user.matchedCount === 0) {          //If no user was found
+            if (!user) {          //If no user was found
                 Result = "Could not find user to show";
             }
             else{          //If user was found
