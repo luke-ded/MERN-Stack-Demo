@@ -93,8 +93,8 @@ exports.setApp = function ( app, client )
 
             //DBStatement
             const user = await usersCollection.updateOne(
-                {Email: Email}, 
-                {$set: {Password: NewPassword}}
+                {Email: Email},     //Search criteria
+                {$set: {Password: NewPassword}}     //updates password
             );
 
             //Configure Response
@@ -251,23 +251,23 @@ exports.setApp = function ( app, client )
         try{
             //Input
             const {_id, index, NewName, NewAmount, NewIfReccuring, NewInitialTime, NewTimeFrame} = req.body;
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
-            let newIncome = {};
-
-            let indexSearch = `Income.${index}`;
 
             //If all input fields are not given
-            if (!_id || !index || !NewName || !NewAmount || !NewIfReccuring){
+            if (!_id || !index || !NewName || !NewAmount || NewIfReccuring == undefined){
                 throw new Error("Invalid Input");
             }
-            else{
-                if (!NewInitialTime || !NewTimeFrame){
-                    newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring};
-                }
-                else{
-                    newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
-                }
+            
+            //Create objects for DB Statement
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            let newIncome = {};
+            let indexSearch = `Income.${index}`;    //Concatenates the search string
+            if (!NewInitialTime || !NewTimeFrame){
+                newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring};
             }
+            else{
+                newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
+            }
+            
 
             //DB
             const user = await usersCollection.updateOne(
@@ -299,21 +299,28 @@ exports.setApp = function ( app, client )
         try{
             //Input
             const {_id, index, NewName, NewAmount, NewCategory, NewIfReccuring, NewInitialTime, NewTimeFrame} = req.body;
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
-            const newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
-
-            let indexSearch = 'Expenses.${index}';
-            console.log(indexSearch);
 
             //If all input fields are not given
-            if (!_id || !index || !NewName || !NewAmount || !NewCategory || !NewIfReccuring){
+            if (!_id || !index || !NewName || !NewAmount || !NewCategory || NewIfReccuring == undefined){
                 throw new Error("Invalid Input");
             }
+            
+            //Create objects for DB Statement
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            let newExpense = {};
+            let indexSearch = `Expenses.${index}`;    //Concatenates the search string
+            if (!NewInitialTime || !NewTimeFrame){
+                newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfReccuring: NewIfReccuring};
+            }
+            else{
+                newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
+            }
+            
 
             //DB
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
-                {$set : {indexSearch: newExpense}}   //Pushing onto Income Array new Income
+                {$set : {[indexSearch]: newExpense}}   //Pushing onto Expenses Array new Expense
             );
 
             //Configure response and send JSON response
