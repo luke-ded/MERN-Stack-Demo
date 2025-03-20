@@ -253,7 +253,7 @@ exports.setApp = function ( app, client )
             const {_id, index, NewName, NewAmount, NewIfReccuring, NewInitialTime, NewTimeFrame} = req.body;
 
             //If all input fields are not given
-            if (!_id || index == undefined|| !NewName || !NewAmount || NewIfReccuring == undefined){
+            if (_id == undefined || index == undefined|| !NewName || !NewAmount || NewIfReccuring == undefined){
                 throw new Error("Invalid Input");
             }
             
