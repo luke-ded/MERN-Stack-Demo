@@ -6,6 +6,8 @@ import emailjs from 'emailjs-com';
 function ForgotPass(){
 
     const navigate = useNavigate();
+    const [tempPass, setTempPass] = useState<number | null>(null)
+    const [isEmailSent, setEmailSent] = useState(false);
 
     function reclaimPass(){
 
@@ -33,7 +35,9 @@ function ForgotPass(){
         
                 if (validateEmail()){
 
-                    const oneTimePassword = Math.round((Math.random() * 100000)).toString();
+                    const pass = Math.round((Math.random() * 100000));
+                    const oneTimePassword = pass.toString();
+                    setTempPass(pass);
 
                     const templateParams = { //parameters for email builder
                         toEmail: Email,
@@ -41,8 +45,7 @@ function ForgotPass(){
                     };
 
                     emailjs.send(serviceID, templateID, templateParams, publicKey)
-                    alertMessage.innerText = "Sent to " + Email;
-                    alertMessage.style.visibility = "visible";
+                    setEmailSent(true);
                     return;
                 } else {
 
@@ -70,20 +73,60 @@ function ForgotPass(){
         );
    }
 
+   function verifyOneTimePass(){
+
+    const oneTimePass = (document.getElementById("loginNames") as HTMLInputElement).value;
+    const alertMessage = document.getElementById("alertmessage");
+
+        if (alertMessage){
+            if (oneTimePass.length != 5){
+                alertMessage.innerText = "Invalid Code";
+                alertMessage.style.visibility = "visible";
+                return;
+            } else {
+                var tempNum = parseInt(oneTimePass);
+
+                if (tempNum == tempPass){
+                    navReset();
+                } else {
+                    alertMessage.innerText = "Incorrect Code";
+                    alertMessage.style.visibility = "visible";
+                    return;
+                }
+            }
+        }
+    
+    }
+
+    function navReset()
+    {
+
+        navigate('/reset');
+    }
 
 
-   
-
-    return(
-        <div id = "loginDiv">
-            <span id="inner-title">Forgot Password</span><br />
-            <h5 className={app.loginlabel}>Enter your Email</h5>
-            <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
-            <h5 id = "alertmessage"></h5>
-            <button className={app.loginbuttons} id={app.doEmail} onClick={reclaimPass}>Confirm</button>
-            <button className={app.loginbuttons} id = {app.backToLogin} onClick = {navLogin}>Back To Login</button>
-        </div>
-    );
+    if (isEmailSent == false){
+        return(
+            <div id = "loginDiv">
+                <span id="inner-title">Forgot Password</span><br />
+                <h5 className={app.loginlabel}>Enter your Email</h5>
+                <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
+                <h5 id = "alertmessage"></h5>
+                <button className={app.loginbuttons} id={app.doEmail} onClick={reclaimPass}>Confirm</button>
+                <button className={app.loginbuttons} id = {app.backToLogin} onClick = {navLogin}>Back To Login</button>
+            </div>
+        );
+   } else {
+        return(
+            <div id = "loginDivs">
+                <span id="inner-title">Forgot Password</span><br />
+                <h5 className={app.loginlabel}>Reset your Password</h5>
+                <input type="number" id="loginNames" className = {app.logininputs} placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
+                <h5 id = "alertmessage"></h5>
+                <button className={app.loginbuttons} id={app.doVerify} onClick={verifyOneTimePass}>Confirm</button>
+            </div>
+        );
+   }
 }
 
 export default ForgotPass;
