@@ -349,7 +349,7 @@ exports.setApp = function ( app, client )
             const {_id, index} = req.body;
 
             //If all input fields are not given
-            if (!_id || !index){
+            if (_id == undefined|| index == undefined){
                 throw new Error("Invalid Input");
             }
 
@@ -378,8 +378,8 @@ exports.setApp = function ( app, client )
             //Send JSON response
             res.status(200).json({Result: Result});
         } catch (error) {
-            console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            console.error("❌ Error:", error.message);
+            res.status(500).json({Result: error.message});
         }
     });
 
