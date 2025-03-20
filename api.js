@@ -286,8 +286,8 @@ exports.setApp = function ( app, client )
             //Send JSON response
             res.status(200).json({Result: Result});
         } catch (error) {
-            console.error("❌ Error:", error);
-            res.status(500).json({Result: error});
+            console.error("❌ Error:", error.message);
+            res.status(500).json({Result: error.message});
         }
     });
 
