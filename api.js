@@ -477,7 +477,7 @@ exports.setApp = function ( app, client )
             }
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
         }
     });
 
