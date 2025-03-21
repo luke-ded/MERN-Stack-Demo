@@ -18,7 +18,7 @@ exports.setApp = function ( app, client )
             req.user = decoded;
             next();
         } catch (error) {
-            res.status(403).json({ Result: "Invalid token" });
+            res.status(403).json({ Result: error.message });
         }
     };
 
