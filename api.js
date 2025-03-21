@@ -455,6 +455,7 @@ exports.setApp = function ( app, client )
         try{
             //Input
             const {_id} = req.user;
+            console.log(req.user);
             const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //If all input fields are not given
