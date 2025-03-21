@@ -15,6 +15,8 @@ exports.setApp = function ( app, client )
     
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            console.log("Decoded JWT:", decoded);
+            console.log("Extracted Token:", token);
             req.user = decoded;
             next();
         } catch (error) {
