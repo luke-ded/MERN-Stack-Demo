@@ -219,6 +219,13 @@ li a:hover {
     bottom: 15%;
 }
 
+#doVerify
+{
+    position:absolute;
+    right: 45%;
+    bottom: 15%;
+}
+
 #signinredirect
 {
     display:flex;
