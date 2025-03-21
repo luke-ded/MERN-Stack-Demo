@@ -51,9 +51,9 @@ exports.setApp = function ( app, client )
             }
             else{   //If user does match
                 Result = "Found user";
-                res.status(200).json({Result: Result, _id: user._id});
                 // Generate JWT token
                 const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+                res.status(200).json({Result: Result, _id: user._id, token});
             }       
         } catch (error) {
             console.error("❌ Error:", error);
