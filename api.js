@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 exports.setApp = function ( app, client )
 {
