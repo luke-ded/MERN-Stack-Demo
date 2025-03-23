@@ -8,7 +8,7 @@ exports.setApp = function ( app, client )
     const usersCollection = db.collection('Users');
 
     //JWT Authenticator
-    const authenticateJWT = (req, res, next) => {
+    /*const authenticateJWT = (req, res, next) => {
         const token = req.header("Authorization")?.split(" ")[1]; // Extract token from Bearer header
         if (!token) {
             return res.status(401).json({ Result: "Access denied" });
@@ -23,7 +23,7 @@ exports.setApp = function ( app, client )
         } catch (error) {
             res.status(403).json({ Result: error.message });
         }
-    };
+    };*/
 
     //Login API
     //In: Email, Password
@@ -138,7 +138,7 @@ exports.setApp = function ( app, client )
     //AddInitial API
     //In: _id, InitialDebt, InitialAmount
     //Out: Result
-    app.post('/api/AddInitial', authenticateJWT, async (req,res) => {
+    app.post('/api/AddInitial', async (req,res) => {
         let Result = "Could not add amount and debt";
         try{
             //Input
@@ -175,7 +175,7 @@ exports.setApp = function ( app, client )
     //AddIncome API
     //In: _id, Name, Amount, IfReccuring, InitialTime, TimeFrame
     //Out: Result
-    app.post('/api/AddIncome', authenticateJWT, async (req,res) => {
+    app.post('/api/AddIncome', async (req,res) => {
         let Result = "Could not add income";
         try{
             //Input
@@ -221,7 +221,7 @@ exports.setApp = function ( app, client )
     //AddExpense API
     //In: _id, Name, Category, Amount, IfReccuring, InitialTime, TimeFrame
     //Out: Result
-    app.post('/api/AddExpense', authenticateJWT, async (req,res) => {
+    app.post('/api/AddExpense', async (req,res) => {
         let Result = "Could not add expense";
         try{
             //Input
@@ -268,7 +268,7 @@ exports.setApp = function ( app, client )
     //EditIncome API
     //In: _id, index, NewName, NewAmount, NewIfReccuring, NewInitialTime, NewTimeFrame
     //Out: Result
-    app.post('/api/EditIncome', authenticateJWT, async (req,res) => {
+    app.post('/api/EditIncome', async (req,res) => {
         let Result = "Could not edit income";
         try{
             //Input
@@ -316,7 +316,7 @@ exports.setApp = function ( app, client )
     //EditExpense API
     //In: _id, index, NewName, NewAmount, NewCategory, NewIfReccuring, NewInitialTime, NewTimeFrame
     //Out: Result
-    app.post('/api/EditExpense', authenticateJWT, async (req,res) => {
+    app.post('/api/EditExpense', async (req,res) => {
         let Result = "Could not edit expense";
         try{
             //Input
@@ -364,7 +364,7 @@ exports.setApp = function ( app, client )
     //DeleteIncome API
     //In: _id, index
     //Out: Result
-    app.post('/api/DeleteIncome', authenticateJWT, async (req,res) => {
+    app.post('/api/DeleteIncome', async (req,res) => {
         let Result = "Could not delete income";
         try{
             //Input
@@ -408,7 +408,7 @@ exports.setApp = function ( app, client )
     //DeleteExpense API
     //In: _id, index
     //Out: Result
-    app.post('/api/DeleteExpense', authenticateJWT, async (req,res) => {
+    app.post('/api/DeleteExpense',  async (req,res) => {
         let Result = "Could not delete expense";
         try{
             //Input
@@ -453,12 +453,12 @@ exports.setApp = function ( app, client )
     //ShowAllInfo API
     //In: _id
     //Out: Result, User{FName, LName, Email, Password, InitialAmount, InitialDebt, Income[], Expenses}
-    app.post('/api/ShowAllInfo', authenticateJWT, async (req,res) => {
+    app.post('/api/ShowAllInfo',  async (req,res) => {
         let Result = "Could not show all information";
         try{
             //Input
-            const {_id} = req.user;
-            console.log(req.user);
+            const {_id} = req.body;
+            //console.log(req.user);
             const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //If all input fields are not given
