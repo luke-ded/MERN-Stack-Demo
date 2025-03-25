@@ -8,6 +8,8 @@ function ForgotPass(){
 
     const navigate = useNavigate();
     const [tempPass, setTempPass] = useState<number | null>(null)
+    const [stageNum, setStageNum] = useState<number | null>(1)
+    const [email, setemail] = useState<string |null>(null)
     const [isEmailSent, setEmailSent] = useState(false);
 
     function reclaimPass(){
@@ -46,7 +48,7 @@ function ForgotPass(){
                     };
 
                     emailjs.send(serviceID, templateID, templateParams, publicKey)
-                    setEmailSent(true);
+                    setStageNum(2);
                     return;
                 } else {
 
@@ -88,7 +90,8 @@ function ForgotPass(){
                 var tempNum = parseInt(oneTimePass);
 
                 if (tempNum == tempPass){
-                    navReset();
+                    alertMessage.style.visibility = "hidden";
+                    setStageNum(3);
                 } else {
                     alertMessage.innerText = "Incorrect Code";
                     alertMessage.style.visibility = "visible";
@@ -105,8 +108,12 @@ function ForgotPass(){
         navigate('/reset');
     }
 
+    function resetPass()
+    {
+        return;
+    }
 
-    if (isEmailSent == false){
+    if (stageNum == 1){
         return(
             <div id = "loginDiv">
                 <span id="inner-title">Forgot Password</span><br />
@@ -117,7 +124,7 @@ function ForgotPass(){
                 <button className={app.loginbuttons} id = {app.backToLogin} onClick = {navLogin}>Back To Login</button>
             </div>
         );
-   } else {
+   } else if (stageNum == 2){
         return(
             <div id = "loginDivs">
                 <span id="inner-title">Forgot Password</span><br />
@@ -125,6 +132,17 @@ function ForgotPass(){
                 <input type="number" id="loginNames" className = {app.logininputs} placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
                 <h5 id = "alertmessage"></h5>
                 <button className={app.loginbuttons} id={app.doVerify} onClick={verifyOneTimePass}>Confirm</button>
+            </div>
+        );
+   } else if (stageNum == 3){
+        return(
+            <div id = "loginDivs">
+                <span id="inner-title">Reset Password</span><br />
+                <h5 className={app.loginlabel}>Reset your Password</h5>
+                <input type ="password" id ="firstPass" className = {app.logininputs} placeholder = "New Password" value = ""></input><br/>
+                <input type ="password" id ="firstPass" className = {app.logininputs} placeholder = "Confirm Password" value = ""></input>
+                <h5 id = "alertmessage"></h5>
+                <button className={app.loginbuttons} id={app.doVerify} onClick={resetPass}>Confirm</button>
             </div>
         );
    }
