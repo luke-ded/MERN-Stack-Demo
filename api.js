@@ -1,40 +1,45 @@
+//Imports
 const { ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
+//All APIs
 exports.setApp = function ( app, client )
 {
+    //Database and Collection declaration
     const db = client.db('SalvageFinancialDB');
     const usersCollection = db.collection('Users');
 
     //JWT Authenticator
-    /*const authenticateJWT = (req, res, next) => {
-        const token = req.header("Authorization")?.split(" ")[1]; // Extract token from Bearer header
+    const authenticateJWT = (req, res, next) => {
+        // Extract token from Bearer header
+        const token = req.header("Authorization")?.split(" ")[1]; 
+
+        //If token doesn't exist, deny access
         if (!token) {
-            return res.status(401).json({ Result: "Access denied" });
+            return res.status(401).json({ Result: "Access denied, token not given" });
         }
     
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            console.log("Decoded JWT:", decoded);
-            console.log("Extracted Token:", token);
+            //console.log("Decoded JWT:", decoded);
+            //console.log("Extracted Token:", token);
             req.user = decoded;
             next();
         } catch (error) {
             res.status(403).json({ Result: error.message });
         }
-    };*/
+    };
 
     //Login API
     //In: Email, Password
-    //Out: Result, _id
+    //Out: Result, IfFound, token
     app.post('/api/Login', async (req, res) =>{
         let Result = "Could not find login";
+        let IfFound = 0;
         try {
-            //Input
+            //Input and Field Check
             const {Email, Password} = req.body;
-
-            //If all input fields are not given
             if (!Email || !Password){
                 throw new Error("Invalid Input");
             }
@@ -48,17 +53,19 @@ exports.setApp = function ( app, client )
             //Configure response and send JSON response
             if (!user){     //If user does not match
                 Result = "Could not match user";
-                res.status(200).json({Result: Result, _id: -1});
+                res.status(200).json({Result: Result, IfFound: IfFound});
             }
             else{   //If user does match
                 Result = "Found user";
+                IfFound = 1;
+
                 // Generate JWT token
                 const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
-                res.status(200).json({Result: Result, _id: user._id, token});
+                res.status(200).json({Result: Result, IfFound: IfFound, token});
             }       
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
         }
     });
     
@@ -68,21 +75,19 @@ exports.setApp = function ( app, client )
     app.post('/api/Signup', async (req, res) =>{
         let Result = "Could not add user";
         try {
-            //Input
+            //Input and Field Check
             const {FName, LName, Email, Password} = req.body;
-            const newUser = {FName: FName, LName: LName, Email: Email, Password: Password};     //Making New User Object
-
-            //If all input fields are not given
             if (!FName || !LName || !Email || !Password){
                 throw new Error("Invalid Input");
             }
-              
+            const newUser = {FName: FName, LName: LName, Email: Email, Password: Password};     //Making New User Object
+ 
             //DB Statement
             const user = await usersCollection.findOne(
                 { Email: Email },   //Search criteria
             );
 
-            //Configure response
+            //Configure response and insert into database
             if (!user){         //If user doesnt already exist
                 await usersCollection.insertOne(newUser);   //Adds new Users
                 Result = "Added user";
@@ -95,7 +100,7 @@ exports.setApp = function ( app, client )
             res.status(200).json({Result: Result});
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
         }
     });
 
@@ -105,10 +110,8 @@ exports.setApp = function ( app, client )
     app.post('/api/ResetPassword', async (req,res) => {
         let Result = "Could not reset password";
         try{
-            //Input
+            //Input and Field Check
             const {Email, NewPassword} = req.body;
-            
-            //If all input fields are not given
             if (!Email || !NewPassword){
                 throw new Error("Invalid Input");
             }
@@ -131,24 +134,58 @@ exports.setApp = function ( app, client )
             res.status(200).json({Result: Result});
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
+        }
+    });
+
+    //IfEmailExists API
+    //In: Email
+    //Out: Result, IfFound
+    app.post('/api/IfEmailExists', async(req,res) => {
+        let Result = "Could not check if email exists";
+        let IfFound = 0;
+        try{
+            //Input and Field Check
+            const {Email} = req.body;
+            if (!Email){
+                throw new Error("Invalid Input");
+            }
+
+            //DBStatement
+            const user = await usersCollection.findOne(
+                {Email: Email}     //Search criteria
+            );
+
+            //Configure Response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find email in database";
+            }
+            else{          //If user was updated 
+                Result = "Found email";
+                IfFound = 1;
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result, IfFound: IfFound});
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({Result: error.message, IfFound: IfFound});
         }
     });
 
     //AddInitial API
-    //In: _id, InitialDebt, InitialAmount
+    //In: token, InitialDebt, InitialAmount
     //Out: Result
     app.post('/api/AddInitial', async (req,res) => {
         let Result = "Could not add amount and debt";
         try{
-            //Input
-            const {_id, InitialDebt, InitialAmount} = req.body;
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
-
-            //If all input fields are not given
+            //Input and Field Check
+            const {InitialDebt, InitialAmount} = req.body;
+            const {_id} = req.user;
             if (!_id || !InitialDebt || !InitialAmount){
                 throw new Error("Invalid Input");
             }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId            
 
             //DB 
             const user = await usersCollection.updateOne(
@@ -168,32 +205,31 @@ exports.setApp = function ( app, client )
             res.status(200).json({Result: Result});
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
         }
     });
 
     //AddIncome API
-    //In: _id, Name, Amount, IfReccuring, InitialTime, TimeFrame
+    //In: token, Name, Amount, IfRecurring, InitialTime, TimeFrame
     //Out: Result
     app.post('/api/AddIncome', async (req,res) => {
         let Result = "Could not add income";
         try{
-            //Input
-            const {_id, Name, Amount, IfReccuring, InitialTime, TimeFrame} = req.body;
-            
-            //If all input fields are not given
-            if (!_id || !Name || !Amount || IfReccuring == undefined){
+            //Input and Field Check
+            const {Name, Amount, IfRecurring, InitialTime, TimeFrame} = req.body;
+            const {_id} = req.user;
+            if (!_id || !Name || !Amount || IfRecurring == undefined){
                 throw new Error("Invalid Input");
             }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //Create Objects for DB statement
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
             let newIncome = {};
             if (!InitialTime || !TimeFrame){
-                newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring};
+                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring};
             }
             else{
-                newIncome = {Name: Name, Amount: Amount, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring, InitialTime: InitialTime, TimeFrame: TimeFrame};
             }
 
             //DB Statement
@@ -214,32 +250,31 @@ exports.setApp = function ( app, client )
             res.status(200).json({Result: Result});
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
         }
     });
 
     //AddExpense API
-    //In: _id, Name, Category, Amount, IfReccuring, InitialTime, TimeFrame
+    //In: token, Name, Category, Amount, IfRecurring, InitialTime, TimeFrame
     //Out: Result
     app.post('/api/AddExpense', async (req,res) => {
         let Result = "Could not add expense";
         try{
-            //Input
-            const {_id, Name, Amount, Category, IfReccuring, InitialTime, TimeFrame} = req.body;
-            
-            //If all input fields are not given
-            if (!_id || !Name || !Amount || !Category || IfReccuring == undefined){
+            //Input and Field Check
+            const {Name, Amount, Category, IfRecurring, InitialTime, TimeFrame} = req.body;
+            const {_id} = req.user;            
+            if (!_id || !Name || !Amount || !Category || IfRecurring == undefined){
                 throw new Error("Invalid Input");
             }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //Create Objects for DB statement
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
             let newExpense = {};
             if (!InitialTime || !TimeFrame){
-                newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring};
+                newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring};
             }
             else{
-                newExpense = {Name: Name, Amount: Amount, Category: Category, IfReccuring: IfReccuring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+                newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring, InitialTime: InitialTime, TimeFrame: TimeFrame};
             }
 
             //DB Statement
@@ -260,36 +295,34 @@ exports.setApp = function ( app, client )
             res.status(200).json({Result: Result});
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
         }
     });
 
     
     //EditIncome API
-    //In: _id, index, NewName, NewAmount, NewIfReccuring, NewInitialTime, NewTimeFrame
+    //In: token, index, NewName, NewAmount, NewIfRecurring, NewInitialTime, NewTimeFrame
     //Out: Result
     app.post('/api/EditIncome', async (req,res) => {
         let Result = "Could not edit income";
         try{
-            //Input
-            const {_id, index, NewName, NewAmount, NewIfReccuring, NewInitialTime, NewTimeFrame} = req.body;
-
-            //If all input fields are not given
-            if (_id == undefined || index == undefined|| !NewName || !NewAmount || NewIfReccuring == undefined){
+            //Input and Field Check
+            const {index, NewName, NewAmount, NewIfRecurring, NewInitialTime, NewTimeFrame} = req.body;
+            const {_id} = req.user;
+            if (!_id|| index == undefined|| !NewName || !NewAmount || NewIfRecurring == undefined){
                 throw new Error("Invalid Input");
             }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
             
             //Create objects for DB Statement
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
             let newIncome = {};
             let indexSearch = `Income.${index}`;    //Concatenates the search string
             if (!NewInitialTime || !NewTimeFrame){
-                newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring};
+                newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring};
             }
             else{
-                newIncome = {Name: NewName, Amount: NewAmount, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
+                newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
             }
-            
 
             //DB
             const user = await usersCollection.updateOne(
@@ -314,31 +347,29 @@ exports.setApp = function ( app, client )
     });
 
     //EditExpense API
-    //In: _id, index, NewName, NewAmount, NewCategory, NewIfReccuring, NewInitialTime, NewTimeFrame
+    //In: token, index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime, NewTimeFrame
     //Out: Result
     app.post('/api/EditExpense', async (req,res) => {
         let Result = "Could not edit expense";
         try{
-            //Input
-            const {_id, index, NewName, NewAmount, NewCategory, NewIfReccuring, NewInitialTime, NewTimeFrame} = req.body;
-
-            //If all input fields are not given
-            if (!_id || !index || !NewName || !NewAmount || !NewCategory || NewIfReccuring == undefined){
+            //Input and Field Checks
+            const {index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime, NewTimeFrame} = req.body;
+            const{_id} = req.user;
+            if (!_id || index == undefined|| !NewName || !NewAmount || !NewCategory || NewIfRecurring == undefined){
                 throw new Error("Invalid Input");
             }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
             
             //Create objects for DB Statement
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
             let newExpense = {};
             let indexSearch = `Expenses.${index}`;    //Concatenates the search string
             if (!NewInitialTime || !NewTimeFrame){
-                newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfReccuring: NewIfReccuring};
+                newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfRecurring: NewIfRecurring};
             }
             else{
-                newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfReccuring: NewIfReccuring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
+                newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfRecurring: NewIfRecurring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
             }
             
-
             //DB
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
@@ -357,25 +388,22 @@ exports.setApp = function ( app, client )
             res.status(200).json({Result: Result});
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
         }
     }); 
 
     //DeleteIncome API
-    //In: _id, index
+    //In: token, index
     //Out: Result
     app.post('/api/DeleteIncome', async (req,res) => {
         let Result = "Could not delete income";
         try{
-            //Input
-            const {_id, index} = req.body;
-
-            //If all input fields are not given
-            if (_id == undefined|| index == undefined){
+            //Input and Field Checks
+            const {index} = req.body;
+            const {_id} = req.user;            
+            if (!_id|| index == undefined){
                 throw new Error("Invalid Input");
             }
-
-            //Create objects for DB statement
             const objectId = new ObjectId(_id); // Convert string to ObjectId
             const indexSearch = `Income.${index}`;
 
@@ -406,20 +434,17 @@ exports.setApp = function ( app, client )
     });
 
     //DeleteExpense API
-    //In: _id, index
+    //In: _token, index
     //Out: Result
     app.post('/api/DeleteExpense',  async (req,res) => {
         let Result = "Could not delete expense";
         try{
             //Input
-            const {_id, index} = req.body;
-
-            //If all input fields are not given
-            if (!_id || !index){
+            const {index} = req.body;
+            const {_id} = req.user;
+            if (!_id || index == undefined){
                 throw new Error("Invalid Input");
             }
-
-            //Create objects for DB statement
             const objectId = new ObjectId(_id); // Convert string to ObjectId
             const indexSearch = `Expenses.${index}`;
 
@@ -433,7 +458,6 @@ exports.setApp = function ( app, client )
                 { $pull: { Expenses: null } } // Remove null values after unset
             );
 
-
             //Configure response
             if (user.matchedCount === 0) {          //If no user was updated
                 Result = "Could not find user to delete expense";
@@ -446,27 +470,24 @@ exports.setApp = function ( app, client )
             res.status(200).json({Result: Result});
         } catch (error) {
             console.error("❌ Error:", error);
-            res.status(500).json({Result: Result});
+            res.status(500).json({Result: error.message});
         }
     });
     
     //ShowAllInfo API
-    //In: _id
-    //Out: Result, User{FName, LName, Email, Password, InitialAmount, InitialDebt, Income[], Expenses}
+    //In: token
+    //Out: Result, User{FName, LName, Email, Password, InitialAmount, InitialDebt, Income[], Expenses[]}
     app.post('/api/ShowAllInfo',  async (req,res) => {
         let Result = "Could not show all information";
         try{
-            //Input
-            const {_id} = req.body;
-            //console.log(req.user);
-            const objectId = new ObjectId(_id); // Convert string to ObjectId
-
-            //If all input fields are not given
+            //Input and Field Check
+            const {_id} = req.user;
             if (!_id){
                 throw new Error("Invalid Input");
             }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
 
-            //DB 
+            //DB Statement
             const user = await usersCollection.findOne(
                 { _id: objectId}   //Search criteria
             );
