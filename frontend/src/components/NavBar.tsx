@@ -43,8 +43,10 @@ const NavBar = () => {
   function doLogout()
   {
     // Add more here to actually log user out
+    localStorage.clear();
     navHome();
   }
+  
   // Not logged in
   if(location.pathname == '/' || location.pathname == '/signup' || location.pathname == '/login' || location.pathname == '/forgot' || location.pathname == '/reset')
     return (
