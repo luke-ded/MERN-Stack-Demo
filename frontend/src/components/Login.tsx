@@ -120,21 +120,25 @@ function Login() {
   }
 
   return(
-    <div id="loginDiv">
-      <span id="inner-title">LOG IN</span><br />
-      <h5 className={app.loginlabel}>Email</h5>
-      <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp={(e) => e.key === "Enter" && doLogin}/><br />
+    <div className="flex flex-col items-center" id="loginDiv">
+      <span className="font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">LOG IN</span><br />
+      <h5 className="self-start ml-[10%] text-lg">Email</h5>
+      <input className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5"
+      type="text" id="loginName" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && doLogin}/><br />
 
-      <h5 className={app.loginlabel}>Password</h5>
-      <button id={app.forgotpasswordbutton} onClick={navForgotPassword}>Forgot Password?</button>
-
-      <div className={app.showpassworddiv}>
-        <input type= { showPasssword ? "text" :"password"} id="loginPassword" className = {app.logininputs} placeholder="Password" onKeyUp={(e) => e.key === "Enter" && doLogin}/><br />
-        <img id={app.showpasswordbutton} onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
+      <div className="flex w-[100%] justify-between">
+      <h5 className="ml-[10%] text-lg">Password</h5>
+      <button className="mr-[10%] p-0 border-none text-[#6d91e8] hover:text-[#bdc8e2] text-xs font-bold cursor-pointer" onClick={navForgotPassword}>Forgot Password?</button>
       </div>
 
-      <h5 id = "alertmessage"></h5>
-      <button className={app.loginbuttons} id={app.dologinbutton} onClick={doLogin}>Login</button>
+      <div className="flex w-[100%] relative items-center">
+        <input className = "w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5"
+        type= { showPasssword ? "text" :"password"} id="loginPassword" placeholder="Password" onKeyUp={(e) => e.key === "Enter" && doLogin}/>
+        <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
+      </div>
+
+      <h5 className="mt-3" id = "alertmessage"></h5>
+      <button className=" rounded-sm inline-block h-fit w-fit p-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] m-[5%] cursor-pointer" onClick={doLogin}>Login</button>
       <span id="loginResult"></span>
     </div>
   );
