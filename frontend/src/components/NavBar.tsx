@@ -55,8 +55,8 @@ const NavBar = () => {
           <PageTitle />
       </div>
       <div className="flex items-center">
-          <button className="rounded-sm inline-block h-fit w-fit p-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-4 cursor-pointer" onClick={navLogin}>Login</button>
-          <button className="rounded-sm inline-block h-fit w-fit p-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-6 cursor-pointer" onClick={navSignup}>Signup</button>
+          <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-4 cursor-pointer" onClick={navLogin}>Login</button>
+          <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-6 cursor-pointer" onClick={navSignup}>Signup</button>
       </div>
     </div>
     );
@@ -80,7 +80,7 @@ const NavBar = () => {
         </div>
         <div className="flex items-center">
           <h2 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mr-6"> {parsedData.User.FName} {parsedData.User.LName}</h2>
-          <button className="rounded-sm inline-block h-fit w-fit p-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-6 cursor-pointer" onClick={doLogout}>Log out</button>
+          <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-6 cursor-pointer" onClick={doLogout}>Log out</button>
         </div>
 
       </div>);

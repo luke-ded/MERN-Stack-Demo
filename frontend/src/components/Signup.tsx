@@ -199,7 +199,7 @@ function Signup() {
           {isPasswordSame ? "" : "Passwords are not the same."}
       </h6>
       <h5 className="mt-3" id="alertmessage"></h5>
-      <button className=" rounded-sm inline-block h-fit w-fit p-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] m-[5%] cursor-pointer" onClick={doSignUp}>Sign Up</button>
+      <button className=" rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] m-[5%] cursor-pointer" onClick={doSignUp}>Sign Up</button>
   </div>
   );
 }
