@@ -1,4 +1,3 @@
-import app from './App.module.css';
 import NavBar from '../components/NavBar.tsx';
 import logo from '../assets/testlogo.png'
 import Signup from '../components/Signup.tsx';
@@ -13,17 +12,28 @@ const SignupPage = () => {
   }
 
   return (
-    <div>
-      <NavBar />
-        <div className= {app.LDiv}>
-        <img src = {logo} id = {app.loginlogoimg}></img>
-            <Signup />
-        </div>
-        <div id={app.signupredirect}>
-        <p id={app.signinredirectmsg}>Already have an account?</p>
-        <button id={app.signinredirectbutton} onClick={navLogin}> Log in.</button>
+    <div className="min-h-screen flex flex-col">
+    <NavBar />
+    <div className="flex flex-col justify-center w-180 shrink-1 items-center flex-grow overflow-y-auto">
+      <div className="bg-black/80 rounded-lg border border-[#6d91e8] max-w-md w-full">
+        <img
+          className="h-[7vh]  w-auto mx-auto mt-4 mb-4"
+          src={logo}
+          alt="Logo"
+        />
+        <Signup />
+      </div>
+      <div className="mt-4 flex justify-center bg-black/60 rounded-lg border border-[#6d91e8] p-1">
+        <p>Don't have an account?</p>
+        <button
+          className="p-0 bg-transparent border-none ml-2 text-[#6d91e8] hover:text-[#bdc8e2] text-[1.5vh] font-bold cursor-pointer"
+          onClick={navLogin}
+        >
+          Sign up.
+        </button>
       </div>
     </div>
+  </div>
   );
 };
 

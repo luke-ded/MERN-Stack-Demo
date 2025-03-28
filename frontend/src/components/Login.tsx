@@ -121,6 +121,7 @@ function Login() {
   return(
     <div className="flex flex-col items-center" id="loginDiv">
       <span className="font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">LOG IN</span><br />
+      
       <h5 className="self-start ml-[10%] text-lg">Email</h5>
       <input className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5"
       type="text" id="loginName" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && doLogin}/><br />
