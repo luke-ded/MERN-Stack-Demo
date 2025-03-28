@@ -79,7 +79,8 @@ function Login() {
   {
     const data = localStorage.getItem('user_data');
     const parsedData = data ? JSON.parse(data) : null;
-    var obj = {_id:parsedData._id};
+    alert(parsedData.token);
+    var obj = {_id:parsedData.token._id};
     var js = JSON.stringify(obj);
     try
     {
@@ -121,9 +122,9 @@ function Login() {
   return(
     <div className="flex flex-col items-center" id="loginDiv">
       <span className="font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">LOG IN</span><br />
-      
+
       <h5 className="self-start ml-[10%] text-lg">Email</h5>
-      <input className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5"
+      <input className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1"
       type="text" id="loginName" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && doLogin}/><br />
 
       <div className="flex w-[100%] justify-between">
@@ -132,7 +133,7 @@ function Login() {
       </div>
 
       <div className="flex w-[100%] relative items-center">
-        <input className = "w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5"
+        <input className = "w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none p-1"
         type= { showPasssword ? "text" :"password"} id="loginPassword" placeholder="Password" onKeyUp={(e) => e.key === "Enter" && doLogin}/>
         <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
       </div>

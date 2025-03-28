@@ -161,13 +161,13 @@ function Signup() {
       <span className="font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">SIGN UP</span>
       <br />
       <h5 className="self-start ml-[10%] text-lg">First Name</h5>
-      <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5" type="text" id="FirstName" placeholder="First Name" />
+      <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="FirstName" placeholder="First Name" />
       <br />
       <h5 className="self-start ml-[10%] text-lg">Last Name</h5>
-      <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5" type="text" id="lastName" placeholder="Last Name" />
+      <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="lastName" placeholder="Last Name" />
       <br />
       <h5 className="self-start ml-[10%] text-lg">Email</h5>
-      <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5" type="text" id="Email" placeholder="Email" onKeyUp={validateEmail} />
+      <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="Email" placeholder="Email" onKeyUp={validateEmail} />
       <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2" id={app.firstinstruction} style={{ color: isValidEmail ? "#58e96c" : "rgb(235, 83, 83)" }}>
           {isValidEmail ? "" : "Invalid email."}
       </h6>
@@ -175,7 +175,7 @@ function Signup() {
       <h5 className="self-start ml-[10%] text-lg">Password</h5>
 
       <div className="flex w-[100%] relative items-center">
-          <input className="w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5" type={showPasssword ? "text" : "password" } id="loginPassword" placeholder="Password" onKeyUp={validatePassword} />
+          <input className="w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none p-1" type={showPasssword ? "text" : "password" } id="loginPassword" placeholder="Password" onKeyUp={validatePassword} />
           <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
       </div>
 
@@ -192,7 +192,7 @@ function Signup() {
 
       <h5 className="self-start ml-[10%] text-lg">Confirm Password</h5>
       <div className="flex w-[100%] relative items-center">
-          <input className="w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5" type={showConfirmPasssword ? "text" : "password" } id="ConfPassword" placeholder="Confirm Password" onKeyUp={validatePasswordSame} />
+          <input className="w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none p-1" type={showConfirmPasssword ? "text" : "password" } id="ConfPassword" placeholder="Confirm Password" onKeyUp={validatePasswordSame} />
           <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
       </div>
       <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2" style={{ color: isPasswordSame ? "#58e96c" : "rgb(235, 83, 83)" }}>
