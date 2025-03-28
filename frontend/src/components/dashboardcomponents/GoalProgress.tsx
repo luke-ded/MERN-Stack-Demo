@@ -35,7 +35,7 @@ function GoalProgress() {
   };
 
   return (
-    <div id={dashapp.goalchart}>
+    <div className="h-[5vh] ml-2 mt-2">
       <Pie options={options} data={data}/>
     </div>
   );

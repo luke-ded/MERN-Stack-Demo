@@ -67,15 +67,15 @@ const NavBar = () => {
     //const parsedData = data ? JSON.parse(data) : null;
     const parsedData = {User:{FName:"joe", LName:"bob"}};
     return (
-      <div className="flex h-[6.5vh] max-w-screen w-screen whitespace-nowrap bg-black/60 fixed top-0 left-0 border-b border-[#6d91e8] items-center justify-between shrink-1">
+      <div className="flex h-[6.5vh] max-w-screen w-screen whitespace-nowrap bg-black/60 fixed top-0 left-0 z-10 border-b border-[#6d91e8] items-center justify-between shrink-1">
         <div className="flex items-center">
             <img className="h-[5vh] w-auto cursor-pointer" src={logo} onClick={navHome} />
             <PageTitle />
         
 
-        <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:bg-white/15 cursor-pointer" onClick={navDashboardPage} 
+        <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navDashboardPage} 
         >Dashboard</button>
-        <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:bg-white/15 cursor-pointer" onClick={navFinancialsPage}
+        <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navFinancialsPage}
         >Financials</button>
         </div>
         <div className="flex items-center">

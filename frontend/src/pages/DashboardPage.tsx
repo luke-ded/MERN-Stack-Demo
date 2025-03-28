@@ -11,32 +11,38 @@ const DashboardPage = () => {
     const rewardName = "rewardName";
 
     return (
-    <div id = {app.dashboard}>
+    <div className="flex flex-col absolute top-0 left-0 h-screen w-screen bg-yellow-400/50">
         <NavBar />
 
-        <div className={dashapp.dashboardDiv} id={dashapp.expensesdoughnut}>
-            <h3 id={dashapp.chartlabel}>Expenses</h3>
-            <DoughnutChart />
-        </div>
+        <div className="flex justify-start mt-[8vh] bg-red-400/50">
+            <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+        <       h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Expenses</h3>
+                <DoughnutChart />
+            </div>
 
-        <div className={dashapp.dashboardDiv} id={dashapp.incomedoughnut}>
-            <h3 id={dashapp.chartlabel}>Income</h3>
-            <DoughnutChart />
+            <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+            <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Income</h3>
+                <DoughnutChart />
+            </div>
         </div>
 
         {/* This is super rough */}
-        <div className={dashapp.dashboardDiv} id={dashapp.goal}>
-            <h3 id={dashapp.chartlabel}>Reward</h3>
-            <div id={app.goalmessagewrapper}>
+        <div className= "mt-8 ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+            <div className="flex w-[100%] bg-orange-400/50 absolute z-0">
                 <GoalProgress />
-                <h5 id={dashapp.goalmessage} style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 
+                
+            </div>
+            <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Reward</h3>
+            
+            <div >
+                <h5 style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 
                     You are {percentage}% of the way to your reward, {rewardName}!</h5>
             </div>
         </div>
 
-        <div className={dashapp.dashboardDiv} id={dashapp.depthmeter}>
+        {/* <div className={dashapp.dashboardDiv} id={dashapp.depthmeter}>
             <h3 id={dashapp.chartlabel}>Depth</h3>
-        </div>
+        </div> */}
         
     </div>
     );
