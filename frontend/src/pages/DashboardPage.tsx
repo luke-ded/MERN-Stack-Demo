@@ -1,4 +1,5 @@
 import DoughnutChart from '../components/dashboardcomponents/DoughnutChart.tsx';
+import IncomeLineChart from '../components/dashboardcomponents/IncomeLineChart.tsx';
 import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import NavBar from '../components/NavBar.tsx';
 
@@ -8,12 +9,12 @@ const DashboardPage = () => {
     const rewardName = "rewardName";
 
     return (
-    <div className="flex flex-col absolute top-0 left-0 h-screen w-screen">
+    <div className="flex flex-col absolute top-0 left-0 h-[200vh]">
         <NavBar />
 
         <div className="flex justify-start mt-[8vh]">
             <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-        <       h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Expenses</h3>
+                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Expenses</h3>
                 <DoughnutChart />
             </div>
 
@@ -38,16 +39,23 @@ const DashboardPage = () => {
         </div>
 
         {/* This is super rough */}
-        <div className= "mt-8 ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-            <div className="flex w-[50vh%] absolute z-0">
-                <GoalProgress />
+        <div className="flex justify-start w-[85vw] mt-[8vh]">
+            <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+                <div className="flex w-[50vh%] absolute z-0">
+                    <GoalProgress />
+                    
+                </div>
+                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Reward</h3>
                 
+                <div className='mt-10'>
+                    <h5 style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 
+                        You are {percentage}% of the way to your reward, {rewardName}!</h5>
+                </div>
             </div>
-            <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Reward</h3>
-            
-            <div className='mt-10'>
-                <h5 style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 
-                    You are {percentage}% of the way to your reward, {rewardName}!</h5>
+
+            <div className= "ml-8 w-[50vw] min-h-fit h-[40vh] border border-[#6d91e8] rounded-[2%] text-center bg-white/90">
+                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Expenses</h3>
+                <IncomeLineChart />
             </div>
         </div>
 

@@ -25,13 +25,23 @@ function GoalProgress() {
     }]
   };
 
-  const options = {
-    type:Pie,
-    responsive: true,
-    borderWidth:0,
-
-
-  };
+  const options = 
+    {
+      type: 'pie', // Or whatever your chart type is
+      responsive: true,
+      events: [],
+      hover: {
+        mode: undefined,
+        intersect: false,
+      },
+      tooltips: {
+        enabled: false,
+      },
+      interaction: {
+        mode: undefined, // Corrected line: use false to disable interactions
+        intersect: false,
+      },
+    }
 
   return (
     <div className="h-[5vh] ml-2 mt-2">
