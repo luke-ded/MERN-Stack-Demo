@@ -63,9 +63,9 @@ const NavBar = () => {
   // Logged in
   else
   {
-    //const data = localStorage.getItem('user_data');
-    //const parsedData = data ? JSON.parse(data) : null;
-    const parsedData = {User:{FName:"joe", LName:"bob"}};
+    const data = localStorage.getItem('user_data');
+    const parsedData = data ? JSON.parse(data) : null;
+    //const parsedData = {User:{FName:"joe", LName:"bob"}};
     return (
       <div className="flex h-[6.5vh] max-w-screen w-screen whitespace-nowrap bg-black/80 fixed top-0 left-0 z-10 border-b border-[#6d91e8] items-center justify-between shrink-1">
         <div className="flex items-center">

@@ -81,11 +81,11 @@ function Login() {
     const parsedData = data ? JSON.parse(data) : null;
     //console.log(parsedData.token);
     var obj = {token:parsedData.token};
-    var js = JSON.stringify(obj);
+    //var js = JSON.stringify(obj);
     try
     {
       const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
-      {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
+      {method:'POST', headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${parsedData.token}`}});
       var res = JSON.parse(await response.text());
       if( res._id <= 0 )
       {
