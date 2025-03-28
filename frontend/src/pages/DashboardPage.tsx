@@ -26,7 +26,7 @@ const DashboardPage = () => {
 
         {/* This is super rough */}
         <div className= "mt-8 ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-            <div className="flex w-[100%] bg-orange-400/50 absolute z-0">
+            <div className="flex w-[50vh%] bg-orange-400/50 absolute z-0">
                 <GoalProgress />
                 
             </div>
