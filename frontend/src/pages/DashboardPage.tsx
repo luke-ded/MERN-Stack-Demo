@@ -1,8 +1,6 @@
 import DoughnutChart from '../components/dashboardcomponents/DoughnutChart.tsx';
 import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import NavBar from '../components/NavBar.tsx';
-import app from './App.module.css';
-import dashapp from '../components/dashboardcomponents/dashboard.module.css'
 
 
 // Luke is working on this page, please DO NOT edit!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -1,5 +1,4 @@
 import { Pie } from "react-chartjs-2";
-import dashapp from "./dashboard.module.css";
 import {
   Chart as ChartJS,
   Title,
