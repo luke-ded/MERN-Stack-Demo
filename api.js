@@ -22,8 +22,8 @@ exports.setApp = function ( app, client )
     
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            //console.log("Decoded JWT:", decoded);
-            //console.log("Extracted Token:", token);
+            console.log("Decoded JWT:", decoded);
+            console.log("Extracted Token:", token);
             req.user = decoded;
             next();
         } catch (error) {
@@ -212,7 +212,7 @@ exports.setApp = function ( app, client )
     //AddIncome API
     //In: token, Name, Amount, IfRecurring, InitialTime, TimeFrame
     //Out: Result
-    app.post('/api/AddIncome', async (req,res) => {
+    app.post('/api/AddIncome', authenticateJWT, async (req,res) => {
         let Result = "Could not add income";
         try{
             //Input and Field Check
@@ -257,7 +257,7 @@ exports.setApp = function ( app, client )
     //AddExpense API
     //In: token, Name, Category, Amount, IfRecurring, InitialTime, TimeFrame
     //Out: Result
-    app.post('/api/AddExpense', async (req,res) => {
+    app.post('/api/AddExpense', authenticateJWT, async (req,res) => {
         let Result = "Could not add expense";
         try{
             //Input and Field Check
@@ -303,7 +303,7 @@ exports.setApp = function ( app, client )
     //EditIncome API
     //In: token, index, NewName, NewAmount, NewIfRecurring, NewInitialTime, NewTimeFrame
     //Out: Result
-    app.post('/api/EditIncome', async (req,res) => {
+    app.post('/api/EditIncome', authenticateJWT, async (req,res) => {
         let Result = "Could not edit income";
         try{
             //Input and Field Check
@@ -349,7 +349,7 @@ exports.setApp = function ( app, client )
     //EditExpense API
     //In: token, index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime, NewTimeFrame
     //Out: Result
-    app.post('/api/EditExpense', async (req,res) => {
+    app.post('/api/EditExpense', authenticateJWT, async (req,res) => {
         let Result = "Could not edit expense";
         try{
             //Input and Field Checks
@@ -395,7 +395,7 @@ exports.setApp = function ( app, client )
     //DeleteIncome API
     //In: token, index
     //Out: Result
-    app.post('/api/DeleteIncome', async (req,res) => {
+    app.post('/api/DeleteIncome', authenticateJWT, async (req,res) => {
         let Result = "Could not delete income";
         try{
             //Input and Field Checks
@@ -436,7 +436,7 @@ exports.setApp = function ( app, client )
     //DeleteExpense API
     //In: _token, index
     //Out: Result
-    app.post('/api/DeleteExpense',  async (req,res) => {
+    app.post('/api/DeleteExpense', authenticateJWT, async (req,res) => {
         let Result = "Could not delete expense";
         try{
             //Input
@@ -477,7 +477,7 @@ exports.setApp = function ( app, client )
     //ShowAllInfo API
     //In: token
     //Out: Result, User{FName, LName, Email, Password, InitialAmount, InitialDebt, Income[], Expenses[]}
-    app.post('/api/ShowAllInfo',  async (req,res) => {
+    app.post('/api/ShowAllInfo', authenticateJWT, async (req,res) => {
         let Result = "Could not show all information";
         try{
             //Input and Field Check
