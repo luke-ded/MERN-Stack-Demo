@@ -50,14 +50,16 @@ const NavBar = () => {
   // Not logged in
   if(location.pathname == '/' || location.pathname == '/signup' || location.pathname == '/login' || location.pathname == '/forgot' || location.pathname == '/reset')
     return (
-      <div id = {app.NavBar}>
-          <img src = {logo} id = {app.logoimg} onClick={navHome}></img>
+    <div className="flex h-[6.5vh] max-w-screen w-screen bg-black/60 fixed top-0 left-0 border-b border-[#6d91e8] items-center justify-between shrink-1">
+      <div className="flex items-center">
+          <img className="h-[5vh] w-auto cursor-pointer" src={logo} onClick={navHome} />
           <PageTitle />
-          <button className = {app.loginbuttons} id = {app.loginbutton} 
-          onClick={navLogin}>Login</button>
-          <button className = {app.loginbuttons} id = {app.signupbutton}
-          onClick={navSignup}>Signup</button>
       </div>
+      <div className="flex items-center">
+          <button className="rounded-sm inline-block h-fit w-fit p-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-4 cursor-pointer" onClick={navLogin}>Login</button>
+          <button className="rounded-sm inline-block h-fit w-fit p-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-6 cursor-pointer" onClick={navSignup}>Signup</button>
+      </div>
+    </div>
     );
   // Logged in
   else
