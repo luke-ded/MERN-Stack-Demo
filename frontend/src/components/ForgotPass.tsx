@@ -172,15 +172,20 @@ function ForgotPass(){
             }
 
             event.preventDefault();
-            var obj = { Email:userEmail, Password:FirstPass};
+            var obj = { Email:userEmail, NewPassword:FirstPass};
             var js = JSON.stringify(obj);
 
             try {
                 const response = await fetch('http://salvagefinancial.xyz:5000/api/ResetPassword',
                 {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
                 var res = JSON.parse(await response.text());
-                if (res.result == "Changed password of user"){
+                if (res.Result == "Changed password of user"){
+                    alertMessage.style.visibility = "hidden";
                     navLogin();
+                } else if (res.Result == "Could not find user to change password of"){
+                    alertMessage.innerText = "User doesn't exist";
+                    alertMessage.style.visibility = "visible";
+                    return;
                 }
             } catch (error: any){
                 alert(error.toString());
