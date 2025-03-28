@@ -29,6 +29,8 @@ function GoalProgress() {
     {
       type: 'pie', // Or whatever your chart type is
       responsive: true,
+      borderWidth:1,
+      borderColor: "#6d91e8",
       events: [],
       hover: {
         mode: undefined,
