@@ -1,5 +1,4 @@
 import { Pie } from "react-chartjs-2";
-import dashapp from "./dashboard.module.css";
 import {
   Chart as ChartJS,
   Title,
@@ -26,16 +25,28 @@ function GoalProgress() {
     }]
   };
 
-  const options = {
-    type:Pie,
-    responsive: true,
-    borderWidth:0,
-
-
-  };
+  const options = 
+    {
+      type: 'pie', // Or whatever your chart type is
+      responsive: true,
+      borderWidth:1,
+      borderColor: "#6d91e8",
+      events: [],
+      hover: {
+        mode: undefined,
+        intersect: false,
+      },
+      tooltips: {
+        enabled: false,
+      },
+      interaction: {
+        mode: undefined, // Corrected line: use false to disable interactions
+        intersect: false,
+      },
+    }
 
   return (
-    <div id={dashapp.goalchart}>
+    <div className="h-[5vh] ml-2 mt-2">
       <Pie options={options} data={data}/>
     </div>
   );

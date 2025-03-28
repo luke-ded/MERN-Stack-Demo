@@ -1,5 +1,4 @@
-import { Doughnut } from "react-chartjs-2";
-import dashapp from "./dashboard.module.css";
+import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   Title,
@@ -36,16 +35,15 @@ function DoughnutChart() {
   };
 
   const options = {
-    type:Doughnut,
+    type:Pie,
     responsive: true,
-    cutout: "50%",
 
 
   };
 
   return (
-    <div id={dashapp.doughnutchart}>
-      <Doughnut options={options} data={data}/>
+    <div className="flex items-center justify-center p-5">
+      <Pie options={options} data={data}/>
     </div>
   );
 };

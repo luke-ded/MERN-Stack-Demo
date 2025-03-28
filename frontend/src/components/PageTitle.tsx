@@ -8,7 +8,7 @@ function PageTitle(){
     navigate('/')
   }
 
-  return(<h1 id="title" onClick={navHome}>Salvage Financial</h1>);
+  return(<p className="mb-1 font-[Lucida Sans] text-4xl text-[#6d91e8] cursor-pointer" onClick={navHome}>Salvage Financial</p>);
 };
 
 export default PageTitle;
