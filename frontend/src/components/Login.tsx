@@ -80,7 +80,7 @@ function Login() {
     const data = localStorage.getItem('user_data');
     const parsedData = data ? JSON.parse(data) : null;
     //console.log(parsedData.token);
-    var obj = {token:parsedData.token};
+    //var obj = {token:parsedData.token};
     //var js = JSON.stringify(obj);
     try
     {
