@@ -51,14 +51,13 @@ function Login() {
         const response = await fetch('http://salvagefinancial.xyz:5000/api/login',
         {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
         var res = JSON.parse(await response.text());
-        if( res._id <= 0 )
+        if(res.IfFound == 0)
         {
           alertMessage.innerText = 'User/Password combination incorrect';
           alertMessage.style.visibility = "visible"; 
         }
         else
         {
-          
           localStorage.setItem('user_data', JSON.stringify(res));
           alertMessage.style.visibility = "hidden";
 
@@ -87,7 +86,7 @@ function Login() {
       const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
       {method:'POST', headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${parsedData.token}`}});
       var res = JSON.parse(await response.text());
-      if( res._id <= 0 )
+      if( res._id <= 0)
       {
         console.log("FAILED IN SETINFO FUNCTION");
       }
