@@ -1,6 +1,8 @@
 import app from "../pages/App.module.css";
 import { useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
+import show from "../assets/eye-password-show.png";
+import dontshow from "../assets/eye-password-hide.png";
 import {useState} from 'react'
 
 
@@ -15,6 +17,8 @@ function ForgotPass(){
     const [isPasswordSymbolValid, setIsPasswordSymbolValid] = useState(false);
     const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(false);
     const [isPasswordSame, setIsPasswordSame] = useState(true);
+    const [showPasssword, setShowPassword] = useState(false);
+    const [showConfirmPasssword, setShowConfirmPassword] = useState(false);
 
     function reclaimPass(){
 
@@ -146,6 +150,16 @@ function ForgotPass(){
         setIsPasswordSame(false);
     }
 
+    function showPasswordHandler() {
+
+        setShowPassword(!showPasssword);
+    }
+    
+    function showConfirmPasswordHandler() {
+
+        setShowConfirmPassword(!showConfirmPasssword);
+    }
+
     async function changePassword(event:any) : Promise<void> 
     {
         const FirstPass = (document.getElementById("firstPass") as HTMLInputElement).value;
@@ -197,43 +211,57 @@ function ForgotPass(){
     if (stageNum == 1){
         return(
             <div id = "loginDiv">
-                <span id="inner-title">Forgot Password</span><br />
-                <h5 className={app.loginlabel}>Enter your Email</h5>
-                <input type="text" id="loginName" className = {app.logininputs} placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
-                <h5 id = "alertmessage"></h5>
-                <button className={app.loginbuttons} id={app.doEmail} onClick={reclaimPass}>Confirm</button>
-                <button className={app.loginbuttons} id = {app.backToLogin} onClick = {navLogin}>Back To Login</button>
+                <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Forgot Password</span><br />
+                <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Enter your Email</h5>
+                <input type="text" id="loginName" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
+                <h5 className="mt-3" id = "alertmessage"></h5>
+                <button className="absolute left-[28%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={reclaimPass}>Confirm</button>
+                <button className="absolute right-[25%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] mr-[5%] cursor-pointer" onClick = {navLogin}>Back To Login</button>
             </div>
         );
    } else if (stageNum == 2){
         return(
             <div id = "loginDivs">
-                <span id="inner-title">Forgot Password</span><br />
-                <h5 className={app.loginlabel}>Reset your Password</h5>
-                <input type="number" id="loginNames" className = {app.logininputs} placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
-                <h5 id = "alertmessage"></h5>
-                <button className={app.loginbuttons} id={app.doVerify} onClick={verifyOneTimePass}>Confirm</button>
+                <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Forgot Password</span><br />
+                <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Reset your Password</h5>
+                <input type="number" id="loginNames" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
+                <h5 className="mt-3" id = "alertmessage"></h5>
+                <button className="absolute right-[45%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={verifyOneTimePass}>Confirm</button>
             </div>
         );
    } else if (stageNum == 3){
         return(
             <div id = "loginDivs">
-                <span id="inner-title">Reset Password</span><br />
-                <h5 className={app.loginlabel}>Reset your Password</h5>
-                <input type ="password" id ="firstPass" className = {app.logininputs} placeholder = "New Password"  value = {value} onChange = {(e) => setValue(e.target.value)} onKeyUp={validatePassword}></input><br/>
+                <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Reset Password</span><br />
+                <h5 className="mt-4 mb-0 ml-[10%] float-left text-[2vh]">Reset your Password</h5>
+                <div>
+                    <input id ="firstPass" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-0.5" type={showPasssword ? "text" : "password" } placeholder="New Password" onKeyUp={validatePassword}></input><br/>
+                    <img className="h-[2vh] absolute bottom-[46.5%] z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
+                </div>
+                
+                <div className="flex w-[100%] whitespace-nowrap items-center mt-2">
+                    <h6 className="ml-[10%] text-[#bdc8e2] w-fit text-sm">Must contain at least&nbsp;</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passnumber} style = {{color: isPasswordNumberValid ? '#58e96c' :'rgb(235, 83, 83)'}}>1 number</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm">,&nbsp;</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>1 symbol</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm">,&nbsp;</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passlength} style = {{color: isPasswordLengthValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>length of 8+</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm">.</h6>
+                </div>
+                <br />
 
-                <h6 className={app.passwordinstructions} id={app.firstinstruction}>Must contain at least&nbsp;</h6>
-                <h6 className={app.passwordinstructions} id={app.passnumber} style = {{color: isPasswordNumberValid ? '#58e96c' :'rgb(235, 83, 83)'}}>1 number</h6>
-                <h6 className={app.passwordinstructions}>,&nbsp;</h6>
-                <h6 className={app.passwordinstructions} id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>1 symbol</h6>
-                <h6 className={app.passwordinstructions}>,&nbsp;</h6>
-                <h6 className={app.passwordinstructions} id={app.passlength} style = {{color: isPasswordLengthValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>length of 8+</h6>
-                <h6 className={app.passwordinstructions}>.</h6><br />
+                
+                <div>
+                    <input id ="secondPass" className = "absolute left-[10%] bottom-[27%] w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-0.5" type={showConfirmPasssword ? "text" : "password" } placeholder="Confirm Password" onKeyUp={validatePasswordSame}></input><br/>
+                    <img className="h-[2vh] absolute bottom-[28.5%] z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
+                </div>
 
-                <input type ="password" id ="secondPass" className = {app.logininputs} placeholder = "Confirm Password" onKeyUp={validatePasswordSame}></input><br/>
-                <h6 className={app.passwordinstructions} id={app.firstinstruction} style = {{color: isPasswordSame ? '#58e96c' :'rgb(235, 83, 83)'}}> {isPasswordSame ? '' : 'Passwords are not the same.'} </h6>
-                <h5 id = "alertmessage"></h5>
-                <button className={app.loginbuttons} id={app.doChange} onClick={changePassword}>Confirm</button>
+                <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2 p-0" style={{ color: isPasswordSame ? "#58e96c" : "rgb(235, 83, 83)" }}>
+                    {isPasswordSame ? "" : "Passwords are not the same."}
+                 </h6>
+                 <br />
+                <h5 className="absolute right-[30%] bottom-[15%]" id = "alertmessage"></h5>
+                <button className="absolute right-[45%] bottom-[5%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={changePassword}>Confirm</button>
             </div>
         );
    }
