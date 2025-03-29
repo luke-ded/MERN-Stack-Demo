@@ -86,7 +86,7 @@ function Login() {
       const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
       {method:'POST', headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${parsedData.token}`}});
       var res = JSON.parse(await response.text());
-      if( res._id <= 0)
+      if( res.Result == "invalid token")
       {
         console.log("FAILED IN SETINFO FUNCTION");
       }
