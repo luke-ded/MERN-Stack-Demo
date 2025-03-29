@@ -235,7 +235,7 @@ function ForgotPass(){
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Reset Password</span><br />
                 <h5 className="mt-4 mb-0 ml-[10%] float-left text-[2vh]">Reset your Password</h5>
                 <div>
-                    <input id ="firstPass" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-0.5" type={showPasssword ? "text" : "password" } placeholder="New Password" onKeyUp={validatePassword}></input><br/>
+                    <input id ="firstPass" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-0.5" type={showPasssword ? "text" : "password" } value = {value} onChange = {(e) => setValue(e.target.value)} placeholder="New Password" onKeyUp={validatePassword}></input><br/>
                     <img className="h-[2vh] absolute bottom-[46.5%] z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
                 </div>
                 
