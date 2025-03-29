@@ -20,6 +20,24 @@ ChartJS.register(
   Legend
 );
 
+function ParseData()
+{
+  var data = localStorage.getItem('user_data');
+  var parsedData = data ? JSON.parse(data) : null;
+
+  // This may need to be changed depending on time frame moving ability
+  var datapts = new Array(13).fill(0);
+
+  for (var i = 0; i < parsedData.User.Income.length; i++) 
+  {
+    var counter = parsedData.User.Income[i];
+    console.log(counter.Amount);
+    datapts[counter.TimeFrame] += counter.Amount;
+  }
+
+  return [3500, 3250, 3000, 3678, 3345]; // Change to datapoints
+}
+
 function IncomeLineChart() {
   const data = {
     labels: [
@@ -27,11 +45,18 @@ function IncomeLineChart() {
       'Febuary',
       'March',
       'April',
-      'May'
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ],
     datasets: [{
       label: 'Expenses',
-      data: [3500, 3250, 3000, 3678, 3345],
+      data: ParseData(),
       hoverOffset: 4
     }]
   };
