@@ -21,7 +21,7 @@ function ParseLabels()
   for (var i = 0; i < parsedData.User.Income.length; i++) 
   {
     var counter = parsedData.User.Income[i];
-    console.log(counter.Category);
+    //console.log(counter.Category);
     labels.push(counter.Category);
   }
 
@@ -38,7 +38,7 @@ function ParseData()
   for (var i = 0; i < parsedData.User.Income.length; i++) 
   {
     var counter = parsedData.User.Income[i];
-    console.log(counter.Amount);
+    //console.log(counter.Amount);
     datapts.push(counter.Amount);
   }
 
