@@ -39,6 +39,7 @@ const NavBar = () => {
       navigate('/financials');
   }
 
+  // See duplicate in pagetitle
   function doLogout()
   {
     // Add more here to actually log user out
@@ -51,7 +52,7 @@ const NavBar = () => {
     return (
     <div className="flex h-[6.5vh] max-w-screen w-screen bg-black/60 fixed top-0 left-0 border-b border-[#6d91e8] items-center justify-between shrink-1">
       <div className="flex items-center">
-          <img className="h-[5vh] w-auto cursor-pointer" src={logo} onClick={navHome} />
+          <img className="h-[5vh] w-auto cursor-pointer" src={logo} onClick={doLogout} />
           <PageTitle />
       </div>
       <div className="flex items-center">
@@ -60,6 +61,18 @@ const NavBar = () => {
       </div>
     </div>
     );
+  // Onboarding
+  else if(location.pathname == '/onboard')
+  {
+    return(
+    <div className="flex h-[6.5vh] max-w-screen w-screen bg-black/60 fixed top-0 left-0 border-b border-[#6d91e8] items-centershrink-1">
+      <div className="flex items-center">
+          <img className="h-[5vh] w-auto cursor-pointer" src={logo} onClick={doLogout} />
+          <PageTitle />
+      </div>
+    </div>
+    );
+  }
   // Logged in
   else
   {
@@ -69,7 +82,7 @@ const NavBar = () => {
     return (
       <div className="flex h-[6.5vh] max-w-screen w-screen whitespace-nowrap bg-black/80 fixed top-0 left-0 z-10 border-b border-[#6d91e8] items-center justify-between shrink-1">
         <div className="flex items-center">
-            <img className="h-[5vh] w-auto cursor-pointer" src={logo} onClick={navHome} />
+            <img className="h-[5vh] w-auto cursor-pointer" src={logo} onClick={doLogout} />
             <PageTitle />
         
 
