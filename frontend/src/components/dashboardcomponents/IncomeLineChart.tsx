@@ -39,6 +39,7 @@ function ParseData()
 }
 
 function IncomeLineChart() {
+  var dataset = ParseData();
   const data = {
     labels: [
       'January',
@@ -56,7 +57,7 @@ function IncomeLineChart() {
     ],
     datasets: [{
       label: 'Expenses',
-      data: ParseData(),
+      data: dataset,
       hoverOffset: 4
     }]
   };
@@ -72,8 +73,8 @@ function IncomeLineChart() {
     },
     scales: {
         y: {
-          min: 2000, 
-          max: 4000,
+          min: Math.min.apply(null, dataset) > 0 ? Math.floor((Math.min.apply(null, dataset) - 300) / 100) * 100 : 0, 
+          max: Math.ceil((Math.max.apply(null, dataset) + 300) / 100) * 100,
         },
     },
 
