@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage.tsx';
 import ForgotPage from './pages/ForgotPage.tsx';
 import FinancialsPage from './pages/FinancialsPage.tsx';
 import DashboardPage from './pages/DashboardPage.tsx';
+import OnboardPage from './pages/OnboardPage.tsx';
 
 
 function  App(){
@@ -18,6 +19,7 @@ function  App(){
         <Route path="/forgot" element = {<ForgotPage />} />
         <Route path="/financials" element = {<FinancialsPage />} />
         <Route path="/dashboard" element = {<DashboardPage />} />
+        <Route path="/onboard" element = {<OnboardPage />} />
         <Route path="*" element={<HomePage />} /> {/* default */}
       </Routes>
   </Router>

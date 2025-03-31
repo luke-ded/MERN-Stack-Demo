@@ -62,7 +62,16 @@ function Login() {
           alertMessage.style.visibility = "hidden";
 
           await setInfo();
-          navDashboard();
+
+          /* if(res.FirstTime) // Needs to be added to database
+          {
+            res.FirstTime = 0; // Needs to be changed in API as well at some point
+            navOnboard();
+          }
+          else
+            navDashboard(); */
+
+            navDashboard();
         }
       }
       catch(error:any)
@@ -78,7 +87,7 @@ function Login() {
   {
     const data = localStorage.getItem('user_data');
     const parsedData = data ? JSON.parse(data) : null;
-    //console.log(parsedData.token);
+    console.log(parsedData.token);
     //var obj = {token:parsedData.token};
     //var js = JSON.stringify(obj);
     try
@@ -112,6 +121,11 @@ function Login() {
   {
     navigate('/dashboard');
   }
+
+  /* function navOnboard()
+  {
+    navigate('/onboard');
+  } */
 
   function showPasswordHandler()
   {
