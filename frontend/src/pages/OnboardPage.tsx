@@ -1,13 +1,20 @@
 
 import NavBar from '../components/NavBar.tsx';
+import { useNavigate } from "react-router-dom";
 import {useState} from 'react'
 
 const OnboardPage = () => {
     const [isWelcomeClosed, setWelcomeClosed] = useState(false);
     const [isSetClosed, setSetClosed] = useState(false);
 
+    const navigate = useNavigate();
+
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
+
+    function navFincancialsPage() {
+        navigate("/financials");
+      }
 
     function closeWeclome()
     {
@@ -61,6 +68,11 @@ const OnboardPage = () => {
 
         if(set)
             set.style.visibility = "hidden";
+
+        var inst = document.getElementById("inst");
+
+        if(inst)
+            inst.style.visibility = "visible";
     }
 
     return (
@@ -72,7 +84,8 @@ const OnboardPage = () => {
             <br />
             {/*Replace below with non AI generated text.*/}
             <p className='font-[Lucida Sans] text-lg'>
-                We’re here to help you take control of your finances and make smarter budgeting decisions. Whether you’re working toward a specific goal or simply want to track your spending, we’ve got the tools you need to stay on track.
+                We’re here to help you take control of your finances and make smarter budgeting decisions. 
+                Whether you’re working toward a specific goal or simply want to track your spending, we’ve got the tools you need to stay on track.
                 Let’s begin your path to better financial management.
             </p>
             <br />
@@ -87,7 +100,7 @@ const OnboardPage = () => {
             <br />
             
             <p className="self-start ml-[10%] mr-[10%] text-lg">In the next step, you will enter your individual debts and savings accounts. For now, enter your
-                TOTAL debt and TOTAL savings.
+                total debt and total savings.
             </p>
             <br />
             <h5 className="self-start ml-[10%] text-lg">Total Inital Debt</h5>
@@ -100,6 +113,22 @@ const OnboardPage = () => {
             <h5 className="mb-1" id="alertmessage" style={{visibility:"hidden"}}></h5>
 
             <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-5 cursor-pointer" onClick={closeSet}>Continue</button>
+        </div>
+
+        <div id="inst" style={{visibility:"hidden"}} className="flex flex-col w-[60%] h-fit mt-[20vh] border border-[#6d91e8] absolute z-3 rounded-lg  items-center bg-[rgba(17,18,23,.9)] p-5">
+            <h2 className='font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]'>Step 2: Add Detailed Information</h2>
+            <br />
+            
+            <p className="self-start ml-[10%] mr-[10%] text-lg">Now, you will enter your individual debts and savings accounts. View the instructional
+                videos below and then clock "continue" to proceed to the financials page to add the information.
+            </p>
+            <br />
+
+            <div className='flex'>
+                {/*add two autoplaying instructional videos here, one for adding debt and one for adding savings*/}
+            </div>
+
+            <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-5 cursor-pointer" onClick={navFincancialsPage}>Continue</button>
         </div>
         
     </div>
