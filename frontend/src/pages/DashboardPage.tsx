@@ -33,7 +33,7 @@ const DashboardPage = () => {
                 <div className="mt-4 ml-4 text-left font-[Lucida Sans]">
                     <p className="text-[#ff6384]">Total Debt: ${parsedData.User.InitialDebt}</p> {/*Change to calculate total*/}
                     <p className="text-[#36eba6]">Total savings: ${parsedData.User.InitialAmount}</p> {/*Change to calculate total*/}
-                    <p>Assets to Liabilities Ratio: {parsedData.User.InitialAmount/parsedData.User.InitialDebt}:1</p>
+                    <p style = {{color: (parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1) ? '#36eba6' :'#ff6384'}}>Assets to Liabilities Ratio: {parsedData.User.InitialAmount/parsedData.User.InitialDebt}:1</p>
                     <p>Spending this month:</p>
                     <p>% spending on essentials: </p>
                     <p>Need more ideas for this: </p>

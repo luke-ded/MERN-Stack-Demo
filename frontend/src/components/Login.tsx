@@ -71,7 +71,7 @@ function Login() {
           else
             navDashboard(); */
 
-            navOnboard();
+            navDashboard();
         }
       }
       catch(error:any)
@@ -123,10 +123,10 @@ function Login() {
     navigate('/dashboard');
   }
 
-  function navOnboard()
+/*   function navOnboard()
   {
     navigate('/onboard');
-  }
+  } */
 
   function showPasswordHandler()
   {
