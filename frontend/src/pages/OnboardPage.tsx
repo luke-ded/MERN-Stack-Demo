@@ -76,62 +76,62 @@ const OnboardPage = () => {
     }
 
     return (
-    <div className="flex flex-col absolute top-0 left-0 items-center">
-        <NavBar />
+        <div className="flex flex-col absolute top-0 left-0 items-center">
+            <NavBar />
 
-        <div id="welcome" className="w-[60%] h-fit mt-[20vh] border border-[#6d91e8] rounded-lg  bg-[rgba(17,18,23,.9)] p-5">
-            <h2 className='font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]'>Welcome to Salvage Financial, {parsedData.User.FName}.</h2>
-            <br />
-            {/*Replace below with non AI generated text.*/}
-            <p className='font-[Lucida Sans] text-lg'>
-                We’re here to help you take control of your finances and make smarter budgeting decisions. 
-                Whether you’re working toward a specific goal or simply want to track your spending, we’ve got the tools you need to stay on track.
-                Let’s begin your path to better financial management.
-            </p>
-            <br />
-            <p className='font-[Lucida Sans] text-lg'>
-            To get started, we’ll guide you through a few simple steps to set up your budget.
-            </p>
-            <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-5 cursor-pointer" onClick={closeWeclome}>Continue</button>
-        </div>
-        
-        <div id="set" style={{visibility:"hidden"}} className="flex flex-col w-[60%] h-fit mt-[20vh] border border-[#6d91e8] absolute z-2 rounded-lg  items-center bg-[rgba(17,18,23,.9)] p-5">
-            <h2 className='font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]'>Step 1: Add Initial Information</h2>
-            <br />
+            <div id="welcome" className="w-[60%] h-fit mt-[20vh] border border-[#6d91e8] rounded-lg  bg-[rgba(17,18,23,.9)] p-5">
+                <h2 className='font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]'>Welcome to Salvage Financial, {parsedData.User.FName}.</h2>
+                <br />
+                {/*Replace below with non AI generated text. Probably more specific to theming*/}
+                <p className='font-[Lucida Sans] text-lg'>
+                    We’re here to help you take control of your finances and make smarter budgeting decisions. 
+                    Whether you’re working toward a specific goal or simply want to track your spending, we’ve got the tools you need to stay on track.
+                    Let’s begin your path to better financial management.
+                </p>
+                <br />
+                <p className='font-[Lucida Sans] text-lg'>
+                To get started, we’ll guide you through a few simple steps to set up your budget.
+                </p>
+                <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-5 cursor-pointer" onClick={closeWeclome}>Continue</button>
+            </div>
             
-            <p className="self-start ml-[10%] mr-[10%] text-lg">In the next step, you will enter your individual debts and savings accounts. For now, enter your
-                total debt and total savings.
-            </p>
-            <br />
-            <h5 className="self-start ml-[10%] text-lg">Total Inital Debt</h5>
-            <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="debt" placeholder="Initial Debt" />
-            <br />
-            <h5 className="self-start ml-[10%] text-lg">Total Initial Savings</h5>
-            <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="savings" placeholder="Initial Savings" />
-            <br />
+            <div id="set" style={{visibility:"hidden"}} className="flex flex-col w-[60%] h-fit mt-[20vh] border border-[#6d91e8] absolute z-2 rounded-lg  items-center bg-[rgba(17,18,23,.9)] p-5">
+                <h2 className='font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]'>Step 1: Add Initial Information</h2>
+                <br />
+                
+                <p className="self-start ml-[10%] mr-[10%] text-lg">In the next step, you will enter your individual debts and savings accounts. For now, enter your
+                    total debt and total savings.
+                </p>
+                <br />
+                <h5 className="self-start ml-[10%] text-lg">Total Inital Debt</h5>
+                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="debt" placeholder="Initial Debt" />
+                <br />
+                <h5 className="self-start ml-[10%] text-lg">Total Initial Savings</h5>
+                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="savings" placeholder="Initial Savings" />
+                <br />
 
-            <h5 className="mb-1" id="alertmessage" style={{visibility:"hidden"}}></h5>
+                <h5 className="mb-1" id="alertmessage" style={{visibility:"hidden"}}></h5>
 
-            <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-5 cursor-pointer" onClick={closeSet}>Continue</button>
-        </div>
-
-        <div id="inst" style={{visibility:"hidden"}} className="flex flex-col w-[60%] h-fit mt-[20vh] border border-[#6d91e8] absolute z-3 rounded-lg  items-center bg-[rgba(17,18,23,.9)] p-5">
-            <h2 className='font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]'>Step 2: Add Detailed Information</h2>
-            <br />
-            
-            <p className="self-start ml-[10%] mr-[10%] text-lg">Now, you will enter your individual debts and savings accounts. View the instructional
-                videos below and then clock "continue" to proceed to the financials page to add the information.
-            </p>
-            <br />
-
-            <div className='flex'>
-                {/*add two autoplaying instructional videos here, one for adding debt and one for adding savings*/}
+                <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-5 cursor-pointer" onClick={closeSet}>Continue</button>
             </div>
 
-            <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-5 cursor-pointer" onClick={navFincancialsPage}>Continue</button>
+            <div id="inst" style={{visibility:"hidden"}} className="flex flex-col w-[60%] h-fit mt-[20vh] border border-[#6d91e8] absolute z-3 rounded-lg  items-center bg-[rgba(17,18,23,.9)] p-5">
+                <h2 className='font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]'>Step 2: Add Detailed Information</h2>
+                <br />
+                
+                <p className="self-start ml-[10%] mr-[10%] text-lg">Now, you will enter your individual debts and savings accounts. View the instructional
+                    videos below and then clock "continue" to proceed to the financials page to add the information.
+                </p>
+                <br />
+
+                <div className='flex'>
+                    {/*add two autoplaying instructional videos here, one for adding debt and one for adding savings*/}
+                </div>
+
+                <button className="rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-5 cursor-pointer" onClick={navFincancialsPage}>Continue</button>
+            </div>
+            
         </div>
-        
-    </div>
     );
     };
 
