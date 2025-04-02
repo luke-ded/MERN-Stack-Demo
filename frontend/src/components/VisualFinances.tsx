@@ -21,6 +21,7 @@ function VisualFinances(){
     function addExpense(){
         const valAmount = (document.getElementById("ExpNum") as HTMLInputElement).value;
         const alertMessage = document.getElementById("alertmessage");
+        console.log(isRecurring);
 
         if (alertMessage) {
             if (valAmount.length == 0 && isButtonClicked == true){
