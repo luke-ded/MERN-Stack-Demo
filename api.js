@@ -210,7 +210,7 @@ exports.setApp = function ( app, client )
     });
 
     //AddIncome API
-    //In: token, Name, Amount, IfRecurring, InitialTime, TimeFrame
+    //In: token, Name, Amount, IfRecurring, InitialTime
     //Out: Result
     app.post('/api/AddIncome', authenticateJWT, async (req,res) => {
         let Result = "Could not add income";
@@ -255,13 +255,13 @@ exports.setApp = function ( app, client )
     });
 
     //AddExpense API
-    //In: token, Name, Category, Amount, IfRecurring, InitialTime, TimeFrame
+    //In: token, Name, Category, Amount, IfRecurring, InitialTime
     //Out: Result
     app.post('/api/AddExpense', authenticateJWT, async (req,res) => {
         let Result = "Could not add expense";
         try{
             //Input and Field Check
-            const {Name, Amount, Category, IfRecurring, InitialTime, TimeFrame} = req.body;
+            const {Name, Amount, Category, IfRecurring, InitialTime} = req.body;
             const {_id} = req.user;            
             if (!_id || !Name || !Amount || !Category || IfRecurring == undefined){
                 throw new Error("Invalid Input");
@@ -270,11 +270,11 @@ exports.setApp = function ( app, client )
 
             //Create Objects for DB statement
             let newExpense = {};
-            if (!InitialTime || !TimeFrame){
-                newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring};
+            if (IfRecurring){
+                newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
             }
             else{
-                newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+                newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring};
             }
 
             //DB Statement
@@ -301,13 +301,13 @@ exports.setApp = function ( app, client )
 
     
     //EditIncome API
-    //In: token, index, NewName, NewAmount, NewIfRecurring, NewInitialTime, NewTimeFrame
+    //In: token, index, NewName, NewAmount, NewIfRecurring, NewInitialTime
     //Out: Result
     app.post('/api/EditIncome', authenticateJWT, async (req,res) => {
         let Result = "Could not edit income";
         try{
             //Input and Field Check
-            const {index, NewName, NewAmount, NewIfRecurring, NewInitialTime, NewTimeFrame} = req.body;
+            const {index, NewName, NewAmount, NewIfRecurring, NewInitialTime} = req.body;
             const {_id} = req.user;
             if (!_id|| index == undefined|| !NewName || !NewAmount || NewIfRecurring == undefined){
                 throw new Error("Invalid Input");
@@ -317,11 +317,11 @@ exports.setApp = function ( app, client )
             //Create objects for DB Statement
             let newIncome = {};
             let indexSearch = `Income.${index}`;    //Concatenates the search string
-            if (!NewInitialTime || !NewTimeFrame){
-                newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring};
+            if (NewIfRecurring){
+                newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
             }
             else{
-                newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
+                newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring};
             }
 
             //DB
@@ -347,13 +347,13 @@ exports.setApp = function ( app, client )
     });
 
     //EditExpense API
-    //In: token, index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime, NewTimeFrame
+    //In: token, index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime
     //Out: Result
     app.post('/api/EditExpense', authenticateJWT, async (req,res) => {
         let Result = "Could not edit expense";
         try{
             //Input and Field Checks
-            const {index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime, NewTimeFrame} = req.body;
+            const {index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime} = req.body;
             const{_id} = req.user;
             if (!_id || index == undefined|| !NewName || !NewAmount || !NewCategory || NewIfRecurring == undefined){
                 throw new Error("Invalid Input");
@@ -363,11 +363,11 @@ exports.setApp = function ( app, client )
             //Create objects for DB Statement
             let newExpense = {};
             let indexSearch = `Expenses.${index}`;    //Concatenates the search string
-            if (!NewInitialTime || !NewTimeFrame){
-                newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfRecurring: NewIfRecurring};
+            if (NewIfRecurring){
+                newExpense = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
             }
             else{
-                newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfRecurring: NewIfRecurring, InitialTime: NewInitialTime, TimeFrame: NewTimeFrame};
+                newExpense = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring};
             }
             
             //DB
