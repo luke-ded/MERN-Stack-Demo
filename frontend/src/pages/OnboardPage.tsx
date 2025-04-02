@@ -87,7 +87,7 @@ const OnboardPage = () => {
         };
         var js = JSON.stringify(obj);
         try {
-            const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/AddInitial',
             {method:'POST', body: js, headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`}});
             var res = JSON.parse(await response.text());
         if (res.Result == "Could not find user to add initial debt and amount to") 
@@ -99,8 +99,7 @@ const OnboardPage = () => {
         } catch (error: any) {
         alert(error.toString());
         return;
-        }
-    
+        }   
 
         event.preventDefault();
     }
