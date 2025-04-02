@@ -64,6 +64,9 @@ const OnboardPage = () => {
         if(alertMessage)
             alertMessage.style.visibility = "hidden";
 
+        // API call
+        AddInitial;
+
         var set = document.getElementById("set");
 
         if(set)
@@ -73,6 +76,32 @@ const OnboardPage = () => {
 
         if(inst)
             inst.style.visibility = "visible";
+    }
+
+    async function AddInitial(event: any): Promise<void>
+    {
+        event.preventDefault();
+        var obj = {
+            InitialDebt: (document.getElementById("debt") as HTMLInputElement).value,
+            InitalAmount: (document.getElementById("savings") as HTMLInputElement).value,
+        };
+        var js = JSON.stringify(obj);
+        try {
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/AddInitial',
+            {method:'POST', body: js, headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`}});
+            var res = JSON.parse(await response.text());
+        if (res.Result == "Could not find user to add initial debt and amount to") 
+        { // Change this
+            return;
+        } else {
+            
+        }
+        } catch (error: any) {
+        alert(error.toString());
+        return;
+        }   
+
+        event.preventDefault();
     }
 
     return (

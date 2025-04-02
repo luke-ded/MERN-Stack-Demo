@@ -69,8 +69,6 @@ function Signup() {
 
       alertMessage.style.visibility = "hidden";
 
-      // Add email validation here
-
       event.preventDefault();
       var obj = {
         FName: FirstName,
