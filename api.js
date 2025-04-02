@@ -176,7 +176,7 @@ exports.setApp = function ( app, client )
     //AddInitial API
     //In: token, InitialDebt, InitialAmount
     //Out: Result
-    app.post('/api/AddInitial', async (req,res) => {
+    app.post('/api/AddInitial', authenticateJWT, async (req,res) => {
         let Result = "Could not add amount and debt";
         try{
             //Input and Field Check
