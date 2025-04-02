@@ -58,7 +58,7 @@ function IncomeLineChart() {
       'December',
     ],
     datasets: [{
-      label: 'Expenses',
+      label: 'Income',
       data: dataset,
       hoverOffset: 4
     }]
