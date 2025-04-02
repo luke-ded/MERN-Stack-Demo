@@ -135,7 +135,7 @@ function Finances(){
                 </div>
 
 
-                <button id = "AddIncome" className = "rounded-sm inline-block absolute top-[80%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh]" onClick = {addIncome} >Add Income</button>
+                <button id = "AddIncome" className = "rounded-sm inline-block absolute top-[80%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addIncome} >Add Income</button>
             </div>
             
         </div>
