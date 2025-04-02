@@ -28,11 +28,11 @@ function ParseData()
   // This may need to be changed depending on time frame moving ability
   var datapts = new Array(12).fill(0);
 
-  for (var i = 0; i < parsedData.User.Income.length; i++) 
+  for (var i = 0; i < parsedData.User.Expenses.length; i++) 
   {
-    var counter = parsedData.User.Income[i];
+    var counter = parsedData.User.Expenses[i];
     if(counter.InitialTime == undefined) continue;
-
+    
     //console.log(counter.InitialTime.Month);
     datapts[counter.InitialTime.Month - 1] += counter.Amount;
   }

@@ -1,6 +1,7 @@
 import ExpenseChart from '../components/dashboardcomponents/ExpenseChart.tsx';
 import IncomeChart from '../components/dashboardcomponents/IncomeChart.tsx';
 import IncomeLineChart from '../components/dashboardcomponents/IncomeLineChart.tsx';
+import ExpensesLineChart from '../components/dashboardcomponents/ExpensesLineChart.tsx';
 import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import NavBar from '../components/NavBar.tsx';
 
@@ -58,7 +59,7 @@ const DashboardPage = () => {
 
             <div className= "ml-8 w-[50vw] min-h-fit h-[40vh] border border-[#6d91e8] rounded-lg text-center bg-white/90">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Total Expenses by Month</h3>
-                <IncomeLineChart />
+                <ExpensesLineChart />
             </div>
         </div>
 
