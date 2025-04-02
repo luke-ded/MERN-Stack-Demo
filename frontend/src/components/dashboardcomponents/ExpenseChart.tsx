@@ -56,7 +56,9 @@ function ExpenseChart() {
         'rgb(54, 162, 235)',
         'rgb(255, 205, 86)',
         'rgb(54, 235, 166)',
-        'rgb(133, 54, 235)'
+        'rgb(133, 54, 235)',
+        'rgb(235, 139, 54)',
+        'rgb(54, 226, 235)'
       ],
       hoverOffset: 15
     }]
@@ -65,7 +67,7 @@ function ExpenseChart() {
   const options = {
     type:Pie,
     responsive: true,
-
+    borderWidth: 1.5,
 
   };
 
