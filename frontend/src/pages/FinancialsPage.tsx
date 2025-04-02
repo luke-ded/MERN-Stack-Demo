@@ -13,8 +13,10 @@ const FinancialsPage = () => {
     const bar = document.getElementById("FinanceBar");
     const finances = document.getElementById("finances");
     const btn = document.getElementById(app.exitBtn);
+    const alertMessage = document.getElementById("alertmessage");
 
-    if (bar && finances && btn){
+    if (bar && finances && btn && alertMessage){
+      alertMessage.style.visibility = "hidden";
       finances.style.visibility = "hidden";
       bar.style.backgroundColor = "rgba(0,26, 51)";
       bar.style.border = "none";
@@ -44,8 +46,10 @@ const FinancialsPage = () => {
     const bar = document.getElementById("VisualBar");
     const visual = document.getElementById("visual");
     const btn = document.getElementById(app.exitBtnV);
+    const alertMessage = document.getElementById("alertMessage");
 
-    if (bar && visual && btn){  
+    if (bar && visual && btn && alertMessage){ 
+      alertMessage.style.visibility = "hidden";   
       visual.style.visibility = "hidden";
       bar.style.backgroundColor = "rgba(0,26, 51)";
       bar.style.border = "none";
