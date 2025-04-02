@@ -216,7 +216,7 @@ exports.setApp = function ( app, client )
         let Result = "Could not add income";
         try{
             //Input and Field Check
-            const {Name, Amount, IfRecurring, InitialTime, TimeFrame} = req.body;
+            const {Name, Amount, IfRecurring, InitialTime} = req.body;
             const {_id} = req.user;
             if (!_id || !Name || !Amount || IfRecurring == undefined){
                 throw new Error("Invalid Input");
@@ -225,11 +225,11 @@ exports.setApp = function ( app, client )
 
             //Create Objects for DB statement
             let newIncome = {};
-            if (!InitialTime || !TimeFrame){
-                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring};
+            if (IfRecurring){
+                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring, InitialTime: InitialTime};
             }
             else{
-                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring, InitialTime: InitialTime, TimeFrame: TimeFrame};
+                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring};
             }
 
             //DB Statement
