@@ -22,7 +22,7 @@ function ParseLabels()
   {
     var counter = parsedData.User.Income[i];
     //console.log(counter.Category);
-    labels.push(counter.Category);
+    labels.push(counter.Name);
   }
 
   return labels;

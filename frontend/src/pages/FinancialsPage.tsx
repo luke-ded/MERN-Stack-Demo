@@ -74,15 +74,15 @@ const FinancialsPage = () => {
 
 
   return (
-    <div id = {app.finance}>
+    <div className = "absolute top-0 left-0 h-full w-full bg-[rgba(0,26,51,1)]">
          <NavBar />
 
-        <div className = {app.FinanceDiv} id ="FinanceBar">
+         <div className = "block absolute top-1/2 left-2/7 w-[30%] h-[40%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id ="FinanceBar">
           <Finances />
           <button id = {app.exitBtn} onClick={() => {if(isFinanceBarClosed == false) {closeFinanceBar();} else {openFianceBar();}}}>&#10060;</button><br />
         </div>
 
-        <div className = {app.visualDiv} id = "VisualBar">
+        <div className = "block absolute top-1/2 left-[70%] w-[30%] h-[40%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "VisualBar">
           <VisualFinances />
           <button id = {app.exitBtnV} onClick = {() => {if(isVisualBarClosed == false) {closeVisualBar();} else {openVisualBar();}}}>&#10060;</button><br />
         </div>

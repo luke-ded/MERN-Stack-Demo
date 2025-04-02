@@ -168,7 +168,7 @@ function Signup() {
       <br />
       <h5 className="self-start ml-[10%] text-lg">Email</h5>
       <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="Email" placeholder="Email" onKeyUp={validateEmail} />
-      <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2" id={app.firstinstruction} style={{ color: isValidEmail ? "#58e96c" : "rgb(235, 83, 83)" }}>
+      <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2" id={app.firstinstruction} style={{ color: isValidEmail ? '#36eba6' :'#ff6384' }}>
           {isValidEmail ? "" : "Invalid email."}
       </h6>
       <br />
@@ -181,11 +181,11 @@ function Signup() {
 
       <div className="flex w-[100%] whitespace-nowrap items-center mt-2">
         <h6 className="ml-[10%] text-[#bdc8e2] w-fit text-sm">Must contain at least&nbsp;</h6>
-        <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passnumber} style = {{color: isPasswordNumberValid ? '#58e96c' :'rgb(235, 83, 83)'}}>1 number</h6>
+        <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passnumber} style = {{color: isPasswordNumberValid ? '#36eba6' :'#ff6384'}}>1 number</h6>
         <h6 className="text-[#bdc8e2] w-fit text-sm">,&nbsp;</h6>
-        <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>1 symbol</h6>
+        <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#36eba6' :'#ff6384'}}>1 symbol</h6>
         <h6 className="text-[#bdc8e2] w-fit text-sm">,&nbsp;</h6>
-        <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passlength} style = {{color: isPasswordLengthValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>length of 8+</h6>
+        <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passlength} style = {{color: isPasswordLengthValid ? '#36eba6' :'#ff6384'}}>length of 8+</h6>
         <h6 className="text-[#bdc8e2] w-fit text-sm">.</h6>
       </div>
       <br />
@@ -195,7 +195,7 @@ function Signup() {
           <input className="w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none p-1" type={showConfirmPasssword ? "text" : "password" } id="ConfPassword" placeholder="Confirm Password" onKeyUp={validatePasswordSame} />
           <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
       </div>
-      <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2" style={{ color: isPasswordSame ? "#58e96c" : "rgb(235, 83, 83)" }}>
+      <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2" style={{ color: isPasswordSame ? '#36eba6' :'#ff6384' }}>
           {isPasswordSame ? "" : "Passwords are not the same."}
       </h6>
       <h5 className="mt-3" id="alertmessage"></h5>

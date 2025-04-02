@@ -12,7 +12,7 @@ function ForgotPass(){
     const [value, setValue] = useState("");
     const [tempPass, setTempPass] = useState<number | null>(null)
     const [stageNum, setStageNum] = useState<number | null>(1)
-    const [email, setEmail] = useState<string |null>(null)
+    const [email, setEmail] = useState<string>("");
     const [isPasswordNumberValid, setIsPasswordNumberValid] = useState(false);
     const [isPasswordSymbolValid, setIsPasswordSymbolValid] = useState(false);
     const [isPasswordLengthValid, setIsPasswordLengthValid] = useState(false);
@@ -20,7 +20,7 @@ function ForgotPass(){
     const [showPasssword, setShowPassword] = useState(false);
     const [showConfirmPasssword, setShowConfirmPassword] = useState(false);
 
-    function reclaimPass(){
+    async function reclaimPass(){
 
         const Email = (document.getElementById("loginName") as HTMLInputElement).value;
         const alertMessage = document.getElementById("alertmessage");
@@ -31,6 +31,8 @@ function ForgotPass(){
         //Email: salvagefinancial416@gmail.com
         //Password: COP4331$
         //works for gmail emails only for now, will add more later
+
+        setEmail(Email);
 
         if (alertMessage) {
 
@@ -55,10 +57,18 @@ function ForgotPass(){
                         OneTimePass: oneTimePassword
                     };
 
-                    emailjs.send(serviceID, templateID, templateParams, publicKey)
                     setEmail(Email);
-                    setStageNum(2);
-                    return;
+                    const val = await verifyEmail(event, Email);
+                
+                    if (val === 1) {
+                        emailjs.send(serviceID, templateID, templateParams, publicKey)
+                        setStageNum(2);
+                        return;
+                    } else {
+                        alertMessage.innerText = "Email doesn't exist";
+                        alertMessage.style.visibility = "visible";
+                        return;
+                    }
                 } else {
 
                     alertMessage.innerText = "Invalid Email";
@@ -70,6 +80,35 @@ function ForgotPass(){
         }
 
         
+    }
+
+    async function verifyEmail(event: any, Email: string) : Promise<number> {
+
+        const userEmail = Email;
+        console.log(userEmail);
+
+        event.preventDefault();
+        var obj = {Email: userEmail};
+        var js = JSON.stringify(obj);
+
+        try {
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/IfEmailExists',
+            {method:'POST',body:js,headers:{'Content-Type':'application/json'}});
+            var res = JSON.parse(await response.text());
+
+            if (res.IfFound == 1){
+                console.log(1);
+                return 1;
+            } else {
+                console.log(0);
+                return 0;
+            }
+
+        } catch (error : any) {
+            alert(error.toString());
+            return -1;
+        }
+
     }
 
     function navLogin(){
