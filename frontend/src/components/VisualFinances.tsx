@@ -20,7 +20,7 @@ function VisualFinances(){
 
     function addExpense(){
         const valAmount = (document.getElementById("ExpNum") as HTMLInputElement).value;
-        const alertMessage = document.getElementById("alertmessage");
+        const alertMessage = document.getElementById("alertMessage");
         console.log(isRecurring);
 
         if (alertMessage) {
@@ -73,7 +73,7 @@ function VisualFinances(){
                     No </label>  
                 </div>
 
-                <h5 className="mt-3" id="alertmessage"></h5>
+                <h5 className="mt-3" id="alertMessage"></h5>
 
                 <button id = "ExpenseAdd" className = "rounded-sm inline-block absolute top-[80%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpense}>Add Expense</button>
         </div>
