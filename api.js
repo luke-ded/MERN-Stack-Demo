@@ -226,7 +226,7 @@ exports.setApp = function ( app, client )
             //Create Objects for DB statement
             let newIncome = {};
             if (IfRecurring){
-                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring, InitialTime: InitialTime};
+                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
             }
             else{
                 newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring};
