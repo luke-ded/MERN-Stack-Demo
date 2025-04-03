@@ -11,18 +11,19 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale);
 
+let labels: string[] = [];
+
 function ParseLabels()
 {
   var data = localStorage.getItem('user_data');
   var parsedData = data ? JSON.parse(data) : null;
 
-  var labels = [];
-
   for (var i = 0; i < parsedData.User.Expenses.length; i++) 
   {
     var counter = parsedData.User.Expenses[i];
     //console.log(counter.Category);
-    labels.push(counter.Category);
+    if(!labels.includes(counter.Category))
+      labels.push(counter.Category);
   }
 
   return labels;
@@ -33,13 +34,13 @@ function ParseData()
   var data = localStorage.getItem('user_data');
   var parsedData = data ? JSON.parse(data) : null;
 
-  var datapts = [];
+  let datapts = new Array(labels.length).fill(0);
 
   for (var i = 0; i < parsedData.User.Expenses.length; i++) 
   {
     var counter = parsedData.User.Expenses[i];
     //console.log(counter.Amount);
-    datapts.push(counter.Amount);
+    datapts[labels.indexOf(counter.Category)] += counter.Amount;
   }
 
   return datapts;
