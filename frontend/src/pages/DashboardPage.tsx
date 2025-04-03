@@ -17,7 +17,7 @@ const DashboardPage = () => {
     <div className="flex flex-col absolute top-0 left-0 h-[200vh]">
         <NavBar />
 
-        <div className="flex justify-start mt-[8vh]">
+        <div className="flex justify-between mt-[8vh]">
             <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Expenses</h3>
                 <ExpenseChart />
@@ -28,22 +28,45 @@ const DashboardPage = () => {
                 <IncomeChart />
             </div>
 
-            <div className= "ml-8 w-[24.5vw] min-h-[50vh] h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+            <div className= "ml-8 w-[16.5vw] min-h-[50vh] h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Statistics</h3>
 
                 <div className="mt-4 ml-4 text-left font-[Lucida Sans]">
-                    <p className="text-[#ff6384]">Total Debt: ${parsedData.User.InitialDebt}</p> {/*Change to calculate total*/}
-                    <p className="text-[#36eba6]">Total savings: ${parsedData.User.InitialAmount}</p> {/*Change to calculate total*/}
-                    <p style = {{color: (parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1) ? '#36eba6' :'#ff6384'}}>Assets to Liabilities Ratio: {parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1? parsedData.User.InitialAmount/parsedData.User.InitialDebt +':1' : 1 + ':' + 1/(parsedData.User.InitialAmount/parsedData.User.InitialDebt)}</p>
-                    <p>Spending this month:</p>
-                    <p>% spending on essentials: </p>
-                    <p>Need more ideas for this: </p>
+                    <div className = "flex justify-between mr-4">
+                        <p className="text-[#ff6384]">Total Debt: </p> {/*Change to calculate total*/}
+                        <p className="text-[#ff6384]"> ${parsedData.User.InitialDebt}</p>
+                    </div>
+                    
+                    <div className = "flex justify-between mr-4">
+                        <p className="text-[#36eba6]">Total savings: </p> {/*Change to calculate total*/}
+                        <p className="text-[#36eba6]"> ${parsedData.User.InitialAmount}</p>
+                    </div>
+
+                    <div className = "flex justify-between mr-4">
+                        <p style = {{color: (parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1) ? '#36eba6' :'#ff6384'}}>Assets to Liabilities Ratio: </p>
+                        <p style = {{color: (parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1) ? '#36eba6' :'#ff6384'}}>{parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1? parsedData.User.InitialAmount/parsedData.User.InitialDebt +':1' : 1 + ':' + 1/(parsedData.User.InitialAmount/parsedData.User.InitialDebt)}</p>
+                    </div>
+
+                    <div className = "flex justify-between mr-4">
+                        <p>Spending this month:</p>
+                        <p></p>
+                    </div>
+
+                    <div className = "flex justify-between mr-4">
+                        <p>% spending on essentials: </p>
+                        <p></p>
+                    </div>
+
+                    <div className = "flex justify-between mr-4">
+                        <p>Need more ideas for this: </p>
+                        <p></p>
+                    </div>
                 </div>
             </div>
         </div>
 
         {/* This is super rough */}
-        <div className="flex justify-start w-[85vw] mt-[8vh]">
+        <div className="flex justify-between w-[85vw] mt-[8vh]">
             <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
                 <div className="flex w-[50vh%] absolute z-0">
                     <GoalProgress />
@@ -68,7 +91,7 @@ const DashboardPage = () => {
             <p className="mt-10 m-2">(replace this with a graphic designed depth meter)</p>
         </div>
 
-        <div className="flex justify-start w-[85vw] mt-[8vh]">
+        <div className="flex justify-between w-[85vw] mt-[8vh]">
             <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Another Module</h3>
             </div>
