@@ -5,7 +5,6 @@ import ExpensesLineChart from '../components/dashboardcomponents/ExpensesLineCha
 import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import ExpensesList from '../components/dashboardcomponents/ExpensesList.tsx';
 import NavBar from '../components/NavBar.tsx';
-import {useState} from 'react'
 
 const today = new Date();
 interface Item 
