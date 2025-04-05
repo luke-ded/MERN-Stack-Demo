@@ -99,7 +99,7 @@ const DashboardPage = () => {
                 </div>
             </div>
 
-            <div className= "ml-8 w-[50vw] min-h-fit h-[40vh] border border-[#6d91e8] rounded-lg text-center bg-white/90">
+            <div className= "w-[50vw] min-h-fit h-[40vh] border border-[#6d91e8] rounded-lg text-center bg-white/90">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Total Income by Month</h3>
                 <IncomeLineChart />
             </div>
@@ -118,6 +118,11 @@ const DashboardPage = () => {
                     <h5 style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 
                         You are {percentage}% of the way to your reward, {rewardName}!</h5>
                 </div>
+            </div>
+
+            <div className= "w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Top Debts</h3>
+                    
             </div>
         </div>
     </div>

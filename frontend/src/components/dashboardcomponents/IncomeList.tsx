@@ -6,6 +6,7 @@ interface Item
     key:string;
     Name: string;
     Date: any;
+    Amount: any,
 }
 
 interface PropsType 
@@ -39,7 +40,8 @@ function setIncome()
         let newItem: Item = {
             key: i.toString(),
             Name: counter.Name, 
-            Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023}
+            Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+            Amount: counter.Amount
         };
 
         expenses.push(newItem);
@@ -64,10 +66,11 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
     return (
         <div>
             <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-md">{item.Name}</span>
+                <span className="text-white font-semibold text-md">${item.Amount}</span>
                 <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
                 daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
             </div>
+            <p className="self-start text-white">{item.Name}</p>
         </div>
     );
 };
@@ -109,9 +112,10 @@ function IncomeList()
     return (
         <ul className="shadow divide-y divide-[#7f8fb5] max-w-sm min-h-0 border-b border-[#6d91e8]">
         {props.items.map((item) => {
-            return <li onClick={navFinancials} className="px-[2vw] py-[1vh] cursor-pointer">{props.renderer(item)}</li>;
+            return <li onClick={navFinancials} className="px-[1vw] py-[1vh] cursor-pointer">{props.renderer(item)}</li>;
         })}
         </ul>
     );
 }
+
 export default IncomeList;
