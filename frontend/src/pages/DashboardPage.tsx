@@ -74,8 +74,8 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
     return (
         <div>
             <div className="flex justify-between items-center">
-                <span className="font-semibold text-md">{item.Name}</span>
-                <span className="text-gray-500 text-xs"> {daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
+                <span className="text-white font-semibold text-md">{item.Name}</span>
+                <span className="text-gray-300 text-xs"> {daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
             </div>
         </div>
     );
@@ -104,7 +104,7 @@ const DashboardPage = () => {
                 <IncomeChart />
             </div>
 
-            <div className= "ml-8 w-[16.5vw] min-h-[50vh] h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+            <div className= "ml-8 w-[20vw] min-h-[50vh] h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Statistics</h3>
 
                 <div className="mt-4 ml-4 text-left font-[Lucida Sans]">
@@ -143,9 +143,11 @@ const DashboardPage = () => {
 
         {/* Fix Scaling Here!! */}
         <div className="flex justify-between w-[85vw] mt-[8vh]">
-            <div className= "flex-col justify-between ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Recent Expenses</h3>
-                <div className="mt-3 h-[50vh] w-[100%] rounded-lg overflow-y-scroll grow min-h-0">
+            <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Recent Expenses</h3>
+                </div>
+                <div className="flex flex-col w-[100%] h-[90%] rounded-lg overflow-y-scroll grow min-h-0">
                     <ExpensesList items={expenses} renderer={renderExpenseItem} />
                 </div>
             </div>
