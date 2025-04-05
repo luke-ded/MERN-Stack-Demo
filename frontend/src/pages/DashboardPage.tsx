@@ -4,6 +4,7 @@ import IncomeLineChart from '../components/dashboardcomponents/IncomeLineChart.t
 import ExpensesLineChart from '../components/dashboardcomponents/ExpensesLineChart.tsx';
 import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import ExpensesList from '../components/dashboardcomponents/ExpensesList.tsx';
+import IncomeList from '../components/dashboardcomponents/IncomeList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
 
@@ -89,8 +90,13 @@ const DashboardPage = () => {
         </div>
 
         <div className="flex justify-between w-[85vw] mt-[8vh]">
-            <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Recent Income</h3>
+            <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Recent Income</h3>
+                </div>
+                <div className="flex flex-col w-[100%] h-[90%] rounded-lg overflow-y-scroll grow min-h-0">
+                    <IncomeList/>
+                </div>
             </div>
 
             <div className= "ml-8 w-[50vw] min-h-fit h-[40vh] border border-[#6d91e8] rounded-lg text-center bg-white/90">

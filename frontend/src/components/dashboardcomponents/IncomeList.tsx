@@ -15,7 +15,7 @@ interface PropsType
 }
 
 
-function setExpenses()
+function setIncome()
 {
     const today = new Date();
 
@@ -24,9 +24,9 @@ function setExpenses()
 
     let expenses = new Array<Item>();
 
-    for(var i = 0; i < parsedData.User.Expenses.length; i++) 
+    for (var i = 0; i < parsedData.User.Income.length; i++) 
     {
-        var counter = parsedData.User.Expenses[i];
+        var counter = parsedData.User.Income[i];
 
         // Ensures item is not in the future
         if(counter.InitialTime != undefined)
@@ -91,12 +91,12 @@ function GetDaySuffix(day:any)
 }
 
 
-function ExpensesList() 
+function IncomeList() 
 {
     const navigate = useNavigate();
 
     var props: PropsType = {
-        items: setExpenses(),
+        items: setIncome(),
         renderer: renderExpenseItem
     };
 
@@ -113,4 +113,4 @@ function ExpensesList()
         </ul>
     );
 }
-export default ExpensesList;
+export default IncomeList;
