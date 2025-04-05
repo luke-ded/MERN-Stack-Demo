@@ -14,7 +14,6 @@ interface PropsType
     renderer: (item: Item) => React.ReactNode;
 }
 
-
 function setExpenses()
 {
     const today = new Date();
@@ -65,7 +64,8 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
         <div>
             <div className="flex justify-between items-center">
                 <span className="text-white font-semibold text-md">{item.Name}</span>
-                <span className="text-gray-300 text-xs"> {daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
+                <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
+                daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
             </div>
         </div>
     );
