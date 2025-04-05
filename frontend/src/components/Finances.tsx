@@ -108,7 +108,7 @@ function Finances(){
 
         <div id = "finances">
             <div id = "income">
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Income</span>
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Income</span>
 
                 <br></br>
                 <br></br>

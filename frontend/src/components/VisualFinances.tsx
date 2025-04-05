@@ -116,7 +116,7 @@ function VisualFinances(){
     return(
         <div id = "visual">
             
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Expenses</span>
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Expenses</span>
 
                 <br></br>
                 <br></br>

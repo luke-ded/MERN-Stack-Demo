@@ -1,6 +1,7 @@
 import Finances from '../components/Finances.tsx';
 import NavBar from '../components/NavBar.tsx';
 import VisualFinances from '../components/VisualFinances.tsx';
+import Results from '../components/Results.tsx';
 import app from './App.module.css';
 import {useState} from 'react'
 
@@ -8,6 +9,7 @@ const FinancialsPage = () => {
 
   const [isFinanceBarClosed, setFinanceBar] = useState(false);
   const [isVisualBarClosed, setVisualBar] = useState(false);
+  const [isResultBarClosed, setResultBar] = useState(false);
 
   function closeFinanceBar(){ 
     const bar = document.getElementById("FinanceBar");
@@ -75,20 +77,57 @@ const FinancialsPage = () => {
 
   }
 
+  function openResultBar(){
+
+    const bar = document.getElementById("ResultsBar");
+    const result = document.getElementById("results");
+    const btn = document.getElementById(app.exitBtnR);
+
+    if (bar && result && btn){  
+      result.style.visibility = "visible";
+      bar.style.backgroundColor = "rgba(17,18,23, .9)";
+      bar.style.border = "1.5px solid #6d91e8";
+      btn.innerHTML = "&#10060;"
+      setResultBar(false);
+    }
+
+  }
+
+  function closeResultBar(){
+
+    const bar = document.getElementById("ResultsBar");
+    const result = document.getElementById("results");
+    const btn = document.getElementById(app.exitBtnR);
+    
+
+    if (bar && result && btn){  
+      result.style.visibility = "hidden";
+      bar.style.backgroundColor = "rgba(0,26, 51)";
+      bar.style.border = "none";
+      btn.innerHTML = "&#10010;"
+      setResultBar(true);
+    }
+  }
+
 
 
   return (
     <div className = "absolute top-0 left-0 h-full w-full bg-[rgba(0,26,51,1)]">
          <NavBar />
 
-         <div className = "block absolute top-1/2 left-2/7 w-[30%] h-[40%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id ="FinanceBar">
+         <div className = "block absolute top-2/7 left-2/7 w-[30%] h-[40%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id ="FinanceBar">
           <Finances />
           <button id = {app.exitBtn} onClick={() => {if(isFinanceBarClosed == false) {closeFinanceBar();} else {openFianceBar();}}}>&#10060;</button><br />
         </div>
 
-        <div className = "block absolute top-1/2 left-[70%] w-[30%] h-[50%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "VisualBar">
+        <div className = "block absolute top-1/3 left-[70%] w-[30%] h-[48%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "VisualBar">
           <VisualFinances />
           <button id = {app.exitBtnV} onClick = {() => {if(isVisualBarClosed == false) {closeVisualBar();} else {openVisualBar();}}}>&#10060;</button><br />
+        </div>
+
+        <div className = "block absolute top-3/4 left-2/7 w-[30%] h-[40%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "ResultsBar">
+          <Results />
+          <button id = {app.exitBtnR} onClick = {() => {if(isResultBarClosed == false) {closeResultBar();} else {openResultBar();}}}>&#10060;</button><br />
         </div>
     </div>
   );
