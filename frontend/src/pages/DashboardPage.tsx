@@ -6,80 +6,6 @@ import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import ExpensesList from '../components/dashboardcomponents/ExpensesList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
-const today = new Date();
-interface Item 
-{
-    key:string;
-    Name: string;
-    Date: any;
-}
-
-function setExpenses()
-{
-    var data = localStorage.getItem('user_data');
-    var parsedData = data ? JSON.parse(data) : null;
-
-    let expenses = new Array<Item>();
-
-    for (var i = 0; i < parsedData.User.Expenses.length; i++) 
-    {
-        let newItem:Item = {"Name":"", "Date":{"Month":1, "Day":1, "Year":2023}, "key":""};
-        var counter = parsedData.User.Expenses[i];
-
-        newItem.key = i.toString(); 
-        newItem.Name = counter.Name;
-
-        if(counter.InitialTime != undefined)
-            newItem.Date = counter.InitialTime;
-        else
-            newItem.Date = {"Month":1, "Day":1, "Year":2023};
-
-        expenses.push(newItem);
-    }
-    
-    expenses.sort((a, b) => Date.UTC(b.Date.Year, b.Date.Month - 1, b.Date.Day) 
-    - Date.UTC(a.Date.Year, a.Date.Month - 1, a.Date.Day));
-
-    return expenses.slice(0, 20); // Return most recent 10 items
-}
-
-// via https://stackoverflow.com/questions/2050805/getting-day-suffix-when-using-datetime-tostring
-function GetDaySuffix(day:any)
-{
-    switch (day)
-    {
-        case 1:
-        case 21:
-        case 31:
-            return "st";
-        case 2:
-        case 22:
-            return "nd";
-        case 3:
-        case 23:
-            return "rd";
-        default:
-            return "th";
-    }
-}
-
-const renderExpenseItem = (item: Item): React.ReactNode => 
-{
-    var months = [ "January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December" ];
-
-    let old = new Date(Date.UTC(item.Date.Year, item.Date.Month - 1, item.Date.Day));
-    let daysago = Math.floor((today.getTime() - old.getTime()) / 86400000);
-
-    return (
-        <div>
-            <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-md">{item.Name}</span>
-                <span className="text-gray-300 text-xs"> {daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
-            </div>
-        </div>
-    );
-};
 
 const DashboardPage = () => {
     const percentage = 60;
@@ -87,7 +13,6 @@ const DashboardPage = () => {
 
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
-    var expenses = setExpenses();
     
     return (
     <div className="flex flex-col absolute top-0 left-0 h-[300vh]">
@@ -148,7 +73,7 @@ const DashboardPage = () => {
                     <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Recent Expenses</h3>
                 </div>
                 <div className="flex flex-col w-[100%] h-[90%] rounded-lg overflow-y-scroll grow min-h-0">
-                    <ExpensesList items={expenses} renderer={renderExpenseItem} />
+                    <ExpensesList/>
                 </div>
             </div>
 
