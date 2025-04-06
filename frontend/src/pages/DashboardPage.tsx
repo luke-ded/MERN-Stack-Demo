@@ -28,12 +28,16 @@ const DashboardPage = () => {
 
         <div className="flex justify-between mt-[8vh]">
             <div className= "ml-8 w-[50vh] min-h-fit h-[60vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Expenses</h3>
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Expenses</h3>
+                </div>
                 <ExpenseChart />
             </div>
 
             <div className= "ml-8 w-[50vh] min-h-fit h-[60vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-            <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Income</h3>
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Income</h3>
+                </div>
                 <IncomeChart />
             </div>
 
@@ -93,11 +97,12 @@ const DashboardPage = () => {
             </div>
 
             <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <div className="flex w-[50vh%] absolute z-0">
-                    <GoalProgress />
-                        
+                <div className="flex w-[50vh] absolute z-0">
+                    <GoalProgress />    
                 </div>
-                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Reward</h3>
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Reward</h3>
+                </div>
                     
                 <div className='mt-10'>
                     <h5 style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 
