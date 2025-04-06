@@ -68,12 +68,15 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
                 <span className="text-white font-semibold text-md">${item.Amount}</span>
                 <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
                 daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
+                
+            </div>
+            <div className="flex justify-between items-center my-[1vh]">
+                <p className="text-white">{item.Name}</p>
                 <span>
-                    <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]">Edit </button>
-                    <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {deleteIncome}>Delete</button>
+                    <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer">Edit </button>
+                    <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer" onClick = {deleteIncome}>Delete</button>
                 </span>
             </div>
-            <p className="self-start text-white">{item.Name}</p>
         </div>
     );
 };
@@ -126,7 +129,7 @@ function Results(){
             <div className = "rounded-lg grow min-h-0">
                 <ul className="flex-none overflow-y-scroll shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2 h-[350px]"> 
                     {props.items.map((item) => {
-                    return <li className="px-[1vw] py-[1vh] cursor-pointer">{props.renderer(item)}</li>;
+                    return <li className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
                     })}
                 </ul>
             </div>
