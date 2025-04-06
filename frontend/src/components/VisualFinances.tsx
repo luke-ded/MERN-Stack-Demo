@@ -123,7 +123,7 @@ function VisualFinances(){
                 <br></br>
                 <br></br>
 
-                <h5 className="self-start ml-[10%] text-lg text-left">Amount</h5>
+                <h5 className="absolute top-[15%] self-start ml-[10%] text-lg text-left">Amount</h5>
                 <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "ExpNum"></input>
 
                 <br></br>
