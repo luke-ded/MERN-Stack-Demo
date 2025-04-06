@@ -5,8 +5,12 @@ function calcDebt(parsedData:any)
 {
     totalDebt = 0;
     totalMinPayments = 0;
+
+    if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0) 
+        return;
+
     const today = new Date();
-    console.log(parsedData.User.Debts.length);
+
     for (var i = 0; i < parsedData.User.Debts.length; i++) 
     {
         var counter = parsedData.User.Debts[i];
@@ -27,6 +31,10 @@ function calcDebt(parsedData:any)
 function calcIncome(parsedData:any)
 {
     totalIncome = 0;
+
+    if(parsedData.User.Income == undefined || parsedData.User.Income.length == 0) 
+        return;
+
     const today = new Date();
 
     for (var i = 0; i < parsedData.User.Income.length; i++) 
@@ -51,6 +59,10 @@ function calcIncome(parsedData:any)
 function calcExpenses(parsedData:any)
 {
     totalExpenses = 0;
+
+    if(parsedData.User.Expenses == undefined || parsedData.User.Expenses.length == 0) 
+        return;
+
     const today = new Date();
 
     for (var i = 0; i < parsedData.User.Expenses.length; i++) 
@@ -89,18 +101,18 @@ function StatList()
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Total Savings:</span>
                         {/*Change below to calculate actual savings once set up in database*/}
-                        <span className="font-semibold text-md" style = {{color: (parsedData.User.InitialAmount != 0) ? '#36eba6' :'#ff6384'}}> ${parsedData.User.InitialAmount.toFixed(2)}</span>
+                        <span className="font-semibold text-md" style = {{color: (parsedData.User.InitialAmount != 0) ? '#36eba6' :'#ff6384'}}> ${parsedData.User.InitialAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                     </div>
                 </div>
-                <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">~{Math.floor((500/parsedData.User.InitialAmount) * 100)}% of your savings on signup.</p>
+                <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">{parsedData.User.InitialAmount != 0 ? "~"+Math.floor((500/parsedData.User.InitialAmount) * 100) : "N/A"}% of your savings on signup.</p>
             </li>
             <li className="px-[1vw] py-[1vh] group hover:bg-white/10">
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Total Debt:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalDebt == 0) ? '#36eba6' :'#ff6384'}}> ${totalDebt.toFixed(2)}</span>
+                        <span className="font-semibold text-md" style = {{color: (totalDebt == 0) ? '#36eba6' :'#ff6384'}}> ${totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                     </div>
-                    <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">~{Math.floor((totalDebt/parsedData.User.InitialDebt) * 100)}% of your debt on signup.</p>
+                    <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">{parsedData.User.InitialDebt != 0 ? "~"+Math.floor((totalDebt/parsedData.User.InitialDebt) * 100) : "N/A"}% of your debt on signup.</p>
                 </div>
             </li>
 
@@ -108,7 +120,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Assets to Liabilities Ratio:</span>
-                        <p className="font-semibold text-md" style = {{color: (parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1) ? '#36eba6' :'#ff6384'}}>{parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1? parsedData.User.InitialAmount/parsedData.User.InitialDebt +':1' : 1 + ':' + 1/(parsedData.User.InitialAmount/parsedData.User.InitialDebt)}</p>
+                        <p className="font-semibold text-md" style = {{color: (parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1) ? '#36eba6' :'#ff6384'}}>{parsedData.User.InitialDebt != 0 ? parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1? parsedData.User.InitialAmount/parsedData.User.InitialDebt +':1' : 1 + ':' + 1/(parsedData.User.InitialAmount/parsedData.User.InitialDebt) : "N/A"}</p>
                     </div>
                 </div>
                 <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">Experts recommend between 3:1 and 5:1.</p>
@@ -118,7 +130,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Income this Month:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalIncome != 0) ? '#36eba6' :'#ff6384'}}> ${totalIncome.toFixed(2)}</span>
+                        <span className="font-semibold text-md" style = {{color: (totalIncome != 0) ? '#36eba6' :'#ff6384'}}> ${totalIncome.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                     </div>
                 </div>
                 {/*Update this so it is correct*/}
@@ -129,9 +141,9 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Expenses this Month:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalExpenses <= totalIncome) ? '#36eba6' :'#ff6384'}}> ${totalExpenses.toFixed(2)}</span>
+                        <span className="font-semibold text-md" style = {{color: (totalExpenses <= totalIncome) ? '#36eba6' :'#ff6384'}}> ${totalExpenses.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                     </div>
-                    <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">~{Math.floor((totalExpenses/totalIncome) * 100)}% of your income this month.</p>
+                    <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">{totalIncome > 0 ? "~" + Math.floor((totalExpenses/totalIncome) * 100) : "N?/A"}% of your income this month.</p>
                 </div>
             </li>
             
@@ -139,9 +151,9 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Debt Payments this Month:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${totalMinPayments.toFixed(2)}</span>
+                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${totalMinPayments.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                     </div>
-                    <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">~{Math.floor((totalMinPayments/totalIncome) * 100)}% of your income this month.</p>
+                    <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">{totalIncome > 0 ? "~" + Math.floor((totalMinPayments/totalIncome) * 100) : "N/A"}% of your income this month.</p>
                 </div>
             </li>
         </ul>

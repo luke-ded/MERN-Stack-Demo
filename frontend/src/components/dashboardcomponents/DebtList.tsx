@@ -68,11 +68,11 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
     return (
         <div>
             <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-md">${item.Amount.toFixed(2)}</span>
+                <span className="text-white font-semibold text-md">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                 <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
                 daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
             </div>
-            <p className="self-start text-white">{item.Name}, ${item.Monthly.toFixed(2)} / Mo</p>
+            <p className="self-start text-white">{item.Name}, ${item.Monthly.toLocaleString(undefined, {minimumFractionDigits: 2})} / Mo</p>
         </div>
     );
 };
