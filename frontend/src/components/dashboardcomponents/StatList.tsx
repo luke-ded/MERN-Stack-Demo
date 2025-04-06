@@ -143,7 +143,7 @@ function StatList()
                         <span className="text-white font-semibold text-md">Expenses this Month:</span>
                         <span className="font-semibold text-md" style = {{color: (totalExpenses <= totalIncome) ? '#36eba6' :'#ff6384'}}> ${totalExpenses.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                     </div>
-                    <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">{totalIncome > 0 ? "~" + Math.floor((totalExpenses/totalIncome) * 100) : "N?/A"}% of your income this month.</p>
+                    <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">{totalIncome > 0 ? "~" + Math.floor((totalExpenses/totalIncome) * 100) : "N/A"}% of your income this month.</p>
                 </div>
             </li>
             
