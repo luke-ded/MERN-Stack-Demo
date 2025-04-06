@@ -116,7 +116,9 @@ function VisualFinances(){
     return(
         <div id = "visual">
             
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Expenses</span>
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Expenses</span>
+                </div>
 
                 <br></br>
                 <br></br>
@@ -131,7 +133,7 @@ function VisualFinances(){
 
                 <br></br>
 
-                <div className = "absolute top-[40%] left-[12%]">
+                <div className = "absolute top-[46%] left-[10%]">
                     <label>
                         <input type="radio" name="radios" onClick = {setYes}></input>
                     Yes </label>

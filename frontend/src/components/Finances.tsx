@@ -108,7 +108,11 @@ function Finances(){
 
         <div id = "finances">
             <div id = "income">
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Income</span>
+
+
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Income</span>
+                </div>
 
                 <br></br>
                 <br></br>
@@ -123,7 +127,7 @@ function Finances(){
 
                 <br></br>
 
-                <div className = "absolute top-[50%] left-[12%]">
+                <div className = "absolute top-[55%] left-[10%]">
                     <label>
                         <input type="radio" name="radio" onClick = {setYes}></input>
                     Yes </label>
