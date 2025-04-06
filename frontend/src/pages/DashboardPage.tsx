@@ -15,7 +15,7 @@ const DashboardPage = () => {
 
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
-    console.log(localStorage.getItem('token'));
+    //console.log(localStorage.getItem('token'));
 
     return (
     <div className="flex flex-col absolute top-0 left-0 h-[300vh]">
