@@ -99,7 +99,7 @@ function ExpensesList()
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
 
-    if(parsedData.User.Expenses == undefined)
+    if(parsedData.User.Expenses == undefined || parsedData.User.Expenses.length == 0)
     {
         return(
             <div>

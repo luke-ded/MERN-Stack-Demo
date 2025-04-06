@@ -99,7 +99,7 @@ function IncomeList()
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
 
-    if(parsedData.User.Income == undefined)
+    if(parsedData.User.Income == undefined  || parsedData.User.Income.length == 0)
     {
         return(
             <div>

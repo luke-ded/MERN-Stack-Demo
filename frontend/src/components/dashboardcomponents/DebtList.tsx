@@ -102,12 +102,12 @@ function DebtList()
     var parsedData = data ? JSON.parse(data) : null;
 
     const navigate = useNavigate();
-    
-    if(parsedData.User.Debts == undefined)
+
+    if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0)
     {
         return(
-            <div>
-                <p className="mt-5">🥳 Congratulations! No debts to display. 🎉</p>
+            <div className="m-5">
+                <p className="m-2">🥳 Congratulations! No debts to display. 🎉</p>
                 <p className="mt-5 mb-5">When you signed up, you had ${parsedData.User.InitialDebt} of debt.</p>
                 <p className="inline">(If you haven't added your debts yet in the </p>
                 <p className="inline underline text-[#6d91e8] cursor-pointer" onClick={navFinancials}>financials pane</p>
