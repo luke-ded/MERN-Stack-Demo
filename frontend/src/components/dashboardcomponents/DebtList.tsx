@@ -7,6 +7,7 @@ interface Item
     Name: string;
     Date: any;
     Amount: any,
+    Monthly: any;
 }
 
 interface PropsType 
@@ -16,7 +17,7 @@ interface PropsType
 }
 
 
-function setIncome()
+function setDebt()
 {
     const today = new Date();
 
@@ -25,9 +26,9 @@ function setIncome()
 
     let expenses = new Array<Item>();
 
-    for (var i = 0; i < parsedData.User.Income.length; i++) 
+    for (var i = 0; i < parsedData.User.Debts.length; i++) 
     {
-        var counter = parsedData.User.Income[i];
+        var counter = parsedData.User.Debts[i];
 
         // Ensures item is not in the future
         if(counter.InitialTime != undefined)
@@ -41,14 +42,15 @@ function setIncome()
             key: i.toString(),
             Name: counter.Name, 
             Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-            Amount: counter.Amount
+            Amount: counter.Amount,
+            Monthly: counter.Monthly
         };
 
         expenses.push(newItem);
     }
     
-    expenses.sort((a, b) => Date.UTC(b.Date.Year, b.Date.Month - 1, b.Date.Day) 
-    - Date.UTC(a.Date.Year, a.Date.Month - 1, a.Date.Day));
+    expenses.sort((a, b) => a.Amount == b.Amount ? Date.UTC(b.Date.Year, b.Date.Month - 1, b.Date.Day) 
+    - Date.UTC(a.Date.Year, a.Date.Month - 1, a.Date.Day) : b.Amount - a.Amount);
 
     return expenses.slice(0, 20); // Return most recent 10 items
 }
@@ -66,11 +68,11 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
     return (
         <div>
             <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-md">${item.Amount}</span>
+                <span className="text-white font-semibold text-md">${item.Amount.toFixed(2)}</span>
                 <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
                 daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
             </div>
-            <p className="self-start text-white">{item.Name}</p>
+            <p className="self-start text-white">{item.Name}, ${item.Monthly.toFixed(2)} / Mo</p>
         </div>
     );
 };
@@ -94,12 +96,12 @@ function GetDaySuffix(day:any)
     }
 }
 
-function IncomeList() 
+function DebtList() 
 {
     const navigate = useNavigate();
 
     var props: PropsType = {
-        items: setIncome(),
+        items: setDebt(),
         renderer: renderExpenseItem
     };
 
@@ -117,4 +119,4 @@ function IncomeList()
     );
 }
 
-export default IncomeList;
+export default DebtList;

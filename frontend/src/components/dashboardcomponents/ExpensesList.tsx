@@ -109,7 +109,7 @@ function ExpensesList()
     }
 
     return (
-        <ul className="shadow divide-y divide-[#7f8fb5] max-w-sm min-h-0 border-b border-[#6d91e8]">
+        <ul className="shadow divide-y divide-[#7f8fb5] min-h-0 border-b border-[#6d91e8]">
         {props.items.map((item) => {
             return <li onClick={navFinancials} className="px-[1vw] py-[1vh] cursor-pointer">{props.renderer(item)}</li>;
         })}

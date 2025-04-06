@@ -5,6 +5,7 @@ import ExpensesLineChart from '../components/dashboardcomponents/ExpensesLineCha
 import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import ExpensesList from '../components/dashboardcomponents/ExpensesList.tsx';
 import IncomeList from '../components/dashboardcomponents/IncomeList.tsx';
+import DebtList from '../components/dashboardcomponents/DebtList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
 
@@ -14,7 +15,8 @@ const DashboardPage = () => {
 
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
-    
+    console.log(localStorage.getItem('token'));
+
     return (
     <div className="flex flex-col absolute top-0 left-0 h-[300vh]">
         <NavBar />
@@ -51,6 +53,11 @@ const DashboardPage = () => {
 
                     <div className = "flex justify-between mr-4">
                         <p>Spending this month:</p>
+                        <p></p>
+                    </div>
+
+                    <div className = "flex justify-between mr-4">
+                        <p>Monthly min payments:</p>
                         <p></p>
                     </div>
 
@@ -120,9 +127,13 @@ const DashboardPage = () => {
                 </div>
             </div>
 
-            <div className= "w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Top Debts</h3>
-                    
+            <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Top Debts</h3>
+                </div>
+                <div className="flex flex-col w-[100%] h-[90%] rounded-lg overflow-y-scroll grow min-h-0">
+                    <DebtList/>
+                </div>
             </div>
         </div>
     </div>
