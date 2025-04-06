@@ -114,6 +114,15 @@ const DashboardPage = () => {
         
 
         <div className="flex justify-between w-[85vw] mt-[8vh]">
+            <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Top Debts</h3>
+                </div>
+                <div className="flex flex-col w-[100%] h-[90%] rounded-lg overflow-y-scroll grow min-h-0">
+                    <DebtList/>
+                </div>
+            </div>
+
             <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
                 <div className="flex w-[50vh%] absolute z-0">
                     <GoalProgress />
@@ -127,14 +136,6 @@ const DashboardPage = () => {
                 </div>
             </div>
 
-            <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
-                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Top Debts</h3>
-                </div>
-                <div className="flex flex-col w-[100%] h-[90%] rounded-lg overflow-y-scroll grow min-h-0">
-                    <DebtList/>
-                </div>
-            </div>
         </div>
     </div>
     );
