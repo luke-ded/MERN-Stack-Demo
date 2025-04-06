@@ -21,6 +21,12 @@ const DashboardPage = () => {
     <div className="flex flex-col absolute top-0 left-0 h-[300vh]">
         <NavBar />
 
+        <div className="w-[10vw] min-h-fit h-[90vh] border border-[#6d91e8] rounded-lg text-center bg-[rgba(17,18,23,.9)] fixed top-[8vh] right-8">
+            <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Depth</h3>
+            <p className="mt-10 m-2">(replace this with a graphic designed depth meter)</p>
+            <p className='mt-5 m-2'>should this be fixed like it is now, or extend way down the entire page and be scrollable?</p>
+        </div>
+
         <div className="flex justify-between mt-[8vh]">
             <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Expenses</h3>
@@ -91,10 +97,6 @@ const DashboardPage = () => {
             </div>
         </div>
 
-        <div className="w-[10vw] min-h-fit h-[90vh] border border-[#6d91e8] rounded-lg text-center bg-[rgba(17,18,23,.9)] fixed top-[8vh] right-8">
-            <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Depth</h3>
-            <p className="mt-10 m-2">(replace this with a graphic designed depth meter)</p>
-        </div>
 
         <div className="flex justify-between w-[85vw] mt-[8vh]">
             <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
