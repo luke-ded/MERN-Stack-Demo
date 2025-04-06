@@ -93,7 +93,7 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
                 <p className="text-white">{item.Name}</p>
                 <span>
                     <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer">Edit </button>
-                    <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {(e) => {deleteIncome(item, event).then(() => {setInfo().then(() => refreshIncomeList());});}}>Delete</button>
+                    <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {deleteIncome(item, event).then(() => {setInfo().then(() => refreshIncomeList());});}}>Delete</button>
                 </span>
             </div>
         </div>
