@@ -38,12 +38,12 @@ const DashboardPage = () => {
                 <div className="mt-4 ml-4 text-left font-[Lucida Sans]">
                     <div className = "flex justify-between mr-4">
                         <p className="text-[#ff6384]">Total Debt: </p> {/*Change to calculate total*/}
-                        <p className="text-[#ff6384]"> ${parsedData.User.InitialDebt}</p>
+                        <p className="text-[#ff6384]"> ${parsedData.User.InitialDebt.toFixed(2)}</p>
                     </div>
                     
                     <div className = "flex justify-between mr-4">
                         <p className="text-[#36eba6]">Total savings: </p> {/*Change to calculate total*/}
-                        <p className="text-[#36eba6]"> ${parsedData.User.InitialAmount}</p>
+                        <p className="text-[#36eba6]"> ${parsedData.User.InitialAmount.toFixed(2)}</p>
                     </div>
 
                     <div className = "flex justify-between mr-4">

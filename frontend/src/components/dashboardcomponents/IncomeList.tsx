@@ -66,7 +66,7 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
     return (
         <div>
             <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-md">${item.Amount}</span>
+                <span className="text-white font-semibold text-md">${item.Amount.toFixed(2)}</span>
                 <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
                 daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
             </div>
@@ -96,6 +96,19 @@ function GetDaySuffix(day:any)
 
 function IncomeList() 
 {
+    var data = localStorage.getItem('user_data');
+    var parsedData = data ? JSON.parse(data) : null;
+
+    if(parsedData.User.Income == undefined)
+    {
+        return(
+            <div>
+                <p className="mt-5">Looks like you need to get your money up.</p>
+                <p className="mt-5">Jobless much? 🤨</p>
+            </div>
+        );
+    }
+
     const navigate = useNavigate();
 
     var props: PropsType = {

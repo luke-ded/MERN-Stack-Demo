@@ -98,7 +98,25 @@ function GetDaySuffix(day:any)
 
 function DebtList() 
 {
+    var data = localStorage.getItem('user_data');
+    var parsedData = data ? JSON.parse(data) : null;
+
     const navigate = useNavigate();
+    
+    if(parsedData.User.Debts == undefined)
+    {
+        return(
+            <div>
+                <p className="mt-5">🥳 Congratulations! No debts to display. 🎉</p>
+                <p className="mt-5 mb-5">When you signed up, you had ${parsedData.User.InitialDebt} of debt.</p>
+                <p className="inline">(If you haven't added your debts yet in the </p>
+                <p className="inline underline text-[#6d91e8] cursor-pointer" onClick={navFinancials}>financials pane</p>
+                <p className="inline">, you should)</p>
+            </div>
+        );
+    }
+
+    
 
     var props: PropsType = {
         items: setDebt(),
