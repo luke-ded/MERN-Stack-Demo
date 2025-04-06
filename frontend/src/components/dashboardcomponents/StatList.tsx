@@ -20,7 +20,6 @@ function calcDebt(parsedData:any)
         }
 
         totalDebt += counter.Amount;
-        console.log(counter.Amount);
         totalMinPayments += counter.Monthly;
     }
 }
@@ -136,10 +135,12 @@ function StatList()
             <li className="px-[1vw] py-[1vh]">
                 <div>
                     <div className="flex justify-between items-center">
-                        <span className="text-white font-semibold text-md">Total Min Payments / Mo:</span>
+                        <span className="text-white font-semibold text-md">Debt Payments this Month:</span>
                         <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${totalMinPayments.toFixed(2)}</span>
                     </div>
-                    <p>(~{Math.floor((totalMinPayments/totalIncome) * 100)}% of your income this month.)</p>
+                    <div className="group">
+                    <p >(~{Math.floor((totalMinPayments/totalIncome) * 100)}% of your income this month.)</p>
+                    </div>
                 </div>
             </li>
         </ul>
