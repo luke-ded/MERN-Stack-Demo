@@ -1,5 +1,3 @@
-import { parse } from "dotenv";
-
 var totalDebt = 0, totalMinPayments = 0;
 var totalIncome = 0, totalExpenses = 0;
 
