@@ -40,7 +40,22 @@ function ParseData()
   return datapts; // Change to datapoints
 }
 
-function IncomeLineChart() {
+function IncomeLineChart() 
+{
+  var datap = localStorage.getItem('user_data');
+  var parsedData = datap ? JSON.parse(datap) : null;
+
+  if(parsedData.User.Income == undefined  || parsedData.User.Income.length == 0)
+  {
+      return(
+          <div className="p-5 text-black">
+              <p className="mt-5">Looks like you need to get your money up.</p>
+              <p className="mt-5">Jobless much? 🤨</p>
+
+          </div>
+      );
+  }
+
   var dataset = ParseData();
   const data = {
     labels: [

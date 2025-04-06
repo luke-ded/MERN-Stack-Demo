@@ -40,7 +40,20 @@ function ParseData()
   return datapts; // Change to datapoints
 }
 
-function IncomeLineChart() {
+function ExpensesLineChart() 
+{
+  var datap = localStorage.getItem('user_data');
+  var parsedData = datap ? JSON.parse(datap) : null;
+
+  if(parsedData.User.Expenses == undefined || parsedData.User.Expenses.length == 0)
+  {
+      return(
+          <div className="p-5 text-black">
+              <p className="mt-5">Looks like you haven't spent anything yet! No expenses to display.</p>
+          </div>
+      );
+  }
+
   var dataset = ParseData();
   const data = {
     labels: [
@@ -90,4 +103,4 @@ function IncomeLineChart() {
   );
 };
 
-export default IncomeLineChart;
+export default ExpensesLineChart;

@@ -46,7 +46,20 @@ function ParseData()
   return datapts;
 }
 
-function ExpenseChart() {
+function ExpenseChart() 
+{
+  var datap = localStorage.getItem('user_data');
+  var parsedData = datap ? JSON.parse(datap) : null;
+
+  if(parsedData.User.Expenses == undefined || parsedData.User.Expenses.length == 0)
+  {
+      return(
+          <div className="p-5">
+              <p className="mt-5">Looks like you haven't spent anything yet! No expenses to display.</p>
+          </div>
+      );
+  }
+
   const data = {
     labels: ParseLabels(),
     datasets: [{
