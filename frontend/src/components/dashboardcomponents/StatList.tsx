@@ -122,7 +122,7 @@ function StatList()
                     </div>
                 </div>
                 {/*Update this so it is correct*/}
-                <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">200% of last month.</p>
+                <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">~200% of your income last month.</p>
             </li>
 
             <li className="px-[1vw] py-[1vh] group hover:bg-white/10">
