@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import ReactDOM from 'react-dom/client';
 
 interface Item 
 {
@@ -36,6 +36,8 @@ function refreshExpenseList() {
         
     ));
 
+
+    ReactDOM.createRoot(container).render(<>{listItems}</>);
    
     return;
 }
