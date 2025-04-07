@@ -108,7 +108,7 @@ function DebtList()
         return(
             <div className="text-white m-5">
                 <p className="m-2">🥳 Congratulations! No debts to display. 🎉</p>
-                <p className="mt-5 mb-5">When you signed up, you had ${parsedData.User.InitialDebt} of debt.</p>
+                <p className="mt-5 mb-5">When you signed up, you had ${parsedData.User.InitialDebt.toLocaleString(undefined, {minimumFractionDigits: 2})} of debt.</p>
                 <p className="inline">(If you haven't added your debts yet in the </p>
                 <p className="inline underline text-[#6d91e8] cursor-pointer" onClick={navFinancials}>financials pane</p>
                 <p className="inline">, you should)</p>
