@@ -1,6 +1,5 @@
 import * as React from "react";
-import ReactDOM from 'react-dom/client';
-import { useNavigate } from 'react-router-dom';
+
 
 interface Item 
 {
