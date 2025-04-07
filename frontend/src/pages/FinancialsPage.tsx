@@ -2,6 +2,7 @@ import Finances from '../components/Finances.tsx';
 import NavBar from '../components/NavBar.tsx';
 import VisualFinances from '../components/VisualFinances.tsx';
 import Results from '../components/Results.tsx';
+import Expresults from '../components/ExpResults.tsx';
 import app from './App.module.css';
 import {useState} from 'react'
 
@@ -10,6 +11,7 @@ const FinancialsPage = () => {
   const [isFinanceBarClosed, setFinanceBar] = useState(false);
   const [isVisualBarClosed, setVisualBar] = useState(false);
   const [isResultBarClosed, setResultBar] = useState(false);
+  const [isExpenBarClosed, setExpenBar] = useState(false);
 
   function closeFinanceBar(){ 
     const bar = document.getElementById("FinanceBar");
@@ -109,6 +111,38 @@ const FinancialsPage = () => {
     }
   }
 
+  function openExpBar(){
+
+    const bar = document.getElementById("ExpResultsBar");
+    const result = document.getElementById("ExpRes");
+    const btn = document.getElementById(app.exitBtnE);
+
+    if (bar && result && btn){  
+      result.style.visibility = "visible";
+      bar.style.backgroundColor = "rgba(17,18,23, .9)";
+      bar.style.border = "1.5px solid #6d91e8";
+      btn.innerHTML = "&#10060;"
+      setExpenBar(false);
+    }
+
+  }
+
+  function closeExpBar(){
+
+    const bar = document.getElementById("ExpResultsBar");
+    const result = document.getElementById("ExpRes");
+    const btn = document.getElementById(app.exitBtnE);
+    
+
+    if (bar && result && btn){  
+      result.style.visibility = "hidden";
+      bar.style.backgroundColor = "rgba(0,26, 51)";
+      bar.style.border = "none";
+      btn.innerHTML = "&#10010;"
+      setExpenBar(true);
+    }
+  }
+
 
 
   return (
@@ -128,6 +162,11 @@ const FinancialsPage = () => {
         <div className = "block absolute top-3/4 left-2/7 w-[30%] h-[40%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "ResultsBar">
           <Results />
           <button id = {app.exitBtnR} onClick = {() => {if(isResultBarClosed == false) {closeResultBar();} else {openResultBar();}}}>&#10060;</button><br />
+        </div>
+
+        <div className = "block absolute top-[76%] left-[70%] w-[30%] h-[43%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "ExpResultsBar">
+            <Expresults />
+            <button id = {app.exitBtnE} onClick = {() => {if(isExpenBarClosed == false) {closeExpBar();} else {openExpBar();}}}>&#10060;</button><br />
         </div>
     </div>
   );
