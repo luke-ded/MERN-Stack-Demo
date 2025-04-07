@@ -15,6 +15,33 @@ interface PropsType
     renderer: (item: Item) => React.ReactNode;
 }
 
+function displayDModal(item: Item) {
+
+    
+    const container = document.getElementById("listss");
+    if (!container) return;
+
+
+    const root = ReactDOM.createRoot(container);
+    root.render(
+    <>
+
+        <div>
+            <div className="flex h-[10%] items-center justify-center">
+
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Do you want to delete this Expense?</span>
+
+            </div>
+
+            <div>
+                <button className = "rounded-sm absolute left-[35%] top-[50%] inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {deleteExpense(item, event).then(() => {setInfo().then(() => refreshExpenseList());});}}> Confirm</button>
+                <button className = "rounded-sm absolute right-[35%] top-[50%] inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshExpenseList}> Cancel</button>
+            </div>
+
+        </div>
+
+    </>);
+}
 
 
 function refreshExpenseList() {
@@ -101,7 +128,7 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
                 <p className="text-white">{item.Name}</p>
                 <span>
                     <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer">Edit </button>
-                    <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {deleteExpense(item, event).then(() => {setInfo().then(() => refreshExpenseList());});}}>Delete</button>
+                    <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {() => displayDModal(item)}}>Delete</button>
                 </span>
             </div>
 
