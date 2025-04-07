@@ -31,7 +31,7 @@ const OnboardPage = () => {
             set.style.visibility = "visible";
     }
 
-    function closeSet()
+    function closeSet(event:any)
     {
         setSetClosed(!isSetClosed);
 
@@ -65,7 +65,7 @@ const OnboardPage = () => {
             alertMessage.style.visibility = "hidden";
 
         // API call
-        AddInitial;
+        AddInitial(event);
 
         var set = document.getElementById("set");
 
@@ -82,27 +82,61 @@ const OnboardPage = () => {
     {
         event.preventDefault();
         var obj = {
-            InitialDebt: (document.getElementById("debt") as HTMLInputElement).value,
-            InitalAmount: (document.getElementById("savings") as HTMLInputElement).value,
+            InitialDebt: parseFloat((document.getElementById("debt") as HTMLInputElement).value),
+            InitialAmount: parseFloat((document.getElementById("savings") as HTMLInputElement).value),
         };
         var js = JSON.stringify(obj);
-        try {
+        try 
+        {
             const response = await fetch('http://salvagefinancial.xyz:5000/api/AddInitial',
             {method:'POST', body: js, headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`}});
             var res = JSON.parse(await response.text());
-        if (res.Result == "Could not find user to add initial debt and amount to") 
-        { // Change this
+
+            if (res.Result == "Could not find user to add initial debt and amount to") 
+            { // Change this
+                console.log("Error in API call");
+            } else {
+                setInfo();
+            }
+        } 
+        catch (error: any) 
+        {
+            alert(error.toString());
             return;
-        } else {
-            
-        }
-        } catch (error: any) {
-        alert(error.toString());
-        return;
         }   
 
         event.preventDefault();
     }
+
+    async function setInfo() : Promise<void>
+      {
+        const data = localStorage.getItem('user_data');
+        const parsedData = data ? JSON.parse(data) : null;
+        //console.log(parsedData.token);
+        localStorage.setItem('token', parsedData.token);
+        //var obj = {token:parsedData.token};
+        //var js = JSON.stringify(obj);
+        try
+        {
+          const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
+          {method:'POST', headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${parsedData.token}`}});
+          var res = JSON.parse(await response.text());
+          if( res.Result == "invalid token")
+          {
+            console.log("FAILED IN SETINFO FUNCTION");
+          }
+          else
+          {
+            //console.log(JSON.stringify(res));
+            localStorage.setItem('user_data', JSON.stringify(res));
+          }
+        }
+        catch(error:any)
+        {
+            alert(error.toString());
+            return;
+        }
+      }
 
     return (
         <div className="flex flex-col absolute top-0 left-0 items-center">
@@ -149,7 +183,7 @@ const OnboardPage = () => {
                 <br />
                 
                 <p className="self-start ml-[10%] mr-[10%] text-lg">Now, you will enter your individual debts and savings accounts. View the instructional
-                    videos below and then clock "continue" to proceed to the financials page to add the information.
+                    videos below and then click "continue" to proceed to the financials page to add the information.
                 </p>
                 <br />
 

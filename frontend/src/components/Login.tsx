@@ -63,14 +63,12 @@ function Login() {
 
           await setInfo();
 
-          /* if(res.FirstTime) // Needs to be added to database
-          {
-            res.FirstTime = 0; // Needs to be changed in API as well at some point
-            navOnboard();
-          }
-          else
-            navDashboard(); */
+          const data = localStorage.getItem('user_data');
+          const parsedData = data ? JSON.parse(data) : null;
 
+          if(parsedData.User.InitialAmount == undefined)
+            navOnboard();
+          else
             navDashboard();
         }
       }
@@ -123,10 +121,10 @@ function Login() {
     navigate('/dashboard');
   }
 
-/*   function navOnboard()
+  function navOnboard()
   {
     navigate('/onboard');
-  } */
+  }
 
   function showPasswordHandler()
   {
