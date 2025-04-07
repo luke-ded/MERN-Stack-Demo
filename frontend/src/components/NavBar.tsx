@@ -48,7 +48,7 @@ const NavBar = () => {
   }
   
   // Not logged in
-  if(location.pathname == '/' || location.pathname == '/signup' || location.pathname == '/login' || location.pathname == '/forgot' || location.pathname == '/reset')
+  if(localStorage.getItem('user_data') == null)
     return (
     <div className="flex h-[6.5vh] max-w-screen w-screen bg-black/60 fixed top-0 left-0 border-b border-[#6d91e8] items-center justify-between shrink-1">
       <div className="flex items-center">
