@@ -220,8 +220,26 @@ async function setInfo() : Promise<void>
   }
 
 
-function Results(){
+function Results()
+{
+    var data = localStorage.getItem('user_data');
+    var parsedData = data ? JSON.parse(data) : null;
 
+    if(parsedData.User.Income == undefined  || parsedData.User.Income.length == 0)
+    {
+        return(
+            <div id = "results">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Income</span>
+                </div>
+
+                <div className="text-white p-5">
+                    <p className="mt-5">Looks like you need to get your money up.</p>
+                    <p className="mt-5">Jobless much? 🤨</p>
+                </div>
+            </div>
+        );
+    }
      
     var props: PropsType = {
         items: setIncome(),

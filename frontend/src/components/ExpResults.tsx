@@ -229,10 +229,26 @@ async function setInfo() : Promise<void>
   }
 
 
-function ExpResults(){
+function ExpResults()
+{
+    var data = localStorage.getItem('user_data');
+    var parsedData = data ? JSON.parse(data) : null;
 
-    
+    if(parsedData.User.Expenses == undefined || parsedData.User.Expenses.length == 0)
+    {
+        return(
+            <div id = "ExpRes">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Expenses</span>
+                </div>
 
+                <div className="text-white p-5">
+                    <p className="mt-5">Looks like you haven't spent anything yet! No expenses to display.</p>
+                </div>
+            </div>
+        );
+    }
+  
 
     var props: PropsType = {
         items: setExpenses(),
