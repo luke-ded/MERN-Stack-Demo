@@ -166,10 +166,10 @@ async function deleteExpense(item: Item, event: any) : Promise<void>{
     var index = 0;
     const today = new Date();
 
-    for (var i = 0; i < parsedData.User.Income.length; i++) 
+    for (var i = 0; i < parsedData.User.Expenses.length; i++) 
     {
     
-        var counter = parsedData.User.Income[i];
+        var counter = parsedData.User.Expenses[i];
 
         
         if(counter.InitialTime != undefined)
