@@ -139,7 +139,7 @@ const OnboardPage = () => {
       }
 
     return (
-        <div className="flex flex-col absolute top-0 left-0 items-center">
+        <div className="flex flex-col text-white absolute top-0 left-0 items-center">
             <NavBar />
 
             <div id="welcome" className="w-[60%] h-fit mt-[20vh] border border-[#6d91e8] rounded-lg  bg-[rgba(17,18,23,.9)] p-5">
@@ -167,10 +167,21 @@ const OnboardPage = () => {
                 </p>
                 <br />
                 <h5 className="self-start ml-[10%] text-lg">Total Inital Debt</h5>
-                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="debt" placeholder="Initial Debt" />
+                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="debt" placeholder="Initial Debt" onKeyUp={(e) => {
+                    if (e.key === "Enter") 
+                    {
+                      var next = document.getElementById("savings") as HTMLInputElement;
+                      next.focus();
+                    }
+                  }}/>
                 <br />
                 <h5 className="self-start ml-[10%] text-lg">Total Initial Savings</h5>
-                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" id="savings" placeholder="Initial Savings" />
+                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="savings" placeholder="Initial Savings" onKeyUp={(e) => {
+                    if (e.key === "Enter") 
+                    {
+                      closeSet(e);
+                    }
+                  }}/>
                 <br />
 
                 <h5 className="mb-1" id="alertmessage" style={{visibility:"hidden"}}></h5>
