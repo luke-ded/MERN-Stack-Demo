@@ -106,7 +106,7 @@ function DebtList()
     if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0)
     {
         return(
-            <div className="m-5">
+            <div className="text-white m-5">
                 <p className="m-2">🥳 Congratulations! No debts to display. 🎉</p>
                 <p className="mt-5 mb-5">When you signed up, you had ${parsedData.User.InitialDebt} of debt.</p>
                 <p className="inline">(If you haven't added your debts yet in the </p>

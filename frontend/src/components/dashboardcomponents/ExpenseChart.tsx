@@ -54,7 +54,7 @@ function ExpenseChart()
   if(parsedData.User.Expenses == undefined || parsedData.User.Expenses.length == 0)
   {
       return(
-          <div className="p-5">
+          <div className="text-white p-5">
               <p className="mt-5">Looks like you haven't spent anything yet! No expenses to display.</p>
           </div>
       );
