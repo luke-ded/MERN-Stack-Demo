@@ -35,7 +35,7 @@ function displayDModal(item: Item) {
 
             <div>
                 <button className = "rounded-sm absolute left-[35%] top-[50%] inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {deleteIncome(item, event).then(() => {setInfo().then(() => refreshIncomeList());});}}> Confirm</button>
-                <button className = "rounded-sm absolute right-[35%] top-[50%] inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={() => {refreshIncomeList}}> Cancel</button>
+                <button className = "rounded-sm absolute right-[35%] top-[50%] inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {refreshIncomeList}> Cancel</button>
             </div>
 
         </div>
