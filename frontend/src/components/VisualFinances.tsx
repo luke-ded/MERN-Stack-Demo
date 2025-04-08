@@ -19,48 +19,30 @@ function VisualFinances(){
     }
 
     async function addExpense(event: any): Promise<void>{
+        
         const valAmount = (document.getElementById("ExpNum") as HTMLInputElement).value;
+        const userName = (document.getElementById("ExpName") as HTMLInputElement).value;
         const Category =  (document.getElementById("ExpCat") as HTMLInputElement).value;
+        const date = (document.getElementById("Expdate") as HTMLInputElement).value;
         const alertMessage = document.getElementById("alertMessage");
         
 
         if (alertMessage) {
-            if (valAmount.length == 0){
-
-                alertMessage.innerText = "No amount is entered";
+            if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || isButtonClicked == false){
+                alertMessage.innerText = "Please Complete all the fields";
                 alertMessage.style.visibility = "visible";
                 return;
-
-            } else if (isButtonClicked == false) {
-
-                alertMessage.innerText = "Please specify if it's recurring";
-                alertMessage.style.visibility = "visible";
-                return;
-
-            } else if (Category.length == 0){
-
-                alertMessage.innerText = "Please specify the category";
-                alertMessage.style.visibility = "visible";
-                return;
-
-            } else {
-
-                alertMessage.style.visibility = "hidden";
-
-            }
+            } 
         }
-
-        const data = localStorage.getItem('user_data');
-        const parsedData = data ? JSON.parse(data) : null;
+       
         const token = localStorage.getItem('token');
-
-        const FirstName = parsedData.User.FName;
-        const LastName = parsedData.User.LName;
-        const userName = FirstName + " " + LastName;
 
         const Amount = parseInt(valAmount);
         const IfRecurring = isRecurring;
-        var InitialTime = JSON.stringify({Month: new Date().toLocaleString('default', { month: 'long' }), Day: new Date().getDate(), Year: new Date().getFullYear()});
+        
+        const [month, day, year] = date.split("/");
+        const InitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
+
 
         event.preventDefault();
         var obj = {Name: userName, Amount: Amount, Category: Category ,IfRecurring: IfRecurring, InitialTime: InitialTime};
@@ -120,20 +102,25 @@ function VisualFinances(){
                     <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Expenses</span>
                 </div>
 
-                <br></br>
-                <br></br>
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Name" id = "ExpName"></input>
 
-                <h5 className="absolute top-[15%] self-start ml-[10%] text-lg text-left">Amount</h5>
-                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "ExpNum"></input>
+                 <br></br>
+            
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "ExpNum"></input>
 
                 <br></br>
-                <br></br>
+            
+
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "Expdate"></input>
 
                 <h5 className="self-start ml-[10%] text-lg text-left">Is The Expense Recurring?</h5>
 
                 <br></br>
 
-                <div className = "absolute top-[46%] left-[10%]">
+                <div className = "absolute top-[55%] left-[10%]">
                     <label>
                         <input type="radio" name="radios" onClick = {setYes}></input>
                     Yes </label>
@@ -144,12 +131,13 @@ function VisualFinances(){
                     No </label>  
                 </div>
 
-                <h5 className="self-start ml-[10%] mt-[3%] text-lg text-left">Category</h5>
-                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
 
                 <h5 className="mt-3" id="alertMessage"></h5>
 
-                <button id = "ExpenseAdd" className = "rounded-sm inline-block absolute top-[80%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpense}>Add Expense</button>
+                <button id = "ExpenseAdd" className = "rounded-sm inline-block absolute top-[85%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpense}>Add Expense</button>
+                
         </div>
     );
 }
