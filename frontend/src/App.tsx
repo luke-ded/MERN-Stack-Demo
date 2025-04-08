@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage.tsx';
 import ForgotPage from './pages/ForgotPage.tsx';
 import FinancialsPage from './pages/FinancialsPage.tsx';
 import DashboardPage from './pages/DashboardPage.tsx';
+import DebtPage from './pages/DebtPage.tsx';
 import OnboardPage from './pages/OnboardPage.tsx';
 
 const isLoggedIn = () => 
@@ -29,6 +30,7 @@ function App()
         <Route path="/forgot" element = {<ForgotPage />} />
         <Route path="/financials" element = {<PrivateRoute> <FinancialsPage /> </PrivateRoute>} />
         <Route path="/dashboard" element = {<PrivateRoute> <DashboardPage /> </PrivateRoute>} />
+        <Route path="/debt" element = {<PrivateRoute> <DebtPage /> </PrivateRoute>} />
         <Route path="/onboard" element = {<PrivateRoute> <OnboardPage /> </PrivateRoute>} />
         <Route path="*" element={<HomePage />} /> {/* default */}
       </Routes>
