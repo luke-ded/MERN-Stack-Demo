@@ -370,7 +370,7 @@ async function editIncome(item: Item, date: string, isRecurring: boolean, event:
         if (res.Result == "Edited income of user") {
 
             await setInfo();
-            console.log("Deleted " + index);
+            console.log("Edited " + index);
             return;
         } else if (res.Result == "Could not find user to edit income"){
             console.log(res.Result);

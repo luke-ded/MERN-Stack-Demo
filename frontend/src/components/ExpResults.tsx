@@ -57,7 +57,8 @@ function displayDModal(item: Item) {
 
 function displayEModal(item: Item) {
 
-    
+    var isRecurring = false;
+    var isButtonClicked = false;
     var date = item.Date.Month  + "/" + item.Date.Day + "/" + item.Date.Year;
     const container = document.getElementById("listss");
     if (!container) return;
@@ -97,17 +98,17 @@ function displayEModal(item: Item) {
 
                 <div className = "absolute top-[76%] right-[14%]">
                     <label>
-                        <input type="radio" name="radios"></input>
+                        <input type="radio" name="radios" onClick = {()=> {isRecurring = true; isButtonClicked = true}}></input>
                     Yes </label>
                     
 
                     <label>
-                        <input type="radio" name="radios"></input>
+                        <input type="radio" name="radios" onClick = {()=> {isRecurring = false; isButtonClicked = true}}></input>
                     No </label>  
                 </div>
 
 
-                <button id = "EditIncome" className = "fixed left-[29%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]">Edit Expense</button>
+                <button id = "EditIncome" className = "fixed left-[29%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={() => {if(isButtonClicked){editExpenses(item, date, isRecurring, event).then(() => {setInfo().then(() => refreshExpenseList());});} else{return}}}>Edit Expense</button>
                 <button className = "fixed right-[31%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshExpenseList}> Cancel</button>
 
         </div>
@@ -298,6 +299,107 @@ async function deleteExpense(item: Item, event: any) : Promise<void>{
         alert(error.toString());
         return;
     }
+
+}
+
+async function editExpenses(item: Item, date: string, isRecurring: boolean, event: any) : Promise<void>
+{
+
+    var data = localStorage.getItem('user_data');
+    var parsedData = data ? JSON.parse(data) : null;
+    var category = "";
+    console.log(parsedData);
+    const token = localStorage.getItem('token');
+
+    var index = 0;
+    const today = new Date();
+
+    for (var i = 0; i < parsedData.User.Expenses.length; i++) 
+    {
+    
+        var counter = parsedData.User.Expenses[i];
+
+        
+        if(counter.InitialTime != undefined)
+        {
+            let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+            if((today.getTime() - old.getTime()) < 0)
+                continue;
+        }
+
+        let newItem: Item = {
+            key: i.toString(),
+            Name: counter.Name, 
+            Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+            Amount: counter.Amount
+        };
+
+
+        if ((item.key === newItem.key) && (item.Name === newItem.Name) && (item.Amount === newItem.Amount)){
+            category = parsedData.User.Expenses[i].Category;
+            break;
+        } else {
+            index++;
+            continue;
+        }
+
+    }
+
+     var Name = (document.getElementById("ExpName") as HTMLInputElement).value;
+     var Amount = ((document.getElementById("ExpNum") as HTMLInputElement).value);
+     var newDate = (document.getElementById("Expdate") as HTMLInputElement).value;
+     var Cat = (document.getElementById("ExpCat") as HTMLInputElement).value;
+
+     if(!Name){
+        Name = item.Name;
+     }
+
+     if (!Amount){
+        Amount = item.Amount;
+     }
+
+     if (!newDate){
+        newDate = date;
+     } 
+
+
+    if (!Cat){
+        Cat = category;
+    }
+
+    const [month, day, year] = newDate.split("/");
+    const NewInitialTime = {Month: month, Day: day, Year: year};
+
+    event.preventDefault();
+    var obj = {index: index, NewName: Name, NewAmount: Amount, NewCategory: Cat, NewIfRecurring: isRecurring, NewInitialTime: NewInitialTime};
+    var js = JSON.stringify(obj);
+
+    try {
+
+        const response = await fetch('http://salvagefinancial.xyz:5000/api/EditExpense',
+        {method:'POST',body:js,headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+        var res = JSON.parse(await response.text());
+        
+
+        if (res.Result == "Edited expense of user") {
+
+            await setInfo();
+            console.log("Edited " + index);
+            return;
+        } else if (res.Result == "Could not find user to edit expense"){
+            console.log(res.Result);
+            return;
+        } else if (res.Result == "Could not edit expense"){
+            console.log(res.Result);
+            return;
+        }
+
+
+    } catch (error: any){
+        alert(error.toString());
+        return;
+    }
+
 
 }
 
