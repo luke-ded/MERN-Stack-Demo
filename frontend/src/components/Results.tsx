@@ -47,6 +47,7 @@ function displayEModal(item: Item) {
 
     var isRecurring = false;
     var isButtonClicked = false;
+    var date = item.Date.Month  + "/" + item.Date.Day + "/" + item.Date.Year;
     const container = document.getElementById("list");
     if (!container) return;
 
@@ -93,7 +94,7 @@ function displayEModal(item: Item) {
                 </div>
 
 
-                <button id = "EditIncome" className = "fixed left-[29%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={() => {if(isButtonClicked){editIncome(item, item.Name, item.Amount, item.Date.Month  + "/" + item.Date.Day + "/" + item.Date.Year, isRecurring, event).then(() => {setInfo().then(() => refreshIncomeList());});} else{return}}}>Edit Income</button>
+                <button id = "EditIncome" className = "fixed left-[29%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={() => {if(isButtonClicked){editIncome(item, date, isRecurring, event).then(() => {setInfo().then(() => refreshIncomeList());});} else{return}}}>Edit Income</button>
                 <button className = "fixed right-[34%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshIncomeList}> Cancel</button>
 
         </div>
@@ -282,7 +283,7 @@ async function deleteIncome(item: Item, event: any) : Promise<void>{
 
 }
 
-async function editIncome(item: Item, name: string, amount: string, date: string ,isRecurring: boolean, event: any) : Promise<void>
+async function editIncome(item: Item, date: string, isRecurring: boolean, event: any) : Promise<void>
 {
 
     var data = localStorage.getItem('user_data');
@@ -323,21 +324,20 @@ async function editIncome(item: Item, name: string, amount: string, date: string
     }
 
 
-    var Name = (document.getElementById("IncName") as HTMLInputElement).value;
-    var Amount = ((document.getElementById("IncNumber") as HTMLInputElement).value);
-    var newDate = (document.getElementById("IncDate") as HTMLInputElement).value;
-    
-    if (Name == null){
-        Name = name;
-    }
+     var Name = (document.getElementById("IncName") as HTMLInputElement).value;
+     var Amount = ((document.getElementById("IncNumber") as HTMLInputElement).value);
+     var newDate = (document.getElementById("IncDate") as HTMLInputElement).value;
+     if(!Name){
+        Name = item.Name;
+     }
 
-    if (Amount == null){
-        Amount = amount;
-    }
+     if (!Amount){
+        Amount = item.Amount;
+     }
 
-    if (newDate == null){
+     if (!newDate){
         newDate = date;
-    }
+     } 
     
 
     const [month, day, year] = newDate.split("/");
