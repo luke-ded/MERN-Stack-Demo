@@ -103,24 +103,20 @@ function VisualFinances(){
                 </div>
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Name" id = "ExpName"></input>
+                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Name" id = "ExpName"></input>
 
-                 <br></br>
             
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "ExpNum"></input>
+                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "ExpNum"></input>
 
-                <br></br>
             
-
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "Expdate"></input>
+                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "Expdate"></input>
 
                 <h5 className="self-start ml-[10%] text-lg text-left">Is The Expense Recurring?</h5>
 
-                <br></br>
 
-                <div className = "absolute top-[55%] left-[10%]">
+                <div className = "absolute top-[59%] left-[17%]">
                     <label>
                         <input type="radio" name="radios" onClick = {setYes}></input>
                     Yes </label>
@@ -131,12 +127,12 @@ function VisualFinances(){
                     No </label>  
                 </div>
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
+                <h5 className="fixed top-[64.5%] self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
+                <input className="relative h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
 
-                <h5 className="mt-3" id="alertMessage"></h5>
+                <h5 className="mt-1 text-[0.95rem]" id="alertMessage"></h5>
 
-                <button id = "ExpenseAdd" className = "rounded-sm inline-block absolute top-[85%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpense}>Add Expense</button>
+                <button id = "ExpenseAdd" className = "rounded-sm inline-block absolute top-[88%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpense}>Add Expense</button>
                 
         </div>
     );

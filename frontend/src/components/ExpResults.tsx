@@ -47,7 +47,7 @@ function displayDModal(item: Item) {
 
 
             <button className = "fixed left-[38%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {deleteExpense(item, event).then(() => {setInfo().then(() => refreshExpenseList());});}}> Confirm</button>
-            <button className = "fixed right-[30%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {refreshExpenseList}> Cancel</button>
+            <button className = "fixed right-[27%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {refreshExpenseList}> Cancel</button>
 
 
         </div>
@@ -75,25 +75,25 @@ function displayEModal(item: Item) {
             </div>
 
            
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.90rem]">Name</h5>
-                <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Name} id = "ExpName"></input>
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
+                <input className="h-5 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Name} id = "ExpName"></input>
 
                  
             
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.90rem]">Amount</h5>
-                <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Amount} id = "ExpNum"></input>
+                <input className="h-5 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Amount} id = "ExpNum"></input>
 
                
             
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-                <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {date} id = "Expdate"></input>
+                <input className="h-5 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {date} id = "Expdate"></input>
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Is The Expense Recurring?</h5>
 
                 
 
-                <div className = "absolute top-[62%] right-[32%]">
+                <div className = "absolute top-[66%] right-[14%]">
                     <label>
                         <input type="radio" name="radios"></input>
                     Yes </label>
@@ -106,12 +106,12 @@ function displayEModal(item: Item) {
 
                 
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
-                <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
+                <h5 className="fixed top-[71.5%] left-[3%] self-start ml-[10%] text-lg text-left text-[0.9rem]">Category</h5>
+                <input className="h-5 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1 mt-4" type="text" placeholder = "Category" id = "ExpCat"></input>
 
 
-                <button id = "EditIncome" className = "fixed left-[28%] top-[84%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]">Edit Expense</button>
-                <button className = "fixed right-[33%] top-[84%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshExpenseList}> Cancel</button>
+                <button id = "EditIncome" className = "fixed left-[27%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]">Edit Expense</button>
+                <button className = "fixed right-[31%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshExpenseList}> Cancel</button>
 
         </div>
 
@@ -372,7 +372,7 @@ function ExpResults()
             </div>
 
             <div className = "rounded-lg grow min-h-0">
-                <ul className="flex-none overflow-y-scroll shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2 h-[350px]" id = "listss"> 
+                <ul className="flex-none overflow-y-scroll shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2 h-[300px]" id = "listss"> 
                     {props.items.map((item) => {
                     return <li className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
                     })}

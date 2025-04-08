@@ -48,7 +48,7 @@ function displayDModal(item: Item) {
 
 
             <button className = "fixed left-[38%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {deleteIncome(item, event).then(() => {setInfo().then(() => refreshIncomeList());});}}> Confirm</button>
-            <button className = "fixed right-[30%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {refreshIncomeList}> Cancel</button>
+            <button className = "fixed right-[27%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {refreshIncomeList}> Cancel</button>
         </div>
 
     </>);
@@ -93,7 +93,7 @@ function displayEModal(item: Item) {
 
             <br></br>
 
-                <div className = "absolute top-[72%] left-[12%]">
+                <div className = "absolute top-[73.5%] left-[17%]">
                     <label>
                         <input type="radio" name="radio" onClick = {()=> {isRecurring = true; isButtonClicked = true}}></input>
                     Yes </label>
@@ -105,8 +105,8 @@ function displayEModal(item: Item) {
                 </div>
 
 
-                <button id = "EditIncome" className = "fixed left-[29%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={() => {if(isButtonClicked){editIncome(item, date, isRecurring, event).then(() => {setInfo().then(() => refreshIncomeList());});} else{return}}}>Edit Income</button>
-                <button className = "fixed right-[34%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshIncomeList}> Cancel</button>
+                <button id = "EditIncome" className = "fixed left-[29%] top-[84%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={() => {if(isButtonClicked){editIncome(item, date, isRecurring, event).then(() => {setInfo().then(() => refreshIncomeList());});} else{return}}}>Edit Income</button>
+                <button className = "fixed right-[29%] top-[84%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshIncomeList}> Cancel</button>
 
         </div>
 
@@ -457,7 +457,7 @@ function Results()
 
             
             <div className = "rounded-lg grow min-h-0">
-                <ul className="flex-none overflow-y-scroll shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2 h-[350px]" id = "list"> 
+                <ul className="flex-none overflow-y-scroll shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2 h-[300px]" id = "list"> 
                     {props.items.map((item) => {
                     return <li className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
                     })}
