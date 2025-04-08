@@ -28,7 +28,7 @@ function VisualFinances(){
         
 
         if (alertMessage) {
-            if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || isButtonClicked == false){
+            if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || isButtonClicked == false || Category.length == 0){
                 alertMessage.innerText = "Please Complete all the fields";
                 alertMessage.style.visibility = "visible";
                 return;
