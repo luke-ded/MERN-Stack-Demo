@@ -73,7 +73,7 @@ function displayEModal(item: Item) {
             <br></br>
 
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date: MM/DD/YYYY</h5>
-            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Date} id = "IncDate"></input>
+            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Date.Month  + "/" + item.Date.Day + "/" + item.Date.Year} id = "IncDate"></input>
 
             <br></br>
 
