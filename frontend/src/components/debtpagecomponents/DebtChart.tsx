@@ -63,7 +63,6 @@ function DebtChart()
   const data = {
     labels: ParseLabels(),
     datasets: [{
-      label: 'Debt',
       data: ParseData(),
       backgroundColor: [
         'rgb(255, 99, 132)',

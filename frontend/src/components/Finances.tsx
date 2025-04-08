@@ -73,6 +73,8 @@ function Finances(){
                 if (alertMessage){
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.visibility = "visible";
+
+                    updateInfo();
                 }
 
             } else {
@@ -91,6 +93,32 @@ function Finances(){
             return;
         }
     }
+
+    async function updateInfo() : Promise<void>
+      {
+        var token = localStorage.getItem('token');
+
+        try
+        {
+          const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
+          {method:'POST', headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+          var res = JSON.parse(await response.text());
+          if( res.Result == "invalid token")
+          {
+            console.log("FAILED IN SETINFO FUNCTION");
+          }
+          else
+          {
+            //console.log(JSON.stringify(res));
+            localStorage.setItem('user_data', JSON.stringify(res));
+          }
+        }
+        catch(error:any)
+        {
+            alert(error.toString());
+            return;
+        }
+      }
 
     return(
 

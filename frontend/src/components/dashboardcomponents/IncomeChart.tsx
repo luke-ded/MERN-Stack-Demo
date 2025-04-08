@@ -64,7 +64,6 @@ function IncomeChart()
   const data = {
     labels: ParseLabels(),
     datasets: [{
-      label: 'Income',
       data: ParseData(),
       backgroundColor: [
         'rgb(255, 99, 132)',

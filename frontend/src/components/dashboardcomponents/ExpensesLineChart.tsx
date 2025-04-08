@@ -71,7 +71,6 @@ function ExpensesLineChart()
       'December',
     ],
     datasets: [{
-      label: 'Expenses',
       data: dataset,
       hoverOffset: 4
     }]

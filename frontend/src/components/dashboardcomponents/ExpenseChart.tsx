@@ -63,7 +63,6 @@ function ExpenseChart()
   const data = {
     labels: ParseLabels(),
     datasets: [{
-      label: 'Expenses',
       data: ParseData(),
       backgroundColor: [
         'rgb(255, 99, 132)',
