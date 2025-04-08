@@ -447,7 +447,7 @@ function Results()
     
     
     return(
-        <div id = "results">
+        <div id = "results" className="flex flex-col h-full">
 
             <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
 
@@ -456,8 +456,8 @@ function Results()
             </div>
 
             
-            <div className = "rounded-lg grow min-h-0">
-                <ul className="flex-none overflow-y-scroll shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2 h-[300px]" id = "list"> 
+            <div className = "flex flex-col flex-grow min-h-0">
+                <ul className="flex-grow overflow-y-auto shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2" id = "list"> 
                     {props.items.map((item) => {
                     return <li className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
                     })}

@@ -15,7 +15,7 @@ const FinancialsPage = () => {
           <Finances />
         </div>
 
-        <div className = "block fixed top-[29.5%] left-[70%] w-[30%] h-[45%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "VisualBar">
+        <div className = "block fixed top-[29.5%] left-[70%] w-[30%] h-[44%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "VisualBar">
           <VisualFinances />
         </div>
 
@@ -23,7 +23,7 @@ const FinancialsPage = () => {
           <Results />
         </div>
 
-        <div className = "block fixed top-[76%] left-[70%] w-[30%] h-[44%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "ExpResultsBar">
+        <div className = "block fixed top-[76%] left-[70%] w-[30%] h-[40%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "ExpResultsBar">
             <Expresults />
         </div>
     </div>
