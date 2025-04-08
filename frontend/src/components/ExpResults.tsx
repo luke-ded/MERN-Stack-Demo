@@ -105,6 +105,8 @@ function displayEModal(item: Item) {
                     No </label>  
                 </div>
 
+                console.log(isRecurring && isButtonClicked);
+
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
                 <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
 
