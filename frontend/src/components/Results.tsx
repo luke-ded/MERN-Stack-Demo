@@ -43,6 +43,67 @@ function displayDModal(item: Item) {
     </>);
 }
 
+function displayEModal(item: Item) {
+
+    var isRecurring = false;
+    var isButtonClicked = false;
+    const container = document.getElementById("list");
+    if (!container) return;
+
+
+    const root = ReactDOM.createRoot(container);
+    root.render(
+    <>
+
+        <div>
+            <div className="flex h-[10%] items-center justify-center">
+
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Edit your Income</span>
+
+            </div>
+
+            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
+            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Name} id = "IncName"></input>
+
+            <br></br>
+            
+            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
+            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Amount} id = "IncNumber"></input>
+
+            <br></br>
+
+            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date: MM/DD/YYYY</h5>
+            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Date} id = "IncDate"></input>
+
+            <br></br>
+
+            <h5 className="self-start ml-[10%] text-lg text-left">Is The Income Recurring?</h5>
+
+            <br></br>
+
+                <div className = "absolute top-[72%] left-[12%]">
+                    <label>
+                        <input type="radio" name="radio" onClick = {()=> {isRecurring = true; isButtonClicked = true}}></input>
+                    Yes </label>
+                    
+
+                    <label>
+                        <input type="radio" name="radio" onClick = {()=> {isRecurring = false; isButtonClicked = true}}></input>
+                    No </label>  
+                </div>
+
+
+                <button id = "EditIncome" className = "fixed left-[29%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={() => {if(isButtonClicked){editIncome(item, isRecurring, event).then(() => {setInfo().then(() => refreshIncomeList());});} else{return}}}>Edit Income</button>
+                <button className = "fixed right-[34%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshIncomeList}> Cancel</button>
+
+        </div>
+
+    </>);
+
+}
+
+
+
 
 function refreshIncomeList() {
     const container = document.getElementById("list");
@@ -121,7 +182,7 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
             <div className="flex justify-between items-center my-[1vh]">
                 <p className="text-white">{item.Name}</p>
                 <span>
-                    <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer">Edit </button>
+                    <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer" onClick = {()=> displayEModal(item)}>Edit </button>
                     <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {()=> displayDModal(item)}>Delete</button>
                 </span>
             </div>
@@ -220,6 +281,89 @@ async function deleteIncome(item: Item, event: any) : Promise<void>{
     }
 
 }
+
+async function editIncome(item: Item, isRecurring: boolean, event: any) : Promise<void>
+{
+
+    var data = localStorage.getItem('user_data');
+    var parsedData = data ? JSON.parse(data) : null;
+    const token = localStorage.getItem('token');
+
+    var index = 0;
+    const today = new Date();
+
+    for (var i = 0; i < parsedData.User.Income.length; i++) 
+    {
+    
+        var counter = parsedData.User.Income[i];
+
+        
+        if(counter.InitialTime != undefined)
+        {
+            let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+            if((today.getTime() - old.getTime()) < 0)
+                continue;
+        }
+
+        let newItem: Item = {
+            key: i.toString(),
+            Name: counter.Name, 
+            Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+            Amount: counter.Amount
+        };
+
+
+        if ((item.key === newItem.key) && (item.Name === newItem.Name) && (item.Amount === newItem.Amount)){
+            break;
+        } else {
+            index++;
+            continue;
+        }
+
+    }
+
+
+    const Name = (document.getElementById("IncName") as HTMLInputElement).value;
+    const Amount = ((document.getElementById("IncNumber") as HTMLInputElement).value);
+    const newDate = (document.getElementById("IncDate") as HTMLInputElement).value;
+    const [month, day, year] = newDate.split("/");
+    const NewInitialTime = {Month: month, Day: day, Year: year};
+
+    
+
+    event.preventDefault();
+    var obj = {index: index, NewName: Name, NewAmount: Amount, NewIfRecurring: isRecurring, NewInitialTime: NewInitialTime};
+    var js = JSON.stringify(obj);
+
+    try {
+
+        const response = await fetch('http://salvagefinancial.xyz:5000/api/EditIncome',
+        {method:'POST',body:js,headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+        var res = JSON.parse(await response.text());
+        
+
+        if (res.Result == "Edited income of user") {
+
+            await setInfo();
+            console.log("Deleted " + index);
+            return;
+        } else if (res.Result == "Could not find user to edit income"){
+            console.log(res.Result);
+            return;
+        } else if (res.Result == "Could not edit income"){
+            console.log(res.Result);
+            return;
+        }
+
+
+    } catch (error: any){
+        alert(error.toString());
+        return;
+    }
+
+
+}
+
 
 async function setInfo() : Promise<void>
   {
