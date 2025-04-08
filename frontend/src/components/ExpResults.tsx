@@ -57,8 +57,7 @@ function displayDModal(item: Item) {
 
 function displayEModal(item: Item) {
 
-    var isRecurring = false;
-    var isButtonClicked = false;
+    
     var date = item.Date.Month  + "/" + item.Date.Day + "/" + item.Date.Year;
     const container = document.getElementById("listss");
     if (!container) return;
@@ -96,16 +95,16 @@ function displayEModal(item: Item) {
 
                 <div className = "absolute top-[62%] right-[32%]">
                     <label>
-                        <input type="radio" name="radios" onClick = {()=> {isRecurring = true; isButtonClicked = true}}></input>
+                        <input type="radio" name="radios"></input>
                     Yes </label>
                     
 
                     <label>
-                        <input type="radio" name="radios" onClick = {()=> {isRecurring = false; isButtonClicked = true}}></input>
+                        <input type="radio" name="radios"></input>
                     No </label>  
                 </div>
 
-                console.log(isRecurring && isButtonClicked);
+                
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
                 <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
