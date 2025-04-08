@@ -21,7 +21,7 @@ function displayDModal(item: Item) {
     const container = document.getElementById("listss");
     if (!container) return;
 
-
+    var date = item.Date.Month  + "/" + item.Date.Day + "/" + item.Date.Year;
     const root = ReactDOM.createRoot(container);
     root.render(
     <>
@@ -33,10 +33,22 @@ function displayDModal(item: Item) {
 
             </div>
 
-            <div>
-                <button className = "rounded-sm absolute left-[35%] top-[50%] inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {deleteExpense(item, event).then(() => {setInfo().then(() => refreshExpenseList());});}}> Confirm</button>
-                <button className = "rounded-sm absolute right-[35%] top-[50%] inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshExpenseList}> Cancel</button>
-            </div>
+            <br></br>
+
+            <h5 className="self-start ml-[10%] text-lg text-center">Name:  {item.Name}</h5>
+
+            <br></br>
+            
+            <h5 className="self-start ml-[10%] text-lg text-center">Amount: {item.Amount}</h5>
+
+            <br></br>
+
+            <h5 className="self-start ml-[10%] text-lg text-center">Date: {date}</h5>
+
+
+            <button className = "fixed left-[38%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => {deleteExpense(item, event).then(() => {setInfo().then(() => refreshExpenseList());});}}> Confirm</button>
+            <button className = "fixed right-[30%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {refreshExpenseList}> Cancel</button>
+
 
         </div>
 
