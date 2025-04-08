@@ -116,7 +116,7 @@ function VisualFinances(){
                 <h5 className="self-start ml-[10%] text-lg text-left">Is The Expense Recurring?</h5>
 
 
-                <div className = "absolute top-[59%] left-[17%]">
+                <div className = "absolute top-[59%] right-[17%]">
                     <label>
                         <input type="radio" name="radios" onClick = {setYes}></input>
                     Yes </label>
@@ -127,7 +127,7 @@ function VisualFinances(){
                     No </label>  
                 </div>
 
-                <h5 className="fixed top-[64.5%] self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
+                <h5 className="fixed top-[64.5%] self-start ml-[10%] text-lg text-left text-[0.9rem]">Category</h5>
                 <input className="relative h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
 
                 <h5 className="mt-1 text-[0.95rem]" id="alertMessage"></h5>

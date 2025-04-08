@@ -148,7 +148,7 @@ function Finances(){
 
                 <br></br>
 
-                <div className = "absolute top-[68.75%] left-[20%]">
+                <div className = "absolute top-[68.75%] right-[20%]">
                     <label>
                         <input type="radio" name="radio" onClick = {setYes}></input>
                     Yes </label>

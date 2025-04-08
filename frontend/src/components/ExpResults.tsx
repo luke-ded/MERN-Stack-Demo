@@ -80,7 +80,7 @@ function displayEModal(item: Item) {
 
                  
             
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.90rem]">Amount</h5>
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
                 <input className="h-5 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Amount} id = "ExpNum"></input>
 
                
@@ -89,7 +89,7 @@ function displayEModal(item: Item) {
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
                 <input className="h-5 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {date} id = "Expdate"></input>
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Is The Expense Recurring?</h5>
+                <h5 className="self-start ml-[10%] text-lg text-left">Is The Expense Recurring?</h5>
 
                 
 
