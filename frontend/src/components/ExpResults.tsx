@@ -55,6 +55,69 @@ function displayDModal(item: Item) {
     </>);
 }
 
+function displayEModal(item: Item) {
+
+    var isRecurring = false;
+    var isButtonClicked = false;
+    var date = item.Date.Month  + "/" + item.Date.Day + "/" + item.Date.Year;
+    const container = document.getElementById("listss");
+    if (!container) return;
+
+
+    const root = ReactDOM.createRoot(container);
+    root.render(
+    <>
+
+        <div>
+            <div className="flex h-[10%] items-center justify-center">
+
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Edit your Expense</span>
+
+            </div>
+
+           
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.90rem]">Name</h5>
+                <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Name} id = "ExpName"></input>
+
+                 
+            
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.90rem]">Amount</h5>
+                <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Amount} id = "ExpNum"></input>
+
+               
+            
+
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
+                <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {date} id = "Expdate"></input>
+
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Is The Expense Recurring?</h5>
+
+                
+
+                <div className = "absolute top-[62%] right-[32%]">
+                    <label>
+                        <input type="radio" name="radios" onClick = {()=> {isRecurring = true; isButtonClicked = true}}></input>
+                    Yes </label>
+                    
+
+                    <label>
+                        <input type="radio" name="radios" onClick = {()=> {isRecurring = false; isButtonClicked = true}}></input>
+                    No </label>  
+                </div>
+
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
+                <input className="h-1/4 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
+
+
+                <button id = "EditIncome" className = "fixed left-[28%] top-[84%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]">Edit Expense</button>
+                <button className = "fixed right-[33%] top-[84%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={refreshExpenseList}> Cancel</button>
+
+        </div>
+
+    </>);
+
+}
+
 
 function refreshExpenseList() {
     const container = document.getElementById("listss");
@@ -139,7 +202,7 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
             <div className="flex justify-between items-center my-[1vh]">
                 <p className="text-white">{item.Name}</p>
                 <span>
-                    <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer">Edit </button>
+                    <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer" onClick = {()=> displayEModal(item)}>Edit </button>
                     <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => displayDModal(item)}>Delete</button>
                 </span>
             </div>
