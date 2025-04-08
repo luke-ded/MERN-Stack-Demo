@@ -7,6 +7,7 @@ interface Item
     Name: string;
     Date: any;
     Amount: any;
+    Category: string;
 }
 
 interface PropsType 
@@ -168,7 +169,8 @@ function setExpenses()
             key: i.toString(),
             Name: counter.Name, 
             Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-            Amount: counter.Amount
+            Amount: counter.Amount,
+            Category: counter.Category
         };
 
         expenses.push(newItem);
@@ -257,7 +259,8 @@ async function deleteExpense(item: Item, event: any) : Promise<void>{
             key: i.toString(),
             Name: counter.Name, 
             Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-            Amount: counter.Amount
+            Amount: counter.Amount,
+            Category: counter.Category
         };
 
 
@@ -307,7 +310,6 @@ async function editExpenses(item: Item, date: string, isRecurring: boolean, even
 
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
-    var category = "";
     console.log(parsedData);
     const token = localStorage.getItem('token');
 
@@ -331,12 +333,14 @@ async function editExpenses(item: Item, date: string, isRecurring: boolean, even
             key: i.toString(),
             Name: counter.Name, 
             Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-            Amount: counter.Amount
+            Amount: counter.Amount,
+            Category: counter.Category
         };
 
 
         if ((item.key === newItem.key) && (item.Name === newItem.Name) && (item.Amount === newItem.Amount)){
-            category = parsedData.User.Expenses[i].Category;
+            console.log(counter);
+            console.log(counter.Category);
             break;
         } else {
             index++;
@@ -346,9 +350,11 @@ async function editExpenses(item: Item, date: string, isRecurring: boolean, even
     }
 
      var Name = (document.getElementById("ExpName") as HTMLInputElement).value;
-     var Amount = ((document.getElementById("ExpNum") as HTMLInputElement).value);
+     var Amount = ((document.getElementById("Expnum") as HTMLInputElement).value);
      var newDate = (document.getElementById("Expdate") as HTMLInputElement).value;
      var Cat = (document.getElementById("ExpCat") as HTMLInputElement).value;
+
+     console.log(Name);
 
      if(!Name){
         Name = item.Name;
@@ -364,15 +370,22 @@ async function editExpenses(item: Item, date: string, isRecurring: boolean, even
 
 
     if (!Cat){
-        Cat = category;
+        Cat = item.Category;
     }
 
     const [month, day, year] = newDate.split("/");
-    const NewInitialTime = {Month: month, Day: day, Year: year};
+    const NewInitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
+
+    
+    console.log(Cat);
+    console.log(item.Category);
+    
 
     event.preventDefault();
-    var obj = {index: index, NewName: Name, NewAmount: Amount, NewCategory: Cat, NewIfRecurring: isRecurring, NewInitialTime: NewInitialTime};
+    var obj = {index: index, NewName: Name, NewAmount: parseInt(Amount), NewCategory: Cat, NewIfRecurring: isRecurring, NewInitialTime: NewInitialTime};
     var js = JSON.stringify(obj);
+
+    console.log(obj);
 
     try {
 
@@ -394,12 +407,13 @@ async function editExpenses(item: Item, date: string, isRecurring: boolean, even
             return;
         }
 
+        console.log(res.Result);
+
 
     } catch (error: any){
         alert(error.toString());
         return;
     }
-
 
 }
 
