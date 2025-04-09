@@ -3,7 +3,11 @@
 //import {useState} from 'react'
 
 
-function AddSavings(){
+interface ChildProps {
+    triggerRerender: () => void;
+}
+
+const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
 
     //const [isButtonClicked, setButton] = useState(false);
 
@@ -67,7 +71,8 @@ function AddSavings(){
                     alertMessage.style.visibility = "visible";
                 }
 
-                updateInfo();
+                await updateInfo();
+                triggerRerender()
             }
         } 
         catch(error: any) 
