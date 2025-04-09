@@ -97,7 +97,7 @@ function StatList()
                     <div>
                         <div className="flex justify-between items-center">
                             <span className="text-white font-semibold text-3xl">Total Savings:</span>
-                            <span className="font-semibold text-3xl" style = {{color: (totalSavings != 0) ? '#36eba6' :'#ff6384'}}> ${totalSavings.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                            <span className="font-semibold text-3xl" style = {{color: (totalSavings != 0) ? '#36eba6' :'#ff6384'}}> ${totalSavings.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                         </div>
                     </div>
                 </li>
@@ -116,7 +116,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-3xl">Total Savings:</span>
-                        <span className="font-semibold text-3xl" style = {{color: (totalSavings == 0) ? '#36eba6' :'#ff6384'}}> ${totalSavings.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                        <span className="font-semibold text-3xl" style = {{color: (totalSavings == 0) ? '#36eba6' :'#ff6384'}}> ${totalSavings.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                     </div>
                 </div>
             </li>

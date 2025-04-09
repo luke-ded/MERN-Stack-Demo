@@ -126,7 +126,7 @@ function StatList()
                     <div>
                         <div className="flex justify-between items-center">
                             <span className="text-white font-semibold text-3xl">Total Debt:</span>
-                            <span className="font-semibold text-3xl" style = {{color: (totalDebt == 0) ? '#36eba6' :'#ff6384'}}> ${totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                            <span className="font-semibold text-3xl" style = {{color: (totalDebt == 0) ? '#36eba6' :'#ff6384'}}> ${totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                         </div>
                     </div>
                 </li>
@@ -146,7 +146,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-3xl">Total Debt:</span>
-                        <span className="font-semibold text-3xl" style = {{color: (totalDebt == 0) ? '#36eba6' :'#ff6384'}}> ${totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                        <span className="font-semibold text-3xl" style = {{color: (totalDebt == 0) ? '#36eba6' :'#ff6384'}}> ${totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                     </div>
                 </div>
             </li>
@@ -165,7 +165,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Assets to Liabilities Ratio:</span>
-                        <p className="font-semibold text-md" style = {{color: (parsedData.User.InitialAmount/totalDebt >= 1) ? '#36eba6' :'#ff6384'}}>{totalDebt != 0 ? parsedData.User.InitialAmount/totalDebt >= 1? parsedData.User.InitialAmount/totalDebt +':1' : 1 + ':' + 1/(parsedData.User.InitialAmount/totalDebt) : "N/A"}</p>
+                        <p className="font-semibold text-md" style = {{color: (parsedData.User.InitialAmount/totalDebt >= 1) ? '#36eba6' :'#ff6384'}}>{totalDebt != 0 ? parsedData.User.InitialAmount/totalDebt >= 1? parsedData.User.InitialAmount/totalDebt +':1' : 1 + ':' + (1/(parsedData.User.InitialAmount/totalDebt)).toFixed(0) : "N/A"}</p>
                     </div>
                 </div>
             </li>
@@ -174,7 +174,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Total Min Monthly Payments:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${totalMinPayments.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${totalMinPayments.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                     </div>
                 </div>
             </li>
@@ -183,7 +183,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Average Min Monthly Payment:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${(totalMinPayments/parsedData.User.Debts.length).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${(totalMinPayments/parsedData.User.Debts.length).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                     </div>
                 </div>
             </li>
@@ -192,7 +192,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Average Interest Rate:</span>
-                        <span className="font-semibold text-md" style = {{color: (averageAPR < 10) ? '#36eba6' :'#ff6384'}}> {averageAPR}%</span>
+                        <span className="font-semibold text-md" style = {{color: (averageAPR < 10) ? '#36eba6' :'#ff6384'}}> {averageAPR.toFixed(2)}%</span>
                     </div>
                 </div>
             </li>

@@ -2,8 +2,11 @@
 //import { useNavigate } from 'react-router-dom';
 //import {useState} from 'react'
 
+interface ChildProps {
+    triggerRerender: () => void;
+}
 
-function AddDebt(){
+const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) => {
 
     //const [isButtonClicked, setButton] = useState(false);
 
@@ -70,8 +73,8 @@ function AddDebt(){
                     alertMessage.style.visibility = "visible";
                 }
 
-                updateInfo();
-
+                await updateInfo();
+                triggerRerender();
             }
 
 
