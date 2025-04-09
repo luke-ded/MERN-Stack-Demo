@@ -467,15 +467,15 @@ exports.setApp = function ( app, client )
             //DB
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
-                {$set : {[indexSearch]: newSaving}}   //Pushing onto Income Array new Income
+                {$set : {[indexSearch]: newSaving}}   //Pushing onto Saving Array new saving
             );
 
             //Configure response and send JSON response
             if (user.matchedCount === 0) {          //If no user was updated
-                Result = "Could not find user to edit income";
+                Result = "Could not find user to edit savings";
             }
             else{          //If user was updated 
-                Result = "Edited income of user";
+                Result = "Edited saving of user";
             }
 
             //Send JSON response
@@ -525,6 +525,88 @@ exports.setApp = function ( app, client )
             res.status(500).json({Result: error.message});
         }
     }); 
+
+    //DeleteIncome API
+    //In: token, index
+    //Out: Result
+    app.post('/api/DeleteIncome', authenticateJWT, async (req,res) => {
+        let Result = "Could not delete income";
+        try{
+            //Input and Field Checks
+            const {index} = req.body;
+            const {_id} = req.user;            
+            if (!_id|| index == undefined){
+                throw new Error("Invalid Input");
+            }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            const indexSearch = `Income.${index}`;
+
+            //DB 
+            let user = await usersCollection.updateOne(
+                { _id: objectId },  //Search Criteria
+                { $unset: { [indexSearch]: 1 } } // Unset the field at the index
+            );
+            user = await usersCollection.updateOne(
+                { _id: objectId },  //Search Criteria
+                { $pull: { Income: null } } // Remove null values after unset
+            );
+
+            //Configure response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to delete income";
+            }
+            else{          //If user was updated 
+                Result = "Deleted income from user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error.message);
+            res.status(500).json({Result: error.message});
+        }
+    });
+
+    //DeleteIncome API
+    //In: token, index
+    //Out: Result
+    app.post('/api/DeleteIncome', authenticateJWT, async (req,res) => {
+        let Result = "Could not delete income";
+        try{
+            //Input and Field Checks
+            const {index} = req.body;
+            const {_id} = req.user;            
+            if (!_id|| index == undefined){
+                throw new Error("Invalid Input");
+            }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            const indexSearch = `Income.${index}`;
+
+            //DB 
+            let user = await usersCollection.updateOne(
+                { _id: objectId },  //Search Criteria
+                { $unset: { [indexSearch]: 1 } } // Unset the field at the index
+            );
+            user = await usersCollection.updateOne(
+                { _id: objectId },  //Search Criteria
+                { $pull: { Income: null } } // Remove null values after unset
+            );
+
+            //Configure response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to delete income";
+            }
+            else{          //If user was updated 
+                Result = "Deleted income from user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error.message);
+            res.status(500).json({Result: error.message});
+        }
+    });
 
     //DeleteIncome API
     //In: token, index
