@@ -3,7 +3,11 @@
 import {useState} from 'react'
 
 
-function VisualFinances(){
+interface ChildProps {
+    triggerRerender: () => void;
+}
+
+const VisualFinances: React.FC<ChildProps> = ({ triggerRerender }) => {
 
     const [isRecurring, setRecurring] = useState(false);
     const [isButtonClicked, setButton] = useState(false);
@@ -76,7 +80,8 @@ function VisualFinances(){
                     alertMessage.style.visibility = "visible";
                 }
 
-                updateInfo();
+                await updateInfo();
+                triggerRerender();
 
             } else {
 

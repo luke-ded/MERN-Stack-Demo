@@ -113,7 +113,9 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
             
             <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
                     <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Savings</span>
-                </div>
+            </div>
+
+            <div className="flex-col">
 
                 <h5 className="self-start ml-[10%] mt-2 text-lg text-left text-[0.95rem]">Name</h5>
                 <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Name" id = "Name"></input>
@@ -129,10 +131,10 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Interest Rate (APR)</h5>
                 <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "1.23" id = "apr"></input>
 
-                <h5 className="fixed top-[68.5%] left-[33.5%] mt-3 text-[0.95rem]" id="alertMessage"></h5>
+                <h5 className="mt-3 text-[0.95rem]" id="alertMessage"></h5>
 
-                <button id = "ExpenseAdd" className = "rounded-sm inline-block absolute top-[83%] left-[42%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addSavings}>Add Account</button>
-                
+                <button id = "ExpenseAdd" className = "rounded-sm inline-block mt-5  h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addSavings}>Add Account</button>
+            </div> 
         </div>
     );
 }
