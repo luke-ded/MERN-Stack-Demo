@@ -21,7 +21,7 @@ function AddDebt(){
     async function addDebt(event: any): Promise<void>{
         
         const valAmount = (document.getElementById("Num") as HTMLInputElement).value;
-        const userName = (document.getElementById("Name") as HTMLInputElement).value;
+        const name = (document.getElementById("Name") as HTMLInputElement).value;
         const date = (document.getElementById("date") as HTMLInputElement).value;
         const apr = parseFloat((document.getElementById("date") as HTMLInputElement).value);
         const term = parseFloat((document.getElementById("term") as HTMLInputElement).value);
@@ -29,7 +29,7 @@ function AddDebt(){
         
 
         if (alertMessage) {
-            if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || 
+            if (date.length == 0 || name.length == 0 || valAmount.length == 0 || 
                 /* isButtonClicked == false || */ term == undefined || apr == undefined){
                 alertMessage.innerText = "Please Complete all the fields";
                 alertMessage.style.visibility = "visible";
@@ -39,37 +39,30 @@ function AddDebt(){
        
         const token = localStorage.getItem('token');
 
-        const Amount = parseInt(valAmount);
+        const Amount = parseFloat(valAmount);
         
         const [month, day, year] = date.split("/");
         const InitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
 
-
+        console.log(InitialTime);
         event.preventDefault();
-        var obj = {Name: userName, Amount: Amount, APR: apr, Term:term, InitialTime: InitialTime};
+        var obj = {Name: name, Amount: Amount, APR: apr, LoanLength:term, InitialTime: InitialTime};
         var js = JSON.stringify(obj);
 
         try {
 
-            const response = await fetch('http://salvagefinancial.xyz:5000/api/addDebt',
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/AddDebt',
             {method:'POST',body:js,headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
             var res = JSON.parse(await response.text());
             
-            if (res.Result == "Could not add expense"){
+            if (res.Result != "Added debt to user"){
                 
                 if (alertMessage){
                     alertMessage.innerText = "Unsuccesfully Added";
                     alertMessage.style.visibility = "visible";
                 }
 
-            } else if (res.Result == "Could not find user to add expense"){
-                
-                if (alertMessage) {
-                    alertMessage.innerText = "Unsuccesfully Added";
-                    alertMessage.style.visibility = "visible";
-                }
-
-            } else if (res.Result == "Added expense to user"){
+            } else {
 
                 
                 if (alertMessage){
@@ -78,13 +71,6 @@ function AddDebt(){
                 }
 
                 updateInfo();
-
-            } else {
-
-                if (alertMessage) {
-                    alertMessage.innerText = "Unsuccesfully Added";
-                    alertMessage.style.visibility = "visible";
-                }
 
             }
 

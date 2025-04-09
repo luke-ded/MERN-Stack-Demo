@@ -1,5 +1,6 @@
 var totalDebt = 0, totalMinPayments = 0;
 var totalIncome = 0, totalExpenses = 0;
+var averageAPR = 0.0;
 
 function calcDebt(parsedData:any)
 {
@@ -84,6 +85,35 @@ function calcExpenses(parsedData:any)
     }
 }
 
+function calcAverageAPR(parsedData:any)
+{
+    averageAPR = 0;
+
+    if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0) 
+        return;
+
+    const today = new Date();
+
+    for (var i = 0; i < parsedData.User.Debts.length; i++) 
+    {
+        var counter = parsedData.User.Debts[i];
+        // Ensures item is not in the future
+        if(counter.InitialTime != undefined)
+        {
+            let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+            if((today.getTime() - old.getTime()) < 0)
+                continue;
+
+        }
+
+        console.log(counter.APR);
+        averageAPR += counter.APR;
+    }
+
+    console.log(averageAPR);
+    averageAPR = averageAPR / parsedData.User.Debts.length;
+}
+
 function StatList() 
 {
     var data = localStorage.getItem('user_data');
@@ -92,6 +122,7 @@ function StatList()
     calcDebt(parsedData);
     calcIncome(parsedData);
     calcExpenses(parsedData);
+    calcAverageAPR(parsedData);
 
     return (
         <ul className="shadow divide-y divide-[#7f8fb5] min-h-0 border-b border-[#6d91e8]">
@@ -154,7 +185,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Average Interest Rate:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> 15%</span>
+                        <span className="font-semibold text-md" style = {{color: (averageAPR < 10) ? '#36eba6' :'#ff6384'}}> {averageAPR}%</span>
                     </div>
                 </div>
             </li>
