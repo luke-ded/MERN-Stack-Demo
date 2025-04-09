@@ -174,15 +174,15 @@ exports.setApp = function ( app, client )
     });
 
     //AddInitial API
-    //In: token, InitialDebt, InitialAmount
+    //In: token, InitialAmount
     //Out: Result
     app.post('/api/AddInitial', authenticateJWT, async (req,res) => {
-        let Result = "Could not add amount and debt";
+        let Result = "Could not add amount";
         try{
             //Input and Field Check
-            const {InitialDebt, InitialAmount} = req.body;
+            const {InitialAmount} = req.body;
             const {_id} = req.user;
-            if (!_id || !InitialDebt || !InitialAmount){
+            if (!_id || !InitialAmount){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId            
@@ -190,12 +190,12 @@ exports.setApp = function ( app, client )
             //DB 
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
-                {$set: {InitialDebt: InitialDebt, InitialAmount: InitialAmount}}   //Updated info
+                {$set: {InitialAmount: InitialAmount}}   //Updated info
             );
 
             //Configure response
             if (user.matchedCount === 0) {          //If no user was updated
-                Result = "Could not find user to add initial debt and amount to";
+                Result = "Could not find user to add initial amount to";
             }
             else{          //If user was updated 
                 Result = "Added amounts to user";
@@ -218,19 +218,13 @@ exports.setApp = function ( app, client )
             //Input and Field Check
             const {Name, Amount, IfRecurring, InitialTime} = req.body;
             const {_id} = req.user;
-            if (!_id || !Name || !Amount || IfRecurring == undefined){
+            if (!_id || !Name || !Amount || IfRecurring == undefined || !InitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //Create Objects for DB statement
-            let newIncome = {};
-            if (IfRecurring){
-                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
-            }
-            else{
-                newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring};
-            }
+            let newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
 
             //DB Statement
             const user = await usersCollection.updateOne(
@@ -254,6 +248,84 @@ exports.setApp = function ( app, client )
         }
     });
 
+    //AddDebt API
+    //In: token, Name, Amount, APR, LoanLength, InitialTime
+    //Out: Result
+    app.post('/api/AddDebt', authenticateJWT, async (req,res) => {
+        let Result = "Could not add debt";
+        try{
+            //Input and Field Check
+            const {Name, Amount, APR, LoanLength, InitialTime} = req.body;
+            const {_id} = req.user;
+            if (!_id || !Name || !Amount || !APR || !LoanLength || !InitialTime){
+                throw new Error("Invalid Input");
+            }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+
+            //Create Objects for DB statement
+            let newDebt = {Name: Name, Amount: Amount, APR: APR, LoanLength: LoanLength, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
+
+            //DB Statement
+            const user = await usersCollection.updateOne(
+                { _id: objectId},    //Search criteria
+                {$push : {Debts: newDebt}}   //Pushing onto Debts Array new Debt
+            );
+
+            //Configure response and send JSON response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to add debt";
+            }
+            else{          //If user was updated 
+                Result = "Added debt to user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error);
+            res.status(500).json({Result: error.message});
+        }
+    });
+
+    //AddSaving API
+    //In: token, Name, Amount, APR, InitialTime
+    //Out: Result
+    app.post('/api/AddSaving', authenticateJWT, async (req,res) => {
+        let Result = "Could not add saving";
+        try{
+            //Input and Field Check
+            const {Name, Amount, APR, InitialTime} = req.body;
+            const {_id} = req.user;
+            if (!_id || !Name || !Amount || !APR || !InitialTime){
+                throw new Error("Invalid Input");
+            }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+
+            //Create Objects for DB statement
+            let newSaving = {Name: Name, Amount: Amount, APR: APR, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
+
+            //DB Statement
+            const user = await usersCollection.updateOne(
+                { _id: objectId},    //Search criteria
+                {$push : {Savings: newSaving}}   //Pushing onto Savings Array new Saving
+            );
+
+            //Configure response and send JSON response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to add saving";
+            }
+            else{          //If user was updated 
+                Result = "Added saving to user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error);
+            res.status(500).json({Result: error.message});
+        }
+    });
+
     //AddExpense API
     //In: token, Name, Category, Amount, IfRecurring, InitialTime
     //Out: Result
@@ -263,19 +335,13 @@ exports.setApp = function ( app, client )
             //Input and Field Check
             const {Name, Amount, Category, IfRecurring, InitialTime} = req.body;
             const {_id} = req.user;            
-            if (!_id || !Name || !Amount || !Category || IfRecurring == undefined){
+            if (!_id || !Name || !Amount || !Category || IfRecurring == undefined || !InitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //Create Objects for DB statement
-            let newExpense = {};
-            if (IfRecurring){
-                newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
-            }
-            else{
-                newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring};
-            }
+            let newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
 
             //DB Statement
             const user = await usersCollection.updateOne(
