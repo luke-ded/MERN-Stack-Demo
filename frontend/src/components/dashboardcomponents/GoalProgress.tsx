@@ -46,7 +46,7 @@ function GoalProgress() {
     }
 
   return (
-    <div className="h-[5vh] ml-2 mt-2">
+    <div className="h-[4vh]">
       <Pie options={options} data={data}/>
     </div>
   );

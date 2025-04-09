@@ -39,6 +39,12 @@ const NavBar = () => {
       navigate('/financials');
   }
 
+  function navDebtPage()
+  {
+    if(location.pathname != '/debt')
+      navigate('/debt');
+  }
+
   // See duplicate in pagetitle
   function doLogout()
   {
@@ -48,7 +54,7 @@ const NavBar = () => {
   }
   
   // Not logged in
-  if(location.pathname == '/' || location.pathname == '/signup' || location.pathname == '/login' || location.pathname == '/forgot' || location.pathname == '/reset')
+  if(localStorage.getItem('user_data') == null)
     return (
     <div className="flex h-[6.5vh] max-w-screen w-screen bg-black/60 fixed top-0 left-0 border-b border-[#6d91e8] items-center justify-between shrink-1">
       <div className="flex items-center">
@@ -86,10 +92,12 @@ const NavBar = () => {
             <PageTitle />
         
 
-        <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navDashboardPage} 
-        >Dashboard</button>
-        <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navFinancialsPage}
-        >Financials</button>
+          <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navDashboardPage} 
+          >Dashboard</button>
+          <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navFinancialsPage}
+          >Financials</button>
+          <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navDebtPage}
+            >Debt</button>
         </div>
         <div className="flex items-center">
           <h2 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mr-6"> {parsedData.User.FName} {parsedData.User.LName}</h2>

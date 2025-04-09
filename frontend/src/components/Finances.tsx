@@ -21,39 +21,27 @@ function Finances(){
     async function addIncome(event: any): Promise<void>{
 
         const valAmount = (document.getElementById("IncNum") as HTMLInputElement).value;
+        const userName = (document.getElementById("IncNames") as HTMLInputElement).value;
+        const date = (document.getElementById("Incdate") as HTMLInputElement).value;
         const alertMessage = document.getElementById("alertmessage");
 
         if (alertMessage) {
-            if (valAmount.length == 0 && isButtonClicked == true){
-                alertMessage.innerText = "No amount is entered";
+            if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || isButtonClicked == false){
+                alertMessage.innerText = "Please Complete all the fields";
                 alertMessage.style.visibility = "visible";
                 return;
-            } else if (isButtonClicked == false && valAmount.length != 0){
-                alertMessage.innerText = "Please check the box";
-                alertMessage.style.visibility = "visible";
-                return;
-            } else if (isButtonClicked == false && valAmount.length == 0) {
-                alertMessage.innerText = "No Input detected";
-                alertMessage.style.visibility = "visible";
-                return;
-            } else {
-                alertMessage.style.visibility = "hidden";
-            }
+            } 
         }
         
-        const data = localStorage.getItem('user_data');
-        const parsedData = data ? JSON.parse(data) : null;
+       
         const token = localStorage.getItem('token');
 
-        
-        const FirstName = parsedData.User.FName;
-        const LastName = parsedData.User.LName;
-        const userName = FirstName + " " + LastName;
         
         
         const Amount = parseInt(valAmount);
         const IfRecurring = isRecurring;
-        var InitialTime = JSON.stringify({Month: new Date().toLocaleString('default', { month: 'long' }), Day: new Date().getDate(), Year: new Date().getFullYear()});
+        const [month, day, year] = date.split("/");
+        const InitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
 
         event.preventDefault();
         var obj = {Name: userName, Amount: Amount, IfRecurring: IfRecurring, InitialTime: InitialTime};
@@ -85,6 +73,8 @@ function Finances(){
                 if (alertMessage){
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.visibility = "visible";
+
+                    updateInfo();
                 }
 
             } else {
@@ -104,6 +94,32 @@ function Finances(){
         }
     }
 
+    async function updateInfo() : Promise<void>
+      {
+        var token = localStorage.getItem('token');
+
+        try
+        {
+          const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
+          {method:'POST', headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+          var res = JSON.parse(await response.text());
+          if( res.Result == "invalid token")
+          {
+            console.log("FAILED IN SETINFO FUNCTION");
+          }
+          else
+          {
+            //console.log(JSON.stringify(res));
+            localStorage.setItem('user_data', JSON.stringify(res));
+          }
+        }
+        catch(error:any)
+        {
+            alert(error.toString());
+            return;
+        }
+      }
+
     return(
 
         <div id = "finances">
@@ -114,20 +130,25 @@ function Finances(){
                     <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Income</span>
                 </div>
 
-                <br></br>
-                <br></br>
+            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
+            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Name" id = "IncNames"></input>
 
-                <h5 className="self-start ml-[10%] text-lg text-left">Amount</h5>
-                <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "IncNum"></input>
+            <br></br>
+            
+            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
+            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "IncNum"></input>
 
-                <br></br>
-                <br></br>
+            <br></br>
+            
+
+            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
+            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "Incdate"></input>
 
                 <h5 className="self-start ml-[10%] text-lg text-left">Is The Income Recurring?</h5>
 
                 <br></br>
 
-                <div className = "absolute top-[55%] left-[10%]">
+                <div className = "absolute top-[54.75%] right-[20%]">
                     <label>
                         <input type="radio" name="radio" onClick = {setYes}></input>
                     Yes </label>
@@ -138,7 +159,7 @@ function Finances(){
                     No </label>  
                 </div>
 
-                <h5 className="mt-3" id="alertmessage"></h5>
+                <h5 className="mt-4.5" id="alertmessage"></h5>
                 
                 <button id = "AddIncome" className = "rounded-sm inline-block absolute top-[80%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addIncome} >Add Income</button>
             </div>

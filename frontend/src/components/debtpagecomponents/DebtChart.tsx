@@ -18,12 +18,12 @@ function ParseLabels()
   var data = localStorage.getItem('user_data');
   var parsedData = data ? JSON.parse(data) : null;
 
-  for (var i = 0; i < parsedData.User.Expenses.length; i++) 
+  for (var i = 0; i < parsedData.User.Debts.length; i++) 
   {
-    var counter = parsedData.User.Expenses[i];
+    var counter = parsedData.User.Debts[i];
     //console.log(counter.Category);
-    if(!labels.includes(counter.Category))
-      labels.push(counter.Category);
+    if(!labels.includes(counter.Name))
+      labels.push(counter.Name);
   }
 
   return labels;
@@ -36,26 +36,26 @@ function ParseData()
 
   let datapts = new Array(labels.length).fill(0);
 
-  for (var i = 0; i < parsedData.User.Expenses.length; i++) 
+  for (var i = 0; i < parsedData.User.Debts.length; i++) 
   {
-    var counter = parsedData.User.Expenses[i];
+    var counter = parsedData.User.Debts[i];
     //console.log(counter.Amount);
-    datapts[labels.indexOf(counter.Category)] += counter.Amount;
+    datapts[labels.indexOf(counter.Name)] += counter.Amount;
   }
 
   return datapts;
 }
 
-function ExpenseChart() 
+function DebtChart() 
 {
   var datap = localStorage.getItem('user_data');
   var parsedData = datap ? JSON.parse(datap) : null;
 
-  if(parsedData.User.Expenses == undefined || parsedData.User.Expenses.length == 0)
+  if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0)
   {
       return(
           <div className="text-white p-5">
-              <p className="mt-5">Looks like you haven't spent anything yet! No expenses to display.</p>
+              <p className="mt-5">No debts to display.</p>
           </div>
       );
   }
@@ -85,10 +85,10 @@ function ExpenseChart()
   };
 
   return (
-    <div className="flex items-center justify-center p-5">
+    <div className="flex items-center justify-center w-[75%] ml-[12.5%] mt-[5%] p-5">
       <Pie options={options} data={data}/>
     </div>
   );
 };
 
-export default ExpenseChart;
+export default DebtChart;

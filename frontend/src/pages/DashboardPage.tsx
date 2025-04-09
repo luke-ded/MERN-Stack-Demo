@@ -6,6 +6,7 @@ import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import ExpensesList from '../components/dashboardcomponents/ExpensesList.tsx';
 import IncomeList from '../components/dashboardcomponents/IncomeList.tsx';
 import DebtList from '../components/dashboardcomponents/DebtList.tsx';
+import StatList from '../components/dashboardcomponents/StatList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
 
@@ -13,8 +14,6 @@ const DashboardPage = () => {
     const percentage = 60;
     const rewardName = "rewardName";
 
-    var data = localStorage.getItem('user_data');
-    var parsedData = data ? JSON.parse(data) : null;
     //console.log(localStorage.getItem('token'));
 
     return (
@@ -23,59 +22,31 @@ const DashboardPage = () => {
 
         <div className="w-[10vw] min-h-fit h-[90vh] border border-[#6d91e8] rounded-lg text-center bg-[rgba(17,18,23,.9)] fixed top-[8vh] right-8">
             <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Depth</h3>
-            <p className="mt-10 m-2">(replace this with a graphic designed depth meter)</p>
-            <p className='mt-5 m-2'>should this be fixed like it is now, or extend way down the entire page and be scrollable?</p>
+            <p className="text-white mt-10 m-2">(replace this with a graphic designed depth meter)</p>
+            <p className='text-white mt-5 m-2'>should this be fixed like it is now, or extend way down the entire page and be scrollable?</p>
         </div>
 
         <div className="flex justify-between mt-[8vh]">
-            <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Expenses</h3>
+            <div className= "ml-8 w-[50vh] min-h-fit h-[60vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Expenses</h3>
+                </div>
                 <ExpenseChart />
             </div>
 
-            <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-            <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Income</h3>
+            <div className= "ml-8 w-[50vh] min-h-fit h-[60vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Income</h3>
+                </div>
                 <IncomeChart />
             </div>
 
-            <div className= "ml-8 w-[20vw] min-h-[50vh] h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Statistics</h3>
-
-                <div className="mt-4 ml-4 text-left font-[Lucida Sans]">
-                    <div className = "flex justify-between mr-4">
-                        <p className="text-[#ff6384]">Total Debt: </p> {/*Change to calculate total*/}
-                        <p className="text-[#ff6384]"> ${parsedData.User.InitialDebt.toFixed(2)}</p>
-                    </div>
-                    
-                    <div className = "flex justify-between mr-4">
-                        <p className="text-[#36eba6]">Total savings: </p> {/*Change to calculate total*/}
-                        <p className="text-[#36eba6]"> ${parsedData.User.InitialAmount.toFixed(2)}</p>
-                    </div>
-
-                    <div className = "flex justify-between mr-4">
-                        <p style = {{color: (parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1) ? '#36eba6' :'#ff6384'}}>Assets to Liabilities Ratio: </p>
-                        <p style = {{color: (parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1) ? '#36eba6' :'#ff6384'}}>{parsedData.User.InitialAmount/parsedData.User.InitialDebt >= 1? parsedData.User.InitialAmount/parsedData.User.InitialDebt +':1' : 1 + ':' + 1/(parsedData.User.InitialAmount/parsedData.User.InitialDebt)}</p>
-                    </div>
-
-                    <div className = "flex justify-between mr-4">
-                        <p>Spending this month:</p>
-                        <p></p>
-                    </div>
-
-                    <div className = "flex justify-between mr-4">
-                        <p>Monthly min payments:</p>
-                        <p></p>
-                    </div>
-
-                    <div className = "flex justify-between mr-4">
-                        <p>% spending on essentials: </p>
-                        <p></p>
-                    </div>
-
-                    <div className = "flex justify-between mr-4">
-                        <p>Need more ideas for this: </p>
-                        <p></p>
-                    </div>
+            <div className= "flex-col ml-8 w-[20vw] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Statistics</h3>
+                </div>
+                <div className="flex flex-col w-[100%] h-[90%] rounded-lg grow min-h-0">
+                    <StatList/>
                 </div>
             </div>
         </div>
@@ -91,7 +62,7 @@ const DashboardPage = () => {
                 </div>
             </div>
 
-            <div className= "ml-8 w-[50vw] min-h-fit h-[40vh] border border-[#6d91e8] rounded-lg text-center bg-white/90">
+            <div className= "ml-8 w-[50vw] min-h-fit h-[60vh] border border-[#6d91e8] rounded-lg text-center bg-white/90">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Total Expenses by Month</h3>
                 <ExpensesLineChart />
             </div>
@@ -108,7 +79,7 @@ const DashboardPage = () => {
                 </div>
             </div>
 
-            <div className= "w-[50vw] min-h-fit h-[40vh] border border-[#6d91e8] rounded-lg text-center bg-white/90">
+            <div className= "w-[50vw] min-h-fit h-[60vh] border border-[#6d91e8] rounded-lg text-center bg-white/90">
                 <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Total Income by Month</h3>
                 <IncomeLineChart />
             </div>
@@ -126,11 +97,12 @@ const DashboardPage = () => {
             </div>
 
             <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <div className="flex w-[50vh%] absolute z-0">
-                    <GoalProgress />
-                        
+                <div className="flex w-[50vh] absolute z-0">
+                    <GoalProgress />    
                 </div>
-                <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mt-3">Reward</h3>
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Reward</h3>
+                </div>
                     
                 <div className='mt-10'>
                     <h5 style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 

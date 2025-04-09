@@ -68,11 +68,11 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
     return (
         <div>
             <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-md">${item.Amount.toFixed(2)}</span>
+                <span className="text-white font-semibold text-md">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                 <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
                 daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
             </div>
-            <p className="self-start text-white">{item.Name}, ${item.Monthly.toFixed(2)} / Mo</p>
+            <p className="self-start text-white">{item.Name}, ${item.Monthly.toLocaleString(undefined, {minimumFractionDigits: 2})} / Mo</p>
         </div>
     );
 };
@@ -106,9 +106,9 @@ function DebtList()
     if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0)
     {
         return(
-            <div className="m-5">
+            <div className="text-white m-5">
                 <p className="m-2">🥳 Congratulations! No debts to display. 🎉</p>
-                <p className="mt-5 mb-5">When you signed up, you had ${parsedData.User.InitialDebt} of debt.</p>
+                <p className="mt-5 mb-5">When you signed up, you had ${parsedData.User.InitialDebt.toLocaleString(undefined, {minimumFractionDigits: 2})} of debt.</p>
                 <p className="inline">(If you haven't added your debts yet in the </p>
                 <p className="inline underline text-[#6d91e8] cursor-pointer" onClick={navFinancials}>financials pane</p>
                 <p className="inline">, you should)</p>

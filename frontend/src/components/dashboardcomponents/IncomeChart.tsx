@@ -53,7 +53,7 @@ function IncomeChart()
   if(parsedData.User.Income == undefined  || parsedData.User.Income.length == 0)
   {
       return(
-          <div className="p-5">
+          <div className="text-white p-5">
               <p className="mt-5">Looks like you need to get your money up.</p>
               <p className="mt-5">Jobless much? 🤨</p>
 
@@ -64,7 +64,6 @@ function IncomeChart()
   const data = {
     labels: ParseLabels(),
     datasets: [{
-      label: 'Income',
       data: ParseData(),
       backgroundColor: [
         'rgb(255, 99, 132)',
