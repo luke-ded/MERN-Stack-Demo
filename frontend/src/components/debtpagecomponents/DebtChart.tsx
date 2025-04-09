@@ -55,7 +55,7 @@ function DebtChart()
   {
       return(
           <div className="text-white p-5">
-              <p className="mt-5">No debts to display.</p>
+              <p className="mt-5">No more info to display.</p>
           </div>
       );
   }
@@ -81,11 +81,15 @@ function DebtChart()
     type:Pie,
     responsive: true,
     borderWidth: 1.5,
-
+    plugins: {
+      legend: {
+        display: false, // Remove the legend
+      },
+    },
   };
 
   return (
-    <div className="flex items-center justify-center w-[75%] ml-[12.5%] mt-[5%] p-5">
+    <div className="flex items-center justify-center w-[75%] ml-[12.5%] mt-[1%] p-5">
       <Pie options={options} data={data}/>
     </div>
   );

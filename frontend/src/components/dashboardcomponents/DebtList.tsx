@@ -110,7 +110,7 @@ function DebtList()
                 <p className="m-2">🥳 Congratulations! No debts to display. 🎉</p>
                 <p className="mt-5 mb-5">When you signed up, you had ${parsedData.User.InitialDebt.toLocaleString(undefined, {minimumFractionDigits: 2})} of debt.</p>
                 <p className="inline">(If you haven't added your debts yet in the </p>
-                <p className="inline underline text-[#6d91e8] cursor-pointer" onClick={navFinancials}>financials pane</p>
+                <p className="inline underline text-[#6d91e8] cursor-pointer" onClick={navDebt}>debt pane</p>
                 <p className="inline">, you should)</p>
             </div>
         );
@@ -123,15 +123,15 @@ function DebtList()
         renderer: renderExpenseItem
     };
 
-    function navFinancials()
+    function navDebt()
     {
-        navigate('/financials');
+        navigate('/debt');
     }
 
     return (
         <ul className="shadow divide-y divide-[#7f8fb5] min-h-0 border-b border-[#6d91e8]">
         {props.items.map((item) => {
-            return <li onClick={navFinancials} className="px-[1vw] py-[1vh] cursor-pointer">{props.renderer(item)}</li>;
+            return <li onClick={navDebt} className="px-[1vw] py-[1vh] cursor-pointer">{props.renderer(item)}</li>;
         })}
         </ul>
     );
