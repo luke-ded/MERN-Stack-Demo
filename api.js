@@ -375,25 +375,99 @@ exports.setApp = function ( app, client )
             //Input and Field Check
             const {index, NewName, NewAmount, NewIfRecurring, NewInitialTime} = req.body;
             const {_id} = req.user;
-            if (!_id|| index == undefined|| !NewName || !NewAmount || NewIfRecurring == undefined){
+            if (!_id|| index == undefined|| !NewName || !NewAmount || NewIfRecurring == undefined || !NewInitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
             
             //Create objects for DB Statement
-            let newIncome = {};
+            let newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
             let indexSearch = `Income.${index}`;    //Concatenates the search string
-            if (NewIfRecurring){
-                newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
-            }
-            else{
-                newIncome = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring};
-            }
 
             //DB
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
                 {$set : {[indexSearch]: newIncome}}   //Pushing onto Income Array new Income
+            );
+
+            //Configure response and send JSON response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to edit income";
+            }
+            else{          //If user was updated 
+                Result = "Edited income of user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error.message);
+            res.status(500).json({Result: error.message});
+        }
+    });
+
+    //EditDebt API
+    //In: token, index, NewName, NewAmount, NewAPR, NewLoanLength, NewInitialTime
+    //Out: Result
+    app.post('/api/EditDebt', authenticateJWT, async (req,res) => {
+        let Result = "Could not edit debt";
+        try{
+            //Input and Field Check
+            const {index, NewName, NewAmount, NewAPR, NewLoanLength, NewInitialTime} = req.body;
+            const {_id} = req.user;
+            if (!_id|| index == undefined|| !NewName || !NewAmount  || !NewAPR || !NewLoanLength|| NewIfRecurring == undefined || !NewInitialTime){
+                throw new Error("Invalid Input");
+            }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            
+            //Create objects for DB Statement
+            let newDebt = {Name: NewName, Amount: NewAmount, APR: NewAPR, LoanLength: NewLoanLength, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
+            let indexSearch = `Debts.${index}`;    //Concatenates the search string
+
+            //DB
+            const user = await usersCollection.updateOne(
+                { _id: objectId},    //Search criteria
+                {$set : {[indexSearch]: newDebt}}   //Pushing onto Debts Array new Debt
+            );
+
+            //Configure response and send JSON response
+            if (user.matchedCount === 0) {          //If no user was updated
+                Result = "Could not find user to edit debt";
+            }
+            else{          //If user was updated 
+                Result = "Edited debt of user";
+            }
+
+            //Send JSON response
+            res.status(200).json({Result: Result});
+        } catch (error) {
+            console.error("❌ Error:", error.message);
+            res.status(500).json({Result: error.message});
+        }
+    });
+
+    //EditSaving API
+    //In: token, index, NewName, NewAmount, NewAPR, NewInitialTime
+    //Out: Result
+    app.post('/api/EditSaving', authenticateJWT, async (req,res) => {
+        let Result = "Could not edit saving";
+        try{
+            //Input and Field Check
+            const {index, NewName, NewAmount, NewAPR, NewInitialTime} = req.body;
+            const {_id} = req.user;
+            if (!_id|| index == undefined|| !NewName || !NewAmount || !NewAPR || !NewInitialTime){
+                throw new Error("Invalid Input");
+            }
+            const objectId = new ObjectId(_id); // Convert string to ObjectId
+            
+            //Create objects for DB Statement
+            let newSaving = {Name: NewName, Amount: NewAmount, APR: NewAPR, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
+            let indexSearch = `Savings.${index}`;    //Concatenates the search string
+
+            //DB
+            const user = await usersCollection.updateOne(
+                { _id: objectId},    //Search criteria
+                {$set : {[indexSearch]: newSaving}}   //Pushing onto Income Array new Income
             );
 
             //Configure response and send JSON response
@@ -421,20 +495,14 @@ exports.setApp = function ( app, client )
             //Input and Field Checks
             const {index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime} = req.body;
             const{_id} = req.user;
-            if (!_id || index == undefined|| !NewName || !NewAmount || !NewCategory || NewIfRecurring == undefined){
+            if (!_id || index == undefined|| !NewName || !NewAmount || !NewCategory || NewIfRecurring == undefined || !NewInitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
             
             //Create objects for DB Statement
-            let newExpense = {};
+            let newExpense = {Name: NewName, Amount: NewAmount, Category: NewCategory, IfRecurring: NewIfRecurring, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
             let indexSearch = `Expenses.${index}`;    //Concatenates the search string
-            if (NewIfRecurring){
-                newExpense = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
-            }
-            else{
-                newExpense = {Name: NewName, Amount: NewAmount, IfRecurring: NewIfRecurring};
-            }
             
             //DB
             const user = await usersCollection.updateOne(
