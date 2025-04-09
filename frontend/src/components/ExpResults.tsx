@@ -91,7 +91,7 @@ function displayEModal(item: Item) {
                 <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {date} id = "Expdate"></input>
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
-                <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Category} id = "ExpCat"></input>
+                <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = {item.Category} id = "Expcat"></input>
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem] mt-2">Is The Expense Recurring?</h5>
 
@@ -352,7 +352,7 @@ async function editExpenses(item: Item, date: string, isRecurring: boolean, even
      var Name = (document.getElementById("ExpName") as HTMLInputElement).value;
      var Amount = ((document.getElementById("Expnum") as HTMLInputElement).value);
      var newDate = (document.getElementById("Expdate") as HTMLInputElement).value;
-     var Cat = (document.getElementById("ExpCat") as HTMLInputElement).value;
+     var Cat = (document.getElementById("Expcat") as HTMLInputElement).value;
 
      console.log(Name);
 
