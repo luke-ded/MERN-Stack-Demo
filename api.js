@@ -567,11 +567,11 @@ exports.setApp = function ( app, client )
         }
     });
 
-    //DeleteIncome API
+    //DeleteDebt API
     //In: token, index
     //Out: Result
-    app.post('/api/DeleteIncome', authenticateJWT, async (req,res) => {
-        let Result = "Could not delete income";
+    app.post('/api/DeleteDebt', authenticateJWT, async (req,res) => {
+        let Result = "Could not delete debt";
         try{
             //Input and Field Checks
             const {index} = req.body;
@@ -580,7 +580,7 @@ exports.setApp = function ( app, client )
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
-            const indexSearch = `Income.${index}`;
+            const indexSearch = `Debts.${index}`;
 
             //DB 
             let user = await usersCollection.updateOne(
@@ -589,15 +589,15 @@ exports.setApp = function ( app, client )
             );
             user = await usersCollection.updateOne(
                 { _id: objectId },  //Search Criteria
-                { $pull: { Income: null } } // Remove null values after unset
+                { $pull: { Debts: null } } // Remove null values after unset
             );
 
             //Configure response
             if (user.matchedCount === 0) {          //If no user was updated
-                Result = "Could not find user to delete income";
+                Result = "Could not find user to delete debt";
             }
             else{          //If user was updated 
-                Result = "Deleted income from user";
+                Result = "Deleted debt from user";
             }
 
             //Send JSON response
@@ -608,11 +608,11 @@ exports.setApp = function ( app, client )
         }
     });
 
-    //DeleteIncome API
+    //DeleteSaving API
     //In: token, index
     //Out: Result
-    app.post('/api/DeleteIncome', authenticateJWT, async (req,res) => {
-        let Result = "Could not delete income";
+    app.post('/api/DeleteSaving', authenticateJWT, async (req,res) => {
+        let Result = "Could not delete saving";
         try{
             //Input and Field Checks
             const {index} = req.body;
@@ -621,7 +621,7 @@ exports.setApp = function ( app, client )
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
-            const indexSearch = `Income.${index}`;
+            const indexSearch = `Savings.${index}`;
 
             //DB 
             let user = await usersCollection.updateOne(
@@ -630,15 +630,15 @@ exports.setApp = function ( app, client )
             );
             user = await usersCollection.updateOne(
                 { _id: objectId },  //Search Criteria
-                { $pull: { Income: null } } // Remove null values after unset
+                { $pull: { Savings: null } } // Remove null values after unset
             );
 
             //Configure response
             if (user.matchedCount === 0) {          //If no user was updated
-                Result = "Could not find user to delete income";
+                Result = "Could not find user to delete saving";
             }
             else{          //If user was updated 
-                Result = "Deleted income from user";
+                Result = "Deleted saving from user";
             }
 
             //Send JSON response
