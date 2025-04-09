@@ -55,7 +55,7 @@ function DebtChart()
   {
       return(
           <div className="text-white p-5">
-              <p className="mt-5">No debts to display.</p>
+              <p className="mt-5">No more info to display.</p>
           </div>
       );
   }

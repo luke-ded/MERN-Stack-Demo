@@ -118,6 +118,23 @@ function StatList()
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
 
+    if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0) 
+        return(
+            <div>
+                <ul className="shadow divide-y divide-[#7f8fb5] min-h-0 border-b border-[#6d91e8]">
+                <li className="px-[1vw] py-[1vh] group">
+                    <div>
+                        <div className="flex justify-between items-center">
+                            <span className="text-white font-semibold text-3xl">Total Debt:</span>
+                            <span className="font-semibold text-3xl" style = {{color: (totalDebt == 0) ? '#36eba6' :'#ff6384'}}> ${totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                        </div>
+                    </div>
+                </li>
+                </ul>
+            </div>
+    );
+
+
     calcDebt(parsedData);
     calcIncome(parsedData);
     calcExpenses(parsedData);
