@@ -106,13 +106,12 @@ function calcAverageAPR(parsedData:any)
 
         }
 
-        console.log(counter.APR);
         averageAPR += counter.APR;
     }
 
-    console.log(averageAPR);
     averageAPR = averageAPR / parsedData.User.Debts.length;
 }
+
 
 function StatList() 
 {
@@ -153,15 +152,6 @@ function StatList()
                     </div>
                 </div>
             </li>
-            
-            <li className="px-[1vw] py-[1vh] group">
-                <div>
-                    <div className="flex justify-between items-center">
-                        <span className="text-white font-semibold text-md">Debt Payments this Month:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#ff6384' : '#36eba6'}}> ${totalMinPayments.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
-                    </div>
-                </div>
-            </li>
 
             <li className="px-[1vw] py-[1vh] group">
                 <div>
@@ -176,7 +166,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Average Min Monthly Payment:</span>
-                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${totalMinPayments.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                        <span className="font-semibold text-md" style = {{color: (totalMinPayments == 0) ? '#36eba6' :'#ff6384'}}> ${(totalMinPayments/parsedData.User.Debts.length).toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
                     </div>
                 </div>
             </li>
