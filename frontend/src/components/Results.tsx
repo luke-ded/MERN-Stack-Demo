@@ -121,19 +121,35 @@ function refreshIncomeList() {
     const container = document.getElementById("list");
     if (!container) return;
 
-    const props: PropsType = {
-        items: setIncome(),
-        renderer: renderExpenseItem
-    };
-
-    const listItems = props.items.map((item) => (
-        <li key={item.key} className="px-[1vw] py-[1vh] cursor-pointer">
-            {props.renderer(item)}
-        </li>
-    ));
-
+    var data = localStorage.getItem('user_data');
+    var parsedData = data ? JSON.parse(data) : null;
     const root = ReactDOM.createRoot(container);
-    root.render(<>{listItems}</>);
+
+    if (parsedData.User.Income == undefined  || parsedData.User.Income.length == 0){
+        
+        root.render(
+        <>
+        <div className="text-white p-5">
+                        <p className="mt-5">Looks like you need to get your money up.</p>
+                        <p className="mt-5">Jobless much? 🤨</p>
+        </div>
+        </>);
+
+    } else {
+        const props: PropsType = {
+            items: setIncome(),
+            renderer: renderExpenseItem
+        };
+    
+        
+        const listItems = props.items.map((item) => (
+            <li key={item.key} className="px-[1vw] py-[1vh] cursor-pointer">
+                {props.renderer(item)}
+            </li>
+        ));
+    
+        root.render(<>{listItems}</>);
+    }
 }
 
 function setIncome()
@@ -186,7 +202,7 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
     return (
         <div>
             <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-md">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                <span className="text-white font-semibold text-md">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                 <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
                 daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
                 
@@ -423,52 +439,52 @@ function Results()
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
 
-    if(parsedData.User.Income == undefined  || parsedData.User.Income.length == 0)
-    {
-        return(
-            <div id = "results">
-                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Income</span>
-                </div>
-
-                <div className="text-white p-5">
-                    <p className="mt-5">Looks like you need to get your money up.</p>
-                    <p className="mt-5">Jobless much? 🤨</p>
-                </div>
-            </div>
-        );
-    }
+    
      
     var props: PropsType = {
         items: setIncome(),
         renderer: renderExpenseItem
     };
     
+    if(parsedData.User.Income == undefined  || parsedData.User.Income.length == 0)
+    {
+            return(
+                <div id = "results">
+                    <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                        <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Income</span>
+                    </div>
     
+                    <div className="text-white p-5">
+                        <p className="mt-5">Looks like you need to get your money up.</p>
+                        <p className="mt-5">Jobless much? 🤨</p>
+                    </div>
+                </div>
+            );
+    } else {
+        return(
+            <div id = "results" className="flex flex-col h-full">
     
-    return(
-        <div id = "results" className="flex flex-col h-full">
-
-            <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Income</span>
-
-            </div>
-
-            
-            <div className = "flex flex-col flex-grow min-h-0">
-                <ul className="flex-grow overflow-y-auto shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2" id = "list"> 
-                    {props.items.map((item) => {
-                    return <li className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
-                    })}
-                </ul>
-            </div>
-
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+    
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Income</span>
+    
+                </div>
+    
                 
-           
-
-        </div>
-    );
+                <div className = "flex flex-col flex-grow min-h-0">
+                    <ul className="flex-grow overflow-y-auto shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2" id = "list"> 
+                        {props.items.map((item) => {
+                        return <li className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
+                        })}
+                    </ul>
+                </div>
+    
+                    
+               
+    
+            </div>
+        );
+    }
 }
 
 

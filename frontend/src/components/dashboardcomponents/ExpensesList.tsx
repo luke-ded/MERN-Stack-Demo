@@ -65,7 +65,7 @@ const renderExpenseItem = (item: Item): React.ReactNode =>
     return (
         <div>
             <div className="flex justify-between items-center">
-                <span className="text-white font-semibold text-md">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                <span className="text-white font-semibold text-md">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                 <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
                 daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
             </div>
@@ -121,9 +121,9 @@ function ExpensesList()
     }
 
     return (
-        <ul className="shadow divide-y divide-[#7f8fb5] min-h-0 border-b border-[#6d91e8]">
+        <ul className="shadow divide-y divide-[#7f8fb5] min-h-0">
         {props.items.map((item) => {
-            return <li onClick={navFinancials} className="px-[1vw] py-[1vh] cursor-pointer">{props.renderer(item)}</li>;
+            return <li onClick={navFinancials} className="px-[1vw] py-[1vh] cursor-pointer border-b border-[#7f8fb5]">{props.renderer(item)}</li>;
         })}
         </ul>
     );

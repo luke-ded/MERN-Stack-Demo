@@ -3,7 +3,11 @@
 import {useState} from 'react'
 
 
-function Finances(){
+interface ChildProps {
+    triggerRerender: () => void;
+}
+
+const Finances: React.FC<ChildProps> = ({ triggerRerender }) => {
 
     const [isRecurring, setRecurring] = useState(false);
     const [isButtonClicked, setButton] = useState(false);
@@ -74,7 +78,8 @@ function Finances(){
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.visibility = "visible";
 
-                    updateInfo();
+                    await updateInfo();
+                    triggerRerender();
                 }
 
             } else {

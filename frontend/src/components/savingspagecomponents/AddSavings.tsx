@@ -3,7 +3,11 @@
 //import {useState} from 'react'
 
 
-function AddDebt(){
+interface ChildProps {
+    triggerRerender: () => void;
+}
+
+const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
 
     //const [isButtonClicked, setButton] = useState(false);
 
@@ -17,20 +21,19 @@ function AddDebt(){
         setButton(true);
     }
  */
-    // Change below to real add debt api
-    async function addDebt(event: any): Promise<void>{
+
+    async function addSavings(event: any): Promise<void>{
         
-        const valAmount = (document.getElementById("Num") as HTMLInputElement).value;
+        const Amount = parseFloat((document.getElementById("Num") as HTMLInputElement).value);
         const name = (document.getElementById("Name") as HTMLInputElement).value;
         const date = (document.getElementById("date") as HTMLInputElement).value;
         const apr = parseFloat((document.getElementById("date") as HTMLInputElement).value);
-        const term = parseFloat((document.getElementById("term") as HTMLInputElement).value);
         const alertMessage = document.getElementById("alertMessage");
         
 
         if (alertMessage) {
-            if (date.length == 0 || name.length == 0 || valAmount.length == 0 || 
-                /* isButtonClicked == false || */ term == undefined || apr == undefined){
+            if (date.length == 0 || name.length == 0 || Amount == undefined || 
+                /* isButtonClicked == false || */  apr == undefined){
                 alertMessage.innerText = "Please Complete all the fields";
                 alertMessage.style.visibility = "visible";
                 return;
@@ -38,48 +41,44 @@ function AddDebt(){
         }
        
         const token = localStorage.getItem('token');
-
-        const Amount = parseFloat(valAmount);
         
         const [month, day, year] = date.split("/");
         const InitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
 
         console.log(InitialTime);
         event.preventDefault();
-        var obj = {Name: name, Amount: Amount, APR: apr, LoanLength:term, InitialTime: InitialTime};
+        var obj = {Name: name, Amount: Amount, APR: apr, InitialTime: InitialTime};
         var js = JSON.stringify(obj);
 
         try {
-
-            const response = await fetch('http://salvagefinancial.xyz:5000/api/AddDebt',
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/AddSaving',
             {method:'POST',body:js,headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
             var res = JSON.parse(await response.text());
             
-            if (res.Result != "Added debt to user"){
-                
+            if (res.Result != "Added saving to user")
+            {  
                 if (alertMessage){
                     alertMessage.innerText = "Unsuccesfully Added";
                     alertMessage.style.visibility = "visible";
                 }
-
-            } else {
-
                 
+                updateInfo();
+            } 
+            else 
+            {   
                 if (alertMessage){
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.visibility = "visible";
                 }
 
-                updateInfo();
-
+                await updateInfo();
+                triggerRerender()
             }
-
-
-        } catch(error: any) {
-
+        } 
+        catch(error: any) 
+        {
             alert(error.toString());
             return;
-
         }
     }
     
@@ -113,8 +112,10 @@ function AddDebt(){
         <div id = "visual">
             
             <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Debt</span>
-                </div>
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Savings</span>
+            </div>
+
+            <div className="flex-col">
 
                 <h5 className="self-start ml-[10%] mt-2 text-lg text-left text-[0.95rem]">Name</h5>
                 <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Name" id = "Name"></input>
@@ -130,15 +131,12 @@ function AddDebt(){
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Interest Rate (APR)</h5>
                 <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "1.23" id = "apr"></input>
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Term (Months)</h5>
-                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "12" id = "term"></input>
+                <h5 className="mt-3 text-[0.95rem]" id="alertMessage"></h5>
 
-                <h5 className="fixed top-[68.5%] left-[33.5%] mt-3 text-[0.95rem]" id="alertMessage"></h5>
-
-                <button id = "ExpenseAdd" className = "rounded-sm inline-block absolute top-[83%] left-[42%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addDebt}>Add Debt</button>
-                
+                <button id = "ExpenseAdd" className = "rounded-sm inline-block mt-5  h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addSavings}>Add Account</button>
+            </div> 
         </div>
     );
 }
 
-export default AddDebt;
+export default AddSavings;
