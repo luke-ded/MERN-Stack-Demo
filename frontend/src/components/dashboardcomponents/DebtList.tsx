@@ -129,9 +129,9 @@ function DebtList()
     }
 
     return (
-        <ul className="shadow divide-y divide-[#7f8fb5] min-h-0 border-b border-[#6d91e8]">
+        <ul className="shadow divide-y divide-[#7f8fb5] min-h-0">
         {props.items.map((item) => {
-            return <li onClick={navDebt} className="px-[1vw] py-[1vh] cursor-pointer">{props.renderer(item)}</li>;
+            return <li onClick={navDebt} className="px-[1vw] py-[1vh] cursor-pointer border-b border-[#7f8fb5]">{props.renderer(item)}</li>;
         })}
         </ul>
     );
