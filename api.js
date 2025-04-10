@@ -249,21 +249,21 @@ exports.setApp = function ( app, client )
     });
 
     //AddDebt API
-    //In: token, Name, Amount, APR, LoanLength, InitialTime
+    //In: token, Name, Amount, APR, Monthly, LoanLength, InitialTime
     //Out: Result
     app.post('/api/AddDebt', authenticateJWT, async (req,res) => {
         let Result = "Could not add debt";
         try{
             //Input and Field Check
-            const {Name, Amount, APR, LoanLength, InitialTime} = req.body;
+            const {Name, Amount, APR, Monthly, LoanLength, InitialTime} = req.body;
             const {_id} = req.user;
-            if (!_id || !Name || !Amount || !APR || !LoanLength || !InitialTime){
+            if (!_id || !Name || !Amount || !APR || !Monthly ||  !LoanLength || !InitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //Create Objects for DB statement
-            let newDebt = {Name: Name, Amount: Amount, APR: APR, LoanLength: LoanLength, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
+            let newDebt = {Name: Name, Amount: Amount, APR: APR, Monthly: Monthly, LoanLength: LoanLength, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
 
             //DB Statement
             const user = await usersCollection.updateOne(
@@ -407,21 +407,21 @@ exports.setApp = function ( app, client )
     });
 
     //EditDebt API
-    //In: token, index, NewName, NewAmount, NewAPR, NewLoanLength, NewInitialTime
+    //In: token, index, NewName, NewAmount, NewAPR, NewMonthly, NewLoanLength, NewInitialTime
     //Out: Result
     app.post('/api/EditDebt', authenticateJWT, async (req,res) => {
         let Result = "Could not edit debt";
         try{
             //Input and Field Check
-            const {index, NewName, NewAmount, NewAPR, NewLoanLength, NewInitialTime} = req.body;
+            const {index, NewName, NewAmount, NewAPR, NewMonthly, NewLoanLength, NewInitialTime} = req.body;
             const {_id} = req.user;
-            if (!_id|| index == undefined|| !NewName || !NewAmount  || !NewAPR || !NewLoanLength|| NewIfRecurring == undefined || !NewInitialTime){
+            if (!_id|| index == undefined|| !NewName || !NewAmount  || !NewAPR || !NewMonthly || !NewLoanLength|| NewIfRecurring == undefined || !NewInitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
             
             //Create objects for DB Statement
-            let newDebt = {Name: NewName, Amount: NewAmount, APR: NewAPR, LoanLength: NewLoanLength, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
+            let newDebt = {Name: NewName, Amount: NewAmount, APR: NewAPR, Monthly: NewMonthly, LoanLength: NewLoanLength, InitialTime: {Month: NewInitialTime.Month, Day: NewInitialTime.Day, Year: NewInitialTime.Year}};
             let indexSearch = `Debts.${index}`;    //Concatenates the search string
 
             //DB
