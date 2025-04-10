@@ -464,14 +464,11 @@ function ExpResults()
             </div>
         );
     }
-  
 
     var props: PropsType = {
         items: setExpenses(),
         renderer: renderExpenseItem
     };
-
-
 
     return(
 
