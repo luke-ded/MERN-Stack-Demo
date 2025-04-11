@@ -402,10 +402,6 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
 
     return (
         <div>
-            <div className="flex h-[10%] items-center justify-center">
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2vh] text-[#ffffff]"> Edit your Expense</span>
-            </div>
-      
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
             <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" value={name} onChange={(e) => setName(e.target.value)} placeholder = {item.Name} id = "Expname"/>       
                 
@@ -419,16 +415,18 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
             <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" value={category} onChange={(e) => setCategory(e.target.value)} placeholder = {item.Category} id = "Expcat"/>
     
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem] mt-2">Is The Expense Recurring?</h5>
-            <div className = "absolute top-[76%] right-[14%]">
-                <label>
-                    <input type="radio" name="radios" checked={isRecurring === true} onChange={() => setIsRecurring(true)}></input>
-                Yes </label>
-                        
-    
-                <label>
-                    <input type="radio" name="radios" checked={isRecurring === false} onChange={() => setIsRecurring(false)}></input>
-                No </label>  
+            <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10">
+                <h5 className="self-start text-lg text-left text-[0.95rem]">Is The Income Recurring?</h5>  
+                <div>
+                    <label>
+                        <input type="radio" name="radios" checked={isRecurring === true} onChange={() => setIsRecurring(true)}></input>
+                    Yes </label>
+                            
+        
+                    <label>
+                        <input type="radio" name="radios" checked={isRecurring === false} onChange={() => setIsRecurring(false)}></input>
+                    No </label>  
+                </div>
             </div>
     
     
