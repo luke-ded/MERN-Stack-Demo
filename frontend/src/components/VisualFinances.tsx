@@ -1,6 +1,7 @@
 //import app from "../pages/App.module.css";
 //import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
+import sound from "../assets/saxophone .wav"
 
 
 interface ChildProps {
@@ -76,6 +77,12 @@ const VisualFinances: React.FC<ChildProps> = ({ triggerRerender }) => {
 
                 
                 if (alertMessage){
+
+                    if (userName.toLowerCase() === "saxophone" || userName.toLowerCase() === "saxophones"){
+                        new Audio(sound).play()
+                    }
+
+
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.visibility = "visible";
                 }

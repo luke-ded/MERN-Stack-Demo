@@ -261,8 +261,6 @@ const Results: React.FC<ChildProps> = ({ triggerRerender }) =>
         const token = localStorage.getItem('token');
 
         var index = 0;
-
-       
         index = parseInt(item.key);
         
         console.log("The index you are deleting is " + index);
