@@ -17,7 +17,8 @@ interface PropsType
     renderer: (item: Item) => React.ReactNode;
 }
 
-interface ChildProps {
+interface ChildProps 
+{
     triggerRerender: () => void;
 }
 
@@ -30,17 +31,20 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
     const [editingItem, setEditingItem] = useState<Item | null>(null);
     const [deletingItem, setDeletingItem] = useState<Item | null>(null);
 
-    const handleEditClick = (item: Item) => {
+    const handleEditClick = (item: Item) => 
+    {
         setDeletingItem(null);
         setEditingItem(item);
     };
 
-    const handleDeleteClick = (item: Item) => {
+    const handleDeleteClick = (item: Item) => 
+    {
         setEditingItem(null);
         setDeletingItem(item);
     };
 
-    const handleCancel = () => {
+    const handleCancel = () => 
+    {
         setEditingItem(null);
         setDeletingItem(null);
     };
@@ -135,8 +139,8 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
         }
     }
     
-    async function deleteExpense(item: Item) : Promise<void>{
-    
+    async function deleteExpense(item: Item) : Promise<void>
+    {
         var data = localStorage.getItem('user_data');
         var parsedData = data ? JSON.parse(data) : null;
         console.log(parsedData);
@@ -151,8 +155,8 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
         var obj = {index: index};
         var js = JSON.stringify(obj);
         
-        try {
-    
+        try 
+        {
             const response = await fetch('http://salvagefinancial.xyz:5000/api/DeleteExpense',
             {method:'POST',body:js,headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
             var res = JSON.parse(await response.text());
@@ -164,27 +168,31 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
                 triggerRerender();
                 handleCancel();
                 return;
-            } else if (res.Result == "Could not find user to delete expense"){
+            } 
+            else if (res.Result == "Could not find user to delete expense")
+            {
                 console.log(res.Result);
                 return;
-            } else if (res.Result == "Could not delete expense"){
+            } 
+            else if (res.Result == "Could not delete expense")
+            {
                 console.log(res.Result);
                 return;
             }
-    
-    
-        } catch (error: any){
+        } 
+        catch (error: any)
+        {
             alert(error.toString());
             return;
         }
-    
     }
     
     async function editExpenses(item: Item, dateStr: string, isRecurring: boolean | null) 
     {
-        if (isRecurring === null) {
-             alert("Error: Recurring status not set."); // Or handle differently
-             return;
+        if (isRecurring === null) 
+        {
+            alert("Error: Recurring status not set."); // Or handle differently
+            return;
         }
         const token = localStorage.getItem('token');
 
@@ -193,7 +201,8 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
         // Values are passed directly from EditModal state now
         const NewInitialTime = { Month: parseInt(dateStr.split("/")[0]), Day: parseInt(dateStr.split("/")[1]), Year: parseInt(dateStr.split("/")[2]) };
 
-        var obj = {
+        var obj = 
+        {
              index: index,
              NewName: item.Name, // Already updated in EditModal state
              NewAmount: item.Amount, // Already updated in EditModal state
@@ -201,29 +210,36 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
              NewIfRecurring: isRecurring,
              NewInitialTime: NewInitialTime
         };
+
         var js = JSON.stringify(obj);
 
-        try {
-             const response = await fetch('http://salvagefinancial.xyz:5000/api/EditExpense',
-                 { method:'POST', body:js, headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
-             var res = JSON.parse(await response.text());
+        try 
+        {
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/EditExpense',
+                { method:'POST', body:js, headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+            var res = JSON.parse(await response.text());
 
-             if (res.Result === "Edited expense of user") {
+            if (res.Result === "Edited expense of user") 
+            {
                 console.log("edited\n");
-                 await setInfo();
-                 triggerRerender(); // Ensure parent knows data changed
-                 handleCancel(); // Close modal
-             } else {
-                 console.error("Edit failed:", res.Result);
-                  // Consider adding user feedback here
-             }
-        } catch (error: any) {
-             alert(error.toString());
+                await setInfo();
+                triggerRerender(); // Ensure parent knows data changed
+                handleCancel(); // Close modal
+            } 
+            else 
+            {
+                console.error("Edit failed:", res.Result);
+                // Consider adding user feedback here
+            }
+        } 
+        catch (error: any) 
+        {
+            alert(error.toString());
         }
     }
     
     async function setInfo() : Promise<void>
-      {
+    {
         
         console.log(localStorage.getItem('token'));
         
@@ -247,7 +263,7 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
             alert(error.toString());
             return;
         }
-      }
+    }
     
 
     if(parsedData.User.Expenses == undefined || parsedData.User.Expenses.length == 0)
@@ -265,7 +281,8 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
         );
     }
 
-    var props: PropsType = {
+    var props: PropsType = 
+    {
         items: setExpenses(),
         renderer: renderExpenseItem
     };
@@ -312,21 +329,26 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
     );
 }
 
+
 // Modal components
-interface ModalProps {
+interface ModalProps 
+{
     item: Item;
     onCancel: () => void;
 }
 
-interface EditModalProps extends ModalProps {
+interface EditModalProps extends ModalProps 
+{
      onSave: (item: Item, dateStr: string, isRecurring: boolean | null) => Promise<void>;
 }
 
-interface DeleteModalProps extends ModalProps {
+interface DeleteModalProps extends ModalProps 
+{
     onConfirm: (item: Item) => Promise<void>;
 }
 
-const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) => {
+const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) => 
+{
     // Use state for form inputs
     const [name, setName] = useState(item.Name);
     
@@ -342,7 +364,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) => {
     const [category, setCategory] = useState(item.Category);
     const [isRecurring, setIsRecurring] = useState<boolean | null>(null);
 
-    const handleSaveClick = () => {
+    const handleSaveClick = () => 
+    {
         if (isRecurring === null) 
         {
             alert("Please select if the expense is recurring."); // CHange all these alerts to standard error message
@@ -379,21 +402,15 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) => {
 
     return (
         <div>
-        <div className="flex h-[10%] items-center justify-center">
-    
-            <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2vh] text-[#ffffff]"> Edit your Expense</span>
-    
-        </div>
-    
-               
+            <div className="flex h-[10%] items-center justify-center">
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2vh] text-[#ffffff]"> Edit your Expense</span>
+            </div>
+      
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" value={name} onChange={(e) => setName(e.target.value)} placeholder = {item.Name} id = "Expname"/>
-    
-                     
+            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" value={name} onChange={(e) => setName(e.target.value)} placeholder = {item.Name} id = "Expname"/>       
                 
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
             <input type="number" className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder = {typeof item.Amount === 'number' ? item.Amount.toString() : 'Amount'} id = "Expnum"/>
-    
                    
     
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
@@ -403,9 +420,6 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) => {
             <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" value={category} onChange={(e) => setCategory(e.target.value)} placeholder = {item.Category} id = "Expcat"/>
     
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem] mt-2">Is The Expense Recurring?</h5>
-    
-                    
-    
             <div className = "absolute top-[76%] right-[14%]">
                 <label>
                     <input type="radio" name="radios" checked={isRecurring === true} onChange={() => setIsRecurring(true)}></input>
@@ -420,13 +434,13 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) => {
     
             <button id = "EditIncome" className = "fixed left-[29%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={handleSaveClick}>Edit Expense</button>
             <button className = "fixed right-[31%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={onCancel}> Cancel</button>
-    
-    </div>
+        </div>
     );
 };
 
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ item, onConfirm, onCancel }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ item, onConfirm, onCancel }) => 
+{
     // Ensure date components are valid before creating string
     const date = !isNaN(item.Date.Month) && !isNaN(item.Date.Day) && !isNaN(item.Date.Year)
        ? `${item.Date.Month}/${item.Date.Day}/${item.Date.Year}`
@@ -437,31 +451,27 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ item, onConfirm, onCancel }) 
 
     return (
         <div>
-        <div className="flex h-[10%] items-center justify-center">
-    
-            <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Do you want to delete this Expense?</span>
-    
-        </div>
-    
-        <br></br>
-    
-        <h5 className="self-start ml-[10%] text-lg text-center">Name:  {item.Name}</h5>
-    
-        <br></br>
-                
-        <h5 className="self-start ml-[10%] text-lg text-center">Amount: {amount}</h5>
-    
-        <br></br>
-    
-        <h5 className="self-start ml-[10%] text-lg text-center">Date: {date}</h5>
-    
-    
-        <button className = "fixed left-[38%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => onConfirm(item)}> Confirm</button>
-        <button className = "fixed right-[27%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {onCancel}> Cancel</button>
-    
-    
+            <div className="flex h-[10%] items-center justify-center">
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Do you want to delete this Expense?</span>
+            </div>
+        
+            <br />
+        
+            <h5 className="self-start ml-[10%] text-lg text-center">Name:  {item.Name}</h5>
+        
+            <br />
+                    
+            <h5 className="self-start ml-[10%] text-lg text-center">Amount: {amount}</h5>
+        
+            <br />
+        
+            <h5 className="self-start ml-[10%] text-lg text-center">Date: {date}</h5>
+        
+        
+            <button className = "fixed left-[38%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => onConfirm(item)}> Confirm</button>
+            <button className = "fixed right-[27%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {onCancel}> Cancel</button>
         </div>
     );
- };
+};
 
 export default ExpensesList;
