@@ -16,7 +16,6 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
         const apr = parseFloat((document.getElementById("date") as HTMLInputElement).value);
         const term = parseFloat((document.getElementById("term") as HTMLInputElement).value);
         const alertMessage = document.getElementById("alertMessage");
-        var monthly = 10;
 
         if (alertMessage) {
             if (date.length == 0 || name.length == 0 || valAmount.length == 0 || 
@@ -26,7 +25,20 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
                 return;
             } 
         }
-       
+        
+        function calcMonthly(calcAmount : any, calcAPR : any, calcTerm : any)
+        {
+            var i = 0.0, num = 0.0, denom = 0.0, res = 0.0;
+
+            i = (calcAPR / 100) / 12;
+            num = calcAmount * (i * ((1 + i)** calcTerm))
+            denom = ((1 + i) ** (calcTerm)) - 1;
+
+            res = num / denom;
+
+            return res;
+        }
+
         const token = localStorage.getItem('token');
 
         const Amount = parseFloat(valAmount);
@@ -36,7 +48,7 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
 
         
         event.preventDefault();
-        var obj = {Name: name, Amount: Amount, APR: apr, LoanLength:term, InitialTime: InitialTime, Monthly: monthly};
+        var obj = {Name: name, Amount: Amount, APR: apr, LoanLength:term, InitialTime: InitialTime, Monthly: calcMonthly(Amount, apr, term)};
         console.log(obj);
         var js = JSON.stringify(obj);
 

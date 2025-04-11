@@ -438,6 +438,19 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
     const [term, setTerm] = useState(item.Term);
     const [monthly, setMonthly] = useState(item.Monthly);
 
+    function calcMonthly(calcAmount : any, calcAPR : any, calcTerm : any)
+    {
+        var i = 0.0, num = 0.0, denom = 0.0, res = 0.0;
+
+        i = (calcAPR / 100) / 12;
+        num = calcAmount * (i * ((1 + i)** calcTerm))
+        denom = ((1 + i) ** (calcTerm)) - 1;
+
+        res = num / denom;
+
+        return res;
+    }
+
     const handleSaveClick = () => 
     {   
             const alertMessage = document.getElementById("alertMessagess");
@@ -497,7 +510,7 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
                 Amount: parsedAmount,
                 APR: parsedAPR,
                 Term: parsedTerm,
-                Monthly: monthly, /* replace with equation to determine monthly payment */
+                Monthly: calcMonthly(parsedAmount, parsedAPR, parsedTerm), /* replace with equation to determine monthly payment */
             };
             
             
