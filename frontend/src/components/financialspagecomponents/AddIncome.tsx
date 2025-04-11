@@ -32,6 +32,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
         if (alertMessage) {
             if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || isButtonClicked == false){
                 alertMessage.innerText = "Please Complete all the fields";
+                alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible";
                 return;
             } 
@@ -61,6 +62,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                 
                 if (alertMessage){
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
 
@@ -68,6 +70,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                 
                 if (alertMessage) {
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
 
@@ -87,6 +90,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
 
                 if (alertMessage) {
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
 

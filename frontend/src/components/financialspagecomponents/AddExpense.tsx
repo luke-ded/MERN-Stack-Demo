@@ -35,6 +35,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
         if (alertMessage) {
             if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || isButtonClicked == false || Category.length == 0){
                 alertMessage.innerText = "Please Complete all the fields";
+                alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible";
                 return;
             } 
@@ -63,6 +64,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
                 
                 if (alertMessage){
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
 
@@ -70,6 +72,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
                 
                 if (alertMessage) {
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
 
@@ -95,6 +98,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
 
                 if (alertMessage) {
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
 
