@@ -1,6 +1,6 @@
 import NavBar from '../components/NavBar.tsx';
 import AddDebt from '../components/debtpagecomponents/AddDebt.tsx';
-import ExpensesList from '../components/financialspagecomponents/ExpensesList.tsx';
+import DebtList from '../components/debtpagecomponents/DebtList.tsx';
 import StatList from '../components/debtpagecomponents/StatList.tsx';
 import DebtChart from '../components/debtpagecomponents/DebtChart.tsx';
 import {useState} from 'react';
@@ -31,7 +31,7 @@ const FinancialsPage = () => {
 
         
         <div className = "block absolute top-[76%] left-[70%] w-[30%] h-[44%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "ExpensesListBar">
-            <ExpensesList triggerRerender={triggerRerender}/>
+            <DebtList triggerRerender={triggerRerender}/>
         </div>
     </div>
   );
