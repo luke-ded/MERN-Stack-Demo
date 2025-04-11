@@ -355,7 +355,7 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
     const [date, setDate] = useState(dateStr);
     const [isRecurring, setIsRecurring] = useState<boolean | null>(null);
 
-    onst handleSaveClick = () => {
+    const handleSaveClick = () => {
         const alertMessage = document.getElementById("alertMessages");
 
         if (isRecurring === null && alertMessage) 
