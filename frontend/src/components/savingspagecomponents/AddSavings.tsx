@@ -99,7 +99,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
         <div id = "visual">
             
             <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Savings</span>
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add an Account</span>
             </div>
 
             <div className="flex-col">
