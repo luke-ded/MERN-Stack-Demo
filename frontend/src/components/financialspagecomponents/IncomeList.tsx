@@ -399,7 +399,7 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
             <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" value={date} onChange={(e) => setDate(e.target.value)} placeholder = {dateStr || 'MM/DD/YYYY'} id = "expdate"/>
 
-            <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10 bg-red-400/50">
+            <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10">
                 <h5 className="self-start text-lg text-left text-[0.95rem]">Is The Income Recurring?</h5>  
                 <div>
                     <label>
