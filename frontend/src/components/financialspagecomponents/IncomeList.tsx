@@ -355,26 +355,38 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
     const [date, setDate] = useState(dateStr);
     const [isRecurring, setIsRecurring] = useState<boolean | null>(null);
 
-    const handleSaveClick = () => {
-        if (isRecurring === null) 
+    onst handleSaveClick = () => {
+        const alertMessage = document.getElementById("alertMessages");
+
+        if (isRecurring === null && alertMessage) 
         {
-            alert("Please select if the income is recurring."); // CHange all these alerts to standard error message
+            alertMessage.innerText = "Please specify if recurring";
+            alertMessage.style.visibility = "visible"; 
             return;
         }
 
         // Validate inputs (e.g., date format, amount is number) before saving
         const parsedAmount = parseFloat(amount);
-        if (isNaN(parsedAmount)) 
+        if (isNaN(parsedAmount) && alertMessage) 
         {
-            alert("Please enter a valid amount.");
+           
+            alertMessage.innerText = "Please enter a valid amount";
+            alertMessage.style.visibility = "visible"; 
             return;
         }
 
         // Basic date format check (MM/DD/YYYY)
-        if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date)) 
-        {
-            alert("Please enter the date in MM/DD/YYYY format.");
+        if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date) && alertMessage) 
+        {   
+            
+            alertMessage.innerText = "Please enter the date in MM/DD/YYYY format.";
+            alertMessage.style.visibility = "visible"; 
             return;
+        }
+
+        if (alertMessage){
+            alertMessage.innerText = "";
+            alertMessage.style.visibility = "hidden"; 
         }
 
         // Create an updated item object to pass to the save function
@@ -412,7 +424,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
                     No </label>  
                 </div>
             </div>
-    
+
+            <h5 className="mt-4.5" id="alertMessages"></h5>
     
             <button id = "EditIncome" className = "fixed left-[29%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={handleSaveClick}>Edit Income</button>
             <button className = "fixed right-[31%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={onCancel}> Cancel</button>
