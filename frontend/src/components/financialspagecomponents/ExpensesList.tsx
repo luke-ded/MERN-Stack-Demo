@@ -188,10 +188,6 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
         }
         const token = localStorage.getItem('token');
 
-        // WARNING: Calculating index based on sorted/filtered 'key' (which is just the loop counter 'i')
-        // is highly fragile if the underlying data order in localStorage can change relative
-        // to the API's expected index. Prefer using a stable unique ID (_id).
-        // Using item.key as index for now, assuming it matches API expectation.
         var index = parseInt(item.key);
 
         // Values are passed directly from EditModal state now
