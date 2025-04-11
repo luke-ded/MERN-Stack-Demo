@@ -6,21 +6,8 @@ interface ChildProps {
     triggerRerender: () => void;
 }
 
-const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) => {
-
-    //const [isButtonClicked, setButton] = useState(false);
-
-    /* function setYes(){
-        setRecurring(true);
-        setButton(true);
-    }
-
-    function setNo(){
-        setRecurring(false);
-        setButton(true);
-    }
- */
-    // Change below to real add debt api
+const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) => 
+{
     async function addDebt(event: any): Promise<void>{
         
         const valAmount = (document.getElementById("Num") as HTMLInputElement).value;
@@ -29,7 +16,7 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) => {
         const apr = parseFloat((document.getElementById("date") as HTMLInputElement).value);
         const term = parseFloat((document.getElementById("term") as HTMLInputElement).value);
         const alertMessage = document.getElementById("alertMessage");
-        
+        var monthly = 10;
 
         if (alertMessage) {
             if (date.length == 0 || name.length == 0 || valAmount.length == 0 || 
@@ -47,9 +34,10 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) => {
         const [month, day, year] = date.split("/");
         const InitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
 
-        console.log(InitialTime);
+        
         event.preventDefault();
-        var obj = {Name: name, Amount: Amount, APR: apr, LoanLength:term, InitialTime: InitialTime};
+        var obj = {Name: name, Amount: Amount, APR: apr, LoanLength:term, InitialTime: InitialTime, Monthly: monthly};
+        console.log(obj);
         var js = JSON.stringify(obj);
 
         try {
@@ -137,9 +125,10 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) => {
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Term (Months)</h5>
                 <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "12" id = "term"></input>
 
-                <h5 className="mt-3 text-[0.95rem]" id="alertMessage"></h5>
-
-                <button id = "ExpenseAdd" className = "rounded-sm inline-block mt-5  h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addDebt}>Add Account</button>
+                <div className="fixed top-[88%] w-[100%] flex items-center justify-between">
+                    <h5 className="ml-[10%] text-[#ff6384]" id="alertMessage"></h5>
+                    <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addDebt} >Add Debt</button>
+                </div> 
             </div>                
         </div>
     );

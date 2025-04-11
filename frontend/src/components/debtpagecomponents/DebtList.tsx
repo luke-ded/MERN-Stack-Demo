@@ -1,6 +1,7 @@
 
 import * as React from "react";
 import {useState} from "react";
+import Confetti from 'react-confetti';
 
 interface Item 
 {
@@ -32,26 +33,53 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender }) =>
 
     const [editingItem, setEditingItem] = useState<Item | null>(null);
     const [deletingItem, setDeletingItem] = useState<Item | null>(null);
+    const [payoffItem, setPayoffItem] = useState<Item | null>(null);
 
     const handleEditClick = (item: Item) => 
     {
         setDeletingItem(null);
+        setPayoffItem(null);
         setEditingItem(item);
     };
 
     const handleDeleteClick = (item: Item) => 
     {
         setEditingItem(null);
+        setPayoffItem(null);
         setDeletingItem(item);
+    };
+
+    const handlePayoffClick = (item: Item) => 
+    {
+        setEditingItem(null);
+        setDeletingItem(null);
+        setPayoffItem(item);
     };
 
     const handleCancel = () => 
     {
         setEditingItem(null);
         setDeletingItem(null);
+        setPayoffItem(null);
     };
 
     
+    // Confetti
+    const [showConfetti, setShowConfetti] = useState(false);
+    const triggerConfetti = async () => 
+    {
+        setShowConfetti(true);
+        setTimeout(() => {
+           setShowConfetti(false);
+         }, 15000); // Hide after 5 seconds
+    };
+
+    const handleConfettiComplete = () => 
+    {
+        console.log("Confetti animation finished!");
+        setShowConfetti(false);
+    };
+
     
     function setDebts()
     {
@@ -114,10 +142,11 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender }) =>
     
                 <div className="flex justify-between items-center my-[1vh]">
                     <p className="text-white">{item.Name}</p>
-                    <span>
-                        <button className = "relative right-[20%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer" onClick = {()=> handleEditClick(item)}>Edit </button>
-                        <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => handleDeleteClick(item)}>Delete</button>
-                    </span>
+                    <div className="flex">
+                        <button className = "rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer" onClick = {()=> handlePayoffClick(item)}> Payoff </button>
+                        <button className = "ml-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2] cursor-pointer" onClick = {()=> handleEditClick(item)}>Edit </button>
+                        <button className = "ml-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => handleDeleteClick(item)}>Delete</button>
+                    </div>
                 </div>   
             </div>
         );
@@ -233,6 +262,51 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender }) =>
         }
     }
     
+    async function payoffDebt(item: Item) 
+    {
+        const token = localStorage.getItem('token');
+
+        var index = parseInt(item.key);
+
+        var obj = 
+        {
+            index: index,
+            NewName: item.Name,
+            NewAmount: item.Amount, // Only thing updated here
+            NewAPR: item.APR,
+            NewMonthly: item.Monthly,
+            NewLoanLength: item.Term,
+            NewInitialTime: item.Date
+        };
+
+        console.log(obj);
+        var js = JSON.stringify(obj);
+
+        try 
+        {
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/EditDebt',
+                { method:'POST', body:js, headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+            var res = JSON.parse(await response.text());
+
+            if (res.Result === "Edited debt of user") 
+            {
+                console.log("edited\n");
+                await setInfo();
+                triggerRerender(); // Ensure parent knows data changed
+                handleCancel(); // Close modal
+            } 
+            else 
+            {
+                console.error("Edit failed:", res.Result);
+                // Consider adding user feedback here
+            }
+        } 
+        catch (error: any) 
+        {
+            alert(error.toString());
+        }
+    }
+
     async function setInfo() : Promise<void>
     {
         
@@ -286,12 +360,30 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender }) =>
 
         <div id = "ExpRes" className="flex flex-col h-full">
 
+            {showConfetti && (
+                <Confetti
+                  width={1000} // Use window width
+                  height={1000} // Use window height
+                  numberOfPieces={200} // Adjust amount of confetti
+                  recycle={false} // Set to false so it stops generating new pieces
+                  gravity={0.15} // Adjust gravity
+                  onConfettiComplete={handleConfettiComplete} // Callback when pieces run out
+                  style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 1000 
+                  }}
+                />
+              )}
 
             <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
                 <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Your Debts</span>
             </div>
 
-            {!editingItem && !deletingItem && (
+            {!editingItem && !deletingItem && !payoffItem && (
                 <div className = "flex flex-col flex-grow min-h-0">
                     <ul className="flex-grow overflow-y-auto shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2" id = "listss">
                         {props.items.map((item) => {
@@ -319,6 +411,17 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender }) =>
                />
             )}
 
+            {/* Delete Modal */}
+            {payoffItem && (
+               <PayoffModal
+                   item={payoffItem}
+                   onConfirm={payoffDebt}
+                   onCancel={handleCancel}
+                   onDelete={deleteDebt}
+                   onConfetti={triggerConfetti}
+               />
+            )}
+
         </div>
 
     );
@@ -334,12 +437,19 @@ interface ModalProps
 
 interface EditModalProps extends ModalProps 
 {
-     onSave: (item: Item, dateStr: string) => Promise<void>;
+    onSave: (item: Item, dateStr: string) => Promise<void>;
 }
 
 interface DeleteModalProps extends ModalProps 
 {
     onConfirm: (item: Item) => Promise<void>;
+}
+
+interface PayoffModalProps extends ModalProps 
+{
+    onConfirm: (item: Item) => Promise<void>;
+    onDelete: (item: Item) => Promise<void>;
+    onConfetti: () => Promise<void>;
 }
 
 const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) => 
@@ -503,6 +613,68 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ item, onConfirm, onCancel }) 
         
             <div className="fixed top-[80%] left-3/10  w-4/10 flex items-center justify-center">
                 <button className = "mr-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#ff6384] text-center text-[1.8vh] hover:bg-red-400/50 hover:border-[#fc3030]" onClick = {() => onConfirm(item)}> Delete</button>
+                <button className = "ml-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {onCancel}> Cancel</button>
+            </div>
+        </div>
+    );
+};
+
+const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, onDelete, onConfetti }) => 
+{  
+    // Ensure amount is treated as string for input, handle potential non-numeric original value
+    const [amount, setAmount] = useState(typeof item.Amount === 'number' ? item.Amount.toString() : '');
+    
+    const handleSaveClick = () => 
+    {   
+        const alertMessage = document.getElementById("alertMessagess");
+        // Validate inputs (e.g., date format, amount is number) before saving
+        var parsedAmount = parseFloat(amount);
+        if (isNaN(parsedAmount) && alertMessage) 
+        {
+            alertMessage.innerText = "Please enter a valid amount.";
+            alertMessage.style.visibility = "visible"; 
+            return;
+        }
+        
+        var monthly = 10;
+        
+        if(parsedAmount >= item.Amount)
+        {
+            
+            //onDelete(item);
+            onConfetti();
+            // Add confetti here
+            return;
+        }
+
+        parsedAmount = item.Amount - parsedAmount;
+        // Create an updated item object to pass to the save function
+        const updatedItem: Item = 
+        {
+            ...item, 
+            Name: item.Name,
+            Amount: parsedAmount,
+            APR: item.APR,
+            Term: item.Term,
+            Monthly: monthly, /* replace with equation to determine monthly payment */
+        };
+        
+        
+        onConfirm(updatedItem);
+    };
+
+    return (
+        <div>
+            <div className="flex-col mt-2 h-[10%] items-center justify-center">
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2.5vh] text-[#ffffff]">Pay Down Debt</span>
+            </div>
+
+            <h5 className="self-start ml-[10%] mt-10 text-lg text-left text-[0.95rem]">Amount</h5>
+            <input type="number" className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" onChange={(e) => setAmount(e.target.value)} placeholder = {'Amount'} id = "Debtnum"/>
+
+    
+            <div className="fixed top-[80%] left-3/10  w-4/10 flex items-center justify-center">
+                <button className = "mr-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#36eba6] text-center text-[1.8vh] hover:bg-green-400/50 hover:border-[#1df25d]" onClick = {handleSaveClick}>Pay</button>
                 <button className = "ml-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {onCancel}> Cancel</button>
             </div>
         </div>
