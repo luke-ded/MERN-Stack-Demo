@@ -28,7 +28,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
         const valAmount = (document.getElementById("ExpNum") as HTMLInputElement).value;
         const userName = (document.getElementById("ExpName") as HTMLInputElement).value;
         const Category =  (document.getElementById("ExpCat") as HTMLInputElement).value;
-        const date = (document.getElementById("Expdate") as HTMLInputElement).value;
+        const date = (document.getElementById("Expdate3") as HTMLInputElement).value;
         const alertMessage = document.getElementById("alertMessage");
         
 
