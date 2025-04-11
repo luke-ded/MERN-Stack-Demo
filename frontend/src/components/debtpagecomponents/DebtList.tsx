@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import {useState} from "react";
-import Confetti from 'react-confetti';
+
 
 interface Item 
 {
@@ -23,10 +23,11 @@ interface PropsType
 interface ChildProps 
 {
     triggerRerender: () => void;
+    doConfetti: () => Promise<void>;
 }
 
 
-const DebtList: React.FC<ChildProps> = ({ triggerRerender }) =>
+const DebtList: React.FC<ChildProps> = ({ triggerRerender, doConfetti }) =>
 {
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
@@ -63,23 +64,10 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender }) =>
         setPayoffItem(null);
     };
 
-    
-    // Confetti
-    const [showConfetti, setShowConfetti] = useState(false);
     const triggerConfetti = async () => 
     {
-        setShowConfetti(true);
-        setTimeout(() => {
-           setShowConfetti(false);
-         }, 15000); // Hide after 5 seconds
+        doConfetti();
     };
-
-    const handleConfettiComplete = () => 
-    {
-        console.log("Confetti animation finished!");
-        setShowConfetti(false);
-    };
-
     
     function setDebts()
     {
@@ -359,26 +347,6 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender }) =>
     return(
 
         <div id = "ExpRes" className="flex flex-col h-full">
-
-            {showConfetti && (
-                <Confetti
-                  width={1000} // Use window width
-                  height={1000} // Use window height
-                  numberOfPieces={200} // Adjust amount of confetti
-                  recycle={false} // Set to false so it stops generating new pieces
-                  gravity={0.15} // Adjust gravity
-                  onConfettiComplete={handleConfettiComplete} // Callback when pieces run out
-                  style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: 1000 
-                  }}
-                />
-              )}
-
             <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
                 <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Your Debts</span>
             </div>
@@ -641,9 +609,8 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
         if(parsedAmount >= item.Amount)
         {
             
-            //onDelete(item);
+            onDelete(item);
             onConfetti();
-            // Add confetti here
             return;
         }
 
