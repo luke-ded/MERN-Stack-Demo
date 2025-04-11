@@ -129,43 +129,42 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
 
         <div id = "finances">
             <div id = "income">
-
-
                 <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
                     <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Income</span>
                 </div>
 
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Name" id = "IncNames"></input>
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Name" id = "IncNames"></input>
 
-            <br></br>
-            
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "IncNum"></input>
-
-            <br></br>
-            
-
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-            <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "Incdate"></input>
-
-            <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10">
-                <h5 className="self-start text-lg text-left text-[0.95rem]">Is The Income Recurring?</h5> 
-                <div>
-                    <label>
-                        <input type="radio" name="radio" onClick = {setYes}></input>
-                    Yes </label>
-                    
-
-                    <label>
-                        <input type="radio" name="radio" onClick = {setNo}></input>
-                    No </label>  
-                </div>
-            </div>
-
-                <h5 className="mt-4.5" id="alertmessage"></h5>
+                <br></br>
                 
-                <button id = "AddIncome" className = "rounded-sm inline-block absolute top-[80%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addIncome} >Add Income</button>
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "Amount" id = "IncNum"></input>
+
+                <br></br>
+                
+
+                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "Incdate"></input>
+
+                <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10">
+                    <h5 className="self-start text-lg text-left text-[0.95rem]">Is The Income Recurring?</h5> 
+                    <div>
+                        <label>
+                            <input type="radio" name="radio" onClick = {setYes}></input>
+                        Yes </label>
+                        
+
+                        <label>
+                            <input type="radio" name="radio" onClick = {setNo}></input>
+                        No </label>  
+                    </div>
+                </div>
+
+                <div className="fixed top-[82%] w-[100%] flex items-center justify-between">
+                    <h5 className="ml-[10%]" id="alertmessage"></h5>
+                    <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addIncome} >Add Income</button>
+                </div>
             </div>
             
         </div>

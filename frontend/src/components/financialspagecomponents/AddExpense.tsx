@@ -169,10 +169,10 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
             </div>
             </div>
 
-            <h5 className="fixed top-[68.5%] left-[33.5%] mt-3 text-[0.95rem]" id="alertMessage"></h5>
-
-            <button id = "ExpenseAdd" className = "rounded-sm inline-block absolute top-[83%] left-[40%] h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpense}>Add Expense</button>
-                
+            <div className="fixed top-[85%] w-[100%] flex items-center justify-between">
+                <h5 className="ml-[10%]" id="alertMessage"></h5>
+                <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpense} >Add Expense</button>
+            </div> 
         </div>
     );
 }
