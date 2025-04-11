@@ -432,25 +432,22 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ item, onConfirm, onCancel }) 
     const amount = typeof item.Amount === 'number' ? item.Amount : 'N/A';
 
     return (
-        <div>
-            <div className="flex h-[10%] items-center justify-center">
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Do you want to delete this Income?</span>
+        <div className="flex flex-col">
+            <div className="flex-col mt-2 h-[10%] items-center justify-center">
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2.5vh] text-[#ffffff]"> Do you want to delete this Income?</span>
             </div>
-        
-            <br />
-        
-            <h5 className="self-start ml-[10%] text-lg text-center">Name:  {item.Name}</h5>
-        
-            <br />
-                    
-            <h5 className="self-start ml-[10%] text-lg text-center">Amount: {amount}</h5>
-        
-            <br />
-        
-            <h5 className="self-start ml-[10%] text-lg text-center">Date: {date}</h5>
-        
-            <button className = "fixed left-[38%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => onConfirm(item)}> Confirm</button>
-            <button className = "fixed right-[27%] top-[80%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {onCancel}> Cancel</button>
+            
+            <h5 className="text-lg text-center mt-10">Name:  {item.Name}</h5>
+
+                        
+            <h5 className="text-lg text-center">Amount: {amount}</h5>
+
+            <h5 className="text-lg text-center">Date: {date}</h5>
+            
+            <div className="fixed top-[80%] left-3/10  w-4/10 flex items-center justify-center">
+                <button className = "mr-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {() => onConfirm(item)}> Confirm</button>
+                <button className = "ml-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {onCancel}> Cancel</button>
+            </div>
         </div>
     );
 };
