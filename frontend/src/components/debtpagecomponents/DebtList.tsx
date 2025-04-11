@@ -646,7 +646,7 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
     return (
         <div>
             <div className="flex-col mt-2 h-[10%] items-center justify-center">
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2.5vh] text-[#ffffff]">Pay Down Debt</span>
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2.5vh] text-[#ffffff]">Pay Off Debt</span>
             </div>
 
             <h5 className="self-start ml-[10%] mt-10 text-lg text-left text-[0.95rem]">Amount</h5>
