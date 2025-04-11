@@ -256,38 +256,10 @@ const ExpResults: React.FC<ChildProps> = ({ triggerRerender }) =>
         const token = localStorage.getItem('token');
     
         var index = 0;
-        const today = new Date();
     
-        for (var i = 0; i < parsedData.User.Expenses.length; i++) 
-        {
+        index = parseInt(item.key);
         
-            var counter = parsedData.User.Expenses[i];
-    
-            
-            if(counter.InitialTime != undefined)
-            {
-                let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
-                if((today.getTime() - old.getTime()) < 0)
-                    continue;
-            }
-    
-            let newItem: Item = {
-                key: i.toString(),
-                Name: counter.Name, 
-                Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-                Amount: counter.Amount,
-                Category: counter.Category
-            };
-    
-    
-            if ((item.key === newItem.key) && (item.Name === newItem.Name) && (item.Amount === newItem.Amount)){
-                break;
-            } else {
-                index++;
-                continue;
-            }
-    
-        }
+        console.log("The index you are deleting is " + index);
     
     
         event.preventDefault();
