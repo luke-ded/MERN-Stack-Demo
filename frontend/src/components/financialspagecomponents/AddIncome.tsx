@@ -76,6 +76,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                 
                 if (alertMessage){
                     alertMessage.innerText = "Succesfully Added";
+                    alertMessage.style.color = "#00c04b";
                     alertMessage.style.visibility = "visible";
 
                     await updateInfo();

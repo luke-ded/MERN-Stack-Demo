@@ -84,6 +84,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
 
 
                     alertMessage.innerText = "Succesfully Added";
+                    alertMessage.style.color = "#00c04b";
                     alertMessage.style.visibility = "visible";
                 }
 
