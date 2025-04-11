@@ -7,21 +7,8 @@ interface ChildProps {
     triggerRerender: () => void;
 }
 
-const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
-
-    //const [isButtonClicked, setButton] = useState(false);
-
-    /* function setYes(){
-        setRecurring(true);
-        setButton(true);
-    }
-
-    function setNo(){
-        setRecurring(false);
-        setButton(true);
-    }
- */
-
+const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => 
+{
     async function addSavings(event: any): Promise<void>{
         
         const Amount = parseFloat((document.getElementById("Num") as HTMLInputElement).value);
@@ -131,9 +118,10 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Interest Rate (APR)</h5>
                 <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "1.23" id = "apr"></input>
 
-                <h5 className="mt-3 text-[0.95rem]" id="alertMessage"></h5>
-
-                <button id = "ExpenseAdd" className = "rounded-sm inline-block mt-5  h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addSavings}>Add Account</button>
+                <div className="fixed top-[80%] w-[100%] flex items-center justify-between">
+                    <h5 className="ml-[10%] text-[#ff6384]" id="alertMessage"></h5>
+                    <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addSavings} >Add Account</button>
+                </div> 
             </div> 
         </div>
     );
