@@ -149,11 +149,9 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
             <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "Incdate"></input>
 
-                <h5 className="self-start ml-[10%] text-lg text-left">Is The Income Recurring?</h5>
-
-                <br></br>
-
-                <div className = "absolute top-[54.75%] right-[20%]">
+            <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10">
+                <h5 className="self-start text-lg text-left text-[0.95rem]">Is The Income Recurring?</h5> 
+                <div>
                     <label>
                         <input type="radio" name="radio" onClick = {setYes}></input>
                     Yes </label>
@@ -163,6 +161,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                         <input type="radio" name="radio" onClick = {setNo}></input>
                     No </label>  
                 </div>
+            </div>
 
                 <h5 className="mt-4.5" id="alertmessage"></h5>
                 
