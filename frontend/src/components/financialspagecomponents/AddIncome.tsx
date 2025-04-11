@@ -135,12 +135,24 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                 </div>
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "IncNames"></input>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "IncNames" onKeyUp={(e) => {
+                    if (e.key === "Enter") 
+                    {
+                      var next = document.getElementById("IncNum") as HTMLInputElement;
+                      next.focus();
+                    }
+                  }}></input>
 
                 <br></br>
                 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "IncNum"></input>
+                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "IncNum" onKeyUp={(e) => {
+                    if (e.key === "Enter") 
+                    {
+                      var next = document.getElementById("Incdate") as HTMLInputElement;
+                      next.focus();
+                    }
+                  }}></input>
 
                 <br></br>
                 

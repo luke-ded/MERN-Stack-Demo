@@ -142,15 +142,33 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
             </div>
 
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "ExpName"></input>
+            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "ExpName" onKeyUp={(e) => {
+                if (e.key === "Enter") 
+                {
+                  var next = document.getElementById("ExpNum") as HTMLInputElement;
+                  next.focus();
+                }
+              }}></input>
 
         
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "ExpNum"></input>
+            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "ExpNum" onKeyUp={(e) => {
+                if (e.key === "Enter") 
+                {
+                  var next = document.getElementById("Expdate3") as HTMLInputElement;
+                  next.focus();
+                }
+              }}></input>
 
         
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "MM/DD/YYYY" id = "Expdate"></input>
+            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "MM/DD/YYYY" id = "Expdate3" onKeyUp={(e) => {
+                if (e.key === "Enter") 
+                {
+                  var next = document.getElementById("ExpCat") as HTMLInputElement;
+                  next.focus();
+                }
+              }}></input>
 
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Category</h5>
             <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Category" id = "ExpCat"></input>
