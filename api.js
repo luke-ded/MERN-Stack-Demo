@@ -415,7 +415,7 @@ exports.setApp = function ( app, client )
             //Input and Field Check
             const {index, NewName, NewAmount, NewAPR, NewMonthly, NewLoanLength, NewInitialTime} = req.body;
             const {_id} = req.user;
-            if (!_id|| index == undefined|| !NewName || !NewAmount  || !NewAPR || !NewMonthly || !NewLoanLength|| NewIfRecurring == undefined || !NewInitialTime){
+            if (!_id|| index == undefined|| !NewName || !NewAmount  || !NewAPR || !NewMonthly || !NewLoanLength|| !NewInitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
