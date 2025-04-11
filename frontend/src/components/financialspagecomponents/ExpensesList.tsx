@@ -370,6 +370,7 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
             if (isRecurring === null && alertMessage) 
             {
                 alertMessage.innerText = "Please specify if recurring";
+                alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible"; 
                 return;
             }
@@ -379,6 +380,7 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
             if (isNaN(parsedAmount) && alertMessage) 
             {
                 alertMessage.innerText = "Please enter a valid amount";
+                alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible"; 
                 return;
             }
@@ -387,6 +389,7 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
             if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date) && alertMessage) 
             {
                 alertMessage.innerText = "Please enter the date in MM/DD/YYYY format.";
+                alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible"; 
                 return;
             }
