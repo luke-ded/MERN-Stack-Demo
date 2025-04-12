@@ -624,7 +624,13 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
             <h5 className="self-start ml-[10%] mt-10 text-lg text-left text-[0.95rem]">Amount</h5>
             <input type="number" className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" onChange={(e) => setAmount(e.target.value)} placeholder = {'Amount'} id = "Debtnum"/>
 
-    
+            <div className="flex w-8/10 ml-[10%] mt-10 font-bold items-center justify-center">
+                <h5 className="text-[#ff6384]">${item.Amount}</h5><h5>&nbsp;-&nbsp;</h5>
+                <h5 className="text-[#36eba6]">${amount}</h5><h5>&nbsp;=&nbsp;</h5>
+                <h5 style={{color: !isNaN(parseFloat(amount)) && (item.Amount - parseFloat(amount) <= 0) ? "#36eba6":'#ff6384'}}
+                >${!isNaN(parseFloat(amount)) ? (item.Amount - parseFloat(amount) < 0 ? 0.00 : (item.Amount - parseFloat(amount)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})) : "N/A"}</h5>
+            </div>
+
             <div className="fixed top-[80%] left-3/10  w-4/10 flex items-center justify-center">
                 <button className = "mr-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#36eba6] text-center text-[1.8vh] hover:bg-green-400/50 hover:border-[#1df25d]" onClick = {handleSaveClick}>Pay</button>
                 <button className = "ml-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {onCancel}> Cancel</button>
