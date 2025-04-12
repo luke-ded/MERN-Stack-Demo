@@ -321,7 +321,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
             <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Category" id = "ExpCat" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
-                  var next = document.getElementById("Incaccount") as HTMLInputElement;
+                  var next = document.getElementById("Expaccount") as HTMLInputElement;
                   next.focus();
                 }
               }}></input>
@@ -329,7 +329,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Account</h5>
 
             <select
-                id="Incaccount"
+                id="Expaccount"
                 value={selectedItemKey} // Controlled component: value linked to state
                 onChange={handleItemChange} // Update state on change
                 className="h-8 w-8/10 text-md rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1"

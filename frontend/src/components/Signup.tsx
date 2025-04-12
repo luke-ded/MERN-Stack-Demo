@@ -347,7 +347,7 @@ function Signup() {
       <div id = "loginDivs" className="p-10 max-w-[600px] mx-auto">
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Verify Email</span><br />
                 <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Confirm Email</h5>
-                <input type="number" id="loginNames" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass(event)}/><br/>
+                <input type="number" id="loginNames" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass(event)}/><br/>
                 <h5 className="mt-3" id = "alertmessage"></h5>
                 <button className="mt-5 rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={verifyOneTimePass}>Confirm</button>
         </div>

@@ -266,7 +266,7 @@ function ForgotPass(){
             <div id = "loginDiv">
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Forgot Password</span><br />
                 <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Enter your Email</h5>
-                <input type="text" id="loginName" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
+                <input type="text" id="loginName" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
                 <h5 className="mt-3 text-[#ff6384]" id = "alertmessage"></h5>
 
                 <div className="flex justify-between absolute left-[25%] bottom-[10%] w-5/10">
@@ -291,7 +291,14 @@ function ForgotPass(){
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Reset Password</span><br />
                 <h5 className="mb-0 mt-1 ml-[10%] float-left text-[2vh]">New Password</h5>
                 <div className="flex w-[100%] relative items-center">
-                    <input id ="firstPass" className = "w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#7f8fb5] focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } value = {value} onChange = {(e) => setValue(e.target.value)} placeholder="New Password" onKeyUp={validatePassword}></input><br/>
+                    <input id ="firstPass" className = "w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#7f8fb5] focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } value = {value} onChange = {(e) => setValue(e.target.value)} placeholder="New Password" onKeyUp={(e) => {
+                      validatePassword();
+                      if (e.key === "Enter") 
+                      {
+                        var next = document.getElementById("secondPass") as HTMLInputElement;
+                        next.focus();
+                      }
+                    }}></input><br/>
                     <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
                 </div>
                 
@@ -307,7 +314,7 @@ function ForgotPass(){
 
                 <h5 className="mt-3 mb-0 ml-[10%] float-left text-[2vh]">Confirm Password</h5>
                 <div className="flex w-[100%] relative items-center">
-                    <input id ="secondPass" className = "w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } placeholder="Confirm Password" onKeyUp={validatePasswordSame}></input><br/>
+                    <input id ="secondPass" className = "w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {changePassword(e);}}}></input><br/>
                     <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
                 </div>
 
