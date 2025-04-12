@@ -20,39 +20,55 @@ interface PropsType
 function setSavings()
 {
     const today = new Date();
-
+    
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
-
+    
     let savings = new Array<Item>();
 
-    for (var i = 0; i < parsedData.User.Savings.length; i++) 
-    {
-        var counter = parsedData.User.Savings[i];
+    var length = '0';
 
-        // Ensures item is not in the future
-        if(counter.InitialTime != undefined)
+    if(parsedData.User.Savings != undefined)
+    {
+        for(var i = 0; i < parsedData.User.Savings.length; i++) 
         {
-            let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
-            if((today.getTime() - old.getTime()) < 0)
-                continue;
+            var counter = parsedData.User.Savings[i];
+
+            // Ensures item is not in the future
+            if(counter.InitialTime != undefined)
+            {
+                let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+                if((today.getTime() - old.getTime()) < 0)
+                    continue;
+            }
+
+            let newItem: Item = 
+            {
+                key: i.toString(),
+                Name: counter.Name, 
+                Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+                Amount: counter.Amount,
+                APR: counter.APR,
+            };
+
+            savings.push(newItem);
         }
 
-        let newItem: Item = {
-            key: i.toString(),
-            Name: counter.Name, 
-            Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-            Amount: counter.Amount,
-            APR: counter.APR
-        };
-
-        savings.push(newItem);
+        length = parsedData.User.Savings.length.toString();
     }
+    // Add "account" for when going to cash
+    let newItem: Item = 
+    {
+        key: length,
+        Name: "Untracked", 
+        Date: {"Month":1, "Day":1, "Year":2023},
+        Amount: 0,
+        APR: 0,
+    };
     
-    savings.sort((a, b) => a.Amount == b.Amount ? Date.UTC(b.Date.Year, b.Date.Month - 1, b.Date.Day) 
-    - Date.UTC(a.Date.Year, a.Date.Month - 1, a.Date.Day) : b.Amount - a.Amount);
+    savings.push(newItem);
 
-    return savings.slice(0, 20); // Return most recent 10 items
+    return savings;
 }
 
 const renderSavingsItem = (item: Item): React.ReactNode => 

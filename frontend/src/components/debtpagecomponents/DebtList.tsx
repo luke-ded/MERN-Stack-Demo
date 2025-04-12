@@ -611,34 +611,40 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
     
         let savings = new Array<savingsItem>();
 
-        for(var i = 0; i < parsedData.User.Savings.length; i++) 
+        var length = '0';
+
+        if(parsedData.User.Savings != undefined)
         {
-            var counter = parsedData.User.Savings[i];
-    
-            // Ensures item is not in the future
-            if(counter.InitialTime != undefined)
+            for(var i = 0; i < parsedData.User.Savings.length; i++) 
             {
-                let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
-                if((today.getTime() - old.getTime()) < 0)
-                    continue;
+                var counter = parsedData.User.Savings[i];
+
+                // Ensures item is not in the future
+                if(counter.InitialTime != undefined)
+                {
+                    let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+                    if((today.getTime() - old.getTime()) < 0)
+                        continue;
+                }
+
+                let newItem: savingsItem = 
+                {
+                    key: i.toString(),
+                    Name: counter.Name, 
+                    Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+                    Amount: counter.Amount,
+                    APR: counter.APR,
+                };
+
+                savings.push(newItem);
             }
-    
-            let newItem: savingsItem = 
-            {
-                key: i.toString(),
-                Name: counter.Name, 
-                Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-                Amount: counter.Amount,
-                APR: counter.APR,
-            };
-    
-            savings.push(newItem);
+
+            length = parsedData.User.Savings.length.toString();
         }
-        
         // Add "account" for when going to cash
         let newItem: savingsItem = 
         {
-            key: parsedData.User.Savings.Length,
+            key: length,
             Name: "Untracked", 
             Date: {"Month":1, "Day":1, "Year":2023},
             Amount: 0,
@@ -649,7 +655,6 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
 
         return savings;
     }
-
 
     async function removeFunds(item: savingsItem | null, removeamount : any) 
     {

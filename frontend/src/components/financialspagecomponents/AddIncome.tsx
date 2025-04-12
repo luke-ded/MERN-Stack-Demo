@@ -105,13 +105,10 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
 
     async function addFunds(item: Item | null, amount : any) 
     {
-        var data = localStorage.getItem('user_data');
-        var parsedData = data ? JSON.parse(data) : null;
-
         if(item == null)
             return;
 
-        if(item.key == parsedData.User.Savings.Length)
+        if(item.Name == "Untracked")
             return;
 
 

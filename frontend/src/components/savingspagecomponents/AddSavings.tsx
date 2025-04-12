@@ -34,15 +34,16 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
             } 
         }
         
-        for(var i = 0; i < parsedData.User.Savings.length; i++)
-        {
-            if(alertMessage && parsedData.User.Savings[i].Name == name)
+        if(parsedData.User.Savings != undefined)
+            for(var i = 0; i < parsedData.User.Savings.length; i++)
             {
-                alertMessage.innerText = "Duplicate name";
-                alertMessage.style.visibility = "visible";
-                return;
+                if(alertMessage && parsedData.User.Savings[i].Name == name)
+                {
+                    alertMessage.innerText = "Duplicate name";
+                    alertMessage.style.visibility = "visible";
+                    return;
+                }
             }
-        }
         
         const token = localStorage.getItem('token');
         
@@ -83,7 +84,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
                 }
 
                 await updateInfo();
-                triggerRerender()
+                triggerRerender();
             }
         } 
         catch(error: any) 

@@ -68,36 +68,51 @@ const SavingsList: React.FC<ChildProps> = ({ triggerRerender }) =>
         var data = localStorage.getItem('user_data');
         var parsedData = data ? JSON.parse(data) : null;
     
-        let debts = new Array<Item>();
-    
-        for(var i = 0; i < parsedData.User.Savings.length; i++) 
+        let savings = new Array<Item>();
+
+        var length = '0';
+
+        if(parsedData.User.Savings != undefined)
         {
-            var counter = parsedData.User.Savings[i];
-    
-            // Ensures item is not in the future
-            if(counter.InitialTime != undefined)
+            for(var i = 0; i < parsedData.User.Savings.length; i++) 
             {
-                let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
-                if((today.getTime() - old.getTime()) < 0)
-                    continue;
+                var counter = parsedData.User.Savings[i];
+
+                // Ensures item is not in the future
+                if(counter.InitialTime != undefined)
+                {
+                    let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+                    if((today.getTime() - old.getTime()) < 0)
+                        continue;
+                }
+
+                let newItem: Item = 
+                {
+                    key: i.toString(),
+                    Name: counter.Name, 
+                    Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+                    Amount: counter.Amount,
+                    APR: counter.APR,
+                };
+
+                savings.push(newItem);
             }
-    
-            let newItem: Item = 
-            {
-                key: i.toString(),
-                Name: counter.Name, 
-                Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-                Amount: counter.Amount,
-                APR: counter.APR,
-            };
-    
-            debts.push(newItem);
+
+            length = parsedData.User.Savings.length.toString();
         }
-        
-        debts.sort((a, b) => a.Amount == b.Amount ? Date.UTC(b.Date.Year, b.Date.Month - 1, b.Date.Day) 
-        - Date.UTC(a.Date.Year, a.Date.Month - 1, a.Date.Day) : b.Amount - a.Amount);
+        // Add "account" for when going to cash
+        let newItem: Item = 
+        {
+            key: length,
+            Name: "Untracked", 
+            Date: {"Month":1, "Day":1, "Year":2023},
+            Amount: 0,
+            APR: 0,
+        };
     
-        return debts;
+        savings.push(newItem);
+
+        return savings;
     }
     
     const renderDebtItem = (item: Item): React.ReactNode => 
@@ -281,7 +296,7 @@ const SavingsList: React.FC<ChildProps> = ({ triggerRerender }) =>
     }
     
 
-    if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0)
+    if(parsedData.User.Savings == undefined || parsedData.User.Savings.length == 0)
     {
         return(
             <div id = "ExpRes">
@@ -313,7 +328,8 @@ const SavingsList: React.FC<ChildProps> = ({ triggerRerender }) =>
                 <div className = "flex flex-col flex-grow min-h-0">
                     <ul className="flex-grow overflow-y-auto shadow divide-y divide-[#7f8fb5]" id = "listss">
                         {props.items.map((item) => {
-                        return <li key={item.key} className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
+                            if(item.Name != "Untracked")
+                                return <li key={item.key} className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
                         })}
                     </ul>
                 </div>

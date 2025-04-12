@@ -106,13 +106,10 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
 
     async function removeFunds(item: Item | null, amount : any) 
     {
-        var data = localStorage.getItem('user_data');
-        var parsedData = data ? JSON.parse(data) : null;
-
         if(item == null)
             return;
 
-        if(item.key == parsedData.User.Savings.Length)
+        if(item.Name == "Untracked")
             return;
 
 
@@ -158,9 +155,6 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
 
     async function addExpense(event: any): Promise<void>
     {
-        var data = localStorage.getItem('user_data');
-        var parsedData = data ? JSON.parse(data) : null;
-
         const valAmount = (document.getElementById("ExpNum") as HTMLInputElement).value;
         const userName = (document.getElementById("ExpName") as HTMLInputElement).value;
         const Category =  (document.getElementById("ExpCat") as HTMLInputElement).value;
@@ -185,7 +179,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
         const [month, day, year] = date.split("/");
         const InitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
 
-        if(alertMessage && Amount > selectedItemObject?.Amount && selectedItemObject?.key != parsedData.User.Savings.length)
+        if(alertMessage && selectedItemObject?.Name != "Untracked" && Amount > selectedItemObject?.Amount)
         {
             alertMessage.innerText = "Insufficient funds";
             alertMessage.style.color = "#ff6384";
