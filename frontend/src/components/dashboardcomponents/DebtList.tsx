@@ -8,6 +8,7 @@ interface Item
     Date: any;
     Amount: any,
     Monthly: any;
+    APR: any;
 }
 
 interface PropsType 
@@ -43,7 +44,8 @@ function setDebt()
             Name: counter.Name, 
             Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
             Amount: counter.Amount,
-            Monthly: counter.Monthly
+            Monthly: counter.Monthly,
+            APR: counter.APR
         };
 
         expenses.push(newItem);
@@ -57,44 +59,17 @@ function setDebt()
 
 const renderExpenseItem = (item: Item): React.ReactNode => 
 {
-    const today = new Date();
-
-    var months = [ "January", "February", "March", "April", "May", "June", 
-        "July", "August", "September", "October", "November", "December" ];
-
-    let old = new Date(Date.UTC(item.Date.Year, item.Date.Month - 1, item.Date.Day));
-    let daysago = Math.floor((today.getTime() - old.getTime()) / 86400000);
 
     return (
         <div>
             <div className="flex justify-between items-center">
                 <span className="text-white font-semibold text-md">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
-                <span className="text-gray-300 text-xs"> {daysago == 0 ? "Today" : 
-                daysago > 30 ? months[item.Date.Month - 1] + " " + item.Date.Day + GetDaySuffix(item.Date.Day): daysago + " Days Ago"}</span>
+                <span className="text-gray-300 text-xs">{item.APR.toFixed(2)}% APR</span>
             </div>
             <p className="self-start text-white">{item.Name}, ${item.Monthly.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} / Mo</p>
         </div>
     );
 };
-
-function GetDaySuffix(day:any)
-{
-    switch (day)
-    {
-        case 1:
-        case 21:
-        case 31:
-            return "st";
-        case 2:
-        case 22:
-            return "nd";
-        case 3:
-        case 23:
-            return "rd";
-        default:
-            return "th";
-    }
-}
 
 function DebtList() 
 {
