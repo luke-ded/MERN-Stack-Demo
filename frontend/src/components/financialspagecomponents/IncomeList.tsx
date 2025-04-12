@@ -84,7 +84,7 @@ const IncomeList: React.FC<ChildProps> = ({ triggerRerender }) =>
         expenses.sort((a, b) => Date.UTC(b.Date.Year, b.Date.Month - 1, b.Date.Day) 
         - Date.UTC(a.Date.Year, a.Date.Month - 1, a.Date.Day));
 
-        return expenses.slice(0, 20); // Return most recent 10 items
+        return expenses; // Return most recent 10 items
     }
 
     const renderExpenseItem = (item: Item): React.ReactNode => 
