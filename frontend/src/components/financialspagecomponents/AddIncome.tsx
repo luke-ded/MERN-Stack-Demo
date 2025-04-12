@@ -176,7 +176,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
         const InitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
 
         event.preventDefault();
-        var obj = {Name: userName, Amount: Amount, IfRecurring: IfRecurring, InitialTime: InitialTime};
+        var obj = {Name: userName, Amount: Amount, Account:selectedItemObject?.Name,IfRecurring: IfRecurring, InitialTime: InitialTime};
         var js = JSON.stringify(obj);
 
         try {

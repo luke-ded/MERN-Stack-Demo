@@ -189,7 +189,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
         }
 
         event.preventDefault();
-        var obj = {Name: userName, Amount: Amount, Category: Category ,IfRecurring: IfRecurring, InitialTime: InitialTime};
+        var obj = {Name: userName, Amount: Amount, Account:selectedItemObject?.Name, Category: Category ,IfRecurring: IfRecurring, InitialTime: InitialTime};
         var js = JSON.stringify(obj);
 
         try {
