@@ -280,44 +280,43 @@ function ForgotPass(){
             <div id = "loginDivs">
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Forgot Password</span><br />
                 <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Reset your Password</h5>
-                <input type="number" id="loginNames" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
+                <input type="number" id="loginNames" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
                 <h5 className="mt-3 text-[#ff6384]" id = "alertmessage"></h5>
                 <button className="absolute right-[45%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={verifyOneTimePass}>Confirm</button>
             </div>
         );
    } else if (stageNum == 3){
         return(
-            <div id = "loginDivs">
+            <div id = "loginDivs" className="flex-col justify-center items-center">
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Reset Password</span><br />
-                <h5 className="mt-4 mb-0 ml-[10%] float-left text-[2vh]">Reset your Password</h5>
-                <div>
-                    <input id ="firstPass" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-0.5" type={showPasssword ? "text" : "password" } value = {value} onChange = {(e) => setValue(e.target.value)} placeholder="New Password" onKeyUp={validatePassword}></input><br/>
-                    <img className="h-[2vh] absolute bottom-[46.5%] z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
+                <h5 className="mb-0 mt-1 ml-[10%] float-left text-[2vh]">New Password</h5>
+                <div className="flex w-[100%] relative items-center">
+                    <input id ="firstPass" className = "w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#7f8fb5] focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } value = {value} onChange = {(e) => setValue(e.target.value)} placeholder="New Password" onKeyUp={validatePassword}></input><br/>
+                    <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
                 </div>
                 
-                <div className="flex w-[100%] whitespace-nowrap items-center mt-2">
+                <div className="flex w-[100%] whitespace-nowrap items-center mt-1">
                     <h6 className="ml-[10%] text-[#bdc8e2] w-fit text-sm">Must contain at least&nbsp;</h6>
-                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passnumber} style = {{color: isPasswordNumberValid ? '#58e96c' :'rgb(235, 83, 83)'}}>1 number</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passnumber} style = {{color: isPasswordNumberValid ? '#36eba6' :'#ff6384'}}>1 number</h6>
                     <h6 className="text-[#bdc8e2] w-fit text-sm">,&nbsp;</h6>
-                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>1 symbol</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passsymbol} style = {{color: isPasswordSymbolValid ? '#36eba6' : '#ff6384'}}>1 symbol</h6>
                     <h6 className="text-[#bdc8e2] w-fit text-sm">,&nbsp;</h6>
-                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passlength} style = {{color: isPasswordLengthValid ? '#58e96c' : 'rgb(235, 83, 83)'}}>length of 8+</h6>
+                    <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passlength} style = {{color: isPasswordLengthValid ? '#36eba6' : '#ff6384'}}>length of 8+</h6>
                     <h6 className="text-[#bdc8e2] w-fit text-sm">.</h6>
                 </div>
-                <br />
 
-                
-                <div>
-                    <input id ="secondPass" className = "absolute left-[10%] bottom-[27%] w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-0.5" type={showConfirmPasssword ? "text" : "password" } placeholder="Confirm Password" onKeyUp={validatePasswordSame}></input><br/>
-                    <img className="h-[2vh] absolute bottom-[28.5%] z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
+                <h5 className="mt-3 mb-0 ml-[10%] float-left text-[2vh]">Confirm Password</h5>
+                <div className="flex w-[100%] relative items-center">
+                    <input id ="secondPass" className = "w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } placeholder="Confirm Password" onKeyUp={validatePasswordSame}></input><br/>
+                    <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
                 </div>
 
-                <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2 p-0" style={{ color: isPasswordSame ? "#58e96c" : "rgb(235, 83, 83)" }}>
+                <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2 p-0" style={{ color: isPasswordSame ? "#36eba6" : "#ff6384" }}>
                     {isPasswordSame ? "" : "Passwords are not the same."}
                  </h6>
                  <br />
                 <h5 className="absolute right-[30%] bottom-[15%] text-[#ffffff]" id = "alertmessage"></h5>
-                <button className="absolute right-[45%] bottom-[5%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={changePassword}>Confirm</button>
+                <button className=" rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mb-[5%] cursor-pointer" onClick={changePassword}>Confirm</button>
             </div>
         );
    }
