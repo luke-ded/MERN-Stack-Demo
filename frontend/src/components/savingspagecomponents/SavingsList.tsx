@@ -470,6 +470,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
     
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Interest Rate (APR)</h5>
             <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={apr} onChange={(e) => setApr(e.target.value)} placeholder = {item.APR} id = "savingsapr"/>
+            
+            <h5 className="mt-3 text-[#ff6384]" id = "alertMessagess"></h5>
 
             <button id = "EditIncome" className = "fixed left-[29%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={handleSaveClick}>Edit Account</button>
             <button className = "fixed right-[31%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={onCancel}> Cancel</button>
@@ -550,9 +552,6 @@ const AddFundsModal: React.FC<AddFundsModalProps> = ({ item, onConfirm, onCancel
 
             <h5 className="self-start ml-[10%] mt-10 text-lg text-left text-[0.95rem]">Amount</h5>
             <input type="number" className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" onChange={(e) => setAmount(e.target.value)} placeholder = {'Amount'} id = "Savings num"/>
-
-            <h5 className="mt-3 text-[#ff6384]" id = "alertMessagess"></h5>
-
 
             <div className="fixed top-[80%] left-3/10  w-4/10 flex items-center justify-center">
                 <button className = "mr-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#36eba6] text-center text-[1.8vh] hover:bg-green-400/50 hover:border-[#1df25d]" onClick = {handleSaveClick}>Deposit</button>
