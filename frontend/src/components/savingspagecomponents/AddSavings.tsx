@@ -15,7 +15,8 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
     {
         const data = localStorage.getItem('user_data');
         const parsedData = data ? JSON.parse(data) : null;
-
+        
+        
         const Amount = parseFloat((document.getElementById("Num") as HTMLInputElement).value);
         const name = (document.getElementById("Name") as HTMLInputElement).value;
         const date = (document.getElementById("date") as HTMLInputElement).value;
@@ -24,8 +25,8 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
         
 
         if (alertMessage) {
-            if (date.length == 0 || name.length == 0 || Amount == undefined || 
-                /* isButtonClicked == false || */  apr == undefined){
+            if (date.length == 0 || name.length == 0 || Amount == undefined || isNaN(Amount) ||
+                /* isButtonClicked == false || */  apr == undefined || isNaN(apr)){
                 alertMessage.innerText = "Please Complete all the fields";
                 alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible";

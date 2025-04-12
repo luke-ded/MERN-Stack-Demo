@@ -21,14 +21,14 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
 
         if (alertMessage) {
             if (date.length == 0 || name.length == 0 || valAmount.length == 0 || 
-                /* isButtonClicked == false || */ term == undefined || apr == undefined){
+                /* isButtonClicked == false || */ isNaN(term) || isNaN(apr)){
                 alertMessage.innerText = "Please Complete all the fields";
                 alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible";
                 return;
             } 
         }
-        
+
         function calcMonthly(calcAmount : any, calcAPR : any, calcTerm : any)
         {
             var i = 0.0, num = 0.0, denom = 0.0, res = 0.0;

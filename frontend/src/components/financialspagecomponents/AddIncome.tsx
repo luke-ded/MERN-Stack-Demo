@@ -170,7 +170,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
 
         
         
-        const Amount = parseInt(valAmount);
+        const Amount = parseFloat(valAmount);
         const IfRecurring = isRecurring;
         const [month, day, year] = date.split("/");
         const InitialTime = {Month: parseInt(month), Day: parseInt(day), Year: parseInt(year)};
