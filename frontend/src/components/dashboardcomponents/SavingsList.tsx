@@ -92,7 +92,7 @@ function SavingsList()
 
     const navigate = useNavigate();
 
-    if(parsedData.User.Debts == undefined || parsedData.User.Debts.length == 0)
+    if(parsedData.User.Savings == undefined || parsedData.User.Savings.length == 0)
     {
         return(
             <div className="text-white m-5">
@@ -119,7 +119,8 @@ function SavingsList()
     return (
         <ul className="shadow divide-y divide-[#7f8fb5] min-h-0">
         {props.items.map((item) => {
-            return <li onClick={navSavings} className="px-[1vw] py-[1vh] cursor-pointer border-b border-[#7f8fb5]">{props.renderer(item)}</li>;
+            if(item.Name != "Untracked")
+                return <li onClick={navSavings} className="px-[1vw] py-[1vh] cursor-pointer border-b border-[#7f8fb5]">{props.renderer(item)}</li>;
         })}
         </ul>
     );
