@@ -325,7 +325,7 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender, doConfetti }) =>
 
             {!editingItem && !deletingItem && !payoffItem && (
                 <div className = "flex flex-col flex-grow min-h-0">
-                    <ul className="flex-grow overflow-y-auto shadow divide-y divide-[#7f8fb5] border-b border-[#6d91e8] px-4 py-2" id = "listss">
+                    <ul className="flex-grow overflow-y-auto shadow divide-y divide-[#7f8fb5]" id = "listss">
                         {props.items.map((item) => {
                         return <li key={item.key} className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
                         })}
