@@ -271,39 +271,30 @@ function Signup() {
     }
 
     
-
-
-    
-  
-
-
-
   if (stageNum == 1){
 
     return (
-      <div className="flex flex-col justify-center w-[100%] h-160 shrink-1 items-center flex-grow" id="loginDiv">
+      <div className="flex flex-col justify-center w-[100%] h-135 shrink-1 items-center flex-grow" id="loginDiv">
         <span className="font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">SIGN UP</span>
-        <br />
-        <h5 className="self-start ml-[10%] text-lg">First Name</h5>
-        <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="FirstName" placeholder="First Name" onKeyUp={(e) => {
+        <h5 className="self-start ml-[10%] mt-3 text-md">First Name</h5>
+        <input className="w-8/10 text-md rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="FirstName" placeholder="First Name" onKeyUp={(e) => {
           if (e.key === "Enter") 
           {
             var next = document.getElementById("lastName") as HTMLInputElement;
             next.focus();
           }
         }}/>
-        <br />
-        <h5 className="self-start ml-[10%] text-lg">Last Name</h5>
-        <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="lastName" placeholder="Last Name" onKeyUp={(e) => {
+
+        <h5 className="self-start ml-[10%] mt-3 text-md">Last Name</h5>
+        <input className="w-8/10 text-md rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="lastName" placeholder="Last Name" onKeyUp={(e) => {
           if (e.key === "Enter") 
           {
             var next = document.getElementById("Email") as HTMLInputElement;
             next.focus();
           }
         }}/>
-        <br />
-        <h5 className="self-start ml-[10%] text-lg">Email</h5>
-        <input className="w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="Email" placeholder="Email" onKeyUp={(e) => {
+        <h5 className="self-start ml-[10%] mt-3 text-md">Email</h5>
+        <input className="w-8/10 text-md rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="Email" placeholder="Email" onKeyUp={(e) => {
           validateEmail();
           if (e.key === "Enter") 
           {
@@ -311,14 +302,13 @@ function Signup() {
             next.focus();
           }
         }}/>
-        <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2" id={app.firstinstruction} style={{ color: isValidEmail ? '#36eba6' :'#ff6384' }}>
+        <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-1" id={app.firstinstruction} style={{ color: isValidEmail ? '#36eba6' :'#ff6384' }}>
             {isValidEmail ? "" : "Invalid email."}
         </h6>
-        <br />
-        <h5 className="self-start ml-[10%] text-lg">Password</h5>
+        <h5 className="self-start ml-[10%] mt-3 text-md">Password</h5>
   
         <div className="flex w-[100%] relative items-center">
-            <input className="w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } id="loginPassword" placeholder="Password" onKeyUp={(e) => {
+            <input className="w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } id="loginPassword" placeholder="Password" onKeyUp={(e) => {
               validatePassword();
               if (e.key === "Enter") 
               {
@@ -329,7 +319,7 @@ function Signup() {
             <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
         </div>
   
-        <div className="flex w-[100%] whitespace-nowrap items-center mt-2">
+        <div className="flex w-[100%] whitespace-nowrap items-center mt-1">
           <h6 className="ml-[10%] text-[#bdc8e2] w-fit text-sm">Must contain at least&nbsp;</h6>
           <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passnumber} style = {{color: isPasswordNumberValid ? '#36eba6' :'#ff6384'}}>1 number</h6>
           <h6 className="text-[#bdc8e2] w-fit text-sm">,&nbsp;</h6>
@@ -338,14 +328,13 @@ function Signup() {
           <h6 className="text-[#bdc8e2] w-fit text-sm" id={app.passlength} style = {{color: isPasswordLengthValid ? '#36eba6' :'#ff6384'}}>length of 8+</h6>
           <h6 className="text-[#bdc8e2] w-fit text-sm">.</h6>
         </div>
-        <br />
   
-        <h5 className="self-start ml-[10%] text-lg">Confirm Password</h5>
+        <h5 className="self-start ml-[10%] mt-3 text-md">Confirm Password</h5>
         <div className="flex w-[100%] relative items-center">
-            <input className="w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } id="ConfPassword" placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {doSignUp(e);}}}/>
+            <input className="w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } id="ConfPassword" placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {doSignUp(e);}}}/>
             <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
         </div>
-        <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2" style={{ color: isPasswordSame ? '#36eba6' :'#ff6384' }}>
+        <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-1" style={{ color: isPasswordSame ? '#36eba6' :'#ff6384' }}>
             {isPasswordSame ? "" : "Passwords are not the same."}
         </h6>
         <h5 className="mt-3" id="alertmessage"></h5>
