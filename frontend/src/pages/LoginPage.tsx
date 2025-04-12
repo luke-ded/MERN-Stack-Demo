@@ -12,7 +12,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="mt-10 flex flex-col">
       <NavBar />
       <div className="flex flex-col justify-center w-100 shrink-1 items-center flex-grow">
         <div className="bg-black/80 rounded-lg border border-[#6d91e8] max-w-md w-full">
