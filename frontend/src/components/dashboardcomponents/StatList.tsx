@@ -1,5 +1,6 @@
-var totalDebt = 0, totalMinPayments = 0;
-var totalIncome = 0, totalExpenses = 0, totalSavings = 0.0;
+var totalDebt = 0.0, totalMinPayments = 0.0,
+totalIncome = 0.0, totalExpenses = 0.0, 
+totalSavings = 0.0, totalLastIncome = 0.0;
 
 function calcSavings(parsedData:any)
 {
@@ -25,6 +26,7 @@ function calcSavings(parsedData:any)
         totalSavings += counter.Amount;
     }
 }
+
 
 function calcDebt(parsedData:any)
 {
@@ -81,6 +83,34 @@ function calcIncome(parsedData:any)
     }
 }
 
+function calcLastIncome(parsedData:any)
+{
+    totalLastIncome = 0;
+
+    if(parsedData.User.Income == undefined || parsedData.User.Income.length == 0) 
+        return;
+
+    const today = new Date();
+
+    for (var i = 0; i < parsedData.User.Income.length; i++) 
+    {
+        var counter = parsedData.User.Income[i];
+
+        // Ensures item is not in the future
+        if(counter.InitialTime != undefined)
+        {
+            let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+            if((today.getTime() - old.getTime()) < 0)
+                continue;
+
+            if(today.getMonth() != counter.InitialTime.Month)
+                continue;
+        }
+
+        totalLastIncome += counter.Amount;
+    }
+}
+
 function calcExpenses(parsedData:any)
 {
     totalExpenses = 0;
@@ -118,6 +148,7 @@ function StatList()
     calcIncome(parsedData);
     calcExpenses(parsedData);
     calcSavings(parsedData);
+    calcLastIncome(parsedData);
 
     return (
         <ul className="shadow divide-y divide-[#7f8fb5] min-h-0 border-b border-[#6d91e8]">
@@ -160,7 +191,7 @@ function StatList()
                     </div>
                 </div>
                 {/*Update this so it is correct*/}
-                <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">~200% of your income last month.</p>
+                <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">~{totalIncome > 0 ? Math.floor((totalIncome/totalLastIncome) * 100): "N/A"}% of your income last month.</p>
             </li>
 
             <li className="px-[1vw] py-[1vh] group hover:bg-white/10">
