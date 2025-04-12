@@ -27,6 +27,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
             if (date.length == 0 || name.length == 0 || Amount == undefined || 
                 /* isButtonClicked == false || */  apr == undefined){
                 alertMessage.innerText = "Please Complete all the fields";
+                alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible";
                 return;
             } 
@@ -61,6 +62,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
             {  
                 if (alertMessage){
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
                 
@@ -70,6 +72,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
             {   
                 if (alertMessage){
                     alertMessage.innerText = "Succesfully Added";
+                    alertMessage.style.color = "#00c04b";
                     alertMessage.style.visibility = "visible";
                 }
 

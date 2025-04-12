@@ -23,6 +23,7 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
             if (date.length == 0 || name.length == 0 || valAmount.length == 0 || 
                 /* isButtonClicked == false || */ term == undefined || apr == undefined){
                 alertMessage.innerText = "Please Complete all the fields";
+                alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible";
                 return;
             } 
@@ -64,6 +65,7 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
                 
                 if (alertMessage){
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
 
@@ -72,6 +74,7 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
                 
                 if (alertMessage){
                     alertMessage.innerText = "Succesfully Added";
+                    alertMessage.style.color = "#00c04b";
                     alertMessage.style.visibility = "visible";
                 }
 
