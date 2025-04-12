@@ -48,7 +48,21 @@ function ForgotPass(){
         
                 if (validateEmail()){
 
-                    const pass = Math.round((Math.random() * 100000));
+                    var pass = Math.round((Math.random() * 100000));
+
+                    if (pass < 10000 && pass >= 1000) {
+                        pass *= 10;
+                    } else if (pass < 1000 && pass >= 100){
+                        pass *=100;
+                    } else if (pass < 100 && pass >= 10) {
+                        pass *= 1000;
+                    } else if (pass < 10 && pass >= 1){
+                        pass *= 10000;
+                    } else if (pass === 0){
+                        pass = 10000;
+                    }
+
+
                     const oneTimePassword = pass.toString();
                     setTempPass(pass);
 
