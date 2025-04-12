@@ -21,7 +21,7 @@ const FinancialsPage = () => {
           <AddIncome triggerRerender={triggerRerender}/>
         </div>
 
-        <div className = "block fixed top-[32%] left-[70%] w-[30%] h-[48%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "VisualBar">
+        <div className = "block fixed top-[33%] left-[70%] w-[30%] h-[50%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "VisualBar">
           <AddExpense triggerRerender={triggerRerender}/>
         </div>
 
@@ -29,7 +29,7 @@ const FinancialsPage = () => {
           <IncomeList triggerRerender={triggerRerender}/>
         </div>
 
-        <div className = "block fixed top-[78%] left-[70%] w-[30%] h-[40%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "ExpensesListBar">
+        <div className = "block fixed top-[79%] left-[70%] w-[30%] h-[38%] min-h-fit bg-[rgba(17,18,23,0.9)] border border-[#6d91e8] border-[1.5px] rounded-[2%] text-center transform -translate-x-1/2 -translate-y-1/2" id = "ExpensesListBar">
           <ExpensesList triggerRerender={triggerRerender}/>
         </div>
     </div>
