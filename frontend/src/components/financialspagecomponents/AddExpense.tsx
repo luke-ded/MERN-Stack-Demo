@@ -18,7 +18,9 @@ interface Item
     APR: any;
 }
 
-const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
+const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => 
+{
+    var otoday = new Date();
 
     const [isRecurring, setRecurring] = useState(false);
     const [isButtonClicked, setButton] = useState(false);
@@ -304,7 +306,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) => {
 
         
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "MM/DD/YYYY" id = "Expdate3" onKeyUp={(e) => {
+            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" defaultValue={(otoday.getMonth() + 1) + "/" + otoday.getDate() + "/" + otoday.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "Expdate3" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("ExpCat") as HTMLInputElement;

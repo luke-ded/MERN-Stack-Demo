@@ -8,6 +8,8 @@ interface ChildProps {
 
 const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) => 
 {
+    const today = new Date();
+
     async function addDebt(event: any): Promise<void>{
         
         const valAmount = (document.getElementById("Num") as HTMLInputElement).value;
@@ -129,7 +131,7 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
 
             
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "date"></input>
+                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" defaultValue={(today.getMonth() + 1) + "/" + today.getDate() + "/" +today.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "date"></input>
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Interest Rate (APR)</h5>
                 <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "1.23" id = "apr"></input>
