@@ -110,9 +110,6 @@ const OnboardPage = () => {
 
     async function setInfo() : Promise<void>
       {
-        const data = localStorage.getItem('user_data');
-        const parsedData = data ? JSON.parse(data) : null;
-        //console.log(parsedData.token);
         localStorage.setItem('token', parsedData.token);
         //var obj = {token:parsedData.token};
         //var js = JSON.stringify(obj);
