@@ -7,7 +7,18 @@ interface Item
     Name: string;
     Date: any;
     Amount: any,
+    Account: string;
 }
+
+interface savingsItem 
+{
+    key:string;
+    Name: string;
+    Date: any;
+    Amount: any;
+    APR: any;
+}
+
 
 interface PropsType 
 {
@@ -25,6 +36,7 @@ const IncomeList: React.FC<ChildProps> = ({ triggerRerender }) =>
 {
     var data = localStorage.getItem('user_data');
     var parsedData = data ? JSON.parse(data) : null;
+    var savingsList = setSavings();
 
     console.log("After addition the array is of size " + parsedData.User.Income.length);
 
@@ -49,6 +61,99 @@ const IncomeList: React.FC<ChildProps> = ({ triggerRerender }) =>
         setEditingItem(null);
         setDeletingItem(null);
     };
+
+    function setSavings()
+    {
+        const today = new Date();
+    
+        var data = localStorage.getItem('user_data');
+        var parsedData = data ? JSON.parse(data) : null;
+    
+        let debts = new Array<savingsItem>();
+    
+        for(var i = 0; i < parsedData.User.Savings.length; i++) 
+        {
+            var counter = parsedData.User.Savings[i];
+    
+            // Ensures item is not in the future
+            if(counter.InitialTime != undefined)
+            {
+                let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+                if((today.getTime() - old.getTime()) < 0)
+                    continue;
+            }
+    
+            let newItem: savingsItem = 
+            {
+                key: i.toString(),
+                Name: counter.Name, 
+                Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+                Amount: counter.Amount,
+                APR: counter.APR,
+            };
+    
+            debts.push(newItem);
+        }
+        
+        debts.sort((a, b) => a.Amount == b.Amount ? Date.UTC(b.Date.Year, b.Date.Month - 1, b.Date.Day) 
+        - Date.UTC(a.Date.Year, a.Date.Month - 1, a.Date.Day) : b.Amount - a.Amount);
+    
+        return debts;
+    }
+
+    async function removeFunds(item: savingsItem | null, removeamount : any) 
+    {
+        console.log("removeamount="+removeamount);
+        var data = localStorage.getItem('user_data');
+        var parsedData = data ? JSON.parse(data) : null;
+
+        if(item == null)
+            return;
+
+        if(item.key == parsedData.User.Savings.Length)
+            return;
+
+
+        const token = localStorage.getItem('token');
+
+        var index = parseInt(item.key);
+
+        var obj = 
+        {
+            index: index,
+            NewName: item.Name,
+            NewAmount: item.Amount - removeamount, // Only thing updated here
+            NewAPR: item.APR,
+            NewInitialTime: item.Date
+        };
+
+        console.log(obj);
+        var js = JSON.stringify(obj);
+
+        try 
+        {
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/EditSaving',
+                { method:'POST', body:js, headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+            var res = JSON.parse(await response.text());
+
+            if (res.Result === "Edited saving of user") 
+            {
+                console.log("edited\n");
+                await setInfo();
+                //triggerRerender(); // Ensure parent knows data changed
+            } 
+            else 
+            {
+                console.error("Edit failed:", res.Result);
+                // Consider adding user feedback here
+            }
+        } 
+        catch (error: any) 
+        {
+            alert(error.toString());
+        }
+    }
+
 
     function setIncome()
     {
@@ -75,7 +180,8 @@ const IncomeList: React.FC<ChildProps> = ({ triggerRerender }) =>
                 key: i.toString(),
                 Name: counter.Name, 
                 Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-                Amount: counter.Amount
+                Amount: counter.Amount,
+                Account: counter.Account
             };
 
             expenses.push(newItem);
@@ -159,6 +265,16 @@ const IncomeList: React.FC<ChildProps> = ({ triggerRerender }) =>
 
             if (res.Result == "Deleted income from user") 
             {
+
+                for(var i = 0; i < savingsList.length;i++)
+                {
+                    if(item.Account == savingsList[i].Name)
+                    {
+                        removeFunds(savingsList[i], item.Amount);
+                        break;
+                    }
+                }
+
                 await setInfo();
                 console.log("Deleted " + index);
                 triggerRerender();
@@ -228,8 +344,6 @@ const IncomeList: React.FC<ChildProps> = ({ triggerRerender }) =>
             alert(error.toString());
             return;
         }
-
-
     }
 
 
