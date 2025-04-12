@@ -223,6 +223,10 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
                         new Audio(sound).play()
                     }
 
+                    (document.getElementById("ExpNum") as HTMLInputElement).value = "";
+                    (document.getElementById("ExpName") as HTMLInputElement).value = "";
+                    (document.getElementById("ExpCat") as HTMLInputElement).value = "";
+                    setSelectedItemKey("");
 
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.color = "#00c04b";

@@ -19,7 +19,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
         const Amount = parseFloat((document.getElementById("Num") as HTMLInputElement).value);
         const name = (document.getElementById("Name") as HTMLInputElement).value;
         const date = (document.getElementById("date") as HTMLInputElement).value;
-        const apr = parseFloat((document.getElementById("date") as HTMLInputElement).value);
+        const apr = parseFloat((document.getElementById("apr") as HTMLInputElement).value);
         const alertMessage = document.getElementById("alertMessage");
         
 
@@ -71,6 +71,11 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
             else 
             {   
                 if (alertMessage){
+
+                    (document.getElementById("Num") as HTMLInputElement).value = "";
+                    (document.getElementById("Name") as HTMLInputElement).value = "";
+                    (document.getElementById("apr") as HTMLInputElement).value = "";
+
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.color = "#00c04b";
                     alertMessage.style.visibility = "visible";

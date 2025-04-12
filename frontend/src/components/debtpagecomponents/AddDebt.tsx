@@ -15,7 +15,7 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
         const valAmount = (document.getElementById("Num") as HTMLInputElement).value;
         const name = (document.getElementById("Name") as HTMLInputElement).value;
         const date = (document.getElementById("date") as HTMLInputElement).value;
-        const apr = parseFloat((document.getElementById("date") as HTMLInputElement).value);
+        const apr = parseFloat((document.getElementById("apr") as HTMLInputElement).value);
         const term = parseFloat((document.getElementById("term") as HTMLInputElement).value);
         const alertMessage = document.getElementById("alertMessage");
 
@@ -73,6 +73,12 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
 
                 
                 if (alertMessage){
+
+                    (document.getElementById("Num") as HTMLInputElement).value = "";
+                    (document.getElementById("Name") as HTMLInputElement).value = "";
+                    (document.getElementById("term") as HTMLInputElement).value = "";
+                    (document.getElementById("apr") as HTMLInputElement).value = "";
+
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.color = "#00c04b";
                     alertMessage.style.visibility = "visible";

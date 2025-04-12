@@ -205,6 +205,11 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
 
                 
                 if (alertMessage){
+
+                    (document.getElementById("IncNames") as HTMLInputElement).value = "";
+                    (document.getElementById("IncNum") as HTMLInputElement).value = "";
+                    setSelectedItemKey("");
+
                     alertMessage.innerText = "Succesfully Added";
                     alertMessage.style.color = "#00c04b";
                     alertMessage.style.visibility = "visible";
