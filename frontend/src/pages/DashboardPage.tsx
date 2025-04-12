@@ -88,7 +88,7 @@ const DashboardPage = () => {
         
 
         <div className="flex justify-between w-[85vw] mt-[8vh]">
-            <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
+            <div className= "flex-col ml-30 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
                 <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
                     <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Top Debts</h3>
                 </div>
@@ -97,7 +97,7 @@ const DashboardPage = () => {
                 </div>
             </div>
 
-            <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
+            <div className= "flex-col mr-30 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
                 <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
                     <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Top Accounts</h3>
                 </div>
@@ -105,21 +105,6 @@ const DashboardPage = () => {
                     <SavingsList/>
                 </div>
             </div>
-
-            <div className= "ml-8 w-[50vh] min-h-fit h-[50vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
-                <div className="flex w-[50vh] absolute z-0">
-                    <GoalProgress />    
-                </div>
-                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Reward</h3>
-                </div>
-                    
-                <div className='mt-10'>
-                    <h5 style={{color: percentage > 50 ? "rgb(54, 235, 166)" : "rgb(255, 99, 132)"}}> 
-                        You are {percentage}% of the way to your reward, {rewardName}!</h5>
-                </div>
-            </div>
-
         </div>
     </div>
     );
