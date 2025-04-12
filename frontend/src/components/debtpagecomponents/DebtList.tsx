@@ -573,14 +573,167 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ item, onConfirm, onCancel }) 
     );
 };
 
+interface savingsItem 
+{
+    key:string;
+    Name: string;
+    Date: any;
+    Amount: any;
+    APR: any;
+}
+
 const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, onDelete, onConfetti }) => 
 {  
     // Ensure amount is treated as string for input, handle potential non-numeric original value
     const [amount, setAmount] = useState(typeof item.Amount === 'number' ? item.Amount.toString() : '');
+    const [selectedItemObject, setSelectedItemObject] = useState<savingsItem | null>(null);
+    const [selectedItemKey, setSelectedItemKey] = useState<string>('');
+
+    const itemsList = setSavings();
+
+    const handleItemChange = (event: React.ChangeEvent<HTMLSelectElement>) => 
+    {
+        const selectedKey = event.target.value;
+        setSelectedItemKey(selectedKey);
+
+        const fullItem = itemsList.find(item => item.key === selectedKey) || null;
+        setSelectedItemObject(fullItem);
+        console.log("Selected Item Key:", selectedKey);
+        console.log("Selected Item Object:", fullItem);
+    };
+
+    function setSavings()
+    {
+        const today = new Date();
     
+        var data = localStorage.getItem('user_data');
+        var parsedData = data ? JSON.parse(data) : null;
+    
+        let savings = new Array<savingsItem>();
+
+        for(var i = 0; i < parsedData.User.Savings.length; i++) 
+        {
+            var counter = parsedData.User.Savings[i];
+    
+            // Ensures item is not in the future
+            if(counter.InitialTime != undefined)
+            {
+                let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+                if((today.getTime() - old.getTime()) < 0)
+                    continue;
+            }
+    
+            let newItem: savingsItem = 
+            {
+                key: i.toString(),
+                Name: counter.Name, 
+                Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+                Amount: counter.Amount,
+                APR: counter.APR,
+            };
+    
+            savings.push(newItem);
+        }
+        
+        // Add "account" for when going to cash
+        let newItem: savingsItem = 
+        {
+            key: parsedData.User.Savings.Length,
+            Name: "Untracked", 
+            Date: {"Month":1, "Day":1, "Year":2023},
+            Amount: 0,
+            APR: 0,
+        };
+    
+        savings.push(newItem);
+
+        return savings;
+    }
+
+
+    async function removeFunds(item: savingsItem | null, removeamount : any) 
+    {
+        console.log("removeamount="+removeamount);
+        var data = localStorage.getItem('user_data');
+        var parsedData = data ? JSON.parse(data) : null;
+
+        if(item == null)
+            return;
+
+        if(item.key == parsedData.User.Savings.Length)
+            return;
+
+
+        const token = localStorage.getItem('token');
+
+        var index = parseInt(item.key);
+
+        var obj = 
+        {
+            index: index,
+            NewName: item.Name,
+            NewAmount: item.Amount - removeamount, // Only thing updated here
+            NewAPR: item.APR,
+            NewInitialTime: item.Date
+        };
+
+        console.log(obj);
+        var js = JSON.stringify(obj);
+
+        try 
+        {
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/EditSaving',
+                { method:'POST', body:js, headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+            var res = JSON.parse(await response.text());
+
+            if (res.Result === "Edited saving of user") 
+            {
+                console.log("edited\n");
+                await updateInfo();
+                //triggerRerender(); // Ensure parent knows data changed
+            } 
+            else 
+            {
+                console.error("Edit failed:", res.Result);
+                // Consider adding user feedback here
+            }
+        } 
+        catch (error: any) 
+        {
+            alert(error.toString());
+        }
+    }
+
+
+    async function updateInfo() : Promise<void>
+    {
+        var token = localStorage.getItem('token');
+
+        try
+        {
+            const response = await fetch('http://salvagefinancial.xyz:5000/api/ShowAllInfo',
+            {method:'POST', headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`}});
+            var res = JSON.parse(await response.text());
+            if( res.Result == "invalid token")
+            {
+            console.log("FAILED IN SETINFO FUNCTION");
+            }
+            else
+            {
+            //console.log(JSON.stringify(res));
+            localStorage.setItem('user_data', JSON.stringify(res));
+            }
+        }
+        catch(error:any)
+        {
+            alert(error.toString());
+            return;
+        }
+    }
+
     const handleSaveClick = () => 
     {   
-        const alertMessage = document.getElementById("alertMessagess");
+        const alertMessage = document.getElementById("alertMessagepayoff");
         // Validate inputs (e.g., date format, amount is number) before saving
         var parsedAmount = parseFloat(amount);
         if (isNaN(parsedAmount) && alertMessage) 
@@ -589,16 +742,24 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
             alertMessage.style.visibility = "visible"; 
             return;
         }
+
+        if (selectedItemKey == '' && alertMessage) 
+        {
+            alertMessage.innerText = "Select an account.";
+            alertMessage.style.visibility = "visible"; 
+            return;
+        }
         
         var monthly = 10;
         
         if(parsedAmount >= item.Amount)
         {
-            
             onDelete(item);
             onConfetti();
             return;
         }
+        
+        removeFunds(selectedItemObject, parsedAmount);
 
         parsedAmount = item.Amount - parsedAmount;
         // Create an updated item object to pass to the save function
@@ -611,8 +772,7 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
             Term: item.Term,
             Monthly: monthly, /* replace with equation to determine monthly payment */
         };
-        
-        
+         
         onConfirm(updatedItem);
     };
 
@@ -622,10 +782,34 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
                 <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2.5vh] text-white">Pay Off Debt</span>
             </div>
 
-            <h5 className="self-start text-white ml-[10%] mt-10 text-lg text-left text-[0.95rem]">Amount</h5>
-            <input type="number" className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" onChange={(e) => setAmount(e.target.value)} placeholder = {'Amount'} id = "Debtnum"/>
+            <h5 className="self-start text-white ml-[10%] mt-5 text-lg text-left text-[0.95rem]">Amount</h5>
+            <input type="number" className="h-8 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" onChange={(e) => setAmount(e.target.value)} placeholder = {'Amount'} id = "Debtnum"/>
+            
+            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Account</h5>
+            <select
+                id="Incaccount"
+                value={selectedItemKey} // Controlled component: value linked to state
+                onChange={handleItemChange} // Update state on change
+                className="h-8 w-8/10 text-md rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1"
+                required
+                >
 
-            <div className="flex w-8/10 ml-[10%] mt-10 font-bold items-center justify-center">
+                {/* Placeholder Option */}
+                <option className="text-black bg-[#7f8fb5]" value="" disabled>
+                  Select Account
+                </option>
+
+                {itemsList.map((item) => (
+                  <option className="text-black bg-[#7f8fb5]"
+                    key={item.key}
+                    value={item.key}
+                  >
+                    {item.Name} {/* Display the item's Name to the user */}
+                  </option>
+                ))}
+            </select>
+
+            <div className="flex w-8/10 ml-[10%] mt-5 font-bold items-center justify-center">
                 <h5 className="text-[#ff6384]">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</h5>
                 <h5 className="text-white">&nbsp;-&nbsp;</h5>
                 <h5 className="text-[#36eba6]">${ !isNaN(parseFloat(amount)) ? parseFloat(amount).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : "N/A"}</h5>
@@ -633,8 +817,10 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
                 <h5 style={{color: !isNaN(parseFloat(amount)) && (item.Amount - parseFloat(amount) <= 0) ? "#36eba6":'#ff6384'}}
                 >${!isNaN(parseFloat(amount)) ? (item.Amount - parseFloat(amount) < 0 ? 0.00 : (item.Amount - parseFloat(amount)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})) : "N/A"}</h5>
             </div>
+            
+            <h5 className="text-[#ff6384] mt-2" id="alertMessagepayoff"></h5>
 
-            <div className="fixed top-[80%] left-3/10  w-4/10 flex items-center justify-center">
+            <div className="fixed top-[84%] left-3/10  w-4/10 flex items-center justify-center">
                 <button className = "mr-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#36eba6] text-center text-[1.8vh] hover:bg-green-400/50 hover:border-[#1df25d]" onClick = {handleSaveClick}>Pay</button>
                 <button className = "ml-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {onCancel}> Cancel</button>
             </div>
