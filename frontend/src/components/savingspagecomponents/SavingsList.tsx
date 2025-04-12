@@ -97,7 +97,7 @@ const SavingsList: React.FC<ChildProps> = ({ triggerRerender }) =>
         debts.sort((a, b) => a.Amount == b.Amount ? Date.UTC(b.Date.Year, b.Date.Month - 1, b.Date.Day) 
         - Date.UTC(a.Date.Year, a.Date.Month - 1, a.Date.Day) : b.Amount - a.Amount);
     
-        return debts; // Return most recent 10 items
+        return debts;
     }
     
     const renderDebtItem = (item: Item): React.ReactNode => 
