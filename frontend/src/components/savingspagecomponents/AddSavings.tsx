@@ -10,9 +10,12 @@ interface ChildProps {
 const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => 
 {
     const today = new Date();
-    
-    async function addSavings(event: any): Promise<void>{
-        
+
+    async function addSavings(event: any): Promise<void>
+    {
+        const data = localStorage.getItem('user_data');
+        const parsedData = data ? JSON.parse(data) : null;
+
         const Amount = parseFloat((document.getElementById("Num") as HTMLInputElement).value);
         const name = (document.getElementById("Name") as HTMLInputElement).value;
         const date = (document.getElementById("date") as HTMLInputElement).value;
@@ -28,7 +31,17 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) =>
                 return;
             } 
         }
-       
+        
+        for(var i = 0; i < parsedData.User.Savings.length; i++)
+        {
+            if(alertMessage && parsedData.User.Savings[i].Name == name)
+            {
+                alertMessage.innerText = "Duplicate name";
+                alertMessage.style.visibility = "visible";
+                return;
+            }
+        }
+        
         const token = localStorage.getItem('token');
         
         const [month, day, year] = date.split("/");
