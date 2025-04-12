@@ -17,11 +17,23 @@ function ParseLabels()
   var parsedData = data ? JSON.parse(data) : null;
 
   var labels = [];
+  const today = new Date();
 
   for (var i = 0; i < parsedData.User.Income.length; i++) 
   {
     var counter = parsedData.User.Income[i];
     //console.log(counter.Category);
+
+    if(counter.InitialTime != undefined)
+    {
+      let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+      if((today.getTime() - old.getTime()) < 0)
+          continue;
+
+      if(today.getMonth() + 1 != counter.InitialTime.Month)
+          continue;
+    }
+
     labels.push(counter.Name);
   }
 
@@ -34,10 +46,22 @@ function ParseData()
   var parsedData = data ? JSON.parse(data) : null;
 
   var datapts = [];
+  const today = new Date();
 
   for (var i = 0; i < parsedData.User.Income.length; i++) 
   {
     var counter = parsedData.User.Income[i];
+
+    if(counter.InitialTime != undefined)
+    {
+      let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+      if((today.getTime() - old.getTime()) < 0)
+          continue;
+
+      if(today.getMonth() + 1 != counter.InitialTime.Month)
+          continue;
+    }
+
     //console.log(counter.Amount);
     datapts.push(counter.Amount);
   }

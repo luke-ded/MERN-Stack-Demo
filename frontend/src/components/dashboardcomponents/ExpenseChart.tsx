@@ -18,10 +18,23 @@ function ParseLabels()
   var data = localStorage.getItem('user_data');
   var parsedData = data ? JSON.parse(data) : null;
 
+  const today = new Date();
+
   for (var i = 0; i < parsedData.User.Expenses.length; i++) 
   {
     var counter = parsedData.User.Expenses[i];
     //console.log(counter.Category);
+
+    if(counter.InitialTime != undefined)
+    {
+      let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+      if((today.getTime() - old.getTime()) < 0)
+          continue;
+
+      if(today.getMonth() + 1 != counter.InitialTime.Month)
+          continue;
+    }
+
     if(!labels.includes(counter.Category))
       labels.push(counter.Category);
   }
@@ -36,10 +49,23 @@ function ParseData()
 
   let datapts = new Array(labels.length).fill(0);
 
+  const today = new Date();
+
   for (var i = 0; i < parsedData.User.Expenses.length; i++) 
   {
     var counter = parsedData.User.Expenses[i];
     //console.log(counter.Amount);
+
+    if(counter.InitialTime != undefined)
+    {
+      let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+      if((today.getTime() - old.getTime()) < 0)
+          continue;
+
+      if(today.getMonth() + 1 != counter.InitialTime.Month)
+          continue;
+    }
+
     datapts[labels.indexOf(counter.Category)] += counter.Amount;
   }
 
