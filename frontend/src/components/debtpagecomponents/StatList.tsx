@@ -1,6 +1,6 @@
 var totalDebt = 0, totalMinPayments = 0;
 var totalIncome = 0, totalExpenses = 0;
-var averageAPR = 0.0;
+var averageAPR = 0.0, totalSavings=0.0;
 
 function calcDebt(parsedData:any)
 {
@@ -112,6 +112,30 @@ function calcAverageAPR(parsedData:any)
     averageAPR = averageAPR / parsedData.User.Debts.length;
 }
 
+function calcSavings(parsedData:any)
+{
+    totalSavings = 0;
+
+    if(parsedData.User.Savings == undefined || parsedData.User.Savings.length == 0) 
+        return;
+
+    const today = new Date();
+
+    for (var i = 0; i < parsedData.User.Savings.length; i++) 
+    {
+        var counter = parsedData.User.Savings[i];
+
+        // Ensures item is not in the future
+        if(counter.InitialTime != undefined)
+        {
+            let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+            if((today.getTime() - old.getTime()) < 0)
+                continue;
+        }
+
+        totalSavings += counter.Amount;
+    }
+}
 
 function StatList() 
 {
@@ -126,7 +150,7 @@ function StatList()
                     <div>
                         <div className="flex justify-between items-center">
                             <span className="text-white font-semibold text-3xl">Total Debt:</span>
-                            <span className="font-semibold text-3xl" style = {{color: (totalDebt == 0) ? '#36eba6' :'#ff6384'}}> ${totalDebt.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            <span className="font-semibold text-3xl text-[#ff6384]"> $0.00</span>
                         </div>
                     </div>
                 </li>
@@ -139,6 +163,7 @@ function StatList()
     calcIncome(parsedData);
     calcExpenses(parsedData);
     calcAverageAPR(parsedData);
+    calcSavings(parsedData);
 
     return (
         <ul className="shadow divide-y divide-[#7f8fb5] min-h-0 border-b border-[#6d91e8]">
@@ -165,7 +190,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Assets to Liabilities Ratio:</span>
-                        <p className="font-semibold text-md" style = {{color: (parsedData.User.InitialAmount/totalDebt >= 1) ? '#36eba6' :'#ff6384'}}>{totalDebt != 0 ? parsedData.User.InitialAmount/totalDebt >= 1? parsedData.User.InitialAmount/totalDebt +':1' : 1 + ':' + (1/(parsedData.User.InitialAmount/totalDebt)).toFixed(0) : "N/A"}</p>
+                        <p className="font-semibold text-md" style = {{color: (totalSavings/totalDebt >= 1) ? '#36eba6' :'#ff6384'}}>{totalDebt != 0 ? totalSavings/totalDebt >= 1? totalSavings/totalDebt +':1' : 1 + ':' + (1/(totalSavings/totalDebt)).toFixed(0) : "N/A"}</p>
                     </div>
                 </div>
             </li>

@@ -146,7 +146,7 @@ function StatList()
                 <div>
                     <div className="flex justify-between items-center">
                         <span className="text-white font-semibold text-md">Assets to Liabilities Ratio:</span>
-                        <p className="font-semibold text-md" style = {{color: (parsedData.User.InitialAmount/totalDebt >= 1) ? '#36eba6' :'#ff6384'}}>{totalDebt != 0 ? parsedData.User.InitialAmount/totalDebt >= 1? parsedData.User.InitialAmount/totalDebt +':1' : 1 + ':' + (1/(parsedData.User.InitialAmount/totalDebt)).toFixed(0) : "N/A"}</p>
+                        <p className="font-semibold text-md" style = {{color: (totalSavings/totalDebt >= 1) ? '#36eba6' :'#ff6384'}}>{totalDebt != 0 ? totalSavings/totalDebt >= 1? totalSavings/totalDebt +':1' : 1 + ':' + (1/(totalSavings/totalDebt)).toFixed(0) : "N/A"}</p>
                     </div>
                 </div>
                 <p className="max-h-0 overflow-hidden opacity-0 group-hover:opacity-100 group-hover:max-h-16 transition-all duration-300 ease-out visibility-hidden group-hover:visibility-visible">Experts recommend between 3:1 and 5:1.</p>
