@@ -6,7 +6,7 @@ const HomePage = () => {
     <div>
         <NavBar />
         <div id = {app.main}>
-            <h1 className={app.tagline}> "Inspirational" Tagline Here?</h1>
+            <h1 className={app.tagline}>The ocean never apologizes for its vastness. Neither should you for wanting financial freedom.</h1>
         </div>
     </div>
   );
