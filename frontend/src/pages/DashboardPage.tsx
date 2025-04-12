@@ -18,7 +18,7 @@ const DashboardPage = () => {
     //console.log(localStorage.getItem('token'));
 
     return (
-    <div className="flex flex-col absolute top-0 left-0 h-[300vh]">
+    <div className="flex flex-col absolute top-0 left-0 h-[300vh] w-full bg-[rgba(0,26,51,1)]">
         <NavBar />
 
         <div className="w-[10vw] min-h-fit h-[90vh] border border-[#6d91e8] rounded-lg text-center bg-[rgba(17,18,23,.9)] fixed top-[8vh] right-8">
@@ -27,7 +27,7 @@ const DashboardPage = () => {
             <p className='text-white mt-5 m-2'>should this be fixed like it is now, or extend way down the entire page and be scrollable?</p>
         </div>
 
-        <div className="flex justify-between mt-[8vh]">
+        <div className="flex justify-between w-[85vw] mt-[8vh]">
             <div className= "ml-8 w-[50vh] min-h-fit h-[60vh] border border-[#6d91e8] rounded-[2%] text-center bg-[rgba(17,18,23,.9)]">
                 <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
                     <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Expenses</h3>
