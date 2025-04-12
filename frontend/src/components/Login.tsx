@@ -16,6 +16,7 @@ function Login() {
 
     if (alertMessage){ 
 
+
       if (loginVal.length == 0 && passVal.length == 0)
       { 
         alertMessage.innerText = "Username and Password are both empty!";
@@ -156,7 +157,7 @@ function Login() {
         <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
       </div>
 
-      <h5 className="mt-3" id = "alertmessage"></h5>
+      <h5 className="mt-3 text-[#ff6384]" id = "alertmessage "></h5>
       <button className=" rounded-sm inline-block h-fit w-fit p-[3px] pl-[7px] pr-[7px] bg-transparent hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] m-[5%] cursor-pointer" onClick={doLogin}>Login</button>
       <span id="loginResult"></span>
     </div>

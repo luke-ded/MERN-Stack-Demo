@@ -253,7 +253,7 @@ function ForgotPass(){
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Forgot Password</span><br />
                 <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Enter your Email</h5>
                 <input type="text" id="loginName" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
-                <h5 className="mt-3" id = "alertmessage"></h5>
+                <h5 className="mt-3 text-[#ff6384]" id = "alertmessage"></h5>
                 <button className="absolute left-[28%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={reclaimPass}>Confirm</button>
                 <button className="absolute right-[25%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] mr-[5%] cursor-pointer" onClick = {navLogin}>Back To Login</button>
             </div>
@@ -264,7 +264,7 @@ function ForgotPass(){
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Forgot Password</span><br />
                 <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Reset your Password</h5>
                 <input type="number" id="loginNames" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
-                <h5 className="mt-3" id = "alertmessage"></h5>
+                <h5 className="mt-3 text-[#ff6384]" id = "alertmessage"></h5>
                 <button className="absolute right-[45%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={verifyOneTimePass}>Confirm</button>
             </div>
         );
@@ -299,7 +299,7 @@ function ForgotPass(){
                     {isPasswordSame ? "" : "Passwords are not the same."}
                  </h6>
                  <br />
-                <h5 className="absolute right-[30%] bottom-[15%]" id = "alertmessage"></h5>
+                <h5 className="absolute right-[30%] bottom-[15%] text-[#ffffff]" id = "alertmessage"></h5>
                 <button className="absolute right-[45%] bottom-[5%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={changePassword}>Confirm</button>
             </div>
         );
