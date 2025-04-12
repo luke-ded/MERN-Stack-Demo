@@ -286,11 +286,11 @@ const SavingsList: React.FC<ChildProps> = ({ triggerRerender }) =>
         return(
             <div id = "ExpRes">
                 <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Expenses</span>
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Accounts</span>
                 </div>
 
                 <div className="text-white p-5">
-                    <p className="mt-5">No debts to display.</p>
+                    <p className="mt-5">No accounts to display.</p>
                 </div>
             </div>
         );

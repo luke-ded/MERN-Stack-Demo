@@ -300,7 +300,7 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender, doConfetti }) =>
         return(
             <div id = "ExpRes">
                 <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Expenses</span>
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]"> Your Debts</span>
                 </div>
 
                 <div className="text-white p-5">

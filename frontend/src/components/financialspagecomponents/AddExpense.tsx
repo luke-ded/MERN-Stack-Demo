@@ -58,35 +58,40 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
         var parsedData = data ? JSON.parse(data) : null;
     
         let savings = new Array<Item>();
-
-        for(var i = 0; i < parsedData.User.Savings.length; i++) 
+        console.log("aprsed="+parsedData.User.toString());
+        var length = '0';
+        if(parsedData.User.Savings != undefined)
         {
-            var counter = parsedData.User.Savings[i];
-    
-            // Ensures item is not in the future
-            if(counter.InitialTime != undefined)
+            for(var i = 0; i < parsedData.User.Savings.length; i++) 
             {
-                let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
-                if((today.getTime() - old.getTime()) < 0)
-                    continue;
+                var counter = parsedData.User.Savings[i];
+
+                // Ensures item is not in the future
+                if(counter.InitialTime != undefined)
+                {
+                    let old = new Date(Date.UTC(counter.InitialTime.Year, counter.InitialTime.Month - 1, counter.InitialTime.Day));
+                    if((today.getTime() - old.getTime()) < 0)
+                        continue;
+                }
+
+                let newItem: Item = 
+                {
+                    key: i.toString(),
+                    Name: counter.Name, 
+                    Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
+                    Amount: counter.Amount,
+                    APR: counter.APR,
+                };
+
+                savings.push(newItem);
             }
-    
-            let newItem: Item = 
-            {
-                key: i.toString(),
-                Name: counter.Name, 
-                Date: counter.InitialTime != undefined ? counter.InitialTime : {"Month":1, "Day":1, "Year":2023},
-                Amount: counter.Amount,
-                APR: counter.APR,
-            };
-    
-            savings.push(newItem);
+
+            length = parsedData.User.Savings.length.toString();
         }
-        
         // Add "account" for when going to cash
         let newItem: Item = 
         {
-            key: parsedData.User.Savings.Length,
+            key: length,
             Name: "Untracked", 
             Date: {"Month":1, "Day":1, "Year":2023},
             Amount: 0,
