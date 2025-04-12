@@ -2,7 +2,6 @@ import ExpenseChart from '../components/dashboardcomponents/ExpenseChart.tsx';
 import IncomeChart from '../components/dashboardcomponents/IncomeChart.tsx';
 import IncomeLineChart from '../components/dashboardcomponents/IncomeLineChart.tsx';
 import ExpensesLineChart from '../components/dashboardcomponents/ExpensesLineChart.tsx';
-import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import ExpensesList from '../components/dashboardcomponents/ExpensesList.tsx';
 import IncomeList from '../components/dashboardcomponents/IncomeList.tsx';
 import DebtList from '../components/dashboardcomponents/DebtList.tsx';
@@ -11,10 +10,8 @@ import StatList from '../components/dashboardcomponents/StatList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
 
-const DashboardPage = () => {
-    const percentage = 60;
-    const rewardName = "rewardName";
-
+const DashboardPage = () => 
+{
     //console.log(localStorage.getItem('token'));
 
     return (
