@@ -18,7 +18,7 @@ const DashboardPage = () => {
     //console.log(localStorage.getItem('token'));
 
     return (
-    <div className="flex flex-col absolute top-0 left-0 h-[300vh] w-full bg-[rgba(0,26,51,1)]">
+    <div className="flex flex-col absolute top-0 left-0 h-[280vh] w-full bg-[rgba(0,26,51,1)]">
         <NavBar />
 
         <div className="w-[10vw] min-h-fit h-[90vh] border border-[#6d91e8] rounded-lg text-center bg-[rgba(17,18,23,.9)] fixed top-[8vh] right-8">
