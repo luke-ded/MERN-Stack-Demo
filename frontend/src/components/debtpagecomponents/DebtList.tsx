@@ -551,7 +551,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ item, onConfirm, onCancel }) 
     const amount = typeof item.Amount === 'number' ? item.Amount : 'N/A';
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col text-white">
             <div className="flex-col mt-2 h-[10%] items-center justify-center">
                 <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2.5vh] text-[#ffffff]"> Do you want to delete this Debt?</span>
             </div>
@@ -559,11 +559,11 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ item, onConfirm, onCancel }) 
             <h5 className="text-lg text-center mt-10">Name:  {item.Name}</h5>
 
                     
-            <h5 className="text-lg text-center">Amount: {amount}</h5>
+            <h5 className="text-lg text-center">Amount: {amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</h5>
 
             <h5 className="text-lg text-center">Date: {date}</h5>
             
-            <h5 className="text-lg text-center">Monthly payment: {item.Monthly}</h5>
+            <h5 className="text-lg text-center">Monthly payment: {item.Monthly.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</h5>
         
             <div className="fixed top-[80%] left-3/10  w-4/10 flex items-center justify-center">
                 <button className = "mr-2 rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#ff6384] text-center text-[1.8vh] hover:bg-red-400/50 hover:border-[#fc3030]" onClick = {() => onConfirm(item)}> Delete</button>
@@ -619,15 +619,17 @@ const PayoffModal: React.FC<PayoffModalProps> = ({ item, onConfirm, onCancel, on
     return (
         <div>
             <div className="flex-col mt-2 h-[10%] items-center justify-center">
-                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2.5vh] text-[#ffffff]">Pay Off Debt</span>
+                <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[2.5vh] text-white">Pay Off Debt</span>
             </div>
 
-            <h5 className="self-start ml-[10%] mt-10 text-lg text-left text-[0.95rem]">Amount</h5>
+            <h5 className="self-start text-white ml-[10%] mt-10 text-lg text-left text-[0.95rem]">Amount</h5>
             <input type="number" className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" onChange={(e) => setAmount(e.target.value)} placeholder = {'Amount'} id = "Debtnum"/>
 
             <div className="flex w-8/10 ml-[10%] mt-10 font-bold items-center justify-center">
-                <h5 className="text-[#ff6384]">${item.Amount}</h5><h5>&nbsp;-&nbsp;</h5>
-                <h5 className="text-[#36eba6]">${amount}</h5><h5>&nbsp;=&nbsp;</h5>
+                <h5 className="text-[#ff6384]">${item.Amount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</h5>
+                <h5 className="text-white">&nbsp;-&nbsp;</h5>
+                <h5 className="text-[#36eba6]">${ !isNaN(parseFloat(amount)) ? parseFloat(amount).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : "N/A"}</h5>
+                <h5 className="text-white">&nbsp;=&nbsp;</h5>
                 <h5 style={{color: !isNaN(parseFloat(amount)) && (item.Amount - parseFloat(amount) <= 0) ? "#36eba6":'#ff6384'}}
                 >${!isNaN(parseFloat(amount)) ? (item.Amount - parseFloat(amount) < 0 ? 0.00 : (item.Amount - parseFloat(amount)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})) : "N/A"}</h5>
             </div>
