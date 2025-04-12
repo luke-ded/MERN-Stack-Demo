@@ -42,7 +42,7 @@ const FinancialsPage = () => {
             height={2000} // Use window height
             numberOfPieces={200} // Adjust amount of confetti
             recycle={false} // Set to false so it stops generating new pieces
-            gravity={0.4} // Adjust gravity
+            gravity={1} // Adjust gravity
             onConfettiComplete={handleConfettiComplete} // Callback when pieces run out
             style={{
               position: 'fixed',
