@@ -7,23 +7,15 @@ interface ChildProps {
     triggerRerender: () => void;
 }
 
-const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
+const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => 
+{
+    const today = new Date();
 
-    //const [isButtonClicked, setButton] = useState(false);
+    async function addSavings(event: any): Promise<void>
+    {
+        const data = localStorage.getItem('user_data');
+        const parsedData = data ? JSON.parse(data) : null;
 
-    /* function setYes(){
-        setRecurring(true);
-        setButton(true);
-    }
-
-    function setNo(){
-        setRecurring(false);
-        setButton(true);
-    }
- */
-
-    async function addSavings(event: any): Promise<void>{
-        
         const Amount = parseFloat((document.getElementById("Num") as HTMLInputElement).value);
         const name = (document.getElementById("Name") as HTMLInputElement).value;
         const date = (document.getElementById("date") as HTMLInputElement).value;
@@ -35,11 +27,22 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
             if (date.length == 0 || name.length == 0 || Amount == undefined || 
                 /* isButtonClicked == false || */  apr == undefined){
                 alertMessage.innerText = "Please Complete all the fields";
+                alertMessage.style.color = "#ff6384";
                 alertMessage.style.visibility = "visible";
                 return;
             } 
         }
-       
+        
+        for(var i = 0; i < parsedData.User.Savings.length; i++)
+        {
+            if(alertMessage && parsedData.User.Savings[i].Name == name)
+            {
+                alertMessage.innerText = "Duplicate name";
+                alertMessage.style.visibility = "visible";
+                return;
+            }
+        }
+        
         const token = localStorage.getItem('token');
         
         const [month, day, year] = date.split("/");
@@ -59,6 +62,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
             {  
                 if (alertMessage){
                     alertMessage.innerText = "Unsuccesfully Added";
+                    alertMessage.style.color = "#ff6384";
                     alertMessage.style.visibility = "visible";
                 }
                 
@@ -68,6 +72,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
             {   
                 if (alertMessage){
                     alertMessage.innerText = "Succesfully Added";
+                    alertMessage.style.color = "#00c04b";
                     alertMessage.style.visibility = "visible";
                 }
 
@@ -112,7 +117,7 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
         <div id = "visual">
             
             <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
-                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Savings</span>
+                    <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add an Account</span>
             </div>
 
             <div className="flex-col">
@@ -126,14 +131,15 @@ const AddSavings: React.FC<ChildProps> = ({ triggerRerender }) => {
 
             
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "MM/DD/YYYY" id = "date"></input>
+                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" defaultValue={(today.getMonth() + 1) + "/" + today.getDate() + "/" +today.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "date"></input>
 
                 <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Interest Rate (APR)</h5>
                 <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" type="text" placeholder = "1.23" id = "apr"></input>
 
-                <h5 className="mt-3 text-[0.95rem]" id="alertMessage"></h5>
-
-                <button id = "ExpenseAdd" className = "rounded-sm inline-block mt-5  h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addSavings}>Add Account</button>
+                <div className="fixed top-[80%] w-[100%] flex items-center justify-between">
+                    <h5 className="ml-[10%] text-[#ff6384]" id="alertMessage"></h5>
+                    <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addSavings} >Add Account</button>
+                </div> 
             </div> 
         </div>
     );

@@ -24,7 +24,7 @@ const SignupPage = () => {
         <Signup />
       </div>
       <div className="mt-4 flex justify-center bg-black/60 rounded-lg border border-[#6d91e8] p-1">
-        <p>Don't have an account?</p>
+        <p>Have an account?</p>
         <button
           className="p-0 bg-transparent border-none ml-2 text-[#6d91e8] hover:text-[#bdc8e2] text-sm font-bold cursor-pointer"
           onClick={navLogin}

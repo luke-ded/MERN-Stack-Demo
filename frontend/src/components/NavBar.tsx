@@ -105,7 +105,7 @@ const NavBar = () => {
           <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navDebtPage}
             >Debt</button>
           <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navSavingsPage}
-          >Savings</button>
+          >Accounts</button>
         </div>
         <div className="flex items-center">
           <h2 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8] mr-6"> {parsedData.User.FName} {parsedData.User.LName}</h2>

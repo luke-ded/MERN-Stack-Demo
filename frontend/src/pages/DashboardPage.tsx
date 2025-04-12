@@ -6,6 +6,7 @@ import GoalProgress from '../components/dashboardcomponents/GoalProgress.tsx';
 import ExpensesList from '../components/dashboardcomponents/ExpensesList.tsx';
 import IncomeList from '../components/dashboardcomponents/IncomeList.tsx';
 import DebtList from '../components/dashboardcomponents/DebtList.tsx';
+import SavingsList from '../components/dashboardcomponents/SavingsList.tsx';
 import StatList from '../components/dashboardcomponents/StatList.tsx';
 import NavBar from '../components/NavBar.tsx';
 
@@ -93,6 +94,15 @@ const DashboardPage = () => {
                 </div>
                 <div className="flex flex-col w-[100%] h-[90%] rounded-lg overflow-y-scroll grow min-h-0">
                     <DebtList/>
+                </div>
+            </div>
+
+            <div className= "flex-col ml-8 w-[50vh] h-[60vh] border border-[#6d91e8] rounded-[2%] bg-[rgba(17,18,23,.9)]">
+                <div className="flex h-[10%] items-center justify-center border-b border-[#6d91e8]">
+                    <h3 className="font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]">Top Accounts</h3>
+                </div>
+                <div className="flex flex-col w-[100%] h-[90%] rounded-lg overflow-y-scroll grow min-h-0">
+                    <SavingsList/>
                 </div>
             </div>
 
