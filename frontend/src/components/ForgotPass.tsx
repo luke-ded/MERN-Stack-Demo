@@ -268,8 +268,11 @@ function ForgotPass(){
                 <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Enter your Email</h5>
                 <input type="text" id="loginName" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none p-1" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
                 <h5 className="mt-3 text-[#ff6384]" id = "alertmessage"></h5>
-                <button className="absolute left-[28%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={reclaimPass}>Confirm</button>
-                <button className="absolute right-[25%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] mr-[5%] cursor-pointer" onClick = {navLogin}>Back To Login</button>
+
+                <div className="flex justify-between absolute left-[25%] bottom-[10%] w-5/10">
+                    <button className="rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] ml-2 cursor-pointer" onClick={reclaimPass}>Confirm</button>
+                    <button className="rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mr-2 cursor-pointer" onClick = {navLogin}>Back To Login</button>
+                </div>
             </div>
         );
    } else if (stageNum == 2){
