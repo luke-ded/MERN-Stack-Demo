@@ -103,8 +103,7 @@ function IncomeList()
     {
         return(
             <div className="text-white p-5">
-                <p className="mt-5">Looks like you need to get your money up.</p>
-                <p className="mt-5">Jobless much? 🤨</p>
+                <p className="mt-5">No income so far.</p>
             </div>
         );
     }
