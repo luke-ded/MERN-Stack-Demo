@@ -98,13 +98,13 @@ const NavBar = () => {
             <PageTitle />
         
 
-          <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navDashboardPage} 
+          <button className={`ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer ${location.pathname == '/dashboard' ? 'border-b-3 bg-white/15' : ''}`} onClick={navDashboardPage} 
           >Dashboard</button>
-          <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navFinancialsPage}
+          <button className={`ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer ${location.pathname == '/financials' ? 'border-b-3 bg-white/15' : ''}`} onClick={navFinancialsPage}
           >Financials</button>
-          <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navDebtPage}
+          <button className={`ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointe ${location.pathname == '/debt' ? 'border-b-3 bg-white/15' : ''}`} onClick={navDebtPage}
             >Debt</button>
-          <button className="ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointer" onClick={navSavingsPage}
+          <button className={`ml-6 p-1 border-r border-l border-[#6d91e8] hover:border-[#bdc8e2] hover:bg-white/15 cursor-pointe ${location.pathname == '/savings' ? 'border-b-3 bg-white/15' : ''}`} onClick={navSavingsPage}
           >Accounts</button>
         </div>
         <div className="flex items-center">
