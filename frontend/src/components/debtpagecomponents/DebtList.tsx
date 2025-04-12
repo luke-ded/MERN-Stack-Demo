@@ -531,7 +531,7 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
               
             <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Term (Months)</h5>
             <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={term} onChange={(e) => setTerm(e.target.value)} placeholder = {item.Term} id = "Expterm"/>
-            <h5 className="mt-4.5" id="alertMessagess text-[#ff6384]"></h5>
+            <h5 className="mt-4.5 text-[#ff6384]" id="alertMessagess"></h5>
     
             <button id = "EditIncome" className = "fixed left-[29%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={handleSaveClick}>Edit Expense</button>
             <button className = "fixed right-[31%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={onCancel}> Cancel</button>
