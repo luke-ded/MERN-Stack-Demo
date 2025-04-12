@@ -210,21 +210,21 @@ exports.setApp = function ( app, client )
     });
 
     //AddIncome API
-    //In: token, Name, Amount, IfRecurring, InitialTime
+    //In: token, Name, Amount, Account IfRecurring, InitialTime
     //Out: Result
     app.post('/api/AddIncome', authenticateJWT, async (req,res) => {
         let Result = "Could not add income";
         try{
             //Input and Field Check
-            const {Name, Amount, IfRecurring, InitialTime} = req.body;
+            const {Name, Amount, Account, IfRecurring, InitialTime} = req.body;
             const {_id} = req.user;
-            if (!_id || !Name || !Amount || IfRecurring == undefined || !InitialTime){
+            if (!_id || !Name || !Amount || !Account || IfRecurring == undefined || !InitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //Create Objects for DB statement
-            let newIncome = {Name: Name, Amount: Amount, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
+            let newIncome = {Name: Name, Amount: Amount, Account: Account, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
 
             //DB Statement
             const user = await usersCollection.updateOne(
@@ -327,15 +327,15 @@ exports.setApp = function ( app, client )
     });
 
     //AddExpense API
-    //In: token, Name, Category, Amount, IfRecurring, InitialTime
+    //In: token, Name, Category, Account, Amount, IfRecurring, InitialTime
     //Out: Result
     app.post('/api/AddExpense', authenticateJWT, async (req,res) => {
         let Result = "Could not add expense";
         try{
             //Input and Field Check
-            const {Name, Amount, Category, IfRecurring, InitialTime} = req.body;
+            const {Name, Amount, Category, Account, IfRecurring, InitialTime} = req.body;
             const {_id} = req.user;            
-            if (!_id || !Name || !Amount || !Category || IfRecurring == undefined || !InitialTime){
+            if (!_id || !Name || !Amount || !Category || !Account || IfRecurring == undefined || !InitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
@@ -367,15 +367,15 @@ exports.setApp = function ( app, client )
 
     
     //EditIncome API
-    //In: token, index, NewName, NewAmount, NewIfRecurring, NewInitialTime
+    //In: token, index, NewName, NewAmount, NewAccount, NewIfRecurring, NewInitialTime
     //Out: Result
     app.post('/api/EditIncome', authenticateJWT, async (req,res) => {
         let Result = "Could not edit income";
         try{
             //Input and Field Check
-            const {index, NewName, NewAmount, NewIfRecurring, NewInitialTime} = req.body;
+            const {index, NewName, NewAmount, NewAccount, NewIfRecurring, NewInitialTime} = req.body;
             const {_id} = req.user;
-            if (!_id|| index == undefined|| !NewName || !NewAmount || NewIfRecurring == undefined || !NewInitialTime){
+            if (!_id|| index == undefined|| !NewName || !NewAmount ||!NewAccount || NewIfRecurring == undefined || !NewInitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
@@ -487,15 +487,15 @@ exports.setApp = function ( app, client )
     });
 
     //EditExpense API
-    //In: token, index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime
+    //In: token, index, NewName, NewAmount, NewCategory, NewAccount, NewIfRecurring, NewInitialTime
     //Out: Result
     app.post('/api/EditExpense', authenticateJWT, async (req,res) => {
         let Result = "Could not edit expense";
         try{
             //Input and Field Checks
-            const {index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime} = req.body;
+            const {index, NewName, NewAmount, NewCategory, NewAccount, NewIfRecurring, NewInitialTime} = req.body;
             const{_id} = req.user;
-            if (!_id || index == undefined|| !NewName || !NewAmount || !NewCategory || NewIfRecurring == undefined || !NewInitialTime){
+            if (!_id || index == undefined|| !NewName || !NewAmount || !NewCategory || !NewAccount || NewIfRecurring == undefined || !NewInitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
