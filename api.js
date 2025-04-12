@@ -174,15 +174,15 @@ exports.setApp = function ( app, client )
     });
 
     //AddInitial API
-    //In: token, InitialAmount
+    //In: token, InitialDebt, InitialAmount
     //Out: Result
     app.post('/api/AddInitial', authenticateJWT, async (req,res) => {
-        let Result = "Could not add amount";
+        let Result = "Could not add amount and debt";
         try{
             //Input and Field Check
-            const {InitialAmount} = req.body;
+            const {InitialDebt, InitialAmount} = req.body;
             const {_id} = req.user;
-            if (!_id || !InitialAmount){
+            if (!_id || !InitialDebt || !InitialAmount){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId            
@@ -190,12 +190,12 @@ exports.setApp = function ( app, client )
             //DB 
             const user = await usersCollection.updateOne(
                 { _id: objectId},    //Search criteria
-                {$set: {InitialAmount: InitialAmount}}   //Updated info
+                {$set: {InitialDebt: InitialDebt, InitialAmount: InitialAmount}}   //Updated info
             );
 
             //Configure response
             if (user.matchedCount === 0) {          //If no user was updated
-                Result = "Could not find user to add initial amount to";
+                Result = "Could not find user to add initial debt and amount to";
             }
             else{          //If user was updated 
                 Result = "Added amounts to user";
