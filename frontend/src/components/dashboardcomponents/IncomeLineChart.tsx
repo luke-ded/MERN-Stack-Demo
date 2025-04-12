@@ -48,7 +48,7 @@ function IncomeLineChart()
   if(parsedData.User.Income == undefined  || parsedData.User.Income.length == 0)
   {
       return(
-        <div className="text-white p-5">
+        <div className="text-black p-5">
           <p className="mt-5">No income so far this month.</p>
         </div>
       );
