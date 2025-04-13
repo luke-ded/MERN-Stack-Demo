@@ -341,7 +341,7 @@ exports.setApp = function ( app, client )
             const objectId = new ObjectId(_id); // Convert string to ObjectId
 
             //Create Objects for DB statement
-            let newExpense = {Name: Name, Amount: Amount, Category: Category, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
+            let newExpense = {Name: Name, Amount: Amount, Category: Category, Account: Account, IfRecurring: IfRecurring, InitialTime: {Month: InitialTime.Month, Day: InitialTime.Day, Year: InitialTime.Year}};
 
             //DB Statement
             const user = await usersCollection.updateOne(
