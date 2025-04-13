@@ -504,8 +504,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
 
     return (
         <div>
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={name} onChange={(e) => setName(e.target.value)} placeholder = {item.Name} id = "Expname2" onKeyUp={(e) => {
+            <h5 className="self-start text-white ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
+            <input className="h-6 w-8/10 text-white text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={name} onChange={(e) => setName(e.target.value)} placeholder = {item.Name} id = "Expname2" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("Expnum2") as HTMLInputElement;
@@ -513,8 +513,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
                 }
               }}/>       
                 
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-            <input type="number" className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder = {typeof item.Amount === 'number' ? item.Amount.toString() : 'Amount'} id = "Expnum2" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Amount</h5>
+            <input type="number" className="h-6 text-white w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder = {typeof item.Amount === 'number' ? item.Amount.toString() : 'Amount'} id = "Expnum2" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("expdate2") as HTMLInputElement;
@@ -523,8 +523,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
               }}/>
                    
     
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={date} onChange={(e) => setDate(e.target.value)} placeholder = {dateStr || 'MM/DD/YYYY'} id = "expdate2" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Date</h5>
+            <input className="h-6 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={date} onChange={(e) => setDate(e.target.value)} placeholder = {dateStr || 'MM/DD/YYYY'} id = "expdate2" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("Expcat") as HTMLInputElement;
@@ -532,8 +532,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
                 }
               }}/>
     
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Interest Rate (APR)</h5>
-            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={apr} onChange={(e) => setApr(e.target.value)} placeholder = {item.APR} id = "Expcat"onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Interest Rate (APR)</h5>
+            <input className="h-6 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={apr} onChange={(e) => setApr(e.target.value)} placeholder = {item.APR} id = "Expcat"onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("Expterm") as HTMLInputElement;
@@ -541,8 +541,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
                 }
               }}/>
               
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Term (Months)</h5>
-            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={term} onChange={(e) => setTerm(e.target.value)} placeholder = {item.Term} id = "Expterm"/>
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Term (Months)</h5>
+            <input className="h-6 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={term} onChange={(e) => setTerm(e.target.value)} placeholder = {item.Term} id = "Expterm"/>
             <h5 className="mt-4.5 text-[#ff6384]" id="alertMessagess"></h5>
     
             <button id = "EditIncome" className = "fixed left-[29%] top-[87%] rounded-sm inline-block h-fit w-fit p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick ={handleSaveClick}>Edit Expense</button>

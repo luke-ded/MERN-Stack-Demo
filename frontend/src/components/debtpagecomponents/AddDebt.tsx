@@ -131,8 +131,8 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
                 </div>
 
             <div className="flex-col">
-                <h5 className="self-start ml-[10%] mt-2 text-lg text-left text-[0.95rem]">Name</h5>
-                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "Name"onKeyUp={(e) => {
+                <h5 className="self-start text-white ml-[10%] mt-2 text-lg text-left text-[0.95rem]">Name</h5>
+                <input className="h-7 w-8/10 text-white text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "Name"onKeyUp={(e) => {
                     if (e.key === "Enter") 
                     {
                       var next = document.getElementById("Num") as HTMLInputElement;
@@ -141,8 +141,8 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
                   }}></input>
 
             
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "Num"onKeyUp={(e) => {
+                <h5 className="self-start text-white ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
+                <input className="h-7 w-8/10 text-white text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "Num"onKeyUp={(e) => {
                     if (e.key === "Enter") 
                     {
                       var next = document.getElementById("date") as HTMLInputElement;
@@ -151,8 +151,8 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
                   }}></input>
 
             
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" defaultValue={(today.getMonth() + 1) + "/" + today.getDate() + "/" +today.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "date"onKeyUp={(e) => {
+                <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Date</h5>
+                <input className="h-7 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" defaultValue={(today.getMonth() + 1) + "/" + today.getDate() + "/" +today.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "date"onKeyUp={(e) => {
                     if (e.key === "Enter") 
                     {
                       var next = document.getElementById("apr") as HTMLInputElement;
@@ -160,8 +160,8 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
                     }
                   }}></input>
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Interest Rate (APR)</h5>
-                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "1.23" id = "apr"onKeyUp={(e) => {
+                <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.9rem]">Interest Rate (APR)</h5>
+                <input className="h-7 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "1.23" id = "apr"onKeyUp={(e) => {
                     if (e.key === "Enter") 
                     {
                       var next = document.getElementById("term") as HTMLInputElement;
@@ -169,8 +169,8 @@ const AddDebt: React.FC<ChildProps> = ({ triggerRerender }) =>
                     }
                   }}></input>
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Term (Months)</h5>
-                <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "12" id = "term"></input>
+                <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.9rem]">Term (Months)</h5>
+                <input className="h-7 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "12" id = "term"></input>
 
                 <div className="fixed top-[88%] w-[100%] flex items-center justify-between">
                     <h5 className="ml-[10%] text-[#ff6384]" id="alertMessage"></h5>

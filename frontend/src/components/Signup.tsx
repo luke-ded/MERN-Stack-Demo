@@ -276,8 +276,8 @@ function Signup() {
     return (
       <div className="flex flex-col justify-center w-[100%] h-135 shrink-1 items-center flex-grow" id="loginDiv">
         <span className="font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">SIGN UP</span>
-        <h5 className="self-start ml-[10%] mt-3 text-md">First Name</h5>
-        <input className="w-8/10 text-md rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="FirstName" placeholder="First Name" onKeyUp={(e) => {
+        <h5 className="self-start ml-[10%] mt-3 text-md text-white">First Name</h5>
+        <input className="w-8/10 text-md text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="FirstName" placeholder="First Name" onKeyUp={(e) => {
           if (e.key === "Enter") 
           {
             var next = document.getElementById("lastName") as HTMLInputElement;
@@ -285,16 +285,16 @@ function Signup() {
           }
         }}/>
 
-        <h5 className="self-start ml-[10%] mt-3 text-md">Last Name</h5>
-        <input className="w-8/10 text-md rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="lastName" placeholder="Last Name" onKeyUp={(e) => {
+        <h5 className="self-start ml-[10%] mt-3 text-md text-white">Last Name</h5>
+        <input className="w-8/10 text-md text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="lastName" placeholder="Last Name" onKeyUp={(e) => {
           if (e.key === "Enter") 
           {
             var next = document.getElementById("Email") as HTMLInputElement;
             next.focus();
           }
         }}/>
-        <h5 className="self-start ml-[10%] mt-3 text-md">Email</h5>
-        <input className="w-8/10 text-md rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="Email" placeholder="Email" onKeyUp={(e) => {
+        <h5 className="self-start ml-[10%] mt-3 text-md text-white">Email</h5>
+        <input className="w-8/10 text-md text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" id="Email" placeholder="Email" onKeyUp={(e) => {
           validateEmail();
           if (e.key === "Enter") 
           {
@@ -305,10 +305,10 @@ function Signup() {
         <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-1" id={app.firstinstruction} style={{ color: isValidEmail ? '#36eba6' :'#ff6384' }}>
             {isValidEmail ? "" : "Invalid email."}
         </h6>
-        <h5 className="self-start ml-[10%] mt-3 text-md">Password</h5>
+        <h5 className="self-start ml-[10%] mt-3 text-md text-white">Password</h5>
   
         <div className="flex w-[100%] relative items-center">
-            <input className="w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } id="loginPassword" placeholder="Password" onKeyUp={(e) => {
+            <input className="w-8/10 text-md text-white ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } id="loginPassword" placeholder="Password" onKeyUp={(e) => {
               validatePassword();
               if (e.key === "Enter") 
               {
@@ -329,9 +329,9 @@ function Signup() {
           <h6 className="text-[#bdc8e2] w-fit text-sm">.</h6>
         </div>
   
-        <h5 className="self-start ml-[10%] mt-3 text-md">Confirm Password</h5>
+        <h5 className="self-start ml-[10%] mt-3 text-md text-white">Confirm Password</h5>
         <div className="flex w-[100%] relative items-center">
-            <input className="w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } id="ConfPassword" placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {doSignUp(e);}}}/>
+            <input className="w-8/10 text-md text-white ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } id="ConfPassword" placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {doSignUp(e);}}}/>
             <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
         </div>
         <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-1" style={{ color: isPasswordSame ? '#36eba6' :'#ff6384' }}>
@@ -346,7 +346,7 @@ function Signup() {
     return(
       <div id = "loginDivs" className="p-10 max-w-[600px] mx-auto">
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Verify Email</span><br />
-                <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Confirm Email</h5>
+                <h5 className="mt-8 mb-0 ml-[10%] text-white float-left text-[2vh]">Confirm Email</h5>
                 <input type="number" id="loginNames" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass(event)}/><br/>
                 <h5 className="mt-3" id = "alertmessage"></h5>
                 <button className="mt-5 rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={verifyOneTimePass}>Confirm</button>

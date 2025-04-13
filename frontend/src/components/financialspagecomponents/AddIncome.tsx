@@ -274,8 +274,8 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                     <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Income</span>
                 </div>
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "IncNames" onKeyUp={(e) => {
+                <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Name</h5>
+                <input className="h-1/2 w-8/10 text-white text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "IncNames" onKeyUp={(e) => {
                     if (e.key === "Enter") 
                     {
                       var next = document.getElementById("IncNum") as HTMLInputElement;
@@ -285,8 +285,8 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
 
                 <br></br>
                 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "IncNum" onKeyUp={(e) => {
+                <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Amount</h5>
+                <input className="h-1/2 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "IncNum" onKeyUp={(e) => {
                     if (e.key === "Enter") 
                     {
                       var next = document.getElementById("Incdate") as HTMLInputElement;
@@ -297,8 +297,8 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                 <br></br>
                 
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-                <input className="h-1/2 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" defaultValue={(otoday.getMonth() + 1) + "/" + otoday.getDate() + "/" + otoday.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "Incdate" onKeyUp={(e) => {
+                <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Date</h5>
+                <input className="h-1/2 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" defaultValue={(otoday.getMonth() + 1) + "/" + otoday.getDate() + "/" + otoday.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "Incdate" onKeyUp={(e) => {
                     if (e.key === "Enter") 
                     {
                       var next = document.getElementById("Incaccount") as HTMLInputElement;
@@ -306,7 +306,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                     }
                   }}></input>
 
-                <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Account</h5>
+                <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Account</h5>
 
                 <select
                     id="Incaccount"
@@ -331,7 +331,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
                     ))}
                 </select>
 
-                <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10">
+                <div className="flex items-center text-white justify-between ml-[10%] mt-2 w-8/10">
                     <h5 className="self-start text-lg text-left text-[0.95rem]">Is The Income Recurring?</h5> 
                     <div>
                         <label>

@@ -288,8 +288,8 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
                 <span id = "visualTitle" className = "font-[Lucida Sans] font-bold text-[3vh] text-[#ffffff]">Add Expenses</span>
             </div>
 
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "ExpName" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white  text-lg text-left text-[0.95rem]">Name</h5>
+            <input className="h-7 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Name" id = "ExpName" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("ExpNum") as HTMLInputElement;
@@ -298,8 +298,8 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
               }}></input>
 
         
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "ExpNum" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white  text-lg text-left text-[0.95rem]">Amount</h5>
+            <input className="h-7 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Amount" id = "ExpNum" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("Expdate3") as HTMLInputElement;
@@ -308,8 +308,8 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
               }}></input>
 
         
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" defaultValue={(otoday.getMonth() + 1) + "/" + otoday.getDate() + "/" + otoday.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "Expdate3" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Date</h5>
+            <input className="h-7 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" defaultValue={(otoday.getMonth() + 1) + "/" + otoday.getDate() + "/" + otoday.getFullYear()} type="text" placeholder = "MM/DD/YYYY" id = "Expdate3" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("ExpCat") as HTMLInputElement;
@@ -317,8 +317,8 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
                 }
               }}></input>
 
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.9rem]">Category</h5>
-            <input className="h-7 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Category" id = "ExpCat" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.9rem]">Category</h5>
+            <input className="h-7 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type="text" placeholder = "Category" id = "ExpCat" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("Expaccount") as HTMLInputElement;
@@ -326,7 +326,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
                 }
               }}></input>
 
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Account</h5>
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Account</h5>
 
             <select
                 id="Expaccount"
@@ -351,7 +351,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
                 ))}
             </select>
 
-            <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10">
+            <div className="flex items-center text-white justify-between ml-[10%] mt-2 w-8/10">
                 <h5 className="self-start text-lg text-left text-[0.95rem]">Is The Expense Recurring?</h5> 
                 <div>
                     <label>

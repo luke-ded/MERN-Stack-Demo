@@ -265,8 +265,8 @@ function ForgotPass(){
         return(
             <div id = "loginDiv">
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Forgot Password</span><br />
-                <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Enter your Email</h5>
-                <input type="text" id="loginName" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
+                <h5 className="mt-8 mb-0 text-white ml-[10%] float-left text-[2vh]">Enter your Email</h5>
+                <input type="text" id="loginName" className = "w-8/10 text-white text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" placeholder="Email" onKeyUp={(e) => e.key === "Enter" && reclaimPass()}/><br/>
                 <h5 className="mt-3 text-[#ff6384]" id = "alertmessage"></h5>
 
                 <div className="flex justify-between absolute left-[25%] bottom-[10%] w-5/10">
@@ -279,8 +279,8 @@ function ForgotPass(){
         return(
             <div id = "loginDivs">
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Forgot Password</span><br />
-                <h5 className="mt-8 mb-0 ml-[10%] float-left text-[2vh]">Reset your Password</h5>
-                <input type="number" id="loginNames" className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
+                <h5 className="mt-8 mb-0 ml-[10%] text-white float-left text-[2vh]">Reset your Password</h5>
+                <input type="number" id="loginNames" className = "w-8/10 text-white text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" placeholder="5-digit-code" onKeyUp={(e) => e.key === "Enter" && verifyOneTimePass()}/><br/>
                 <h5 className="mt-3 text-[#ff6384]" id = "alertmessage"></h5>
                 <button className="absolute right-[45%] bottom-[15%] rounded-sm inline-block bg-transparent h-fit w-fit p-[3px] pl-[7px] pr-[7px] hover:bg-blue-400/15 hover:border-[#bdc8e2] border border-[#6d91e8] text-center text-[sm] mt-[5%] ml-[5%] cursor-pointer" onClick={verifyOneTimePass}>Confirm</button>
             </div>
@@ -289,9 +289,9 @@ function ForgotPass(){
         return(
             <div id = "loginDivs" className="flex-col justify-center items-center">
                 <span className = "font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">Reset Password</span><br />
-                <h5 className="mb-0 mt-1 ml-[10%] float-left text-[2vh]">New Password</h5>
+                <h5 className="mb-0 mt-1 ml-[10%] text-white float-left text-[2vh]">New Password</h5>
                 <div className="flex w-[100%] relative items-center">
-                    <input id ="firstPass" className = "w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#7f8fb5] focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } value = {value} onChange = {(e) => setValue(e.target.value)} placeholder="New Password" onKeyUp={(e) => {
+                    <input id ="firstPass" className = "w-8/10 text-md ml-[10%] text-white rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-1 focus:ring-[#7f8fb5] focus:ring-[#7f8fb5] p-1" type={showPasssword ? "text" : "password" } value = {value} onChange = {(e) => setValue(e.target.value)} placeholder="New Password" onKeyUp={(e) => {
                       validatePassword();
                       if (e.key === "Enter") 
                       {
@@ -312,9 +312,9 @@ function ForgotPass(){
                     <h6 className="text-[#bdc8e2] w-fit text-sm">.</h6>
                 </div>
 
-                <h5 className="mt-3 mb-0 ml-[10%] float-left text-[2vh]">Confirm Password</h5>
+                <h5 className="mt-3 mb-0 ml-[10%] float-left text-white text-[2vh]">Confirm Password</h5>
                 <div className="flex w-[100%] relative items-center">
-                    <input id ="secondPass" className = "w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {changePassword(e);}}}></input><br/>
+                    <input id ="secondPass" className = "w-8/10text-white  text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {changePassword(e);}}}></input><br/>
                     <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
                 </div>
 

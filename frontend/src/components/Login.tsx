@@ -136,8 +136,8 @@ function Login() {
     <div className="flex flex-col items-center" id="loginDiv">
       <span className="font-[Lucida Sans] font-bold text-[3vh] text-[#6d91e8]">LOG IN</span><br />
 
-      <h5 className="self-start ml-[10%] text-lg">Email</h5>
-      <input className = "w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1"
+      <h5 className="self-start ml-[10%] text-lg text-white">Email</h5>
+      <input className = "w-8/10 text-lg text-white  rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1"
       type="text" id="loginName" placeholder="Email" onKeyUp={(e) => {
         if (e.key === "Enter") 
         {
@@ -147,12 +147,12 @@ function Login() {
       }}/><br />
 
       <div className="flex w-[100%] justify-between">
-      <h5 className="ml-[10%] text-lg">Password</h5>
+      <h5 className="ml-[10%] text-lg text-white">Password</h5>
       <button className="mr-[10%] p-0 border-none text-[#6d91e8] hover:text-[#bdc8e2] text-xs font-bold cursor-pointer" onClick={navForgotPassword}>Forgot Password?</button>
       </div>
 
       <div className="flex w-[100%] relative items-center">
-        <input className = "w-8/10 text-lg ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1"
+        <input className = "w-8/10 text-lg text-white ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1"
         type= { showPasssword ? "text" :"password"} id="loginPassword" placeholder="Password" onKeyUp={(e) => {if (e.key === "Enter") {doLogin(e);}}}/>
         <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
       </div>

@@ -549,8 +549,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
 
     return (
         <div>
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Name</h5>
-            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={name} onChange={(e) => setName(e.target.value)} placeholder = {item.Name} id = "Expname2" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Name</h5>
+            <input className="h-6 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={name} onChange={(e) => setName(e.target.value)} placeholder = {item.Name} id = "Expname2" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("Expnum2") as HTMLInputElement;
@@ -558,8 +558,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
                 }
               }}/>       
                 
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Amount</h5>
-            <input type="number" className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder = {typeof item.Amount === 'number' ? item.Amount.toString() : 'Amount'} id = "Expnum2" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Amount</h5>
+            <input type="number" className="h-6 text-white w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder = {typeof item.Amount === 'number' ? item.Amount.toString() : 'Amount'} id = "Expnum2" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("expdate2") as HTMLInputElement;
@@ -568,8 +568,8 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
               }}/>
                    
     
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Date</h5>
-            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={date} onChange={(e) => setDate(e.target.value)} placeholder = {dateStr || 'MM/DD/YYYY'} id = "expdate2" onKeyUp={(e) => {
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Date</h5>
+            <input className="h-6 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={date} onChange={(e) => setDate(e.target.value)} placeholder = {dateStr || 'MM/DD/YYYY'} id = "expdate2" onKeyUp={(e) => {
                 if (e.key === "Enter") 
                 {
                   var next = document.getElementById("Expcat") as HTMLInputElement;
@@ -577,10 +577,10 @@ const EditModal: React.FC<EditModalProps> = ({ item, onSave, onCancel }) =>
                 }
               }}/>
     
-            <h5 className="self-start ml-[10%] text-lg text-left text-[0.95rem]">Category</h5>
-            <input className="h-6 w-8/10 text-lg rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={category} onChange={(e) => setCategory(e.target.value)} placeholder = {item.Category} id = "Expcat"/>
+            <h5 className="self-start ml-[10%] text-white text-lg text-left text-[0.95rem]">Category</h5>
+            <input className="h-6 w-8/10 text-lg text-white rounded-sm border border-[#6d91e8] bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={category} onChange={(e) => setCategory(e.target.value)} placeholder = {item.Category} id = "Expcat"/>
     
-            <div className="flex items-center justify-between ml-[10%] mt-2 w-8/10">
+            <div className="flex items-center text-white justify-between ml-[10%] mt-2 w-8/10">
                 <h5 className="self-start text-lg text-left text-[0.95rem]">Is The Income Recurring?</h5>  
                 <div>
                     <label>
