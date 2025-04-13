@@ -373,9 +373,9 @@ exports.setApp = function ( app, client )
         let Result = "Could not edit income";
         try{
             //Input and Field Check
-            const {index, NewName, NewAmount, NewAccount, NewIfRecurring, NewInitialTime} = req.body;
+            const {index, NewName, NewAmount, NewIfRecurring, NewInitialTime} = req.body;
             const {_id} = req.user;
-            if (!_id|| index == undefined|| !NewName || !NewAmount ||!NewAccount || NewIfRecurring == undefined || !NewInitialTime){
+            if (!_id|| index == undefined|| !NewName || !NewAmount || NewIfRecurring == undefined || !NewInitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
@@ -493,9 +493,9 @@ exports.setApp = function ( app, client )
         let Result = "Could not edit expense";
         try{
             //Input and Field Checks
-            const {index, NewName, NewAmount, NewCategory, NewAccount, NewIfRecurring, NewInitialTime} = req.body;
+            const {index, NewName, NewAmount, NewCategory, NewIfRecurring, NewInitialTime} = req.body;
             const{_id} = req.user;
-            if (!_id || index == undefined|| !NewName || !NewAmount || !NewCategory || !NewAccount || NewIfRecurring == undefined || !NewInitialTime){
+            if (!_id || index == undefined|| !NewName || !NewAmount || !NewCategory || NewIfRecurring == undefined || !NewInitialTime){
                 throw new Error("Invalid Input");
             }
             const objectId = new ObjectId(_id); // Convert string to ObjectId
