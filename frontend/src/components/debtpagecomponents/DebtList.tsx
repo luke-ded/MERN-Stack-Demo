@@ -35,6 +35,7 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender, doConfetti }) =>
     const [editingItem, setEditingItem] = useState<Item | null>(null);
     const [deletingItem, setDeletingItem] = useState<Item | null>(null);
     const [payoffItem, setPayoffItem] = useState<Item | null>(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleEditClick = (item: Item) => 
     {
@@ -325,11 +326,22 @@ const DebtList: React.FC<ChildProps> = ({ triggerRerender, doConfetti }) =>
 
             {!editingItem && !deletingItem && !payoffItem && (
                 <div className = "flex flex-col flex-grow min-h-0">
+
+                    <br></br>
+
+                    <div className = "flex w-[100%] relative items-center">
+                        <input type="text" placeholder="Search..."  className="w-8/10 text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
+                    </div>
+
+                    <br></br>
+
                     <ul className="flex-grow overflow-y-auto shadow divide-y divide-[#7f8fb5]" id = "listss">
-                        {props.items.map((item) => {
+                        {props.items.filter((item) => item.Name.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => {
                         return <li key={item.key} className="px-[1vw] py-[1vh] hover:bg-white/5">{props.renderer(item)}</li>;
                         })}
                     </ul>
+
+
                 </div>
              )}
 
