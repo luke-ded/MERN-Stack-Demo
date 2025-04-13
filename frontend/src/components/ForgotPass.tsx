@@ -299,7 +299,7 @@ function ForgotPass(){
                         next.focus();
                       }
                     }}></input><br/>
-                    <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
+                    <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} alt="Show/hide password button"/>
                 </div>
                 
                 <div className="flex w-[100%] whitespace-nowrap items-center mt-1">
@@ -315,7 +315,7 @@ function ForgotPass(){
                 <h5 className="mt-3 mb-0 ml-[10%] float-left text-white text-[2vh]">Confirm Password</h5>
                 <div className="flex w-[100%] relative items-center">
                     <input id ="secondPass" className = "w-8/10text-white  text-md ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {changePassword(e);}}}></input><br/>
-                    <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
+                    <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} alt="Show/hide password button"/>
                 </div>
 
                 <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-2 p-0" style={{ color: isPasswordSame ? "#36eba6" : "#ff6384" }}>

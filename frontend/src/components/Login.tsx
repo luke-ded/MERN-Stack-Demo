@@ -154,7 +154,7 @@ function Login() {
       <div className="flex w-[100%] relative items-center">
         <input className = "w-8/10 text-lg text-white ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1"
         type= { showPasssword ? "text" :"password"} id="loginPassword" placeholder="Password" onKeyUp={(e) => {if (e.key === "Enter") {doLogin(e);}}}/>
-        <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
+        <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} alt="Show/hide password button"/>
       </div>
 
       <h5 className="mt-3 text-[#ff6384]" id = "alertmessage"></h5>

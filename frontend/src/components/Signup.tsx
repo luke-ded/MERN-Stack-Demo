@@ -316,7 +316,7 @@ function Signup() {
                 next.focus();
               }
             }}/>
-            <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} />
+            <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showPasswordHandler} src={showPasssword ? show : dontshow} alt="Show/hide password button"/>
         </div>
   
         <div className="flex w-[100%] whitespace-nowrap items-center mt-1">
@@ -332,7 +332,7 @@ function Signup() {
         <h5 className="self-start ml-[10%] mt-3 text-md text-white">Confirm Password</h5>
         <div className="flex w-[100%] relative items-center">
             <input className="w-8/10 text-md text-white ml-[10%] rounded-sm border border-[#6d91e8] relative bg-blue-400/5 focus:outline-none focus:ring-1 focus:ring-[#7f8fb5] p-1" type={showConfirmPasssword ? "text" : "password" } id="ConfPassword" placeholder="Confirm Password" onKeyUp={(e) => {validatePasswordSame();  if (e.key === "Enter") {doSignUp(e);}}}/>
-            <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} />
+            <img className="h-[2vh] absolute z-10 ml-[84%] cursor-pointer" onClick={showConfirmPasswordHandler} src={showConfirmPasssword ? show : dontshow} alt="Show/hide password button"/>
         </div>
         <h6 className="self-start ml-[10%] text-[#bdc8e2] w-fit text-sm mt-1" style={{ color: isPasswordSame ? '#36eba6' :'#ff6384' }}>
             {isPasswordSame ? "" : "Passwords are not the same."}
