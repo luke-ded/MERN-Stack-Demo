@@ -190,8 +190,7 @@ const OnboardPage = () => {
                 <h2 className='font-[Lucida Sans] font-bold text-2xl text-[#6d91e8]'>Step 2: Add Detailed Information</h2>
                 <br />
                 
-                <p className="self-start ml-[10%] mr-[10%] text-lg">Now, you will enter your individual debts and savings accounts. View the instructional
-                    videos below and then click "continue" to proceed to the financials page to add the information.
+                <p className="self-start ml-[10%] mr-[10%] text-lg">Now, you will enter your individual debts and savings accounts. Click "continue" to proceed to the financials page and add the information.
                 </p>
                 <br />
 
