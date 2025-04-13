@@ -43,4 +43,7 @@ h1 {
   a:hover {
     color: #747bff;
   }
+  button {
+    color: white;
+  }
 }
