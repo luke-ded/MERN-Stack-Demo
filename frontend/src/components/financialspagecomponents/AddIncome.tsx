@@ -152,6 +152,42 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
         }
     }
 
+    function addIncomeWrapper(event : any)
+    {
+        const valAmount = (document.getElementById("IncNum") as HTMLInputElement).value;
+        const userName = (document.getElementById("IncNames") as HTMLInputElement).value;
+        const date = (document.getElementById("Incdate") as HTMLInputElement).value;
+        const alertMessage = document.getElementById("alertmessage");
+
+        if (alertMessage) {
+            if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || isButtonClicked == false || selectedItemKey == ''){
+                alertMessage.innerText = "Please Complete all the fields";
+                alertMessage.style.color = "#ff6384";
+                alertMessage.style.visibility = "visible";
+                return;
+            } 
+        }
+        
+       
+        const IfRecurring = isRecurring;
+        const [month, day, year] = date.split("/");
+
+
+        if(IfRecurring)
+        {
+            var i = parseInt(month) - 1;
+
+            for(i = i; i < 12; i++)
+            {
+                (document.getElementById("Incdate") as HTMLInputElement).value = (i + 1).toString() + "/" + day + "/" + year;
+                addIncome(event);
+            }  
+        }
+        else
+            addIncome(event);
+
+    }
+
     async function addIncome(event: any): Promise<void>{
 
         const valAmount = (document.getElementById("IncNum") as HTMLInputElement).value;
@@ -347,7 +383,7 @@ const AddIncome: React.FC<ChildProps> = ({ triggerRerender }) => {
 
                 <div className="fixed top-[85%] w-[100%] flex items-center justify-between">
                     <h5 className="ml-[10%] text-[#ff6384]" id="alertmessage"></h5>
-                    <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addIncome} >Add Income</button>
+                    <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addIncomeWrapper} >Add Income</button>
                 </div>
             </div>
             

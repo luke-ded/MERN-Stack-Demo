@@ -153,6 +153,52 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
         }
     }
 
+    function addExpenseWrapper(event : any)
+    {
+        const valAmount = (document.getElementById("ExpNum") as HTMLInputElement).value;
+        const userName = (document.getElementById("ExpName") as HTMLInputElement).value;
+        const Category =  (document.getElementById("ExpCat") as HTMLInputElement).value;
+        const date = (document.getElementById("Expdate3") as HTMLInputElement).value;
+        const alertMessage = document.getElementById("alertMessage");
+        
+
+        if (alertMessage) {
+            if (date.length == 0 || userName.length == 0 || valAmount.length == 0 || isNaN(parseFloat(valAmount))|| isButtonClicked == false || Category.length == 0 || selectedItemKey == ''){
+                alertMessage.innerText = "Please Complete all the fields";
+                alertMessage.style.color = "#ff6384";
+                alertMessage.style.visibility = "visible";
+                return;
+            } 
+        }
+
+        const Amount = parseFloat(valAmount);
+        const IfRecurring = isRecurring;
+        
+        const [month, day, year] = date.split("/");
+
+        if(alertMessage && selectedItemObject?.Name != "Untracked" && Amount > selectedItemObject?.Amount)
+        {
+            alertMessage.innerText = "Insufficient funds";
+            alertMessage.style.color = "#ff6384";
+            alertMessage.style.visibility = "visible";
+            return;
+        }
+
+        if(IfRecurring)
+        {
+            var i = parseInt(month) - 1;
+
+            for(i = i; i < 12; i++)
+            {
+                (document.getElementById("Expdate3") as HTMLInputElement).value = (i + 1).toString() + "/" + day + "/" + year;
+                addExpense(event);
+            }  
+        }
+        else
+            addExpense(event);
+
+    }
+    
     async function addExpense(event: any): Promise<void>
     {
         const valAmount = (document.getElementById("ExpNum") as HTMLInputElement).value;
@@ -367,7 +413,7 @@ const AddExpense: React.FC<ChildProps> = ({ triggerRerender }) =>
 
             <div className="fixed top-[88%] w-[100%] flex items-center justify-between">
                 <h5 className="ml-[10%] text-[#ff6384]" id="alertMessage"></h5>
-                <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpense} >Add Expense</button>
+                <button id = "AddIncome" className = "rounded-sm inline-block h-fit w-fit mr-[10%] p-[10px] pt-[5px] pb-[7px] bg-transparent border border-[#6d91e8] text-center text-[1.8vh] hover:bg-blue-400/15 hover:border-[#bdc8e2]" onClick = {addExpenseWrapper} >Add Expense</button>
             </div> 
         </div>
     );

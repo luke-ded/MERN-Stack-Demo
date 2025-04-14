@@ -140,7 +140,7 @@ const ExpensesList: React.FC<ChildProps> = ({ triggerRerender }) =>
         if(item == null)
             return;
 
-        if(item.key == parsedData.User.Savings.Length)
+        if(item.key == parsedData.User.Savings.Length || parsedData.User.Savings == undefined)
             return;
 
 
