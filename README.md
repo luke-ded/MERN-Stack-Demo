@@ -1,5 +1,6 @@
 # MERN Stack Demo - Salvage Financial
 *This is a demonstration of a MERN full-stack application. A site to manage and track your debt with analytics* 
+Website no longer hosted.
 
 ## Members
 [Luke Dederich](https://github.com/luke-ded) Front End
